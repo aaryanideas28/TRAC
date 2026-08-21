@@ -1,0 +1,152 @@
+{
+  "dataset_file": "live_observations_moving_20260821T162310Z-moving-625795fa.csv",
+  "total_rows": 101,
+  "total_columns": 67,
+  "total_trains": 5,
+  "stale_observations_count": 19,
+  "non_stale_observations_count": 82,
+  "total_usable_sequential_pairs": 96,
+  "total_non_stale_sequential_pairs": 77,
+  "per_train_summary": {
+    "12809": {
+      "train_name": "Mumbai CSMT - Howrah Mail",
+      "observation_count": 21,
+      "usable_sequential_pairs": 20,
+      "usable_non_stale_pairs": 20,
+      "station_transitions": 2,
+      "time_span_minutes": 21.55,
+      "first_observation": "2026-08-21 16:29:16.947275+00:00",
+      "last_observation": "2026-08-21 16:50:49.691343+00:00"
+    },
+    "95135": {
+      "train_name": "S 39/ Mumbai CSMT - Karjat Fast Local",
+      "observation_count": 20,
+      "usable_sequential_pairs": 19,
+      "usable_non_stale_pairs": 19,
+      "station_transitions": 7,
+      "time_span_minutes": 22.05,
+      "first_observation": "2026-08-21 16:28:28.030715+00:00",
+      "last_observation": "2026-08-21 16:50:31.326093+00:00"
+    },
+    "95333": {
+      "train_name": "A55 / Mumbai CSMT - Ambernath Fast Local",
+      "observation_count": 21,
+      "usable_sequential_pairs": 20,
+      "usable_non_stale_pairs": 19,
+      "station_transitions": 5,
+      "time_span_minutes": 20.43,
+      "first_observation": "2026-08-21 16:30:17.908184+00:00",
+      "last_observation": "2026-08-21 16:50:43.534572+00:00"
+    },
+    "97179": {
+      "train_name": "Kalyan Jn. Mumbai EMU",
+      "observation_count": 20,
+      "usable_sequential_pairs": 19,
+      "usable_non_stale_pairs": 6,
+      "station_transitions": 8,
+      "time_span_minutes": 22.97,
+      "first_observation": "2026-08-21 16:27:27.105831+00:00",
+      "last_observation": "2026-08-21 16:50:25.214996+00:00"
+    },
+    "97263": {
+      "train_name": "Dombivli Mumbai EMU",
+      "observation_count": 19,
+      "usable_sequential_pairs": 18,
+      "usable_non_stale_pairs": 13,
+      "station_transitions": 6,
+      "time_span_minutes": 21.44,
+      "first_observation": "2026-08-21 16:29:10.805382+00:00",
+      "last_observation": "2026-08-21 16:50:37.446286+00:00"
+    }
+  },
+  "missing_values": {
+    "next_station": {
+      "missing_count": 1,
+      "missing_pct": 0.99
+    },
+    "next_station_code": {
+      "missing_count": 1,
+      "missing_pct": 0.99
+    },
+    "speed_kmh": {
+      "missing_count": 101,
+      "missing_pct": 100.0
+    },
+    "bearing_degrees": {
+      "missing_count": 101,
+      "missing_pct": 100.0
+    },
+    "segment_progress": {
+      "missing_count": 23,
+      "missing_pct": 22.77
+    },
+    "scheduled_departure": {
+      "missing_count": 1,
+      "missing_pct": 0.99
+    },
+    "actual_arrival": {
+      "missing_count": 2,
+      "missing_pct": 1.98
+    },
+    "actual_departure": {
+      "missing_count": 3,
+      "missing_pct": 2.97
+    },
+    "platform": {
+      "missing_count": 58,
+      "missing_pct": 57.43
+    },
+    "route_speed_to_next_kmh": {
+      "missing_count": 1,
+      "missing_pct": 0.99
+    },
+    "time_since_previous_observation_seconds": {
+      "missing_count": 5,
+      "missing_pct": 4.95
+    },
+    "previous_delay": {
+      "missing_count": 5,
+      "missing_pct": 4.95
+    },
+    "delay_change": {
+      "missing_count": 5,
+      "missing_pct": 4.95
+    },
+    "estimated_speed_kmh": {
+      "missing_count": 60,
+      "missing_pct": 59.41
+    },
+    "distance_from_previous_station_km": {
+      "missing_count": 69,
+      "missing_pct": 68.32
+    },
+    "station_to_station_travel_time_seconds": {
+      "missing_count": 73,
+      "missing_pct": 72.28
+    },
+    "headway_seconds": {
+      "missing_count": 101,
+      "missing_pct": 100.0
+    },
+    "distance_travelled_km": {
+      "missing_count": 5,
+      "missing_pct": 4.95
+    }
+  },
+  "delay_distribution": {
+    "min": 0.0,
+    "max": 138.0,
+    "mean": 36.65,
+    "median": 14.0,
+    "std": 51.28
+  },
+  "movement_state_counts": {
+    "MOVING": 57,
+    "STATIONARY": 39,
+    "UNKNOWN": 5
+  },
+  "current_location_status_counts": {
+    "at-station": 69,
+    "departed": 32
+  }
+}

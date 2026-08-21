@@ -1,0 +1,257 @@
+{
+  "total_columns": 36,
+  "columns": {
+    "run_id": {
+      "type": "string",
+      "category": "IDENTIFIER",
+      "description": "Metadata or future component: run_id",
+      "source": "run_id",
+      "use_as_feature": false
+    },
+    "collection_timestamp": {
+      "type": "datetime",
+      "category": "IDENTIFIER",
+      "description": "Metadata or future component: collection_timestamp",
+      "source": "collection_timestamp",
+      "use_as_feature": false
+    },
+    "train_number": {
+      "type": "categorical",
+      "category": "REAL",
+      "description": "Real RailRadar API feature: train_number",
+      "source": "raw_csv.train_number",
+      "use_as_feature": true
+    },
+    "train_name": {
+      "type": "string",
+      "category": "IDENTIFIER",
+      "description": "Metadata or future component: train_name",
+      "source": "train_name",
+      "use_as_feature": false
+    },
+    "train_type": {
+      "type": "categorical",
+      "category": "REAL",
+      "description": "Real RailRadar API feature: train_type",
+      "source": "raw_csv.train_type",
+      "use_as_feature": true
+    },
+    "train_category": {
+      "type": "categorical",
+      "category": "REAL",
+      "description": "Real RailRadar API feature: train_category",
+      "source": "raw_csv.train_category",
+      "use_as_feature": true
+    },
+    "journey_date": {
+      "type": "string",
+      "category": "IDENTIFIER",
+      "description": "Metadata or future component: journey_date",
+      "source": "journey_date",
+      "use_as_feature": false
+    },
+    "current_station_code": {
+      "type": "categorical",
+      "category": "REAL",
+      "description": "Real RailRadar API feature: current_station_code",
+      "source": "raw_csv.current_station_code",
+      "use_as_feature": true
+    },
+    "next_station_code": {
+      "type": "categorical",
+      "category": "REAL",
+      "description": "Real RailRadar API feature: next_station_code",
+      "source": "raw_csv.next_station_code",
+      "use_as_feature": true
+    },
+    "latitude": {
+      "type": "numeric",
+      "category": "REAL",
+      "description": "Real RailRadar API feature: latitude",
+      "source": "raw_csv.latitude",
+      "use_as_feature": true
+    },
+    "longitude": {
+      "type": "numeric",
+      "category": "REAL",
+      "description": "Real RailRadar API feature: longitude",
+      "source": "raw_csv.longitude",
+      "use_as_feature": true
+    },
+    "segment_progress": {
+      "type": "numeric",
+      "category": "REAL",
+      "description": "Real RailRadar API feature: segment_progress",
+      "source": "raw_csv.segment_progress",
+      "use_as_feature": true
+    },
+    "delay_minutes": {
+      "type": "numeric",
+      "category": "REAL",
+      "description": "Real RailRadar API feature: delay_minutes",
+      "source": "raw_csv.delay_minutes",
+      "use_as_feature": true
+    },
+    "scheduled_arrival": {
+      "type": "categorical",
+      "category": "REAL",
+      "description": "Real RailRadar API feature: scheduled_arrival",
+      "source": "raw_csv.scheduled_arrival",
+      "use_as_feature": true
+    },
+    "scheduled_departure": {
+      "type": "categorical",
+      "category": "REAL",
+      "description": "Real RailRadar API feature: scheduled_departure",
+      "source": "raw_csv.scheduled_departure",
+      "use_as_feature": true
+    },
+    "actual_arrival": {
+      "type": "categorical",
+      "category": "REAL",
+      "description": "Real RailRadar API feature: actual_arrival",
+      "source": "raw_csv.actual_arrival",
+      "use_as_feature": true
+    },
+    "actual_departure": {
+      "type": "categorical",
+      "category": "REAL",
+      "description": "Real RailRadar API feature: actual_departure",
+      "source": "raw_csv.actual_departure",
+      "use_as_feature": true
+    },
+    "platform": {
+      "type": "numeric",
+      "category": "REAL",
+      "description": "Real RailRadar API feature: platform",
+      "source": "raw_csv.platform",
+      "use_as_feature": true
+    },
+    "current_location_status": {
+      "type": "categorical",
+      "category": "REAL",
+      "description": "Real RailRadar API feature: current_location_status",
+      "source": "raw_csv.current_location_status",
+      "use_as_feature": true
+    },
+    "movement_state": {
+      "type": "categorical",
+      "category": "REAL",
+      "description": "Real RailRadar API feature: movement_state",
+      "source": "raw_csv.movement_state",
+      "use_as_feature": true
+    },
+    "distance_from_origin_km": {
+      "type": "numeric",
+      "category": "REAL",
+      "description": "Real RailRadar API feature: distance_from_origin_km",
+      "source": "raw_csv.distance_from_origin_km",
+      "use_as_feature": true
+    },
+    "distance_from_last_station_km": {
+      "type": "numeric",
+      "category": "REAL",
+      "description": "Real RailRadar API feature: distance_from_last_station_km",
+      "source": "raw_csv.distance_from_last_station_km",
+      "use_as_feature": true
+    },
+    "route_sequence": {
+      "type": "numeric",
+      "category": "REAL",
+      "description": "Real RailRadar API feature: route_sequence",
+      "source": "raw_csv.route_sequence",
+      "use_as_feature": true
+    },
+    "previous_delay": {
+      "type": "numeric",
+      "category": "DERIVED",
+      "description": "Derived sequential/time feature: previous_delay",
+      "source": "Group-wise shift / datetime extraction",
+      "use_as_feature": true
+    },
+    "delay_change_prev": {
+      "type": "numeric",
+      "category": "DERIVED",
+      "description": "Derived sequential/time feature: delay_change_prev",
+      "source": "Group-wise shift / datetime extraction",
+      "use_as_feature": true
+    },
+    "time_since_previous_observation_seconds": {
+      "type": "numeric",
+      "category": "DERIVED",
+      "description": "Derived sequential/time feature: time_since_previous_observation_seconds",
+      "source": "Group-wise shift / datetime extraction",
+      "use_as_feature": true
+    },
+    "distance_travelled_km": {
+      "type": "numeric",
+      "category": "DERIVED",
+      "description": "Derived sequential/time feature: distance_travelled_km",
+      "source": "Group-wise shift / datetime extraction",
+      "use_as_feature": true
+    },
+    "station_transition": {
+      "type": "boolean",
+      "category": "DERIVED",
+      "description": "Derived sequential/time feature: station_transition",
+      "source": "Group-wise shift / datetime extraction",
+      "use_as_feature": true
+    },
+    "route_position_change": {
+      "type": "numeric",
+      "category": "DERIVED",
+      "description": "Derived sequential/time feature: route_position_change",
+      "source": "Group-wise shift / datetime extraction",
+      "use_as_feature": true
+    },
+    "estimated_speed_kmh": {
+      "type": "numeric",
+      "category": "DERIVED",
+      "description": "Derived sequential/time feature: estimated_speed_kmh",
+      "source": "Group-wise shift / datetime extraction",
+      "use_as_feature": true
+    },
+    "hour": {
+      "type": "numeric",
+      "category": "DERIVED",
+      "description": "Derived sequential/time feature: hour",
+      "source": "Group-wise shift / datetime extraction",
+      "use_as_feature": true
+    },
+    "minute": {
+      "type": "numeric",
+      "category": "DERIVED",
+      "description": "Derived sequential/time feature: minute",
+      "source": "Group-wise shift / datetime extraction",
+      "use_as_feature": true
+    },
+    "time_of_day_minutes": {
+      "type": "numeric",
+      "category": "DERIVED",
+      "description": "Derived sequential/time feature: time_of_day_minutes",
+      "source": "Group-wise shift / datetime extraction",
+      "use_as_feature": true
+    },
+    "day_of_week": {
+      "type": "numeric",
+      "category": "DERIVED",
+      "description": "Derived sequential/time feature: day_of_week",
+      "source": "Group-wise shift / datetime extraction",
+      "use_as_feature": true
+    },
+    "future_delay": {
+      "type": "string",
+      "category": "FUTURE_TARGET_COMPONENT",
+      "description": "Metadata or future component: future_delay",
+      "source": "future_delay",
+      "use_as_feature": false
+    },
+    "target_delay_change": {
+      "type": "numeric",
+      "category": "TARGET",
+      "description": "Future delay change: delay(t+1) - delay(t)",
+      "source": "future_delay - delay_minutes",
+      "use_as_feature": false
+    }
+  }
+}

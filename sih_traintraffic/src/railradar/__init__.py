@@ -9,14 +9,21 @@ from .models import (
     Station,
     TrainSummary,
 )
+from .moving import MovingCollector
+from .ml_preprocessing import load_dataset, run_preprocessing_pipeline
 
 __all__ = [
     "Corridor",
+    "MovingCollector",
     "NormalizedRouteGeometry",
     "NormalizedTrainStatus",
     "RailRadarClient",
     "Settings",
     "Station",
     "TrainSummary",
+    "load_dataset",
     "load_settings",
+    "run_preprocessing_pipeline",
 ]
+
+
