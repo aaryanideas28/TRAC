@@ -1,0 +1,451 @@
+{
+  "run_id": "20260821T145115Z-3d27e36c",
+  "selection_timestamp": "2026-08-21T14:51:21.511838+00:00",
+  "corridor": {
+    "name": "central",
+    "origin_code": "CSMT",
+    "destination_code": "TNA"
+  },
+  "selected_trains": [
+    {
+      "number": "95011",
+      "name": "KP11/Mumbai CSMT - Khopoli Fast Local",
+      "train_type": "EMU",
+      "category": null,
+      "source": {
+        "code": "CSMT",
+        "name": "CHHATRAPATI SHIVAJI MAHARAJ TERMINUS",
+        "city": "Mumbai",
+        "departure": "20:41",
+        "day": 1,
+        "sequence": 1
+      },
+      "destination": {
+        "code": "TNA",
+        "name": "THANE",
+        "city": "Mumbai",
+        "arrival": "21:23",
+        "day": 1,
+        "sequence": 23
+      },
+      "from_schedule": {
+        "code": "CSMT",
+        "name": "CHHATRAPATI SHIVAJI MAHARAJ TERMINUS",
+        "city": "Mumbai",
+        "departure": "20:41",
+        "day": 1,
+        "sequence": 1
+      },
+      "to_schedule": {
+        "code": "TNA",
+        "name": "THANE",
+        "city": "Mumbai",
+        "arrival": "21:23",
+        "day": 1,
+        "sequence": 23
+      },
+      "distance_km": 33.3,
+      "duration_minutes": 42,
+      "total_halts_between": 5,
+      "selection_score": 180.0,
+      "selection_reason": "Mumbai suburban/local service; scheduled during collection window"
+    },
+    {
+      "number": "96333",
+      "name": "A57 / Mumbai CSMT - Ambernath Slow Local",
+      "train_type": "EMU",
+      "category": null,
+      "source": {
+        "code": "CSMT",
+        "name": "CHHATRAPATI SHIVAJI MAHARAJ TERMINUS",
+        "city": "Mumbai",
+        "departure": "20:38",
+        "day": 1,
+        "sequence": 1
+      },
+      "destination": {
+        "code": "TNA",
+        "name": "THANE",
+        "city": "Mumbai",
+        "arrival": "21:35",
+        "day": 1,
+        "sequence": 23
+      },
+      "from_schedule": {
+        "code": "CSMT",
+        "name": "CHHATRAPATI SHIVAJI MAHARAJ TERMINUS",
+        "city": "Mumbai",
+        "departure": "20:38",
+        "day": 1,
+        "sequence": 1
+      },
+      "to_schedule": {
+        "code": "TNA",
+        "name": "THANE",
+        "city": "Mumbai",
+        "arrival": "21:35",
+        "day": 1,
+        "sequence": 23
+      },
+      "distance_km": 33.3,
+      "duration_minutes": 57,
+      "total_halts_between": 17,
+      "selection_score": 180.0,
+      "selection_reason": "Mumbai suburban/local service; scheduled during collection window"
+    },
+    {
+      "number": "96643",
+      "name": "TL55 / Mumbai CSMT - Titvala Slow Local",
+      "train_type": "EMU",
+      "category": null,
+      "source": {
+        "code": "CSMT",
+        "name": "CHHATRAPATI SHIVAJI MAHARAJ TERMINUS",
+        "city": "Mumbai",
+        "departure": "20:30",
+        "day": 1,
+        "sequence": 1
+      },
+      "destination": {
+        "code": "TNA",
+        "name": "THANE",
+        "city": "Mumbai",
+        "arrival": "21:27",
+        "day": 1,
+        "sequence": 23
+      },
+      "from_schedule": {
+        "code": "CSMT",
+        "name": "CHHATRAPATI SHIVAJI MAHARAJ TERMINUS",
+        "city": "Mumbai",
+        "departure": "20:30",
+        "day": 1,
+        "sequence": 1
+      },
+      "to_schedule": {
+        "code": "TNA",
+        "name": "THANE",
+        "city": "Mumbai",
+        "arrival": "21:27",
+        "day": 1,
+        "sequence": 23
+      },
+      "distance_km": 33.3,
+      "duration_minutes": 57,
+      "total_halts_between": 17,
+      "selection_score": 180.0,
+      "selection_reason": "Mumbai suburban/local service; scheduled during collection window"
+    },
+    {
+      "number": "97167",
+      "name": "Kalyan Jn. Mumbai EMU",
+      "train_type": "EMU",
+      "category": null,
+      "source": {
+        "code": "CSMT",
+        "name": "CHHATRAPATI SHIVAJI MAHARAJ TERMINUS",
+        "city": "Mumbai",
+        "departure": "20:26",
+        "day": 1,
+        "sequence": 1
+      },
+      "destination": {
+        "code": "TNA",
+        "name": "THANE",
+        "city": "Mumbai",
+        "arrival": "21:23",
+        "day": 1,
+        "sequence": 23
+      },
+      "from_schedule": {
+        "code": "CSMT",
+        "name": "CHHATRAPATI SHIVAJI MAHARAJ TERMINUS",
+        "city": "Mumbai",
+        "departure": "20:26",
+        "day": 1,
+        "sequence": 1
+      },
+      "to_schedule": {
+        "code": "TNA",
+        "name": "THANE",
+        "city": "Mumbai",
+        "arrival": "21:23",
+        "day": 1,
+        "sequence": 23
+      },
+      "distance_km": 33.3,
+      "duration_minutes": 57,
+      "total_halts_between": 17,
+      "selection_score": 180.0,
+      "selection_reason": "Mumbai suburban/local service; scheduled during collection window"
+    },
+    {
+      "number": "97259",
+      "name": "DL49 / Mumbai CSMT - Dombivli Slow Local",
+      "train_type": "EMU",
+      "category": null,
+      "source": {
+        "code": "CSMT",
+        "name": "CHHATRAPATI SHIVAJI MAHARAJ TERMINUS",
+        "city": "Mumbai",
+        "departure": "20:22",
+        "day": 1,
+        "sequence": 1
+      },
+      "destination": {
+        "code": "TNA",
+        "name": "THANE",
+        "city": "Mumbai",
+        "arrival": "21:19",
+        "day": 1,
+        "sequence": 23
+      },
+      "from_schedule": {
+        "code": "CSMT",
+        "name": "CHHATRAPATI SHIVAJI MAHARAJ TERMINUS",
+        "city": "Mumbai",
+        "departure": "20:22",
+        "day": 1,
+        "sequence": 1
+      },
+      "to_schedule": {
+        "code": "TNA",
+        "name": "THANE",
+        "city": "Mumbai",
+        "arrival": "21:19",
+        "day": 1,
+        "sequence": 23
+      },
+      "distance_km": 33.3,
+      "duration_minutes": 57,
+      "total_halts_between": 17,
+      "selection_score": 180.0,
+      "selection_reason": "Mumbai suburban/local service; scheduled during collection window"
+    },
+    {
+      "number": "97419",
+      "name": "T123 / Mumbai CSMT - Thane Slow Local",
+      "train_type": "EMU",
+      "category": null,
+      "source": {
+        "code": "CSMT",
+        "name": "CHHATRAPATI SHIVAJI MAHARAJ TERMINUS",
+        "city": "Mumbai",
+        "departure": "20:34",
+        "day": 1,
+        "sequence": 1
+      },
+      "destination": {
+        "code": "TNA",
+        "name": "THANE",
+        "city": "Mumbai",
+        "arrival": "21:30",
+        "day": 1,
+        "sequence": 23
+      },
+      "from_schedule": {
+        "code": "CSMT",
+        "name": "CHHATRAPATI SHIVAJI MAHARAJ TERMINUS",
+        "city": "Mumbai",
+        "departure": "20:34",
+        "day": 1,
+        "sequence": 1
+      },
+      "to_schedule": {
+        "code": "TNA",
+        "name": "THANE",
+        "city": "Mumbai",
+        "arrival": "21:30",
+        "day": 1,
+        "sequence": 23
+      },
+      "distance_km": 33.3,
+      "duration_minutes": 56,
+      "total_halts_between": 17,
+      "selection_score": 180.0,
+      "selection_reason": "Mumbai suburban/local service; scheduled during collection window"
+    },
+    {
+      "number": "95421",
+      "name": "N27 / Mumbai CSMT - Kasara Fast Local",
+      "train_type": "EMU",
+      "category": null,
+      "source": {
+        "code": "CSMT",
+        "name": "CHHATRAPATI SHIVAJI MAHARAJ TERMINUS",
+        "city": "Mumbai",
+        "departure": "20:44",
+        "day": 1,
+        "sequence": 1
+      },
+      "destination": {
+        "code": "TNA",
+        "name": "THANE",
+        "city": "Mumbai",
+        "arrival": "21:26",
+        "day": 1,
+        "sequence": 23
+      },
+      "from_schedule": {
+        "code": "CSMT",
+        "name": "CHHATRAPATI SHIVAJI MAHARAJ TERMINUS",
+        "city": "Mumbai",
+        "departure": "20:44",
+        "day": 1,
+        "sequence": 1
+      },
+      "to_schedule": {
+        "code": "TNA",
+        "name": "THANE",
+        "city": "Mumbai",
+        "arrival": "21:26",
+        "day": 1,
+        "sequence": 23
+      },
+      "distance_km": 33.3,
+      "duration_minutes": 42,
+      "total_halts_between": 5,
+      "selection_score": 137.7,
+      "selection_reason": "Mumbai suburban/local service"
+    },
+    {
+      "number": "95333",
+      "name": "A55 / Mumbai CSMT - Ambernath Fast Local",
+      "train_type": "EMU",
+      "category": null,
+      "source": {
+        "code": "CSMT",
+        "name": "CHHATRAPATI SHIVAJI MAHARAJ TERMINUS",
+        "city": "Mumbai",
+        "departure": "20:47",
+        "day": 1,
+        "sequence": 1
+      },
+      "destination": {
+        "code": "TNA",
+        "name": "THANE",
+        "city": "Mumbai",
+        "arrival": "21:29",
+        "day": 1,
+        "sequence": 23
+      },
+      "from_schedule": {
+        "code": "CSMT",
+        "name": "CHHATRAPATI SHIVAJI MAHARAJ TERMINUS",
+        "city": "Mumbai",
+        "departure": "20:47",
+        "day": 1,
+        "sequence": 1
+      },
+      "to_schedule": {
+        "code": "TNA",
+        "name": "THANE",
+        "city": "Mumbai",
+        "arrival": "21:29",
+        "day": 1,
+        "sequence": 23
+      },
+      "distance_km": 33.3,
+      "duration_minutes": 42,
+      "total_halts_between": 5,
+      "selection_score": 137.4,
+      "selection_reason": "Mumbai suburban/local service"
+    },
+    {
+      "number": "97261",
+      "name": "DL51 / Mumbai CSMT - Dombivli Slow Local",
+      "train_type": "EMU",
+      "category": null,
+      "source": {
+        "code": "CSMT",
+        "name": "CHHATRAPATI SHIVAJI MAHARAJ TERMINUS",
+        "city": "Mumbai",
+        "departure": "20:48",
+        "day": 1,
+        "sequence": 1
+      },
+      "destination": {
+        "code": "TNA",
+        "name": "THANE",
+        "city": "Mumbai",
+        "arrival": "21:44",
+        "day": 1,
+        "sequence": 23
+      },
+      "from_schedule": {
+        "code": "CSMT",
+        "name": "CHHATRAPATI SHIVAJI MAHARAJ TERMINUS",
+        "city": "Mumbai",
+        "departure": "20:48",
+        "day": 1,
+        "sequence": 1
+      },
+      "to_schedule": {
+        "code": "TNA",
+        "name": "THANE",
+        "city": "Mumbai",
+        "arrival": "21:44",
+        "day": 1,
+        "sequence": 23
+      },
+      "distance_km": 33.3,
+      "duration_minutes": 56,
+      "total_halts_between": 17,
+      "selection_score": 137.3,
+      "selection_reason": "Mumbai suburban/local service"
+    },
+    {
+      "number": "97421",
+      "name": "T127 / Mumbai CSMT - Thane Slow Local",
+      "train_type": "EMU",
+      "category": null,
+      "source": {
+        "code": "CSMT",
+        "name": "CHHATRAPATI SHIVAJI MAHARAJ TERMINUS",
+        "city": "Mumbai",
+        "departure": "20:52",
+        "day": 1,
+        "sequence": 1
+      },
+      "destination": {
+        "code": "TNA",
+        "name": "THANE",
+        "city": "Mumbai",
+        "arrival": "21:48",
+        "day": 1,
+        "sequence": 23
+      },
+      "from_schedule": {
+        "code": "CSMT",
+        "name": "CHHATRAPATI SHIVAJI MAHARAJ TERMINUS",
+        "city": "Mumbai",
+        "departure": "20:52",
+        "day": 1,
+        "sequence": 1
+      },
+      "to_schedule": {
+        "code": "TNA",
+        "name": "THANE",
+        "city": "Mumbai",
+        "arrival": "21:48",
+        "day": 1,
+        "sequence": 23
+      },
+      "distance_km": 33.3,
+      "duration_minutes": 56,
+      "total_halts_between": 17,
+      "selection_score": 136.9,
+      "selection_reason": "Mumbai suburban/local service"
+    }
+  ],
+  "plan": {
+    "train_count": 10,
+    "polling_interval_seconds": 60,
+    "expected_cycles": 20,
+    "expected_live_requests": 200,
+    "expected_validation_requests": 10,
+    "expected_static_requests": 12,
+    "expected_total_requests": 222,
+    "safe_budget": 845
+  }
+}

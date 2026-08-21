@@ -1,0 +1,193 @@
+{
+  "total_observations": 101,
+  "observations_per_train": {
+    "12809": 21,
+    "95135": 20,
+    "95333": 21,
+    "97179": 20,
+    "97263": 19
+  },
+  "moving_observations": 57,
+  "stationary_observations": 39,
+  "unknown_movement_observations": 5,
+  "unique_stations": [
+    "ABH",
+    "BND",
+    "CHG",
+    "CLA",
+    "CLAS",
+    "CRD",
+    "CRNM",
+    "DDCL",
+    "DIVA",
+    "DR",
+    "GC",
+    "JDI",
+    "KHS",
+    "KYN",
+    "KYNX",
+    "MLND",
+    "MTN",
+    "NHU",
+    "PR",
+    "PRLW",
+    "ROB",
+    "SION",
+    "SNRD",
+    "THK",
+    "TNA"
+  ],
+  "station_transitions": 28,
+  "route_position_changes": 28,
+  "delay_distribution": {
+    "0": 19,
+    "10": 2,
+    "11": 1,
+    "12": 6,
+    "13": 2,
+    "132": 4,
+    "134": 2,
+    "135": 3,
+    "136": 2,
+    "137": 8,
+    "138": 2,
+    "14": 12,
+    "15": 3,
+    "16": 5,
+    "17": 7,
+    "18": 2,
+    "19": 4,
+    "20": 2,
+    "21": 4,
+    "3": 1,
+    "6": 1,
+    "7": 5,
+    "9": 4
+  },
+  "missing_values": {
+    "latitude": 0,
+    "longitude": 0,
+    "speed_kmh": 101,
+    "distance_from_origin_km": 0,
+    "distance_from_last_station_km": 0,
+    "delay_minutes": 0,
+    "route_sequence": 0
+  },
+  "duplicate_observations": 0,
+  "stale_observations": 19,
+  "first_timestamp": "2026-08-21T16:27:27.105831+00:00",
+  "last_timestamp": "2026-08-21T16:50:49.691343+00:00",
+  "run_id": "20260821T162310Z-moving-625795fa",
+  "candidate_trains_checked": 42,
+  "active_trains_found": 5,
+  "selected_train_numbers": [
+    "97179",
+    "95135",
+    "97263",
+    "95333",
+    "12809"
+  ],
+  "initial_current_stations": {
+    "12809": "JDI",
+    "96643": "KYNX",
+    "95421": "KYN",
+    "97167": "DWJN",
+    "95333": "DIVA",
+    "96519": "KLVC",
+    "97423": "MLND",
+    "96333": "MLND",
+    "97261": "CRNM",
+    "97263": "NHU",
+    "97173": "KJRD",
+    "96221": "VK",
+    "96223": "CLAS",
+    "95135": "SION",
+    "96411": "MTN",
+    "96335": "DR",
+    "95741": "PRLW",
+    "97179": "SNRD"
+  },
+  "api_requests": 198,
+  "successful_requests": 140,
+  "failed_requests": 12,
+  "retry_count": 46,
+  "429_responses": 12,
+  "rate_limit_waits": 179,
+  "failures": [
+    {
+      "phase": "active_verification",
+      "train_number": "97183",
+      "error_type": "RateLimitError",
+      "message": "TOO_MANY_REQUESTS: Rate limit exceeded. Maximum 10 requests per minute."
+    },
+    {
+      "phase": "active_verification",
+      "train_number": "96019",
+      "error_type": "RateLimitError",
+      "message": "TOO_MANY_REQUESTS: Rate limit exceeded. Maximum 10 requests per minute."
+    },
+    {
+      "phase": "active_verification",
+      "train_number": "97433",
+      "error_type": "RateLimitError",
+      "message": "TOO_MANY_REQUESTS: Rate limit exceeded. Maximum 10 requests per minute."
+    },
+    {
+      "phase": "active_verification",
+      "train_number": "97437",
+      "error_type": "RateLimitError",
+      "message": "TOO_MANY_REQUESTS: Rate limit exceeded. Maximum 10 requests per minute."
+    },
+    {
+      "phase": "active_verification",
+      "train_number": "96225",
+      "error_type": "RateLimitError",
+      "message": "TOO_MANY_REQUESTS: Rate limit exceeded. Maximum 10 requests per minute."
+    },
+    {
+      "phase": "active_verification",
+      "train_number": "96645",
+      "error_type": "RateLimitError",
+      "message": "TOO_MANY_REQUESTS: Rate limit exceeded. Maximum 10 requests per minute."
+    },
+    {
+      "phase": "active_verification",
+      "train_number": "97171",
+      "error_type": "RateLimitError",
+      "message": "TOO_MANY_REQUESTS: Rate limit exceeded. Maximum 10 requests per minute."
+    },
+    {
+      "phase": "active_verification",
+      "train_number": "95011",
+      "error_type": "RateLimitError",
+      "message": "TOO_MANY_REQUESTS: Rate limit exceeded. Maximum 10 requests per minute."
+    },
+    {
+      "phase": "moving_collection",
+      "train_number": "97179",
+      "error_type": "RateLimitError",
+      "message": "TOO_MANY_REQUESTS: Rate limit exceeded. Maximum 10 requests per minute."
+    },
+    {
+      "phase": "moving_collection",
+      "train_number": "95135",
+      "error_type": "RateLimitError",
+      "message": "TOO_MANY_REQUESTS: Rate limit exceeded. Maximum 10 requests per minute."
+    },
+    {
+      "phase": "moving_collection",
+      "train_number": "97263",
+      "error_type": "RateLimitError",
+      "message": "TOO_MANY_REQUESTS: Rate limit exceeded. Maximum 10 requests per minute."
+    },
+    {
+      "phase": "moving_collection",
+      "train_number": "97263",
+      "error_type": "RateLimitError",
+      "message": "TOO_MANY_REQUESTS: Rate limit exceeded. Maximum 10 requests per minute."
+    }
+  ],
+  "output_path": "/home/shivam/Desktop/Nexora/sih_traintraffic/data/processed/live_observations_moving_20260821T162310Z-moving-625795fa.csv",
+  "previous_dataset": "/home/shivam/Desktop/Nexora/sih_traintraffic/data/processed/live_observations_augmented.csv",
+  "run_metadata": "/home/shivam/Desktop/Nexora/sih_traintraffic/data/runs/20260821T162310Z-moving-625795fa.json"
+}

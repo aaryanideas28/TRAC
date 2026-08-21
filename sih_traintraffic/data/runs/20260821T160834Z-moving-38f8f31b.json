@@ -1,0 +1,120 @@
+{
+  "run_id": "20260821T160834Z-moving-38f8f31b",
+  "start_time": "2026-08-21T16:08:34.970768+00:00",
+  "end_time": "2026-08-21T16:35:19.481643+00:00",
+  "requested_duration_seconds": 1200,
+  "actual_duration_seconds": 1293.124201,
+  "candidate_trains_checked": 1561,
+  "active_trains_found": 21,
+  "selected_train_numbers": [
+    "12809",
+    "97259",
+    "95421",
+    "95011",
+    "97167",
+    "97421",
+    "95333",
+    "96519",
+    "96643",
+    "96333",
+    "97419",
+    "97423",
+    "96221",
+    "97261",
+    "97171",
+    "97263",
+    "97173",
+    "95135",
+    "96645",
+    "96223",
+    "96411"
+  ],
+  "polling_interval_seconds": 60,
+  "expected_cycles": 20,
+  "expected_requests": 472,
+  "actual_requests": 264,
+  "successful_requests": 208,
+  "failed_requests": 12,
+  "retry_count": 44,
+  "rate_limit_waits": 263,
+  "429_count": 12,
+  "total_observations": 177,
+  "quota_total": 1000,
+  "known_prior_requests": 242,
+  "safe_request_budget": 608,
+  "remaining_safe_budget": 344,
+  "failures": [
+    {
+      "phase": "moving_collection",
+      "train_number": "96221",
+      "error_type": "RateLimitError",
+      "message": "TOO_MANY_REQUESTS: Rate limit exceeded. Maximum 10 requests per minute."
+    },
+    {
+      "phase": "moving_collection",
+      "train_number": "96645",
+      "error_type": "RateLimitError",
+      "message": "TOO_MANY_REQUESTS: Rate limit exceeded. Maximum 10 requests per minute."
+    },
+    {
+      "phase": "moving_collection",
+      "train_number": "95011",
+      "error_type": "RateLimitError",
+      "message": "TOO_MANY_REQUESTS: Rate limit exceeded. Maximum 10 requests per minute."
+    },
+    {
+      "phase": "moving_collection",
+      "train_number": "96333",
+      "error_type": "RateLimitError",
+      "message": "TOO_MANY_REQUESTS: Rate limit exceeded. Maximum 10 requests per minute."
+    },
+    {
+      "phase": "moving_collection",
+      "train_number": "97263",
+      "error_type": "RateLimitError",
+      "message": "TOO_MANY_REQUESTS: Rate limit exceeded. Maximum 10 requests per minute."
+    },
+    {
+      "phase": "moving_collection",
+      "train_number": "12809",
+      "error_type": "RateLimitError",
+      "message": "TOO_MANY_REQUESTS: Rate limit exceeded. Maximum 10 requests per minute."
+    },
+    {
+      "phase": "moving_collection",
+      "train_number": "95333",
+      "error_type": "RateLimitError",
+      "message": "TOO_MANY_REQUESTS: Rate limit exceeded. Maximum 10 requests per minute."
+    },
+    {
+      "phase": "moving_collection",
+      "train_number": "96221",
+      "error_type": "RateLimitError",
+      "message": "TOO_MANY_REQUESTS: Rate limit exceeded. Maximum 10 requests per minute."
+    },
+    {
+      "phase": "moving_collection",
+      "train_number": "96645",
+      "error_type": "RateLimitError",
+      "message": "TOO_MANY_REQUESTS: Rate limit exceeded. Maximum 10 requests per minute."
+    },
+    {
+      "phase": "moving_collection",
+      "train_number": "95011",
+      "error_type": "RateLimitError",
+      "message": "TOO_MANY_REQUESTS: Rate limit exceeded. Maximum 10 requests per minute."
+    },
+    {
+      "phase": "moving_collection",
+      "train_number": "96333",
+      "error_type": "RateLimitError",
+      "message": "TOO_MANY_REQUESTS: Rate limit exceeded. Maximum 10 requests per minute."
+    },
+    {
+      "phase": "moving_collection",
+      "train_number": "97173",
+      "error_type": "RateLimitError",
+      "message": "TOO_MANY_REQUESTS: Rate limit exceeded. Maximum 10 requests per minute."
+    }
+  ]
+}
