@@ -1,0 +1,26 @@
+{
+  "dataset_total_rows": 470,
+  "recommended_strategy": "Chronological In-Sequence Split (70/30)",
+  "strategy_a_in_sequence_chronological": {
+    "description": "Allocates the first 70% of chronological observations per sequence to Train and the final 30% to Test.",
+    "train_row_count": 314,
+    "test_row_count": 156,
+    "train_percentage": 66.81,
+    "test_percentage": 33.19,
+    "leakage_risk": "Zero (strictly preserves time-ordering within every train journey)"
+  },
+  "strategy_b_run_holdout": {
+    "description": "Uses earlier runs as training/development data and the latest collection run (20260822T131216Z-moving-7b8b8e46) as temporal holdout.",
+    "train_runs": [
+      "20260821T160834Z-moving-38f8f31b",
+      "20260821T162310Z-moving-625795fa",
+      "20260822T085927Z-moving-6809face"
+    ],
+    "holdout_run": "20260822T131216Z-moving-7b8b8e46",
+    "train_row_count": 358,
+    "holdout_row_count": 112,
+    "train_percentage": 76.17,
+    "holdout_percentage": 23.83,
+    "leakage_risk": "Zero (complete temporal and operational separation across days/sessions)"
+  }
+}

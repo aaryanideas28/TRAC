@@ -1,104 +1,353 @@
 {
-  "original_rows": 798,
+  "original_row_count": 798,
+  "original_column_count": 65,
   "stale_rows": 293,
   "fresh_rows": 505,
-  "rows_with_valid_sequential_pairs": 470,
+  "percentage_stale": 36.72,
+  "percentage_fresh": 63.28,
+  "number_of_sequences": 35,
+  "number_of_usable_sequential_pairs": 470,
+  "terminal_observations_removed": 35,
   "final_ml_row_count": 470,
   "train_count": 30,
-  "unique_stations_count": 36,
-  "station_transitions_count": 142,
-  "missing_value_statistics": {
-    "next_station_code": {
-      "missing_count": 1,
-      "missing_pct": 0.21,
-      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
-    },
-    "segment_progress": {
-      "missing_count": 98,
-      "missing_pct": 20.85,
-      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
-    },
-    "scheduled_arrival": {
-      "missing_count": 21,
-      "missing_pct": 4.47,
-      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
-    },
-    "scheduled_departure": {
-      "missing_count": 22,
-      "missing_pct": 4.68,
-      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
-    },
-    "actual_arrival": {
-      "missing_count": 25,
-      "missing_pct": 5.32,
-      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
-    },
-    "actual_departure": {
-      "missing_count": 24,
-      "missing_pct": 5.11,
-      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
-    },
-    "platform": {
-      "missing_count": 192,
-      "missing_pct": 40.85,
-      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
-    },
-    "distance_from_origin_km": {
-      "missing_count": 19,
-      "missing_pct": 4.04,
-      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
-    },
-    "distance_from_last_station_km": {
-      "missing_count": 21,
-      "missing_pct": 4.47,
-      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
-    },
-    "route_sequence": {
-      "missing_count": 21,
-      "missing_pct": 4.47,
-      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
-    },
-    "previous_delay": {
-      "missing_count": 34,
-      "missing_pct": 7.23,
-      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
-    },
-    "delay_change_prev": {
-      "missing_count": 34,
-      "missing_pct": 7.23,
-      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
-    },
-    "time_since_previous_observation_seconds": {
-      "missing_count": 34,
-      "missing_pct": 7.23,
-      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
-    },
-    "distance_travelled_km": {
-      "missing_count": 56,
-      "missing_pct": 11.91,
-      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
-    },
-    "route_position_change": {
-      "missing_count": 56,
-      "missing_pct": 11.91,
-      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
-    },
-    "estimated_speed_kmh": {
-      "missing_count": 65,
-      "missing_pct": 13.83,
-      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
-    }
+  "station_count": 36,
+  "run_count": 4,
+  "feature_counts": {
+    "total_model_features": 25,
+    "numerical_features_count": 7,
+    "categorical_features_count": 7,
+    "derived_features_count": 7,
+    "temporal_features_count": 4,
+    "excluded_features_count": 40
   },
-  "final_feature_count": 32,
   "target_statistics": {
     "min": -19.0,
     "max": 14.0,
     "mean": 0.11,
     "median": 0.0,
-    "std": 2.15
+    "std": 2.15,
+    "zero_change_pct": 57.66,
+    "negative_change_pct": 20.85,
+    "positive_change_pct": 21.49
   },
-  "rows_dropped_reasons": {
-    "stale_observations_dropped": 293,
-    "terminal_train_observations_without_future_target_dropped": 35
-  }
+  "target_distribution_by_run": {
+    "20260821T160834Z-moving-38f8f31b": {
+      "row_count": 89,
+      "mean": 0.19,
+      "median": 0.0,
+      "std": 3.09,
+      "zero_change_pct": 35.96,
+      "positive_change_pct": 35.96,
+      "negative_change_pct": 28.09
+    },
+    "20260821T162310Z-moving-625795fa": {
+      "row_count": 77,
+      "mean": 0.27,
+      "median": 0.0,
+      "std": 1.76,
+      "zero_change_pct": 55.84,
+      "positive_change_pct": 27.27,
+      "negative_change_pct": 16.88
+    },
+    "20260822T085927Z-moving-6809face": {
+      "row_count": 192,
+      "mean": 0.0,
+      "median": 0.0,
+      "std": 1.4,
+      "zero_change_pct": 64.58,
+      "positive_change_pct": 16.15,
+      "negative_change_pct": 19.27
+    },
+    "20260822T131216Z-moving-7b8b8e46": {
+      "row_count": 112,
+      "mean": 0.14,
+      "median": 0.0,
+      "std": 2.53,
+      "zero_change_pct": 64.29,
+      "positive_change_pct": 15.18,
+      "negative_change_pct": 20.54
+    }
+  },
+  "target_distribution_by_train": {
+    "12809": {
+      "row_count": 27,
+      "mean": 0.41,
+      "median": 0.0,
+      "zero_change_pct": 44.44
+    },
+    "95011": {
+      "row_count": 5,
+      "mean": -1.2,
+      "median": 0.0,
+      "zero_change_pct": 40.0
+    },
+    "95135": {
+      "row_count": 27,
+      "mean": 0.26,
+      "median": 0.0,
+      "zero_change_pct": 48.15
+    },
+    "95327": {
+      "row_count": 31,
+      "mean": 0.23,
+      "median": 0.0,
+      "zero_change_pct": 54.84
+    },
+    "95333": {
+      "row_count": 26,
+      "mean": 0.15,
+      "median": 0.0,
+      "zero_change_pct": 53.85
+    },
+    "95421": {
+      "row_count": 8,
+      "mean": 0.12,
+      "median": 0.0,
+      "zero_change_pct": 25.0
+    },
+    "95515": {
+      "row_count": 36,
+      "mean": 0.17,
+      "median": 0.0,
+      "zero_change_pct": 69.44
+    },
+    "95733": {
+      "row_count": 2,
+      "mean": 0.0,
+      "median": 0.0,
+      "zero_change_pct": 100.0
+    },
+    "96207": {
+      "row_count": 58,
+      "mean": -0.07,
+      "median": 0.0,
+      "zero_change_pct": 68.97
+    },
+    "96223": {
+      "row_count": 4,
+      "mean": 0.5,
+      "median": -0.5,
+      "zero_change_pct": 25.0
+    },
+    "96333": {
+      "row_count": 6,
+      "mean": 0.17,
+      "median": 0.0,
+      "zero_change_pct": 83.33
+    },
+    "96411": {
+      "row_count": 5,
+      "mean": 0.2,
+      "median": 0.0,
+      "zero_change_pct": 40.0
+    },
+    "96519": {
+      "row_count": 1,
+      "mean": 0.0,
+      "median": 0.0,
+      "zero_change_pct": 100.0
+    },
+    "96633": {
+      "row_count": 31,
+      "mean": 0.39,
+      "median": 0.0,
+      "zero_change_pct": 83.87
+    },
+    "96643": {
+      "row_count": 4,
+      "mean": -3.75,
+      "median": -1.5,
+      "zero_change_pct": 25.0
+    },
+    "96645": {
+      "row_count": 6,
+      "mean": 1.17,
+      "median": 0.5,
+      "zero_change_pct": 16.67
+    },
+    "97093": {
+      "row_count": 27,
+      "mean": -0.04,
+      "median": 0.0,
+      "zero_change_pct": 66.67
+    },
+    "97095": {
+      "row_count": 48,
+      "mean": -0.04,
+      "median": 0.0,
+      "zero_change_pct": 45.83
+    },
+    "97167": {
+      "row_count": 5,
+      "mean": 1.2,
+      "median": 1.0,
+      "zero_change_pct": 0.0
+    },
+    "97171": {
+      "row_count": 8,
+      "mean": 0.62,
+      "median": 0.0,
+      "zero_change_pct": 25.0
+    },
+    "97179": {
+      "row_count": 6,
+      "mean": 0.33,
+      "median": 0.0,
+      "zero_change_pct": 83.33
+    },
+    "97231": {
+      "row_count": 28,
+      "mean": -0.18,
+      "median": 0.0,
+      "zero_change_pct": 64.29
+    },
+    "97259": {
+      "row_count": 2,
+      "mean": 1.5,
+      "median": 1.5,
+      "zero_change_pct": 0.0
+    },
+    "97261": {
+      "row_count": 3,
+      "mean": 1.0,
+      "median": 1.0,
+      "zero_change_pct": 33.33
+    },
+    "97263": {
+      "row_count": 15,
+      "mean": 1.13,
+      "median": 0.0,
+      "zero_change_pct": 46.67
+    },
+    "97399": {
+      "row_count": 38,
+      "mean": 0.13,
+      "median": 0.0,
+      "zero_change_pct": 65.79
+    },
+    "97401": {
+      "row_count": 5,
+      "mean": -0.4,
+      "median": 0.0,
+      "zero_change_pct": 60.0
+    },
+    "97419": {
+      "row_count": 3,
+      "mean": -1.0,
+      "median": 0.0,
+      "zero_change_pct": 66.67
+    },
+    "97421": {
+      "row_count": 1,
+      "mean": 0.0,
+      "median": 0.0,
+      "zero_change_pct": 100.0
+    },
+    "97423": {
+      "row_count": 4,
+      "mean": -2.0,
+      "median": 0.0,
+      "zero_change_pct": 75.0
+    }
+  },
+  "station_transitions_count": 142,
+  "missing_value_statistics": {
+    "next_station_code": {
+      "missing_count": 1,
+      "missing_pct": 0.21,
+      "classification": "structurally missing",
+      "decision": "Kept as NaN; handled gracefully by scikit-learn SimpleImputer without fake data"
+    },
+    "segment_progress": {
+      "missing_count": 98,
+      "missing_pct": 20.85,
+      "classification": "structurally missing",
+      "decision": "Kept as NaN; handled gracefully by scikit-learn SimpleImputer without fake data"
+    },
+    "scheduled_arrival": {
+      "missing_count": 21,
+      "missing_pct": 4.47,
+      "classification": "structurally missing",
+      "decision": "Kept as NaN; handled gracefully by scikit-learn SimpleImputer without fake data"
+    },
+    "scheduled_departure": {
+      "missing_count": 22,
+      "missing_pct": 4.68,
+      "classification": "structurally missing",
+      "decision": "Kept as NaN; handled gracefully by scikit-learn SimpleImputer without fake data"
+    },
+    "actual_arrival": {
+      "missing_count": 25,
+      "missing_pct": 5.32,
+      "classification": "structurally missing",
+      "decision": "Kept as NaN; handled gracefully by scikit-learn SimpleImputer without fake data"
+    },
+    "actual_departure": {
+      "missing_count": 24,
+      "missing_pct": 5.11,
+      "classification": "structurally missing",
+      "decision": "Kept as NaN; handled gracefully by scikit-learn SimpleImputer without fake data"
+    },
+    "platform": {
+      "missing_count": 192,
+      "missing_pct": 40.85,
+      "classification": "legitimately unavailable (API does not populate platform for all stations)",
+      "decision": "Kept as NaN; handled gracefully by scikit-learn SimpleImputer without fake data"
+    },
+    "distance_from_origin_km": {
+      "missing_count": 19,
+      "missing_pct": 4.04,
+      "classification": "structurally missing",
+      "decision": "Kept as NaN; handled gracefully by scikit-learn SimpleImputer without fake data"
+    },
+    "distance_from_last_station_km": {
+      "missing_count": 21,
+      "missing_pct": 4.47,
+      "classification": "structurally missing",
+      "decision": "Kept as NaN; handled gracefully by scikit-learn SimpleImputer without fake data"
+    },
+    "route_sequence": {
+      "missing_count": 21,
+      "missing_pct": 4.47,
+      "classification": "structurally missing",
+      "decision": "Kept as NaN; handled gracefully by scikit-learn SimpleImputer without fake data"
+    },
+    "previous_delay": {
+      "missing_count": 34,
+      "missing_pct": 7.23,
+      "classification": "derivation-related (first observation of sequence has no lag)",
+      "decision": "Kept as NaN; handled gracefully by scikit-learn SimpleImputer without fake data"
+    },
+    "delay_change_prev": {
+      "missing_count": 34,
+      "missing_pct": 7.23,
+      "classification": "derivation-related (first observation of sequence has no lag)",
+      "decision": "Kept as NaN; handled gracefully by scikit-learn SimpleImputer without fake data"
+    },
+    "time_since_previous_observation_seconds": {
+      "missing_count": 34,
+      "missing_pct": 7.23,
+      "classification": "derivation-related (first observation of sequence has no lag)",
+      "decision": "Kept as NaN; handled gracefully by scikit-learn SimpleImputer without fake data"
+    },
+    "distance_travelled_km": {
+      "missing_count": 56,
+      "missing_pct": 11.91,
+      "classification": "derivation-related (first observation of sequence has no lag)",
+      "decision": "Kept as NaN; handled gracefully by scikit-learn SimpleImputer without fake data"
+    },
+    "route_position_change": {
+      "missing_count": 56,
+      "missing_pct": 11.91,
+      "classification": "derivation-related (first observation of sequence has no lag)",
+      "decision": "Kept as NaN; handled gracefully by scikit-learn SimpleImputer without fake data"
+    },
+    "estimated_speed_kmh": {
+      "missing_count": 65,
+      "missing_pct": 13.83,
+      "classification": "derivation-related (first observation of sequence has no lag)",
+      "decision": "Kept as NaN; handled gracefully by scikit-learn SimpleImputer without fake data"
+    }
+  },
+  "leakage_audit_status": "PASSED"
 }

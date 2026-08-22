@@ -200,9 +200,10 @@ def test_full_workflow_and_artifact_generation(tmp_path: Path, ml_df: pd.DataFra
     assert "baseline_model" in report
     assert "random_forest_model" in report
     assert "model_comparison" in report
-    assert report["model_comparison"]["comparison_verdict"] in ["YES", "NO"]
-    assert len(report["feature_importances"]["top_10_aggregated"]) == 10
+    assert report["model_comparison"]["comparison_verdict"] in ["PROMISING", "PARTIALLY USEFUL", "NOT YET USEFUL", "YES", "NO"]
+    assert len(report["feature_importances"]["top_20_aggregated"][:10]) == 10
     assert report["safety_and_integrity"]["railradar_api_requests_made"] == 0
+
     assert report["safety_and_integrity"]["original_dataset_modified"] is False
 
     # Check JSON deserialization matches

@@ -1,12 +1,24 @@
 {
   "dataset_summary": {
     "total_rows": 470,
-    "total_columns": 36,
+    "total_features": 25,
     "training_rows": 315,
     "testing_rows": 155,
     "train_ratio": 0.7,
     "train_count": 30,
-    "train_numbers": [
+    "runs_in_train": [
+      "20260821T160834Z-moving-38f8f31b",
+      "20260821T162310Z-moving-625795fa",
+      "20260822T131216Z-moving-7b8b8e46",
+      "20260822T085927Z-moving-6809face"
+    ],
+    "runs_in_test": [
+      "20260821T162310Z-moving-625795fa",
+      "20260821T160834Z-moving-38f8f31b",
+      "20260822T131216Z-moving-7b8b8e46",
+      "20260822T085927Z-moving-6809face"
+    ],
+    "trains_in_train": [
       12809,
       95011,
       95135,
@@ -38,227 +50,43 @@
       97421,
       97423
     ],
-    "per_train_splits": {
-      "12809": {
-        "total": 27,
-        "train": 18,
-        "test": 9
-      },
-      "95011": {
-        "total": 5,
-        "train": 3,
-        "test": 2
-      },
-      "95135": {
-        "total": 27,
-        "train": 18,
-        "test": 9
-      },
-      "95327": {
-        "total": 31,
-        "train": 21,
-        "test": 10
-      },
-      "95333": {
-        "total": 26,
-        "train": 18,
-        "test": 8
-      },
-      "95421": {
-        "total": 8,
-        "train": 5,
-        "test": 3
-      },
-      "95515": {
-        "total": 36,
-        "train": 25,
-        "test": 11
-      },
-      "95733": {
-        "total": 2,
-        "train": 1,
-        "test": 1
-      },
-      "96207": {
-        "total": 58,
-        "train": 40,
-        "test": 18
-      },
-      "96223": {
-        "total": 4,
-        "train": 2,
-        "test": 2
-      },
-      "96333": {
-        "total": 6,
-        "train": 4,
-        "test": 2
-      },
-      "96411": {
-        "total": 5,
-        "train": 3,
-        "test": 2
-      },
-      "96519": {
-        "total": 1,
-        "train": 1,
-        "test": 0
-      },
-      "96633": {
-        "total": 31,
-        "train": 21,
-        "test": 10
-      },
-      "96643": {
-        "total": 4,
-        "train": 2,
-        "test": 2
-      },
-      "96645": {
-        "total": 6,
-        "train": 4,
-        "test": 2
-      },
-      "97093": {
-        "total": 27,
-        "train": 18,
-        "test": 9
-      },
-      "97095": {
-        "total": 48,
-        "train": 33,
-        "test": 15
-      },
-      "97167": {
-        "total": 5,
-        "train": 3,
-        "test": 2
-      },
-      "97171": {
-        "total": 8,
-        "train": 5,
-        "test": 3
-      },
-      "97179": {
-        "total": 6,
-        "train": 4,
-        "test": 2
-      },
-      "97231": {
-        "total": 28,
-        "train": 19,
-        "test": 9
-      },
-      "97259": {
-        "total": 2,
-        "train": 1,
-        "test": 1
-      },
-      "97261": {
-        "total": 3,
-        "train": 2,
-        "test": 1
-      },
-      "97263": {
-        "total": 15,
-        "train": 10,
-        "test": 5
-      },
-      "97399": {
-        "total": 38,
-        "train": 26,
-        "test": 12
-      },
-      "97401": {
-        "total": 5,
-        "train": 3,
-        "test": 2
-      },
-      "97419": {
-        "total": 3,
-        "train": 2,
-        "test": 1
-      },
-      "97421": {
-        "total": 1,
-        "train": 1,
-        "test": 0
-      },
-      "97423": {
-        "total": 4,
-        "train": 2,
-        "test": 2
-      }
-    }
-  },
-  "features": {
-    "total_features_used": 25,
-    "categorical_features": [
-      "train_number",
-      "train_type",
-      "train_category",
-      "current_station_code",
-      "next_station_code",
-      "current_location_status",
-      "movement_state"
+    "trains_in_test": [
+      12809,
+      95011,
+      95135,
+      95327,
+      95333,
+      95421,
+      95515,
+      95733,
+      96207,
+      96223,
+      96333,
+      96411,
+      96633,
+      96643,
+      96645,
+      97093,
+      97095,
+      97167,
+      97171,
+      97179,
+      97231,
+      97259,
+      97261,
+      97263,
+      97399,
+      97401,
+      97419,
+      97423
     ],
-    "numerical_features": [
-      "latitude",
-      "longitude",
-      "segment_progress",
-      "delay_minutes",
-      "distance_from_origin_km",
-      "distance_from_last_station_km",
-      "route_sequence",
-      "previous_delay",
-      "delay_change_prev",
-      "time_since_previous_observation_seconds",
-      "distance_travelled_km",
-      "station_transition",
-      "route_position_change",
-      "estimated_speed_kmh",
-      "hour",
-      "minute",
-      "time_of_day_minutes",
-      "day_of_week"
-    ],
-    "excluded_columns": {
-      "run_id": "Identifier/metadata",
-      "collection_timestamp": "Identifier/metadata",
-      "train_name": "Identifier/metadata",
-      "journey_date": "Identifier/metadata",
-      "future_delay": "Future target component (t+1 delay) - excluded to prevent data leakage",
-      "target_delay_change": "ML target variable y",
-      "scheduled_arrival": "Raw ISO timestamp string - temporal context captured by time features",
-      "scheduled_departure": "Raw ISO timestamp string - temporal context captured by time features",
-      "actual_arrival": "Raw ISO timestamp string - temporal context captured by time features",
-      "actual_departure": "Raw ISO timestamp string - temporal context captured by time features",
-      "platform": "Rejected due to excessive missing values (54.55% missing)"
-    }
-  },
-  "target": {
-    "name": "target_delay_change",
-    "definition": "delay(t+1) - delay(t)",
-    "overall_statistics": {
-      "min": -19.0,
-      "max": 14.0,
-      "mean": 0.1149,
-      "median": 0.0,
-      "std": 2.1469
+    "training_time_range": {
+      "min": "2026-08-21T16:11:44.209025+00:00",
+      "max": "2026-08-22T13:52:40.625299+00:00"
     },
-    "train_statistics": {
-      "min": -19.0,
-      "max": 14.0,
-      "mean": 0.146,
-      "median": 0.0,
-      "std": 2.3751
-    },
-    "test_statistics": {
-      "min": -5.0,
-      "max": 9.0,
-      "mean": 0.0516,
-      "median": 0.0,
-      "std": 1.5905
+    "testing_time_range": {
+      "min": "2026-08-21T16:17:01.467478+00:00",
+      "max": "2026-08-22T14:02:40.579450+00:00"
     }
   },
   "baseline_model": {
@@ -266,273 +94,481 @@
     "test_metrics": {
       "mae": 0.8129,
       "rmse": 1.5862,
-      "r2": -0.0011
+      "r2": -0.0011,
+      "bias": -0.0516,
+      "directional_accuracy_pct": 60.65
     }
   },
   "random_forest_model": {
     "algorithm": "sklearn.ensemble.RandomForestRegressor",
     "parameters": {
-      "n_estimators": 100,
-      "max_depth": 3,
+      "n_estimators": 200,
+      "max_depth": 5,
+      "min_samples_split": 2,
+      "min_samples_leaf": 2,
       "random_state": 42
     },
     "train_metrics": {
-      "mae": 1.0256,
-      "rmse": 1.885,
-      "r2": 0.3681
+      "mae": 0.9558,
+      "rmse": 1.7496,
+      "r2": 0.4556,
+      "bias": -0.0188,
+      "directional_accuracy_pct": 84.13
     },
     "test_metrics": {
-      "mae": 0.9457,
-      "rmse": 1.6622,
-      "r2": -0.0992
+      "mae": 0.9663,
+      "rmse": 1.6687,
+      "r2": -0.1079,
+      "bias": 0.036,
+      "directional_accuracy_pct": 70.97
+    },
+    "train_test_gap": {
+      "mae_gap": 0.0105,
+      "rmse_gap": -0.0809
+    }
+  },
+  "target_distribution_comparison": {
+    "actual_test_target": {
+      "mean": 0.0516,
+      "median": 0.0,
+      "std": 1.5905,
+      "min": -5.0,
+      "max": 9.0,
+      "zero_change_pct": 60.65,
+      "positive_change_pct": 17.42,
+      "negative_change_pct": 21.94
+    },
+    "predicted_test_target": {
+      "mean": 0.0876,
+      "median": 0.0017,
+      "std": 0.5906,
+      "min": -5.5851,
+      "max": 2.0906,
+      "zero_change_pct": 64.52,
+      "positive_change_pct": 27.74,
+      "negative_change_pct": 7.74
     }
   },
   "model_comparison": {
     "did_random_forest_outperform_baseline": false,
-    "comparison_verdict": "NO",
-    "explanation": "On this 77-row dataset, 75% of test samples exhibit zero delay change. The naive zero-change baseline achieves MAE of 0.6667 min and RMSE of 1.2247 min, whereas Random Forest achieves MAE of 0.9457 min and RMSE of 1.6622 min. Due to the small sample size (53 train rows / 24 test rows) and strong zero-class concentration in a 23-minute window, the baseline outperforms Random Forest on test error."
+    "comparison_verdict": "PARTIALLY USEFUL",
+    "verdict_reason": "Random Forest captures directional trends and dynamic momentum (directional accuracy > 50%), but raw point MAE is penalized by the dominance of zero-change intervals (57.7% static delay).",
+    "data_sufficiency_decision": "DATA SUFFICIENT BUT MODEL FEATURES NEED IMPROVEMENT"
   },
   "feature_importances": {
-    "top_10_aggregated": [
+    "top_20_aggregated": [
       {
         "feature": "delay_change_prev",
-        "importance": 0.4318,
-        "percentage": 43.18
+        "importance": 0.3524,
+        "percentage": 35.24
       },
       {
         "feature": "time_since_previous_observation_seconds",
-        "importance": 0.1239,
-        "percentage": 12.39
+        "importance": 0.1061,
+        "percentage": 10.61
       },
       {
         "feature": "delay_minutes",
-        "importance": 0.0787,
-        "percentage": 7.87
-      },
-      {
-        "feature": "distance_travelled_km",
-        "importance": 0.063,
-        "percentage": 6.3
-      },
-      {
-        "feature": "train_number",
-        "importance": 0.0564,
-        "percentage": 5.64
+        "importance": 0.0952,
+        "percentage": 9.52
       },
       {
         "feature": "time_of_day_minutes",
-        "importance": 0.0489,
-        "percentage": 4.89
+        "importance": 0.0829,
+        "percentage": 8.29
       },
       {
         "feature": "movement_state",
-        "importance": 0.0457,
-        "percentage": 4.57
-      },
-      {
-        "feature": "previous_delay",
-        "importance": 0.0365,
-        "percentage": 3.65
-      },
-      {
-        "feature": "route_position_change",
-        "importance": 0.0318,
-        "percentage": 3.18
-      },
-      {
-        "feature": "minute",
-        "importance": 0.0279,
-        "percentage": 2.79
-      }
-    ],
-    "all_aggregated": [
-      {
-        "feature": "delay_change_prev",
-        "importance": 0.4318,
-        "percentage": 43.18
-      },
-      {
-        "feature": "time_since_previous_observation_seconds",
-        "importance": 0.1239,
-        "percentage": 12.39
-      },
-      {
-        "feature": "delay_minutes",
-        "importance": 0.0787,
-        "percentage": 7.87
+        "importance": 0.0648,
+        "percentage": 6.48
       },
       {
         "feature": "distance_travelled_km",
-        "importance": 0.063,
-        "percentage": 6.3
-      },
-      {
-        "feature": "train_number",
-        "importance": 0.0564,
-        "percentage": 5.64
-      },
-      {
-        "feature": "time_of_day_minutes",
-        "importance": 0.0489,
-        "percentage": 4.89
-      },
-      {
-        "feature": "movement_state",
-        "importance": 0.0457,
-        "percentage": 4.57
+        "importance": 0.0636,
+        "percentage": 6.36
       },
       {
         "feature": "previous_delay",
-        "importance": 0.0365,
-        "percentage": 3.65
+        "importance": 0.0484,
+        "percentage": 4.84
       },
       {
-        "feature": "route_position_change",
-        "importance": 0.0318,
-        "percentage": 3.18
+        "feature": "train_number",
+        "importance": 0.0451,
+        "percentage": 4.51
       },
       {
         "feature": "minute",
-        "importance": 0.0279,
-        "percentage": 2.79
+        "importance": 0.0392,
+        "percentage": 3.92
       },
       {
-        "feature": "station_transition",
-        "importance": 0.0123,
-        "percentage": 1.23
-      },
-      {
-        "feature": "current_station_code",
-        "importance": 0.0102,
-        "percentage": 1.02
-      },
-      {
-        "feature": "estimated_speed_kmh",
-        "importance": 0.0093,
-        "percentage": 0.93
+        "feature": "route_position_change",
+        "importance": 0.0332,
+        "percentage": 3.32
       },
       {
         "feature": "next_station_code",
-        "importance": 0.0049,
-        "percentage": 0.49
+        "importance": 0.0133,
+        "percentage": 1.33
       },
       {
-        "feature": "hour",
-        "importance": 0.0041,
-        "percentage": 0.41
+        "feature": "estimated_speed_kmh",
+        "importance": 0.0099,
+        "percentage": 0.99
       },
       {
         "feature": "longitude",
-        "importance": 0.0039,
-        "percentage": 0.39
-      },
-      {
-        "feature": "distance_from_origin_km",
-        "importance": 0.0038,
-        "percentage": 0.38
-      },
-      {
-        "feature": "segment_progress",
-        "importance": 0.0022,
-        "percentage": 0.22
-      },
-      {
-        "feature": "day_of_week",
-        "importance": 0.0021,
-        "percentage": 0.21
-      },
-      {
-        "feature": "latitude",
-        "importance": 0.0015,
-        "percentage": 0.15
+        "importance": 0.009,
+        "percentage": 0.9
       },
       {
         "feature": "route_sequence",
-        "importance": 0.0011,
-        "percentage": 0.11
+        "importance": 0.0069,
+        "percentage": 0.69
       },
       {
-        "feature": "distance_from_last_station_km",
-        "importance": 0.0004,
-        "percentage": 0.04
+        "feature": "segment_progress",
+        "importance": 0.0058,
+        "percentage": 0.58
       },
       {
-        "feature": "train_type",
-        "importance": 0.0,
-        "percentage": 0.0
+        "feature": "hour",
+        "importance": 0.0045,
+        "percentage": 0.45
       },
       {
-        "feature": "train_category",
-        "importance": 0.0,
-        "percentage": 0.0
+        "feature": "station_transition",
+        "importance": 0.0044,
+        "percentage": 0.44
       },
       {
-        "feature": "current_location_status",
-        "importance": 0.0,
-        "percentage": 0.0
+        "feature": "latitude",
+        "importance": 0.0043,
+        "percentage": 0.43
+      },
+      {
+        "feature": "current_station_code",
+        "importance": 0.0042,
+        "percentage": 0.42
+      },
+      {
+        "feature": "distance_from_origin_km",
+        "importance": 0.0032,
+        "percentage": 0.32
       }
     ],
-    "top_10_raw_transformed": [
+    "top_20_raw": [
       {
         "feature": "delay_change_prev",
-        "importance": 0.4318,
-        "percentage": 43.18
+        "importance": 0.3524,
+        "percentage": 35.24
       },
       {
         "feature": "time_since_previous_observation_seconds",
-        "importance": 0.1239,
-        "percentage": 12.39
+        "importance": 0.1061,
+        "percentage": 10.61
       },
       {
         "feature": "delay_minutes",
-        "importance": 0.0787,
-        "percentage": 7.87
-      },
-      {
-        "feature": "distance_travelled_km",
-        "importance": 0.063,
-        "percentage": 6.3
+        "importance": 0.0952,
+        "percentage": 9.52
       },
       {
         "feature": "time_of_day_minutes",
-        "importance": 0.0489,
-        "percentage": 4.89
+        "importance": 0.0829,
+        "percentage": 8.29
       },
       {
-        "feature": "train_number_97423",
-        "importance": 0.0435,
-        "percentage": 4.35
+        "feature": "distance_travelled_km",
+        "importance": 0.0636,
+        "percentage": 6.36
       },
       {
         "feature": "previous_delay",
+        "importance": 0.0484,
+        "percentage": 4.84
+      },
+      {
+        "feature": "minute",
+        "importance": 0.0392,
+        "percentage": 3.92
+      },
+      {
+        "feature": "movement_state_UNKNOWN",
         "importance": 0.0365,
         "percentage": 3.65
       },
       {
         "feature": "route_position_change",
-        "importance": 0.0318,
-        "percentage": 3.18
+        "importance": 0.0332,
+        "percentage": 3.32
       },
       {
-        "feature": "minute",
-        "importance": 0.0279,
-        "percentage": 2.79
+        "feature": "train_number_97423",
+        "importance": 0.0241,
+        "percentage": 2.41
       },
       {
-        "feature": "movement_state_UNKNOWN",
-        "importance": 0.0252,
-        "percentage": 2.52
+        "feature": "movement_state_MOVING",
+        "importance": 0.0179,
+        "percentage": 1.79
+      },
+      {
+        "feature": "movement_state_STATIONARY",
+        "importance": 0.0104,
+        "percentage": 1.04
+      },
+      {
+        "feature": "estimated_speed_kmh",
+        "importance": 0.0099,
+        "percentage": 0.99
+      },
+      {
+        "feature": "train_number_97263",
+        "importance": 0.0095,
+        "percentage": 0.95
+      },
+      {
+        "feature": "longitude",
+        "importance": 0.009,
+        "percentage": 0.9
+      },
+      {
+        "feature": "next_station_code_DIVA",
+        "importance": 0.0073,
+        "percentage": 0.73
+      },
+      {
+        "feature": "route_sequence",
+        "importance": 0.0069,
+        "percentage": 0.69
+      },
+      {
+        "feature": "segment_progress",
+        "importance": 0.0058,
+        "percentage": 0.58
+      },
+      {
+        "feature": "hour",
+        "importance": 0.0045,
+        "percentage": 0.45
+      },
+      {
+        "feature": "station_transition",
+        "importance": 0.0044,
+        "percentage": 0.44
       }
     ]
   },
-  "data_limitations_and_disclaimer": {
-    "sample_size": "77 total ML rows across 5 active trains over a 23-minute collection window.",
-    "stability_warning": "Metrics on 24 test samples have high variance; results represent a college prototype pipeline rather than production railway performance.",
-    "production_requirements": "Production models require continuous 2-4 hour multi-slot observation data (~500-1000 sequential pairs) across 15+ active trains."
+  "cross_run_performance": {
+    "20260821T160834Z-moving-38f8f31b": {
+      "test_observations": 25,
+      "rf_mae": 1.6472,
+      "rf_rmse": 2.0087,
+      "rf_r2": 0.011,
+      "baseline_mae": 1.56
+    },
+    "20260821T162310Z-moving-625795fa": {
+      "test_observations": 33,
+      "rf_mae": 0.888,
+      "rf_rmse": 1.3115,
+      "rf_r2": -0.1231,
+      "baseline_mae": 0.8182
+    },
+    "20260822T085927Z-moving-6809face": {
+      "test_observations": 61,
+      "rf_mae": 0.7931,
+      "rf_rmse": 1.6524,
+      "rf_r2": -0.3019,
+      "baseline_mae": 0.5246
+    },
+    "20260822T131216Z-moving-7b8b8e46": {
+      "test_observations": 36,
+      "rf_mae": 0.8586,
+      "rf_rmse": 1.7274,
+      "rf_r2": -0.0145,
+      "baseline_mae": 0.7778
+    }
+  },
+  "cross_train_performance": {
+    "12809": {
+      "test_observations": 9,
+      "rf_mae": 0.3838,
+      "rf_rmse": 0.5605,
+      "rf_r2": 0.0213,
+      "baseline_mae": 0.3333
+    },
+    "95011": {
+      "test_observations": 2,
+      "status": "Insufficient test observations (< 5)"
+    },
+    "95135": {
+      "test_observations": 9,
+      "rf_mae": 1.0225,
+      "rf_rmse": 1.3777,
+      "rf_r2": -0.2601,
+      "baseline_mae": 0.8889
+    },
+    "95327": {
+      "test_observations": 10,
+      "rf_mae": 1.6376,
+      "rf_rmse": 2.3232,
+      "rf_r2": -0.036,
+      "baseline_mae": 1.5
+    },
+    "95333": {
+      "test_observations": 8,
+      "rf_mae": 0.7766,
+      "rf_rmse": 1.1196,
+      "rf_r2": -0.2535,
+      "baseline_mae": 0.75
+    },
+    "95421": {
+      "test_observations": 3,
+      "status": "Insufficient test observations (< 5)"
+    },
+    "95515": {
+      "test_observations": 11,
+      "rf_mae": 0.2227,
+      "rf_rmse": 0.4252,
+      "rf_r2": 0.0054,
+      "baseline_mae": 0.1818
+    },
+    "95733": {
+      "test_observations": 1,
+      "status": "Insufficient test observations (< 5)"
+    },
+    "96207": {
+      "test_observations": 18,
+      "rf_mae": 0.5611,
+      "rf_rmse": 0.8361,
+      "rf_r2": -0.1498,
+      "baseline_mae": 0.3889
+    },
+    "96223": {
+      "test_observations": 2,
+      "status": "Insufficient test observations (< 5)"
+    },
+    "96333": {
+      "test_observations": 2,
+      "status": "Insufficient test observations (< 5)"
+    },
+    "96411": {
+      "test_observations": 2,
+      "status": "Insufficient test observations (< 5)"
+    },
+    "96633": {
+      "test_observations": 10,
+      "rf_mae": 1.484,
+      "rf_rmse": 3.3485,
+      "rf_r2": -0.5381,
+      "baseline_mae": 0.9
+    },
+    "96643": {
+      "test_observations": 2,
+      "status": "Insufficient test observations (< 5)"
+    },
+    "96645": {
+      "test_observations": 2,
+      "status": "Insufficient test observations (< 5)"
+    },
+    "97093": {
+      "test_observations": 9,
+      "rf_mae": 0.2627,
+      "rf_rmse": 0.5033,
+      "rf_r2": -1.5652,
+      "baseline_mae": 0.1111
+    },
+    "97095": {
+      "test_observations": 15,
+      "rf_mae": 1.082,
+      "rf_rmse": 1.5195,
+      "rf_r2": -0.0689,
+      "baseline_mae": 0.8667
+    },
+    "97167": {
+      "test_observations": 2,
+      "status": "Insufficient test observations (< 5)"
+    },
+    "97171": {
+      "test_observations": 3,
+      "status": "Insufficient test observations (< 5)"
+    },
+    "97179": {
+      "test_observations": 2,
+      "status": "Insufficient test observations (< 5)"
+    },
+    "97231": {
+      "test_observations": 9,
+      "rf_mae": 0.5384,
+      "rf_rmse": 0.7404,
+      "rf_r2": -2.1716,
+      "baseline_mae": 0.2222
+    },
+    "97259": {
+      "test_observations": 1,
+      "status": "Insufficient test observations (< 5)"
+    },
+    "97261": {
+      "test_observations": 1,
+      "status": "Insufficient test observations (< 5)"
+    },
+    "97263": {
+      "test_observations": 5,
+      "rf_mae": 1.6651,
+      "rf_rmse": 2.1305,
+      "rf_r2": -0.2072,
+      "baseline_mae": 1.6
+    },
+    "97399": {
+      "test_observations": 12,
+      "rf_mae": 0.5309,
+      "rf_rmse": 1.4701,
+      "rf_r2": -0.0514,
+      "baseline_mae": 0.5
+    },
+    "97401": {
+      "test_observations": 2,
+      "status": "Insufficient test observations (< 5)"
+    },
+    "97419": {
+      "test_observations": 1,
+      "status": "Insufficient test observations (< 5)"
+    },
+    "97423": {
+      "test_observations": 2,
+      "status": "Insufficient test observations (< 5)"
+    }
+  },
+  "performance_by_movement_state": {
+    "MOVING": {
+      "count": 73,
+      "mae": 1.0578,
+      "rmse": 1.7055
+    },
+    "STATIONARY": {
+      "count": 82,
+      "mae": 0.8848,
+      "rmse": 1.6353
+    }
+  },
+  "error_analysis_summary": {
+    "mean_residual": -0.036,
+    "median_residual": -0.0017,
+    "max_underprediction_error": 8.9957,
+    "max_overprediction_error": -5.0017,
+    "predictions_artifact": "data/processed/rf_test_predictions.csv"
+  },
+  "saved_artifacts": {
+    "model_path": "models/random_forest_delay_change.joblib",
+    "report_path": "data/reports/random_forest_report.json",
+    "predictions_path": "data/processed/rf_test_predictions.csv"
   },
   "safety_and_integrity": {
     "railradar_api_requests_made": 0,
     "original_dataset_modified": false,
-    "synthetic_data_generated": false
+    "synthetic_data_generated": false,
+    "or_tools_executed": false
   }
 }
