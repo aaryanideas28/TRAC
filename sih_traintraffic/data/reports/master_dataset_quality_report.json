@@ -1,0 +1,481 @@
+{
+  "dataset_path": "C:\\Users\\Omkar\\OneDrive\\Documents\\01_Engineering_Degree\\Semester3\\14_SIH\\TRAC\\sih_traintraffic\\data\\processed\\live_observations_master.csv",
+  "dimensions": {
+    "total_rows": 798,
+    "total_columns": 65
+  },
+  "provenance_summary": {
+    "unique_runs_count": 4,
+    "runs": [
+      "20260821T162310Z-moving-625795fa",
+      "20260822T085927Z-moving-6809face",
+      "20260822T131216Z-moving-7b8b8e46",
+      "20260821T160834Z-moving-38f8f31b"
+    ],
+    "rows_per_run": {
+      "20260822T085927Z-moving-6809face": 305,
+      "20260822T131216Z-moving-7b8b8e46": 215,
+      "20260821T160834Z-moving-38f8f31b": 177,
+      "20260821T162310Z-moving-625795fa": 101
+    },
+    "unique_trains_count": 32,
+    "rows_per_train": {
+      "97095": 61,
+      "96207": 61,
+      "97093": 61,
+      "96633": 61,
+      "97231": 61,
+      "97401": 43,
+      "95733": 43,
+      "95515": 43,
+      "97399": 43,
+      "95327": 43,
+      "95135": 29,
+      "95333": 29,
+      "12809": 29,
+      "97263": 27,
+      "97179": 20,
+      "97259": 9,
+      "95421": 9,
+      "97167": 9,
+      "97421": 9,
+      "96519": 9,
+      "96643": 9,
+      "97419": 9,
+      "97423": 9,
+      "97261": 9,
+      "97171": 9,
+      "96223": 9,
+      "96411": 9,
+      "97173": 8,
+      "95011": 7,
+      "96333": 7,
+      "96221": 7,
+      "96645": 7
+    },
+    "total_raw_sequences": 36,
+    "total_fresh_sequences": 35,
+    "fresh_sequence_length_stats": {
+      "min": 1,
+      "max": 59,
+      "median": 7.0,
+      "mean": 14.43
+    },
+    "total_usable_sequential_pairs": 470,
+    "usable_pairs_per_sequence": {
+      "20260821T160834Z-moving-38f8f31b_train_12809": 7,
+      "20260821T160834Z-moving-38f8f31b_train_95011": 5,
+      "20260821T160834Z-moving-38f8f31b_train_95135": 8,
+      "20260821T160834Z-moving-38f8f31b_train_95333": 7,
+      "20260821T160834Z-moving-38f8f31b_train_95421": 8,
+      "20260821T160834Z-moving-38f8f31b_train_96221": 0,
+      "20260821T160834Z-moving-38f8f31b_train_96223": 4,
+      "20260821T160834Z-moving-38f8f31b_train_96333": 6,
+      "20260821T160834Z-moving-38f8f31b_train_96411": 5,
+      "20260821T160834Z-moving-38f8f31b_train_96519": 1,
+      "20260821T160834Z-moving-38f8f31b_train_96643": 4,
+      "20260821T160834Z-moving-38f8f31b_train_96645": 6,
+      "20260821T160834Z-moving-38f8f31b_train_97167": 5,
+      "20260821T160834Z-moving-38f8f31b_train_97171": 8,
+      "20260821T160834Z-moving-38f8f31b_train_97259": 2,
+      "20260821T160834Z-moving-38f8f31b_train_97261": 3,
+      "20260821T160834Z-moving-38f8f31b_train_97263": 2,
+      "20260821T160834Z-moving-38f8f31b_train_97419": 3,
+      "20260821T160834Z-moving-38f8f31b_train_97421": 1,
+      "20260821T160834Z-moving-38f8f31b_train_97423": 4,
+      "20260821T162310Z-moving-625795fa_train_12809": 20,
+      "20260821T162310Z-moving-625795fa_train_95135": 19,
+      "20260821T162310Z-moving-625795fa_train_95333": 19,
+      "20260821T162310Z-moving-625795fa_train_97179": 6,
+      "20260821T162310Z-moving-625795fa_train_97263": 13,
+      "20260822T085927Z-moving-6809face_train_96207": 58,
+      "20260822T085927Z-moving-6809face_train_96633": 31,
+      "20260822T085927Z-moving-6809face_train_97093": 27,
+      "20260822T085927Z-moving-6809face_train_97095": 48,
+      "20260822T085927Z-moving-6809face_train_97231": 28,
+      "20260822T131216Z-moving-7b8b8e46_train_95327": 31,
+      "20260822T131216Z-moving-7b8b8e46_train_95515": 36,
+      "20260822T131216Z-moving-7b8b8e46_train_95733": 2,
+      "20260822T131216Z-moving-7b8b8e46_train_97399": 38,
+      "20260822T131216Z-moving-7b8b8e46_train_97401": 5
+    }
+  },
+  "integrity_and_duplicates": {
+    "exact_duplicate_rows": 0,
+    "duplicate_observation_keys": 0,
+    "timestamp_range": {
+      "min": "2026-08-21T16:11:44.209025+00:00",
+      "max": "2026-08-22T14:03:40.790965+00:00"
+    },
+    "is_monotonic_per_sequence": true
+  },
+  "data_freshness": {
+    "fresh_rows": 505,
+    "stale_rows": 293,
+    "fresh_percentage": 63.28,
+    "stale_percentage": 36.72
+  },
+  "state_distributions": {
+    "movement_state": {
+      "MOVING": 484,
+      "STATIONARY": 288,
+      "UNKNOWN": 26
+    },
+    "current_location_status": {
+      "at-station": 546,
+      "departed": 252
+    }
+  },
+  "delay_distribution": {
+    "min": -2.0,
+    "max": 138.0,
+    "mean": 9.47,
+    "median": 2.0,
+    "std": 25.15,
+    "negative_count": 15,
+    "zero_count": 341,
+    "positive_count": 442
+  },
+  "field_availability": {
+    "latitude_missing": 0,
+    "longitude_missing": 0,
+    "speed_kmh_missing": 798,
+    "distance_from_origin_km_missing": 19,
+    "distance_from_last_station_km_missing": 21,
+    "route_sequence_missing": 21,
+    "segment_progress_missing": 157
+  },
+  "columns_summary": {
+    "run_id": {
+      "dtype": "str",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "raw_file": {
+      "dtype": "str",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "dataset_source": {
+      "dtype": "str",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "collection_timestamp": {
+      "dtype": "str",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "api_timestamp": {
+      "dtype": "str",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "train_number": {
+      "dtype": "int64",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "train_name": {
+      "dtype": "str",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "train_type": {
+      "dtype": "str",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "train_category": {
+      "dtype": "str",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "journey_date": {
+      "dtype": "str",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "current_station": {
+      "dtype": "str",
+      "missing_count": 21,
+      "missing_pct": 2.63
+    },
+    "current_station_code": {
+      "dtype": "str",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "previous_station": {
+      "dtype": "str",
+      "missing_count": 2,
+      "missing_pct": 0.25
+    },
+    "previous_station_code": {
+      "dtype": "str",
+      "missing_count": 2,
+      "missing_pct": 0.25
+    },
+    "next_station": {
+      "dtype": "str",
+      "missing_count": 44,
+      "missing_pct": 5.51
+    },
+    "next_station_code": {
+      "dtype": "str",
+      "missing_count": 44,
+      "missing_pct": 5.51
+    },
+    "latitude": {
+      "dtype": "float64",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "longitude": {
+      "dtype": "float64",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "speed_kmh": {
+      "dtype": "float64",
+      "missing_count": 798,
+      "missing_pct": 100.0
+    },
+    "bearing_degrees": {
+      "dtype": "float64",
+      "missing_count": 798,
+      "missing_pct": 100.0
+    },
+    "segment_progress": {
+      "dtype": "float64",
+      "missing_count": 157,
+      "missing_pct": 19.67
+    },
+    "delay_minutes": {
+      "dtype": "int64",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "scheduled_arrival": {
+      "dtype": "str",
+      "missing_count": 21,
+      "missing_pct": 2.63
+    },
+    "scheduled_departure": {
+      "dtype": "str",
+      "missing_count": 65,
+      "missing_pct": 8.15
+    },
+    "actual_arrival": {
+      "dtype": "str",
+      "missing_count": 25,
+      "missing_pct": 3.13
+    },
+    "actual_departure": {
+      "dtype": "str",
+      "missing_count": 67,
+      "missing_pct": 8.4
+    },
+    "platform": {
+      "dtype": "float64",
+      "missing_count": 389,
+      "missing_pct": 48.75
+    },
+    "status": {
+      "dtype": "str",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "source": {
+      "dtype": "str",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "data_source": {
+      "dtype": "str",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "is_stale": {
+      "dtype": "bool",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "data_age_seconds": {
+      "dtype": "float64",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "route_distance_km": {
+      "dtype": "float64",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "distance_from_origin_km": {
+      "dtype": "float64",
+      "missing_count": 19,
+      "missing_pct": 2.38
+    },
+    "distance_from_last_station_km": {
+      "dtype": "float64",
+      "missing_count": 21,
+      "missing_pct": 2.63
+    },
+    "route_sequence": {
+      "dtype": "float64",
+      "missing_count": 21,
+      "missing_pct": 2.63
+    },
+    "route_speed_to_next_kmh": {
+      "dtype": "float64",
+      "missing_count": 65,
+      "missing_pct": 8.15
+    },
+    "route_json": {
+      "dtype": "str",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "position_source": {
+      "dtype": "str",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "speed_source": {
+      "dtype": "str",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "previous_station_source": {
+      "dtype": "str",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "segment_progress_source": {
+      "dtype": "str",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "movement_state": {
+      "dtype": "str",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "time_of_day_minutes": {
+      "dtype": "int64",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "time_since_previous_observation_seconds": {
+      "dtype": "float64",
+      "missing_count": 36,
+      "missing_pct": 4.51
+    },
+    "previous_delay": {
+      "dtype": "float64",
+      "missing_count": 36,
+      "missing_pct": 4.51
+    },
+    "delay_change": {
+      "dtype": "float64",
+      "missing_count": 36,
+      "missing_pct": 4.51
+    },
+    "delay_change_source": {
+      "dtype": "str",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "estimated_speed_kmh": {
+      "dtype": "float64",
+      "missing_count": 522,
+      "missing_pct": 65.41
+    },
+    "estimated_speed_source": {
+      "dtype": "str",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "distance_from_previous_station_km": {
+      "dtype": "float64",
+      "missing_count": 554,
+      "missing_pct": 69.42
+    },
+    "station_to_station_travel_time_seconds": {
+      "dtype": "float64",
+      "missing_count": 501,
+      "missing_pct": 62.78
+    },
+    "travel_time_source": {
+      "dtype": "str",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "headway_seconds": {
+      "dtype": "float64",
+      "missing_count": 798,
+      "missing_pct": 100.0
+    },
+    "headway_source": {
+      "dtype": "str",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "current_location_status": {
+      "dtype": "str",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "is_live": {
+      "dtype": "bool",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "is_halt": {
+      "dtype": "bool",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "is_actual_position": {
+      "dtype": "bool",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "station_transition": {
+      "dtype": "bool",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "station_transition_source": {
+      "dtype": "str",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "distance_travelled_km": {
+      "dtype": "float64",
+      "missing_count": 60,
+      "missing_pct": 7.52
+    },
+    "distance_travelled_source": {
+      "dtype": "str",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "route_position_change": {
+      "dtype": "bool",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "route_position_change_source": {
+      "dtype": "str",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    }
+  },
+  "anomalies_and_observations": [
+    "Raw speed_kmh and bearing_degrees are 100% unpopulated by the RailRadar API.",
+    "Raw headway_seconds is 100% unpopulated by the RailRadar API.",
+    "Platform number is missing in 52.88% of observations.",
+    "293 observations (36.72%) are marked stale by the API due to un-updated telemetry pulses."
+  ]
+}

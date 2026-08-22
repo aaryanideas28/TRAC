@@ -1,0 +1,19 @@
+{
+  "status": "PASSED",
+  "audit_timestamp": "2026-08-22T15:15:18.616110+00:00",
+  "total_ml_observations_checked": 470,
+  "checks": {
+    "1_target_delay_change_excluded_from_X": true,
+    "2_future_delay_excluded_from_X": true,
+    "3_no_suspicious_future_feature_names": true,
+    "4_target_mathematical_consistency": true,
+    "5_cross_run_boundary_isolation": true,
+    "6_cross_train_boundary_isolation": true,
+    "7_no_nan_targets_in_ml_dataset": true,
+    "8_no_duplicate_observation_keys": true,
+    "9_chronological_sequence_monotonicity": true,
+    "10_no_duplicate_target_columns": true
+  },
+  "suspicious_features": [],
+  "leakage_examples": []
+}
