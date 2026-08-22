@@ -1,0 +1,150 @@
+{
+  "dataset_used": "C:\\Users\\Omkar\\OneDrive\\Documents\\01_Engineering_Degree\\Semester3\\14_SIH\\TRAC\\sih_traintraffic\\data\\processed\\ml_ready_dataset.csv",
+  "target_variable": "delay_increase (1 if delay(t+1) > delay(t) else 0)",
+  "dataset_summary": {
+    "total_ml_rows": 470,
+    "training_rows": 315,
+    "testing_rows": 155,
+    "train_ratio": 0.7,
+    "train_count": 30,
+    "class_distribution_overall": {
+      "class_0_stable_or_decrease": 369,
+      "class_1_delay_increase": 101,
+      "positive_percentage": 21.49
+    },
+    "class_distribution_train": {
+      "class_0": 241,
+      "class_1": 74
+    },
+    "class_distribution_test": {
+      "class_0": 128,
+      "class_1": 27
+    }
+  },
+  "majority_class_baseline": {
+    "strategy": "Predict Class 0 (No delay increase) for all observations",
+    "test_metrics": {
+      "accuracy": 0.8258,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "confusion_matrix": [
+        [
+          128,
+          0
+        ],
+        [
+          27,
+          0
+        ]
+      ]
+    }
+  },
+  "random_forest_classifier": {
+    "parameters": {
+      "n_estimators": 100,
+      "max_depth": 3,
+      "min_samples_split": 2,
+      "min_samples_leaf": 2,
+      "class_weight": "balanced",
+      "random_state": 42
+    },
+    "train_metrics": {
+      "accuracy": 0.7905,
+      "precision": 0.5426,
+      "recall": 0.6892,
+      "f1": 0.6071,
+      "confusion_matrix": [
+        [
+          198,
+          43
+        ],
+        [
+          23,
+          51
+        ]
+      ]
+    },
+    "test_metrics": {
+      "accuracy": 0.6129,
+      "precision": 0.2105,
+      "recall": 0.4444,
+      "f1": 0.2857,
+      "confusion_matrix": [
+        [
+          83,
+          45
+        ],
+        [
+          15,
+          12
+        ]
+      ]
+    }
+  },
+  "model_comparison": {
+    "baseline_accuracy": 0.8258,
+    "rf_accuracy": 0.6129,
+    "baseline_f1": 0.0,
+    "rf_f1": 0.2857,
+    "rf_recall": 0.4444,
+    "rf_precision": 0.2105,
+    "analysis": "While the majority-class baseline achieves 82.6% accuracy by never predicting a delay increase (F1=0.0), the Random Forest Classifier actively detects positive delay increase events with 44.4% recall and F1=0.2857, providing risk probabilities useful for proactive traffic optimization."
+  },
+  "top_10_features": [
+    {
+      "feature": "delay_change_prev",
+      "importance": 0.0839,
+      "percentage": 8.39
+    },
+    {
+      "feature": "delay_minutes",
+      "importance": 0.0685,
+      "percentage": 6.85
+    },
+    {
+      "feature": "distance_from_origin_km",
+      "importance": 0.0685,
+      "percentage": 6.85
+    },
+    {
+      "feature": "train_number",
+      "importance": 0.0685,
+      "percentage": 6.85
+    },
+    {
+      "feature": "time_since_previous_observation_seconds",
+      "importance": 0.0647,
+      "percentage": 6.47
+    },
+    {
+      "feature": "time_of_day_minutes",
+      "importance": 0.0617,
+      "percentage": 6.17
+    },
+    {
+      "feature": "next_station_code",
+      "importance": 0.0572,
+      "percentage": 5.72
+    },
+    {
+      "feature": "current_location_status",
+      "importance": 0.0498,
+      "percentage": 4.98
+    },
+    {
+      "feature": "segment_progress",
+      "importance": 0.0495,
+      "percentage": 4.95
+    },
+    {
+      "feature": "longitude",
+      "importance": 0.0476,
+      "percentage": 4.76
+    }
+  ],
+  "saved_artifacts": {
+    "model_path": "C:\\Users\\Omkar\\OneDrive\\Documents\\01_Engineering_Degree\\Semester3\\14_SIH\\TRAC\\sih_traintraffic\\data\\models\\random_forest_classifier.joblib",
+    "report_path": "C:\\Users\\Omkar\\OneDrive\\Documents\\01_Engineering_Degree\\Semester3\\14_SIH\\TRAC\\sih_traintraffic\\data\\reports\\random_forest_classification_report.json"
+  }
+}

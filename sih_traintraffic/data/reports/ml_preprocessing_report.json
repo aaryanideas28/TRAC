@@ -1,74 +1,104 @@
 {
-  "original_rows": 101,
-  "stale_rows": 19,
-  "fresh_rows": 82,
-  "rows_with_valid_sequential_pairs": 77,
-  "final_ml_row_count": 77,
-  "train_count": 5,
-  "unique_stations_count": 18,
-  "station_transitions_count": 17,
+  "original_rows": 798,
+  "stale_rows": 293,
+  "fresh_rows": 505,
+  "rows_with_valid_sequential_pairs": 470,
+  "final_ml_row_count": 470,
+  "train_count": 30,
+  "unique_stations_count": 36,
+  "station_transitions_count": 142,
   "missing_value_statistics": {
+    "next_station_code": {
+      "missing_count": 1,
+      "missing_pct": 0.21,
+      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
+    },
     "segment_progress": {
-      "missing_count": 20,
-      "missing_pct": 25.97,
+      "missing_count": 98,
+      "missing_pct": 20.85,
+      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
+    },
+    "scheduled_arrival": {
+      "missing_count": 21,
+      "missing_pct": 4.47,
+      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
+    },
+    "scheduled_departure": {
+      "missing_count": 22,
+      "missing_pct": 4.68,
       "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
     },
     "actual_arrival": {
-      "missing_count": 2,
-      "missing_pct": 2.6,
+      "missing_count": 25,
+      "missing_pct": 5.32,
       "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
     },
     "actual_departure": {
-      "missing_count": 2,
-      "missing_pct": 2.6,
+      "missing_count": 24,
+      "missing_pct": 5.11,
       "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
     },
     "platform": {
-      "missing_count": 42,
-      "missing_pct": 54.55,
+      "missing_count": 192,
+      "missing_pct": 40.85,
+      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
+    },
+    "distance_from_origin_km": {
+      "missing_count": 19,
+      "missing_pct": 4.04,
+      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
+    },
+    "distance_from_last_station_km": {
+      "missing_count": 21,
+      "missing_pct": 4.47,
+      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
+    },
+    "route_sequence": {
+      "missing_count": 21,
+      "missing_pct": 4.47,
       "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
     },
     "previous_delay": {
-      "missing_count": 5,
-      "missing_pct": 6.49,
+      "missing_count": 34,
+      "missing_pct": 7.23,
       "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
     },
     "delay_change_prev": {
-      "missing_count": 5,
-      "missing_pct": 6.49,
+      "missing_count": 34,
+      "missing_pct": 7.23,
       "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
     },
     "time_since_previous_observation_seconds": {
-      "missing_count": 5,
-      "missing_pct": 6.49,
+      "missing_count": 34,
+      "missing_pct": 7.23,
       "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
     },
     "distance_travelled_km": {
-      "missing_count": 5,
-      "missing_pct": 6.49,
+      "missing_count": 56,
+      "missing_pct": 11.91,
       "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
     },
     "route_position_change": {
-      "missing_count": 5,
-      "missing_pct": 6.49,
+      "missing_count": 56,
+      "missing_pct": 11.91,
       "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
     },
     "estimated_speed_kmh": {
-      "missing_count": 8,
-      "missing_pct": 10.39,
+      "missing_count": 65,
+      "missing_pct": 13.83,
       "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
     }
   },
   "final_feature_count": 32,
   "target_statistics": {
-    "min": -3.0,
-    "max": 11.0,
-    "mean": 0.27,
+    "min": -19.0,
+    "max": 14.0,
+    "mean": 0.11,
     "median": 0.0,
-    "std": 1.76
+    "std": 2.15
   },
   "rows_dropped_reasons": {
-    "stale_observations_dropped": 19,
-    "terminal_train_observations_without_future_target_dropped": 5
+    "stale_observations_dropped": 293,
+    "terminal_train_observations_without_future_target_dropped": 35
   }
 }

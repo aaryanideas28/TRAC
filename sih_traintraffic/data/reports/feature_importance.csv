@@ -1,0 +1,11 @@
+feature,importance,percentage
+delay_change_prev,0.0839,8.39
+delay_minutes,0.0685,6.85
+distance_from_origin_km,0.0685,6.85
+train_number,0.0685,6.85
+time_since_previous_observation_seconds,0.0647,6.47
+time_of_day_minutes,0.0617,6.17
+next_station_code,0.0572,5.72
+current_location_status,0.0498,4.98
+segment_progress,0.0495,4.95
+longitude,0.0476,4.76

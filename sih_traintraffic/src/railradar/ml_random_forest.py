@@ -77,7 +77,7 @@ def load_ml_dataset(csv_path: str | Path) -> pd.DataFrame:
     return df
 
 
-def prepare_feature_target_split(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
+def prepare_feature_target_split(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series | None]:
     """Separate feature matrix X and target y, enforcing target isolation."""
     # Ensure categorical columns are string types
     df_clean = df.copy()
@@ -91,7 +91,7 @@ def prepare_feature_target_split(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Ser
 
     feature_cols = [col for col in CATEGORICAL_FEATURES + NUMERICAL_FEATURES if col in df_clean.columns]
     X = df_clean[feature_cols].copy()
-    y = df_clean[TARGET_COLUMN].copy()
+    y = df_clean[TARGET_COLUMN].copy() if TARGET_COLUMN in df_clean.columns else None
 
     # Guard against target or future column presence in X
     for forbidden in ["target_delay_change", "future_delay"]:
@@ -99,6 +99,7 @@ def prepare_feature_target_split(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Ser
             raise ValueError(f"Data leakage risk: forbidden column '{forbidden}' found in feature matrix X")
 
     return X, y
+
 
 
 def split_chronologically_per_train(
@@ -118,13 +119,17 @@ def split_chronologically_per_train(
 
     for _, train_grp in df.groupby("train_number", sort=False):
         n_obs = len(train_grp)
-        n_train = int(n_obs * train_ratio)
-        train_indices.extend(train_grp.index[:n_train])
-        test_indices.extend(train_grp.index[n_train:])
+        if n_obs == 1:
+            train_indices.extend(train_grp.index)
+        else:
+            n_train = max(1, int(n_obs * train_ratio))
+            train_indices.extend(train_grp.index[:n_train])
+            test_indices.extend(train_grp.index[n_train:])
 
     train_df = df.loc[train_indices].copy().reset_index(drop=True)
     test_df = df.loc[test_indices].copy().reset_index(drop=True)
     return train_df, test_df
+
 
 
 def build_preprocessor(
@@ -200,14 +205,17 @@ def extract_feature_importances(
     num_cols = numerical_cols if numerical_cols is not None else NUMERICAL_FEATURES
 
     preprocessor: ColumnTransformer = pipeline.named_steps["preprocessor"]
-    regressor: RandomForestRegressor = pipeline.named_steps["regressor"]
+    estimator = pipeline.named_steps.get("regressor") or pipeline.named_steps.get("classifier")
+    if estimator is None:
+        raise KeyError("Neither 'regressor' nor 'classifier' found in pipeline steps.")
 
     # Extract transformed feature names
     cat_encoder = preprocessor.named_transformers_["cat"].named_steps["encoder"]
     encoded_cat_names = cat_encoder.get_feature_names_out(cat_cols).tolist()
     all_feature_names = num_cols + encoded_cat_names
 
-    importances = regressor.feature_importances_
+    importances = estimator.feature_importances_
+
 
     # Raw transformed feature importances
     raw_importances = [
@@ -248,14 +256,17 @@ def train_and_evaluate_random_forest(
     report_output_path: str | Path | None = "data/reports/random_forest_report.json",
     model_output_path: str | Path | None = "data/models/random_forest_pipeline.joblib",
     n_estimators: int = 100,
-    max_depth: int = 5,
+    max_depth: int | None = 5,
+    min_samples_split: int = 2,
+    min_samples_leaf: int = 1,
+    train_ratio: float = 0.7,
     random_state: int = 42,
 ) -> dict[str, Any]:
     """Execute complete Random Forest training, baseline benchmarking, and reporting workflow."""
     df = load_ml_dataset(dataset_csv)
 
     # 1. Chronological Per-Train Split
-    train_df, test_df = split_chronologically_per_train(df, train_ratio=0.7)
+    train_df, test_df = split_chronologically_per_train(df, train_ratio=train_ratio)
 
     # 2. Extract X and y
     X_train, y_train = prepare_feature_target_split(train_df)
@@ -267,6 +278,8 @@ def train_and_evaluate_random_forest(
         numerical_cols=NUMERICAL_FEATURES,
         n_estimators=n_estimators,
         max_depth=max_depth,
+        min_samples_split=min_samples_split,
+        min_samples_leaf=min_samples_leaf,
         random_state=random_state,
     )
     pipeline.fit(X_train, y_train)
@@ -708,6 +721,200 @@ def run_random_forest_tuning_experiment(
     return report
 
 
+def build_classifier_pipeline(
+    categorical_cols: list[str] | None = None,
+    numerical_cols: list[str] | None = None,
+    n_estimators: int = 100,
+    max_depth: int | None = 3,
+    min_samples_split: int = 2,
+    min_samples_leaf: int = 2,
+    class_weight: str | None = "balanced",
+    random_state: int = 42,
+) -> Pipeline:
+    """Construct complete preprocessing + RandomForestClassifier pipeline."""
+    from sklearn.ensemble import RandomForestClassifier
+
+    preprocessor = build_preprocessor(categorical_cols, numerical_cols)
+    clf = RandomForestClassifier(
+        n_estimators=n_estimators,
+        max_depth=max_depth,
+        min_samples_split=min_samples_split,
+        min_samples_leaf=min_samples_leaf,
+        class_weight=class_weight,
+        random_state=random_state,
+    )
+    return Pipeline([
+        ("preprocessor", preprocessor),
+        ("classifier", clf),
+    ])
+
+
+def evaluate_classification_predictions(y_true: np.ndarray | pd.Series, y_pred: np.ndarray | pd.Series) -> dict[str, Any]:
+    """Calculate classification performance metrics: Accuracy, Precision, Recall, F1."""
+    from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
+
+    y_t = np.asarray(y_true, dtype=int)
+    y_p = np.asarray(y_pred, dtype=int)
+
+    acc = float(accuracy_score(y_t, y_p))
+    prec = float(precision_score(y_t, y_p, zero_division=0))
+    rec = float(recall_score(y_t, y_p, zero_division=0))
+    f1 = float(f1_score(y_t, y_p, zero_division=0))
+    cm = confusion_matrix(y_t, y_p).tolist()
+
+    return {
+        "accuracy": round(acc, 4),
+        "precision": round(prec, 4),
+        "recall": round(rec, 4),
+        "f1": round(f1, 4),
+        "confusion_matrix": cm,
+    }
+
+
+def train_and_evaluate_classifier(
+    dataset_csv: str | Path = "data/processed/ml_ready_dataset.csv",
+    report_output_path: str | Path = "data/reports/random_forest_classification_report.json",
+    model_output_path: str | Path = "data/models/random_forest_classifier.joblib",
+    train_ratio: float = 0.7,
+    n_estimators: int = 100,
+    max_depth: int | None = 3,
+    min_samples_split: int = 2,
+    min_samples_leaf: int = 2,
+    class_weight: str | None = "balanced",
+    random_state: int = 42,
+) -> dict[str, Any]:
+    """Train and evaluate RandomForestClassifier on the binary delay_increase target."""
+    df = load_ml_dataset(dataset_csv)
+
+    # Chronological per-train/run split
+    train_df, test_df = split_chronologically_per_train(df, train_ratio=train_ratio)
+    X_train, y_train_reg = prepare_feature_target_split(train_df)
+    X_test, y_test_reg = prepare_feature_target_split(test_df)
+
+    # Binary target: delay_increase = 1 if delay(t+1) > delay(t) else 0
+    y_train_clf = (y_train_reg > 0).astype(int)
+    y_test_clf = (y_test_reg > 0).astype(int)
+
+    # Majority-class baseline: predict 0 for all samples
+    y_test_base = np.zeros_like(y_test_clf)
+    baseline_metrics = evaluate_classification_predictions(y_test_clf, y_test_base)
+
+    # Build and fit classifier pipeline
+    pipeline = build_classifier_pipeline(
+        categorical_cols=CATEGORICAL_FEATURES,
+        numerical_cols=NUMERICAL_FEATURES,
+        n_estimators=n_estimators,
+        max_depth=max_depth,
+        min_samples_split=min_samples_split,
+        min_samples_leaf=min_samples_leaf,
+        class_weight=class_weight,
+        random_state=random_state,
+    )
+    pipeline.fit(X_train, y_train_clf)
+
+    # Predictions
+    train_preds = pipeline.predict(X_train)
+    test_preds = pipeline.predict(X_test)
+    test_probs = pipeline.predict_proba(X_test)[:, 1] if hasattr(pipeline, "predict_proba") else None
+
+    train_metrics = evaluate_classification_predictions(y_train_clf, train_preds)
+    test_metrics = evaluate_classification_predictions(y_test_clf, test_preds)
+
+    # Feature importances
+    importance_info = extract_feature_importances(
+        pipeline,
+        categorical_cols=CATEGORICAL_FEATURES,
+        numerical_cols=NUMERICAL_FEATURES,
+    )
+    sorted_aggregated = importance_info["aggregated_importances"]
+
+
+    report = {
+        "dataset_used": str(dataset_csv),
+        "target_variable": "delay_increase (1 if delay(t+1) > delay(t) else 0)",
+        "dataset_summary": {
+            "total_ml_rows": len(df),
+            "training_rows": len(train_df),
+            "testing_rows": len(test_df),
+            "train_ratio": train_ratio,
+            "train_count": int(df["train_number"].nunique()),
+            "class_distribution_overall": {
+                "class_0_stable_or_decrease": int((df[TARGET_COLUMN] <= 0).sum()),
+                "class_1_delay_increase": int((df[TARGET_COLUMN] > 0).sum()),
+                "positive_percentage": round(float((df[TARGET_COLUMN] > 0).mean() * 100), 2),
+            },
+            "class_distribution_train": {
+                "class_0": int((y_train_clf == 0).sum()),
+                "class_1": int((y_train_clf == 1).sum()),
+            },
+            "class_distribution_test": {
+                "class_0": int((y_test_clf == 0).sum()),
+                "class_1": int((y_test_clf == 1).sum()),
+            },
+        },
+        "majority_class_baseline": {
+            "strategy": "Predict Class 0 (No delay increase) for all observations",
+            "test_metrics": baseline_metrics,
+        },
+        "random_forest_classifier": {
+            "parameters": {
+                "n_estimators": n_estimators,
+                "max_depth": max_depth,
+                "min_samples_split": min_samples_split,
+                "min_samples_leaf": min_samples_leaf,
+                "class_weight": class_weight,
+                "random_state": random_state,
+            },
+            "train_metrics": train_metrics,
+            "test_metrics": test_metrics,
+        },
+        "model_comparison": {
+            "baseline_accuracy": baseline_metrics["accuracy"],
+            "rf_accuracy": test_metrics["accuracy"],
+            "baseline_f1": baseline_metrics["f1"],
+            "rf_f1": test_metrics["f1"],
+            "rf_recall": test_metrics["recall"],
+            "rf_precision": test_metrics["precision"],
+            "analysis": (
+                f"While the majority-class baseline achieves {baseline_metrics['accuracy']*100:.1f}% accuracy by never predicting a delay increase (F1=0.0), "
+                f"the Random Forest Classifier actively detects positive delay increase events with {test_metrics['recall']*100:.1f}% recall and F1={test_metrics['f1']:.4f}, "
+                f"providing risk probabilities useful for proactive traffic optimization."
+            ),
+        },
+        "top_10_features": sorted_aggregated[:10],
+        "saved_artifacts": {
+            "model_path": str(model_output_path),
+            "report_path": str(report_output_path),
+        },
+    }
+
+    # Save model artifact
+    if model_output_path:
+        mod_p = Path(model_output_path)
+        mod_p.parent.mkdir(parents=True, exist_ok=True)
+        joblib.dump(pipeline, mod_p)
+
+    # Save report JSON
+    if report_output_path:
+        rep_p = Path(report_output_path)
+        rep_p.parent.mkdir(parents=True, exist_ok=True)
+        rep_p.write_text(json.dumps(report, indent=2), encoding="utf-8")
+
+    return report
+
+
+def save_feature_importance_csv(
+    feature_importances: list[dict[str, Any]],
+    output_path: str | Path = "data/reports/feature_importance.csv",
+) -> Path:
+    """Save ranked feature importances to CSV."""
+    df_imp = pd.DataFrame(feature_importances)
+    out_p = Path(output_path)
+    out_p.parent.mkdir(parents=True, exist_ok=True)
+    df_imp.to_csv(out_p, index=False)
+    return out_p
+
+
 if __name__ == "__main__":
     rep = train_and_evaluate_random_forest()
     print("Random Forest Training and Evaluation Complete.")
@@ -720,5 +927,10 @@ if __name__ == "__main__":
     print(f"Best Tuned Config: {tune_rep['best_tuned_configuration']['name']}")
     print(f"Best Tuned Test MAE: {tune_rep['best_tuned_configuration']['test_metrics']['mae']}")
     print(f"Did Tuned RF Beat Baseline? {tune_rep['comparison_summary']['did_tuned_rf_beat_baseline']}")
-    print(f"Recommendation: {tune_rep['decision_rule_outcome']['recommendation']}")
+
+    print("\nRunning Random Forest Classification Experiment...")
+    clf_rep = train_and_evaluate_classifier()
+    print(f"Majority Baseline Acc: {clf_rep['majority_class_baseline']['test_metrics']['accuracy']}")
+    print(f"RF Classifier Acc: {clf_rep['random_forest_classifier']['test_metrics']['accuracy']}, F1: {clf_rep['random_forest_classifier']['test_metrics']['f1']}, Recall: {clf_rep['random_forest_classifier']['test_metrics']['recall']}")
+
 

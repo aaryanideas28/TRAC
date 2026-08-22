@@ -1,0 +1,33 @@
+{
+  "run_id": "20260822T131216Z-moving-7b8b8e46",
+  "start_time": "2026-08-22T13:12:16.467517+00:00",
+  "end_time": "2026-08-22T14:04:15.863435+00:00",
+  "requested_duration_seconds": 3000,
+  "actual_duration_seconds": 3051.946133,
+  "candidate_pool_size": 1561,
+  "candidate_trains_checked": 10,
+  "active_trains_found": 7,
+  "selected_active_train_count": 5,
+  "selected_train_numbers": [
+    "97401",
+    "95733",
+    "95515",
+    "97399",
+    "95327"
+  ],
+  "polling_interval_seconds": 60,
+  "expected_cycles": 50,
+  "expected_requests": 262,
+  "actual_requests": 222,
+  "successful_requests": 222,
+  "failed_requests": 0,
+  "retry_count": 0,
+  "rate_limit_waits": 181,
+  "429_count": 0,
+  "total_observations": 215,
+  "quota_total": 1000,
+  "known_prior_requests": 0,
+  "safe_request_budget": 850,
+  "remaining_safe_budget": 628,
+  "failures": []
+}
