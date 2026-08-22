@@ -43,3 +43,5 @@ Desktop.ini
 # Data & Raw Responses
 data/raw/*
 !data/raw/.gitkeep
+scratch/
+

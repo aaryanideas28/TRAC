@@ -1,0 +1,235 @@
+{
+  "dataset": "data/processed/ml_ready_dataset_20260822.csv",
+  "model_configuration": "Depth 3, Leaf 1",
+  "top_10_aggregated": [
+    {
+      "feature": "delay_change_prev",
+      "importance": 0.2849,
+      "percentage": 28.49
+    },
+    {
+      "feature": "delay_minutes",
+      "importance": 0.2258,
+      "percentage": 22.58
+    },
+    {
+      "feature": "time_since_previous_observation_seconds",
+      "importance": 0.1015,
+      "percentage": 10.15
+    },
+    {
+      "feature": "train_number",
+      "importance": 0.0572,
+      "percentage": 5.72
+    },
+    {
+      "feature": "minute",
+      "importance": 0.0544,
+      "percentage": 5.44
+    },
+    {
+      "feature": "previous_delay",
+      "importance": 0.0475,
+      "percentage": 4.75
+    },
+    {
+      "feature": "time_of_day_minutes",
+      "importance": 0.0425,
+      "percentage": 4.25
+    },
+    {
+      "feature": "next_station_code",
+      "importance": 0.0408,
+      "percentage": 4.08
+    },
+    {
+      "feature": "distance_travelled_km",
+      "importance": 0.0316,
+      "percentage": 3.16
+    },
+    {
+      "feature": "current_station_code",
+      "importance": 0.0264,
+      "percentage": 2.64
+    }
+  ],
+  "all_aggregated": [
+    {
+      "feature": "delay_change_prev",
+      "importance": 0.2849,
+      "percentage": 28.49
+    },
+    {
+      "feature": "delay_minutes",
+      "importance": 0.2258,
+      "percentage": 22.58
+    },
+    {
+      "feature": "time_since_previous_observation_seconds",
+      "importance": 0.1015,
+      "percentage": 10.15
+    },
+    {
+      "feature": "train_number",
+      "importance": 0.0572,
+      "percentage": 5.72
+    },
+    {
+      "feature": "minute",
+      "importance": 0.0544,
+      "percentage": 5.44
+    },
+    {
+      "feature": "previous_delay",
+      "importance": 0.0475,
+      "percentage": 4.75
+    },
+    {
+      "feature": "time_of_day_minutes",
+      "importance": 0.0425,
+      "percentage": 4.25
+    },
+    {
+      "feature": "next_station_code",
+      "importance": 0.0408,
+      "percentage": 4.08
+    },
+    {
+      "feature": "distance_travelled_km",
+      "importance": 0.0316,
+      "percentage": 3.16
+    },
+    {
+      "feature": "current_station_code",
+      "importance": 0.0264,
+      "percentage": 2.64
+    },
+    {
+      "feature": "route_position_change",
+      "importance": 0.0231,
+      "percentage": 2.31
+    },
+    {
+      "feature": "latitude",
+      "importance": 0.0164,
+      "percentage": 1.64
+    },
+    {
+      "feature": "estimated_speed_kmh",
+      "importance": 0.014,
+      "percentage": 1.4
+    },
+    {
+      "feature": "longitude",
+      "importance": 0.0131,
+      "percentage": 1.31
+    },
+    {
+      "feature": "movement_state",
+      "importance": 0.0091,
+      "percentage": 0.91
+    },
+    {
+      "feature": "segment_progress",
+      "importance": 0.0033,
+      "percentage": 0.33
+    },
+    {
+      "feature": "station_transition",
+      "importance": 0.0032,
+      "percentage": 0.32
+    },
+    {
+      "feature": "route_sequence",
+      "importance": 0.0028,
+      "percentage": 0.28
+    },
+    {
+      "feature": "distance_from_origin_km",
+      "importance": 0.0018,
+      "percentage": 0.18
+    },
+    {
+      "feature": "distance_from_last_station_km",
+      "importance": 0.0005,
+      "percentage": 0.05
+    },
+    {
+      "feature": "current_location_status",
+      "importance": 0.0004,
+      "percentage": 0.04
+    },
+    {
+      "feature": "hour",
+      "importance": 0.0,
+      "percentage": 0.0
+    },
+    {
+      "feature": "day_of_week",
+      "importance": 0.0,
+      "percentage": 0.0
+    },
+    {
+      "feature": "train_type",
+      "importance": 0.0,
+      "percentage": 0.0
+    },
+    {
+      "feature": "train_category",
+      "importance": 0.0,
+      "percentage": 0.0
+    }
+  ],
+  "top_10_raw_transformed": [
+    {
+      "feature": "delay_change_prev",
+      "importance": 0.2849,
+      "percentage": 28.49
+    },
+    {
+      "feature": "delay_minutes",
+      "importance": 0.2258,
+      "percentage": 22.58
+    },
+    {
+      "feature": "time_since_previous_observation_seconds",
+      "importance": 0.1015,
+      "percentage": 10.15
+    },
+    {
+      "feature": "minute",
+      "importance": 0.0544,
+      "percentage": 5.44
+    },
+    {
+      "feature": "previous_delay",
+      "importance": 0.0475,
+      "percentage": 4.75
+    },
+    {
+      "feature": "time_of_day_minutes",
+      "importance": 0.0425,
+      "percentage": 4.25
+    },
+    {
+      "feature": "distance_travelled_km",
+      "importance": 0.0316,
+      "percentage": 3.16
+    },
+    {
+      "feature": "route_position_change",
+      "importance": 0.0231,
+      "percentage": 2.31
+    },
+    {
+      "feature": "train_number_97095",
+      "importance": 0.0213,
+      "percentage": 2.13
+    },
+    {
+      "feature": "current_station_code_VK",
+      "importance": 0.017,
+      "percentage": 1.7
+    }
+  ]
+}

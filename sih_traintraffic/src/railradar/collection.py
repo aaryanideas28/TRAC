@@ -230,16 +230,25 @@ def discover_trains(payload: dict, now: datetime, duration_seconds: int) -> list
         )
         score = 100.0 if local else 0.0
         if departure_minutes is not None:
-            distance = min(abs(departure_minutes - current_minutes), abs(departure_minutes + 1440 - current_minutes))
-            if current_minutes <= departure_minutes <= end_minutes:
-                score += 80.0
-            elif departure_minutes >= current_minutes:
-                score += max(0.0, 40.0 - distance / 10.0)
+            time_diff = (current_minutes - departure_minutes) % 1440
+            if time_diff > 720:
+                time_diff -= 1440
+            # Trains that departed 0 to 50 minutes ago are actively running on the corridor right now
+            if 0 <= time_diff <= 50:
+                score += 150.0 - time_diff
+                reason = "Mumbai suburban service; actively running (departed within last 50 mins)"
+            elif -15 <= time_diff < 0:
+                score += 100.0 + time_diff
+                reason = "Mumbai suburban service; departing shortly (within 15 mins)"
+            elif time_diff < -15:
+                score += max(0.0, 50.0 + time_diff / 5.0)
+                reason = "Mumbai suburban service; scheduled in future"
             else:
-                score += max(0.0, 20.0 - distance / 10.0)
-        reason = "Mumbai suburban/local service"
-        if departure_minutes is not None and current_minutes <= departure_minutes <= end_minutes:
-            reason += "; scheduled during collection window"
+                score += max(0.0, 50.0 - (time_diff - 50) / 2.0)
+                reason = "Mumbai suburban service; departed >50 mins ago"
+        else:
+            reason = "Mumbai suburban service"
+
         result.append(
             DiscoveredTrain(
                 number=str(train["number"]),

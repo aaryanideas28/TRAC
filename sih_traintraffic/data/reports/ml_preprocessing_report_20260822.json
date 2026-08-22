@@ -1,0 +1,64 @@
+{
+  "original_rows": 305,
+  "stale_rows": 108,
+  "fresh_rows": 197,
+  "rows_with_valid_sequential_pairs": 192,
+  "final_ml_row_count": 192,
+  "train_count": 5,
+  "unique_stations_count": 21,
+  "station_transitions_count": 57,
+  "missing_value_statistics": {
+    "segment_progress": {
+      "missing_count": 30,
+      "missing_pct": 15.62,
+      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
+    },
+    "platform": {
+      "missing_count": 65,
+      "missing_pct": 33.85,
+      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
+    },
+    "previous_delay": {
+      "missing_count": 5,
+      "missing_pct": 2.6,
+      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
+    },
+    "delay_change_prev": {
+      "missing_count": 5,
+      "missing_pct": 2.6,
+      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
+    },
+    "time_since_previous_observation_seconds": {
+      "missing_count": 5,
+      "missing_pct": 2.6,
+      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
+    },
+    "distance_travelled_km": {
+      "missing_count": 5,
+      "missing_pct": 2.6,
+      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
+    },
+    "route_position_change": {
+      "missing_count": 5,
+      "missing_pct": 2.6,
+      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
+    },
+    "estimated_speed_kmh": {
+      "missing_count": 10,
+      "missing_pct": 5.21,
+      "decision": "Kept as NaN or ignored for feature matrix; no artificial imputation performed"
+    }
+  },
+  "final_feature_count": 32,
+  "target_statistics": {
+    "min": -5.0,
+    "max": 9.0,
+    "mean": 0.0,
+    "median": 0.0,
+    "std": 1.4
+  },
+  "rows_dropped_reasons": {
+    "stale_observations_dropped": 108,
+    "terminal_train_observations_without_future_target_dropped": 5
+  }
+}

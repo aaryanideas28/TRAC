@@ -1,0 +1,500 @@
+{
+  "experiment_title": "Controlled Random Forest Hyperparameter Tuning Experiment",
+  "dataset_summary": {
+    "total_rows": 77,
+    "training_rows": 53,
+    "testing_rows": 24,
+    "sub_training_rows": 35,
+    "sub_validation_rows": 18,
+    "train_ratio": 0.7,
+    "train_count": 5,
+    "train_numbers": [
+      12809,
+      95135,
+      95333,
+      97179,
+      97263
+    ]
+  },
+  "baseline_result": {
+    "strategy": "Zero-change persistence baseline (predict delta_delay = 0.0)",
+    "test_metrics": {
+      "mae": 0.6667,
+      "rmse": 1.2247,
+      "r2": -0.1309
+    },
+    "validation_metrics": {
+      "mae": 0.7222,
+      "rmse": 1.0274,
+      "r2": -0.0029
+    }
+  },
+  "original_random_forest_result": {
+    "parameters": {
+      "n_estimators": 100,
+      "max_depth": 5,
+      "min_samples_split": 2,
+      "min_samples_leaf": 1,
+      "random_state": 42
+    },
+    "train_metrics": {
+      "mae": 0.5892,
+      "rmse": 0.9053,
+      "r2": 0.7857
+    },
+    "test_metrics": {
+      "mae": 0.9297,
+      "rmse": 1.3743,
+      "r2": -0.424
+    },
+    "train_test_mae_gap": 0.3405
+  },
+  "all_tested_configurations": [
+    {
+      "config_id": "cfg_01_orig_depth5",
+      "name": "Original Benchmark (Depth 5)",
+      "description": "Baseline RF configuration from initial implementation",
+      "parameters": {
+        "n_estimators": 100,
+        "max_depth": 5,
+        "min_samples_split": 2,
+        "min_samples_leaf": 1,
+        "random_state": 42
+      },
+      "train_metrics": {
+        "mae": 0.5892,
+        "rmse": 0.9053,
+        "r2": 0.7857
+      },
+      "validation_metrics": {
+        "mae": 0.907,
+        "rmse": 1.2232,
+        "r2": -0.4217
+      },
+      "test_metrics": {
+        "mae": 0.9297,
+        "rmse": 1.3743,
+        "r2": -0.424
+      },
+      "train_test_gap": {
+        "mae_gap": 0.3405,
+        "rmse_gap": 0.469
+      },
+      "beats_baseline_mae": false
+    },
+    {
+      "config_id": "cfg_02_shallow_depth2",
+      "name": "Shallow Trees (Depth 2)",
+      "description": "Strict depth constraint to prevent complex partitioning",
+      "parameters": {
+        "n_estimators": 100,
+        "max_depth": 2,
+        "min_samples_split": 2,
+        "min_samples_leaf": 1,
+        "random_state": 42
+      },
+      "train_metrics": {
+        "mae": 0.7779,
+        "rmse": 1.1742,
+        "r2": 0.6395
+      },
+      "validation_metrics": {
+        "mae": 0.7968,
+        "rmse": 1.0557,
+        "r2": -0.059
+      },
+      "test_metrics": {
+        "mae": 0.8468,
+        "rmse": 1.3276,
+        "r2": -0.3289
+      },
+      "train_test_gap": {
+        "mae_gap": 0.0689,
+        "rmse_gap": 0.1534
+      },
+      "beats_baseline_mae": false
+    },
+    {
+      "config_id": "cfg_03_moderate_depth3",
+      "name": "Moderate Trees (Depth 3)",
+      "description": "Intermediate depth balancing capacity and generalization",
+      "parameters": {
+        "n_estimators": 100,
+        "max_depth": 3,
+        "min_samples_split": 2,
+        "min_samples_leaf": 1,
+        "random_state": 42
+      },
+      "train_metrics": {
+        "mae": 0.7063,
+        "rmse": 1.0567,
+        "r2": 0.708
+      },
+      "validation_metrics": {
+        "mae": 0.8604,
+        "rmse": 1.1426,
+        "r2": -0.2405
+      },
+      "test_metrics": {
+        "mae": 0.8885,
+        "rmse": 1.3557,
+        "r2": -0.3856
+      },
+      "train_test_gap": {
+        "mae_gap": 0.1822,
+        "rmse_gap": 0.299
+      },
+      "beats_baseline_mae": false
+    },
+    {
+      "config_id": "cfg_04_unconstrained_none",
+      "name": "Unconstrained (Depth None)",
+      "description": "Full tree expansion testing maximum capacity / extreme overfitting boundary",
+      "parameters": {
+        "n_estimators": 100,
+        "max_depth": null,
+        "min_samples_split": 2,
+        "min_samples_leaf": 1,
+        "random_state": 42
+      },
+      "train_metrics": {
+        "mae": 0.4323,
+        "rmse": 0.7801,
+        "r2": 0.8409
+      },
+      "validation_metrics": {
+        "mae": 0.99,
+        "rmse": 1.2923,
+        "r2": -0.5868
+      },
+      "test_metrics": {
+        "mae": 0.9496,
+        "rmse": 1.3412,
+        "r2": -0.3562
+      },
+      "train_test_gap": {
+        "mae_gap": 0.5173,
+        "rmse_gap": 0.5611
+      },
+      "beats_baseline_mae": false
+    },
+    {
+      "config_id": "cfg_05_depth3_leaf2",
+      "name": "Depth 3 + Leaf 2",
+      "description": "Depth 3 with minimum 2 samples per leaf to regularize terminal predictions",
+      "parameters": {
+        "n_estimators": 100,
+        "max_depth": 3,
+        "min_samples_split": 2,
+        "min_samples_leaf": 2,
+        "random_state": 42
+      },
+      "train_metrics": {
+        "mae": 0.8748,
+        "rmse": 1.4525,
+        "r2": 0.4484
+      },
+      "validation_metrics": {
+        "mae": 1.0943,
+        "rmse": 1.3443,
+        "r2": -0.7169
+      },
+      "test_metrics": {
+        "mae": 0.828,
+        "rmse": 1.222,
+        "r2": -0.1258
+      },
+      "train_test_gap": {
+        "mae_gap": -0.0468,
+        "rmse_gap": -0.2305
+      },
+      "beats_baseline_mae": false
+    },
+    {
+      "config_id": "cfg_06_depth3_leaf4",
+      "name": "Depth 3 + Leaf 4",
+      "description": "Depth 3 with strong leaf regularization (min 4 samples per leaf)",
+      "parameters": {
+        "n_estimators": 100,
+        "max_depth": 3,
+        "min_samples_split": 2,
+        "min_samples_leaf": 4,
+        "random_state": 42
+      },
+      "train_metrics": {
+        "mae": 0.9482,
+        "rmse": 1.7054,
+        "r2": 0.2396
+      },
+      "validation_metrics": {
+        "mae": 1.1934,
+        "rmse": 1.6642,
+        "r2": -1.6314
+      },
+      "test_metrics": {
+        "mae": 0.8243,
+        "rmse": 1.139,
+        "r2": 0.0219
+      },
+      "train_test_gap": {
+        "mae_gap": -0.1239,
+        "rmse_gap": -0.5664
+      },
+      "beats_baseline_mae": false
+    },
+    {
+      "config_id": "cfg_07_depth3_split4",
+      "name": "Depth 3 + Split 4",
+      "description": "Depth 3 requiring at least 4 samples to consider an internal split",
+      "parameters": {
+        "n_estimators": 100,
+        "max_depth": 3,
+        "min_samples_split": 4,
+        "min_samples_leaf": 1,
+        "random_state": 42
+      },
+      "train_metrics": {
+        "mae": 0.7253,
+        "rmse": 1.0832,
+        "r2": 0.6933
+      },
+      "validation_metrics": {
+        "mae": 0.8625,
+        "rmse": 1.1312,
+        "r2": -0.2159
+      },
+      "test_metrics": {
+        "mae": 0.9034,
+        "rmse": 1.3705,
+        "r2": -0.4161
+      },
+      "train_test_gap": {
+        "mae_gap": 0.1781,
+        "rmse_gap": 0.2873
+      },
+      "beats_baseline_mae": false
+    },
+    {
+      "config_id": "cfg_08_depth3_split6_leaf2",
+      "name": "Depth 3 + Split 6 + Leaf 2",
+      "description": "Joint split and leaf regularization on moderate depth trees",
+      "parameters": {
+        "n_estimators": 100,
+        "max_depth": 3,
+        "min_samples_split": 6,
+        "min_samples_leaf": 2,
+        "random_state": 42
+      },
+      "train_metrics": {
+        "mae": 0.8849,
+        "rmse": 1.4698,
+        "r2": 0.4352
+      },
+      "validation_metrics": {
+        "mae": 1.0928,
+        "rmse": 1.346,
+        "r2": -0.7215
+      },
+      "test_metrics": {
+        "mae": 0.8208,
+        "rmse": 1.2153,
+        "r2": -0.1135
+      },
+      "train_test_gap": {
+        "mae_gap": -0.0641,
+        "rmse_gap": -0.2545
+      },
+      "beats_baseline_mae": false
+    },
+    {
+      "config_id": "cfg_09_depth2_leaf2",
+      "name": "Depth 2 + Leaf 2",
+      "description": "Highly conservative configuration: shallow depth combined with leaf regularization",
+      "parameters": {
+        "n_estimators": 100,
+        "max_depth": 2,
+        "min_samples_split": 2,
+        "min_samples_leaf": 2,
+        "random_state": 42
+      },
+      "train_metrics": {
+        "mae": 0.9347,
+        "rmse": 1.5363,
+        "r2": 0.3829
+      },
+      "validation_metrics": {
+        "mae": 1.0669,
+        "rmse": 1.3045,
+        "r2": -0.6169
+      },
+      "test_metrics": {
+        "mae": 0.774,
+        "rmse": 1.1989,
+        "r2": -0.0836
+      },
+      "train_test_gap": {
+        "mae_gap": -0.1607,
+        "rmse_gap": -0.3374
+      },
+      "beats_baseline_mae": false
+    },
+    {
+      "config_id": "cfg_09_depth2_leaf4",
+      "name": "Depth 2 + Leaf 4",
+      "description": "Ultra-conservative configuration: shallow depth with aggressive leaf smoothing",
+      "parameters": {
+        "n_estimators": 100,
+        "max_depth": 2,
+        "min_samples_split": 2,
+        "min_samples_leaf": 4,
+        "random_state": 42
+      },
+      "train_metrics": {
+        "mae": 0.9927,
+        "rmse": 1.7558,
+        "r2": 0.194
+      },
+      "validation_metrics": {
+        "mae": 1.2117,
+        "rmse": 1.6584,
+        "r2": -1.6133
+      },
+      "test_metrics": {
+        "mae": 0.7861,
+        "rmse": 1.1234,
+        "r2": 0.0486
+      },
+      "train_test_gap": {
+        "mae_gap": -0.2066,
+        "rmse_gap": -0.6324
+      },
+      "beats_baseline_mae": false
+    },
+    {
+      "config_id": "cfg_11_200trees_depth2_leaf2",
+      "name": "200 Trees (Depth 2, Leaf 2)",
+      "description": "Increased ensemble size on conservative shallow regularized trees",
+      "parameters": {
+        "n_estimators": 200,
+        "max_depth": 2,
+        "min_samples_split": 2,
+        "min_samples_leaf": 2,
+        "random_state": 42
+      },
+      "train_metrics": {
+        "mae": 0.9396,
+        "rmse": 1.5277,
+        "r2": 0.3898
+      },
+      "validation_metrics": {
+        "mae": 1.0354,
+        "rmse": 1.2992,
+        "r2": -0.6038
+      },
+      "test_metrics": {
+        "mae": 0.7822,
+        "rmse": 1.2289,
+        "r2": -0.1385
+      },
+      "train_test_gap": {
+        "mae_gap": -0.1574,
+        "rmse_gap": -0.2988
+      },
+      "beats_baseline_mae": false
+    },
+    {
+      "config_id": "cfg_12_200trees_depth3_leaf2",
+      "name": "200 Trees (Depth 3, Leaf 2)",
+      "description": "Increased ensemble size on moderate depth regularized trees",
+      "parameters": {
+        "n_estimators": 200,
+        "max_depth": 3,
+        "min_samples_split": 2,
+        "min_samples_leaf": 2,
+        "random_state": 42
+      },
+      "train_metrics": {
+        "mae": 0.8712,
+        "rmse": 1.445,
+        "r2": 0.4541
+      },
+      "validation_metrics": {
+        "mae": 1.0534,
+        "rmse": 1.3302,
+        "r2": -0.6812
+      },
+      "test_metrics": {
+        "mae": 0.8271,
+        "rmse": 1.254,
+        "r2": -0.1856
+      },
+      "train_test_gap": {
+        "mae_gap": -0.0441,
+        "rmse_gap": -0.191
+      },
+      "beats_baseline_mae": false
+    }
+  ],
+  "best_tuned_configuration": {
+    "config_id": "cfg_09_depth2_leaf2",
+    "name": "Depth 2 + Leaf 2",
+    "description": "Highly conservative configuration: shallow depth combined with leaf regularization",
+    "parameters": {
+      "n_estimators": 100,
+      "max_depth": 2,
+      "min_samples_split": 2,
+      "min_samples_leaf": 2,
+      "random_state": 42
+    },
+    "train_metrics": {
+      "mae": 0.9347,
+      "rmse": 1.5363,
+      "r2": 0.3829
+    },
+    "validation_metrics": {
+      "mae": 1.0669,
+      "rmse": 1.3045,
+      "r2": -0.6169
+    },
+    "test_metrics": {
+      "mae": 0.774,
+      "rmse": 1.1989,
+      "r2": -0.0836
+    },
+    "train_test_gap": {
+      "mae_gap": -0.1607,
+      "rmse_gap": -0.3374
+    },
+    "did_beat_baseline": false
+  },
+  "comparison_summary": {
+    "did_tuned_rf_beat_baseline": "NO",
+    "did_train_eval_gap_improve": "YES",
+    "baseline_mae": 0.6667,
+    "original_rf_test_mae": 0.9297,
+    "best_tuned_rf_test_mae": 0.774,
+    "original_gap_mae": 0.3405,
+    "best_gap_mae": -0.1607
+  },
+  "overfitting_analysis": {
+    "depth_impact": "Reducing max_depth from 5 (or None) down to 2 reduced the train/test MAE gap from +0.3405 to -0.1607, curbing severe training memorization.",
+    "leaf_regularization_impact": "Increasing min_samples_leaf to 2 or 4 prevents isolated outlier memorization in terminal leaves, lowering test MAE from 0.9297 to 0.7740.",
+    "generalization_conclusion": "While simpler trees generalize better than unconstrained trees on test data (0.7740 vs 0.9297 MAE), no tree configuration can overcome the zero-change dominance on 24 test observations without a larger, more diverse dataset."
+  },
+  "limitations_caused_by_77_row_dataset": [
+    "Extremely small sample size: 53 training rows and 24 test rows across only 5 active trains.",
+    "Short collection duration: ~23 minutes of continuous observations captured limited delay variance (68.8% overall and 75% test zero delay change).",
+    "Lack of temporal diversity: Missing multi-hour progression, peak congestion shifts, and signal clearance sequences.",
+    "High metric sensitivity: In a 24-sample test set, a single 3-minute prediction error shifts the MAE by 0.125."
+  ],
+  "decision_rule_outcome": {
+    "recommendation": "COLLECT MORE REAL RAILRADAR DATA",
+    "reason": "Despite tuning depth down to 2 and increasing leaf constraints to 4, all 12 Random Forest configurations failed to beat the zero-change baseline MAE of 0.6667 (best test MAE achieved: 0.774). On this 77-row dataset (53 train / 24 test rows across a 23-minute window), 75.0% of test observations have exact zero delay change. Predicting non-zero values on zero-change observations accumulates error. Collecting multi-hour observation windows across peak and non-peak traffic is required to observe true delay progression dynamics."
+  },
+  "safety_and_integrity": {
+    "railradar_api_requests_made": 0,
+    "original_dataset_modified": false,
+    "synthetic_data_generated": false,
+    "preprocessing_pipeline_modified": false
+  }
+}

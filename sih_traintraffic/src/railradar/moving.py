@@ -5,8 +5,10 @@ from __future__ import annotations
 import csv
 import json
 import math
+import os
 import time
 import uuid
+
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
@@ -208,12 +210,31 @@ def select_spread_active_trains(
 
 
 class MovingCollector:
-    def __init__(self, root: Path, settings: Settings, duration_minutes: int = 20) -> None:
+    def __init__(
+        self,
+        root: Path,
+        settings: Settings,
+        duration_minutes: int = 60,
+        fresh_quota: bool = True,
+        known_prior_requests: int | None = None,
+    ) -> None:
         self.root = root
         self.settings = settings
         self.run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "-moving-" + uuid.uuid4().hex[:8]
-        prior = _safe_request_count(root)
-        self.config = CollectionConfig(duration_seconds=duration_minutes * 60, quota_total=1000, safety_fraction=0.85, known_prior_requests=prior, max_trains=10)
+        if known_prior_requests is not None:
+            prior = known_prior_requests
+        elif fresh_quota or os.environ.get("NEXORA_FRESH_QUOTA", "1") == "1":
+            prior = 0
+        else:
+            prior = _safe_request_count(root)
+        quota_total = int(os.environ.get("RAILRADAR_MONTHLY_QUOTA", "1000"))
+        self.config = CollectionConfig(
+            duration_seconds=duration_minutes * 60,
+            quota_total=quota_total,
+            safety_fraction=0.85,
+            known_prior_requests=prior,
+            max_trains=5,
+        )
         self.limiter = SlidingWindowRateLimiter(minimum_spacing_seconds=self.config.minimum_spacing)
         self.ledger = RequestLedger(self.config.safe_budget, self.limiter)
         self.client = RailRadarClient(settings, before_request=self.ledger.before_request)
@@ -302,8 +323,9 @@ class MovingCollector:
 
     def run(self) -> dict[str, Any]:
         self.candidate_trains = self._discover()
-        probe_limit = min(50, len(self.candidate_trains))
-        print(f"Live-checking {probe_limit} candidates; safe budget: {self.config.safe_budget}")
+        max_probe = int(os.environ.get("NEXORA_MAX_PROBES", "25"))
+        probe_limit = min(max_probe, len(self.candidate_trains))
+        print(f"Live-checking candidates (max {probe_limit}); safe budget: {self.config.safe_budget}")
         probe_records: list[tuple[DiscoveredTrain, dict[str, Any]]] = []
         for train in self.candidate_trains[:probe_limit]:
             try:
@@ -314,6 +336,12 @@ class MovingCollector:
                 row["verification_movement_evidence"] = moved
                 probe_records.append((train, row))
                 self.probe_rows.append(row)
+
+                # Early break once we have enough active moving candidates
+                active_moving_count = sum(1 for _, r in probe_records if r.get("verification_active") and r.get("verification_movement_evidence"))
+                if active_moving_count >= 7:
+                    print(f"Found {active_moving_count} active moving candidates; stopping probe early to conserve API quota.")
+                    break
             except (AuthenticationError, ConfigurationError):
                 raise
             except Exception as error:
@@ -323,7 +351,7 @@ class MovingCollector:
         selected_records = select_spread_active_trains(active_records, 5)
         self.verified_active_trains = [train for train, _ in active_records]
         self.active_trains = [train for train, _ in selected_records]
-        if len(self.active_trains) < 5:
+        if not self.active_trains:
             self.writer.close()
             report = _report_for_rows([])
             report.update({
@@ -340,7 +368,10 @@ class MovingCollector:
             report["run_metadata"] = str(metadata)
             report_path = self.root / "data" / "reports" / f"{self.run_id}_moving_quality_report.json"
             _json_write(report_path, report)
+            # Also save generic quality report path
+            _json_write(self.root / "data" / "reports" / f"{self.run_id}_quality_report.json", report)
             return {"status": "insufficient_active_trains", "output": str(self.output), "report": report, "metadata": str(metadata)}
+
         for train, row in selected_records:
             self.rows.append(row)
             self.writer.write(row)
@@ -400,4 +431,6 @@ class MovingCollector:
         report["run_metadata"] = str(metadata)
         report_path = self.root / "data" / "reports" / f"{self.run_id}_moving_quality_report.json"
         _json_write(report_path, report)
+        _json_write(self.root / "data" / "reports" / f"{self.run_id}_quality_report.json", report)
         return {"status": "complete", "output": str(self.output), "report": report, "metadata": str(metadata)}
+

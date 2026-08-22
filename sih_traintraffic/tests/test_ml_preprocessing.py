@@ -139,3 +139,31 @@ def test_original_csv_integrity():
     fresh_df = load_dataset(ORIGINAL_CSV)
     assert len(fresh_df) == 101
     assert ORIGINAL_CSV.read_bytes() == original_data
+
+
+def test_20260822_preprocessing_and_integrity():
+    csv_20260822 = Path("data/processed/live_observations_moving_20260822T085927Z-moving-6809face.csv")
+    ml_csv_20260822 = Path("data/processed/ml_ready_dataset_20260822.csv")
+    report_20260822 = Path("data/reports/ml_preprocessing_report_20260822.json")
+    spec_20260822 = Path("data/reports/ml_feature_spec_20260822.json")
+
+    assert csv_20260822.exists()
+    assert ml_csv_20260822.exists()
+    assert report_20260822.exists()
+    assert spec_20260822.exists()
+
+    df = load_dataset(ml_csv_20260822)
+    assert len(df) == 192
+    assert df["train_number"].nunique() == 5
+    assert not df.duplicated().any()
+
+    # Target alignment verification
+    assert (df["target_delay_change"] == df["future_delay"] - df["delay_minutes"]).all()
+
+    # Check report
+    rep = json.loads(report_20260822.read_text(encoding="utf-8"))
+    assert rep["original_rows"] == 305
+    assert rep["stale_rows"] == 108
+    assert rep["fresh_rows"] == 197
+    assert rep["final_ml_row_count"] == 192
+

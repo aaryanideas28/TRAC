@@ -50,21 +50,23 @@ def filter_stale_observations(df: pd.DataFrame) -> tuple[pd.DataFrame, dict[str,
 
 
 def sort_chronologically(df: pd.DataFrame) -> pd.DataFrame:
-    """Ensure observations are sorted by ``train_number`` and ``collection_timestamp``."""
+    """Ensure observations are sorted by ``run_id`` (if present), ``train_number``, and ``collection_timestamp``."""
     out_df = df.copy()
     out_df["collection_dt"] = pd.to_datetime(out_df["collection_timestamp"], errors="coerce", utc=True)
     out_df["train_number"] = out_df["train_number"].astype(str)
-    out_df = out_df.sort_values(["train_number", "collection_dt"]).reset_index(drop=True)
+    sort_cols = ["run_id", "train_number", "collection_dt"] if "run_id" in out_df.columns else ["train_number", "collection_dt"]
+    out_df = out_df.sort_values(sort_cols).reset_index(drop=True)
     return out_df
 
 
 def create_sequential_features(df: pd.DataFrame) -> pd.DataFrame:
-    """Create per-train lag and movement features strictly within train boundaries.
+    """Create per-train/run lag and movement features strictly within train and run boundaries.
 
-    Ensures no information from one train bleeds into another train's features.
+    Ensures no information from one train or run bleeds into another train's features.
     """
     out_df = df.copy()
-    grouped_train = out_df.groupby("train_number")
+    group_keys = ["run_id", "train_number"] if "run_id" in out_df.columns else ["train_number"]
+    grouped_train = out_df.groupby(group_keys, sort=False)
 
     out_df["previous_delay"] = grouped_train["delay_minutes"].shift(1)
     out_df["delay_change_prev"] = out_df["delay_minutes"] - out_df["previous_delay"]
@@ -109,15 +111,17 @@ def create_time_features(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def create_future_target(df: pd.DataFrame) -> pd.DataFrame:
-    """Create the future target variable strictly within each train group.
+    """Create the future target variable strictly within each train and run group.
 
     The target ``target_delay_change`` is defined as:
     ``delay(t+1) - delay(t)``.
     """
     out_df = df.copy()
-    out_df["future_delay"] = out_df.groupby("train_number")["delay_minutes"].shift(-1)
+    group_keys = ["run_id", "train_number"] if "run_id" in out_df.columns else ["train_number"]
+    out_df["future_delay"] = out_df.groupby(group_keys, sort=False)["delay_minutes"].shift(-1)
     out_df["target_delay_change"] = out_df["future_delay"] - out_df["delay_minutes"]
     return out_df
+
 
 
 def build_ml_ready_dataset(df: pd.DataFrame) -> pd.DataFrame:

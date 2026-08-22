@@ -1,0 +1,388 @@
+{
+  "dataset_summary": {
+    "total_rows": 77,
+    "total_columns": 36,
+    "training_rows": 53,
+    "testing_rows": 24,
+    "train_ratio": 0.7,
+    "train_count": 5,
+    "train_numbers": [
+      12809,
+      95135,
+      95333,
+      97179,
+      97263
+    ],
+    "per_train_splits": {
+      "12809": {
+        "total": 20,
+        "train": 14,
+        "test": 6
+      },
+      "95135": {
+        "total": 19,
+        "train": 13,
+        "test": 6
+      },
+      "95333": {
+        "total": 19,
+        "train": 13,
+        "test": 6
+      },
+      "97179": {
+        "total": 6,
+        "train": 4,
+        "test": 2
+      },
+      "97263": {
+        "total": 13,
+        "train": 9,
+        "test": 4
+      }
+    }
+  },
+  "features": {
+    "total_features_used": 25,
+    "categorical_features": [
+      "train_number",
+      "train_type",
+      "train_category",
+      "current_station_code",
+      "next_station_code",
+      "current_location_status",
+      "movement_state"
+    ],
+    "numerical_features": [
+      "latitude",
+      "longitude",
+      "segment_progress",
+      "delay_minutes",
+      "distance_from_origin_km",
+      "distance_from_last_station_km",
+      "route_sequence",
+      "previous_delay",
+      "delay_change_prev",
+      "time_since_previous_observation_seconds",
+      "distance_travelled_km",
+      "station_transition",
+      "route_position_change",
+      "estimated_speed_kmh",
+      "hour",
+      "minute",
+      "time_of_day_minutes",
+      "day_of_week"
+    ],
+    "excluded_columns": {
+      "run_id": "Identifier/metadata",
+      "collection_timestamp": "Identifier/metadata",
+      "train_name": "Identifier/metadata",
+      "journey_date": "Identifier/metadata",
+      "future_delay": "Future target component (t+1 delay) - excluded to prevent data leakage",
+      "target_delay_change": "ML target variable y",
+      "scheduled_arrival": "Raw ISO timestamp string - temporal context captured by time features",
+      "scheduled_departure": "Raw ISO timestamp string - temporal context captured by time features",
+      "actual_arrival": "Raw ISO timestamp string - temporal context captured by time features",
+      "actual_departure": "Raw ISO timestamp string - temporal context captured by time features",
+      "platform": "Rejected due to excessive missing values (54.55% missing)"
+    }
+  },
+  "target": {
+    "name": "target_delay_change",
+    "definition": "delay(t+1) - delay(t)",
+    "overall_statistics": {
+      "min": -3.0,
+      "max": 11.0,
+      "mean": 0.2727,
+      "median": 0.0,
+      "std": 1.7595
+    },
+    "train_statistics": {
+      "min": -3.0,
+      "max": 11.0,
+      "mean": 0.2075,
+      "median": 0.0,
+      "std": 1.9744
+    },
+    "test_statistics": {
+      "min": -2.0,
+      "max": 3.0,
+      "mean": 0.4167,
+      "median": 0.0,
+      "std": 1.1765
+    }
+  },
+  "baseline_model": {
+    "strategy": "Zero-change persistence baseline (predict delta_delay = 0)",
+    "test_metrics": {
+      "mae": 0.6667,
+      "rmse": 1.2247,
+      "r2": -0.1309
+    }
+  },
+  "random_forest_model": {
+    "algorithm": "sklearn.ensemble.RandomForestRegressor",
+    "parameters": {
+      "n_estimators": 100,
+      "max_depth": 5,
+      "random_state": 42
+    },
+    "train_metrics": {
+      "mae": 0.5892,
+      "rmse": 0.9053,
+      "r2": 0.7857
+    },
+    "test_metrics": {
+      "mae": 0.9297,
+      "rmse": 1.3743,
+      "r2": -0.424
+    }
+  },
+  "model_comparison": {
+    "did_random_forest_outperform_baseline": false,
+    "comparison_verdict": "NO",
+    "explanation": "On this 77-row dataset, 75% of test samples exhibit zero delay change. The naive zero-change baseline achieves MAE of 0.6667 min and RMSE of 1.2247 min, whereas Random Forest achieves MAE of 0.9297 min and RMSE of 1.3743 min. Due to the small sample size (53 train rows / 24 test rows) and strong zero-class concentration in a 23-minute window, the baseline outperforms Random Forest on test error."
+  },
+  "feature_importances": {
+    "top_10_aggregated": [
+      {
+        "feature": "route_position_change",
+        "importance": 0.1678,
+        "percentage": 16.78
+      },
+      {
+        "feature": "delay_minutes",
+        "importance": 0.1535,
+        "percentage": 15.35
+      },
+      {
+        "feature": "distance_from_last_station_km",
+        "importance": 0.147,
+        "percentage": 14.7
+      },
+      {
+        "feature": "distance_travelled_km",
+        "importance": 0.1349,
+        "percentage": 13.49
+      },
+      {
+        "feature": "previous_delay",
+        "importance": 0.0829,
+        "percentage": 8.29
+      },
+      {
+        "feature": "time_since_previous_observation_seconds",
+        "importance": 0.08,
+        "percentage": 8.0
+      },
+      {
+        "feature": "delay_change_prev",
+        "importance": 0.0501,
+        "percentage": 5.01
+      },
+      {
+        "feature": "current_station_code",
+        "importance": 0.0435,
+        "percentage": 4.35
+      },
+      {
+        "feature": "segment_progress",
+        "importance": 0.0229,
+        "percentage": 2.29
+      },
+      {
+        "feature": "latitude",
+        "importance": 0.0181,
+        "percentage": 1.81
+      }
+    ],
+    "all_aggregated": [
+      {
+        "feature": "route_position_change",
+        "importance": 0.1678,
+        "percentage": 16.78
+      },
+      {
+        "feature": "delay_minutes",
+        "importance": 0.1535,
+        "percentage": 15.35
+      },
+      {
+        "feature": "distance_from_last_station_km",
+        "importance": 0.147,
+        "percentage": 14.7
+      },
+      {
+        "feature": "distance_travelled_km",
+        "importance": 0.1349,
+        "percentage": 13.49
+      },
+      {
+        "feature": "previous_delay",
+        "importance": 0.0829,
+        "percentage": 8.29
+      },
+      {
+        "feature": "time_since_previous_observation_seconds",
+        "importance": 0.08,
+        "percentage": 8.0
+      },
+      {
+        "feature": "delay_change_prev",
+        "importance": 0.0501,
+        "percentage": 5.01
+      },
+      {
+        "feature": "current_station_code",
+        "importance": 0.0435,
+        "percentage": 4.35
+      },
+      {
+        "feature": "segment_progress",
+        "importance": 0.0229,
+        "percentage": 2.29
+      },
+      {
+        "feature": "latitude",
+        "importance": 0.0181,
+        "percentage": 1.81
+      },
+      {
+        "feature": "time_of_day_minutes",
+        "importance": 0.0179,
+        "percentage": 1.79
+      },
+      {
+        "feature": "minute",
+        "importance": 0.0169,
+        "percentage": 1.69
+      },
+      {
+        "feature": "train_number",
+        "importance": 0.0146,
+        "percentage": 1.46
+      },
+      {
+        "feature": "estimated_speed_kmh",
+        "importance": 0.0139,
+        "percentage": 1.39
+      },
+      {
+        "feature": "next_station_code",
+        "importance": 0.0094,
+        "percentage": 0.94
+      },
+      {
+        "feature": "movement_state",
+        "importance": 0.0091,
+        "percentage": 0.91
+      },
+      {
+        "feature": "longitude",
+        "importance": 0.008,
+        "percentage": 0.8
+      },
+      {
+        "feature": "current_location_status",
+        "importance": 0.0031,
+        "percentage": 0.31
+      },
+      {
+        "feature": "distance_from_origin_km",
+        "importance": 0.0028,
+        "percentage": 0.28
+      },
+      {
+        "feature": "train_type",
+        "importance": 0.0018,
+        "percentage": 0.18
+      },
+      {
+        "feature": "route_sequence",
+        "importance": 0.0017,
+        "percentage": 0.17
+      },
+      {
+        "feature": "train_category",
+        "importance": 0.0002,
+        "percentage": 0.02
+      },
+      {
+        "feature": "station_transition",
+        "importance": 0.0,
+        "percentage": 0.0
+      },
+      {
+        "feature": "hour",
+        "importance": 0.0,
+        "percentage": 0.0
+      },
+      {
+        "feature": "day_of_week",
+        "importance": 0.0,
+        "percentage": 0.0
+      }
+    ],
+    "top_10_raw_transformed": [
+      {
+        "feature": "route_position_change",
+        "importance": 0.1678,
+        "percentage": 16.78
+      },
+      {
+        "feature": "delay_minutes",
+        "importance": 0.1535,
+        "percentage": 15.35
+      },
+      {
+        "feature": "distance_from_last_station_km",
+        "importance": 0.147,
+        "percentage": 14.7
+      },
+      {
+        "feature": "distance_travelled_km",
+        "importance": 0.1349,
+        "percentage": 13.49
+      },
+      {
+        "feature": "previous_delay",
+        "importance": 0.0829,
+        "percentage": 8.29
+      },
+      {
+        "feature": "time_since_previous_observation_seconds",
+        "importance": 0.08,
+        "percentage": 8.0
+      },
+      {
+        "feature": "delay_change_prev",
+        "importance": 0.0501,
+        "percentage": 5.01
+      },
+      {
+        "feature": "segment_progress",
+        "importance": 0.0229,
+        "percentage": 2.29
+      },
+      {
+        "feature": "current_station_code_BND",
+        "importance": 0.022,
+        "percentage": 2.2
+      },
+      {
+        "feature": "latitude",
+        "importance": 0.0181,
+        "percentage": 1.81
+      }
+    ]
+  },
+  "data_limitations_and_disclaimer": {
+    "sample_size": "77 total ML rows across 5 active trains over a 23-minute collection window.",
+    "stability_warning": "Metrics on 24 test samples have high variance; results represent a college prototype pipeline rather than production railway performance.",
+    "production_requirements": "Production models require continuous 2-4 hour multi-slot observation data (~500-1000 sequential pairs) across 15+ active trains."
+  },
+  "safety_and_integrity": {
+    "railradar_api_requests_made": 0,
+    "original_dataset_modified": false,
+    "synthetic_data_generated": false
+  }
+}

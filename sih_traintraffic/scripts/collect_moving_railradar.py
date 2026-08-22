@@ -16,15 +16,16 @@ from railradar.moving import MovingCollector  # noqa: E402
 
 def main() -> int:
     settings = load_settings(PROJECT_ROOT / ".env")
-    duration = int(os.environ.get("NEXORA_MOVING_MINUTES", "20"))
-    result = MovingCollector(PROJECT_ROOT, settings, duration_minutes=duration).run()
+    duration = int(os.environ.get("NEXORA_MOVING_MINUTES", "60"))
+    result = MovingCollector(PROJECT_ROOT, settings, duration_minutes=duration, fresh_quota=True).run()
     print(f"Moving collection status: {result['status']}")
     print(f"Moving-train dataset: {result['output']}")
     print(f"Quality report run: {result['report'].get('run_id')}")
     if result["status"] == "insufficient_active_trains":
-        print("Fewer than three verified active trains were found; no full polling window was started.")
+        print("No verified active trains were found; no full polling window was started.")
     return 0
 
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
