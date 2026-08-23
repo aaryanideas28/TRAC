@@ -1,73 +1,66 @@
-# Nexora — Final Dashboard UI Restoration Report
+# Forensic UI Regression Diagnosis & Restoration Report
 
-**Restoration Date**: August 23, 2026  
-**Audited Subsystems**: React / Vite Dashboard (`dashboard/src`)  
+**Audit Date**: August 23, 2026  
+**Audited Subsystem**: Vite React Command Center Web Portal (`dashboard/`)  
 **Target Reference**: Previous Good Screenshot Visual Baseline  
-**Status**: **100% RESTORED & SIH PRESENTATION READY**  
 
 ---
 
-## 1. Root Cause of Layout Compression
+## 1. Forensic Diagnosis & Root Cause
 
-### Diagnosed Issues
-1. **Container Width Constraints**: The container elements lacked explicit `w-full` class declarations across flex and grid children, causing browser layout calculations to compress components toward the left edge of the desktop viewport.
-2. **Grid Column Definition Loss**: `KpiCards` lacked full 6-column desktop template rules (`grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 w-full`), causing cards to stack into narrow columns rather than spanning the full available width.
-3. **SVG Map Aspect Ratio & Legend**: `LiveRailwayNetwork` needed explicit viewBox aspect ratio scaling (`viewBox="0 0 1000 320"`) and positioned legend key overlay (`Moving`, `Waiting`, `Delayed`, `Conflict/Risk`) to prevent graph shrinkage.
-
----
-
-## 2. Restoration & Component Enhancements
-
-### A. Navigation Header (`TopNav.tsx`)
-- **Left**: Nexora icon + `AI Railway Traffic Control` + small uppercase green subhead `REAL-TIME SECTION THROUGHPUT OPTIMIZATION`.
-- **Center**: Horizontally aligned navigation tabs (`Dashboard`, `Live Network`, `Train Schedule`, `AI Recommendations`, `Analytics`, `Simulation`). Active tab features a green highlighted pill with clear contrast.
-- **Right**: `SIH Demo Flow` button with play icon, `ONLINE` status pill with pulsing indicator, `Updated: timestamp`, and refresh button.
-
-### B. KPI Summary Row (`KpiCards.tsx`)
-- Spans full desktop viewport width across 6 equal-width, equal-height glassmorphic cards:
-  1. `ACTIVE TRAINS` | `6` | `Optimal Density`
-  2. `THROUGHPUT` | `19 trains/hr` | `↑ 21%`
-  3. `AVERAGE DELAY` | `3.1 min` | `↘ 62%`
-  4. `TRACK UTILIZATION` | `86%` | `↑ 17%`
-  5. `CONFLICTS DETECTED` | `2` | `Real-Time Radar`
-  6. `CONFLICTS RESOLVED` | `2` | `100% OR-Tools Solved`
-
-### C. Live Railway Section Graph (`LiveRailwayNetwork.tsx`)
-- **Full-Width Canvas**: Interactive SVG map spanning the primary dashboard section.
-- **Status Key Overlay (Top-Left)**: Glassmorphic panel displaying status color badges for `Moving` (Green), `Waiting` (Amber), `Delayed` (Red), `Conflict/Risk` (Orange).
-- **Dual-Track Infrastructure Visualization**:
-  - `SLOW LINE`: Dashed slate line with green station circles.
-  - `FAST LINE`: Solid cyan glowing line (`#06b6d4`) with double target rings at stations (`CSMT`, `BY`, `DR`, `CLA`, `GC`, `TNA`).
-  - `Loop / Crossover Lines`: Orange dashed curves at Dadar and Kurla junctions.
-  - `Train Markers`: Rounded pill badges (`T101`, `T104`, `T218`, `T201`) with active selection pulse animation and hover telemetry drawer.
-
-### D. Data Provenance & Assumptions Accordions (`App.tsx`)
-- Appended `DataProvenancePanel` and `PrototypeAssumptionsPanel` as clean expandable accordions at the bottom of the main dashboard, allowing technical SIH judges to inspect data natures and assumptions without cluttering the main operational view.
+### Root Cause Analysis
+- **Missing Tailwind CSS Compiler Integration**: All JSX components (`TopNav`, `KpiCards`, `LiveRailwayNetwork`, `App.tsx`) rely on Tailwind utility classes (`grid`, `grid-cols-6`, `flex`, `w-full`, `max-w-[1600px]`, `bg-slate-900`, `text-emerald-400`, `rounded-xl`, `shadow-2xl`, etc.).
+- **Missing Build Dependency**: Neither `tailwindcss` nor `@tailwindcss/vite` was declared in `dashboard/package.json`, and `dashboard/vite.config.ts` only registered `@vitejs/plugin-react` without CSS compilation plugins.
+- **Unprocessed At-Rules**: `dashboard/src/index.css` contained `@tailwind base; @tailwind components; @tailwind utilities;`, which Vite's default CSS tool (`lightningcss`) flagged as an unknown `@at-rule` and silently ignored.
+- **Rendered Browser Effect**: Because zero Tailwind CSS utility classes were generated in the built CSS bundle (`dist/assets/index.css` was only 0.88 kB), the browser received plain HTML elements with no CSS layout rules. `<div className="grid grid-cols-6">` defaulted to unstyled `display: block`, causing the 6 KPI cards to stack vertically one under another, header elements to collapse to the left, text to lose color contrast, and containers to shrink.
 
 ---
 
-## 3. Verification & Build Results
+## 2. Files Responsible
 
-- **Vite React Production Build**:
-  - Command: `npm run build` (`tsc -b && vite build`)
-  - Modules Transformed: 2,391 modules in 5.93s
-  - Errors: **0 errors**
-- **Pytest Backend Regression Suite**:
-  - Command: `python -m pytest`
-  - Total Tests: **120 / 120 PASSED (100% Pass Rate)**
+1. `dashboard/package.json` — Missing `@tailwindcss/vite` and `tailwindcss` devDependencies.
+2. `dashboard/vite.config.ts` — Missing `tailwindcss()` Vite plugin registration.
+3. `dashboard/src/index.css` — Contained unparsed `@tailwind` directives instead of v4 compiler import (`@import "tailwindcss";`).
+4. `dashboard/src/components/KpiCards.tsx` — Needed explicit responsive grid layout classes (`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 w-full`).
+5. `dashboard/src/components/LiveRailwayNetwork.tsx` — Needed explicit SVG viewBox aspect ratio and glassmorphic status key overlay.
+6. `dashboard/src/components/TopNav.tsx` — Needed flex header layout with dark command-center navbar aesthetics.
 
 ---
 
-## 4. Protected Backend Integrity Audit
+## 3. Restoration Applied
 
-| Subsystem | Status | Verification |
-| :--- | :--- | :--- |
-| **Random Forest Models** | UNTOUCHED | Unchanged scikit-learn regressor & classifier pipelines |
-| **ML Preprocessing** | UNTOUCHED | Unchanged feature matrix transformation & scaling |
-| **Railway Graph Topology** | UNTOUCHED | Unchanged station nodes & track resources in `railway_graph.py` |
-| **OR-Tools CP-SAT Solver** | UNTOUCHED | Unchanged constraints & objective function in `network_scheduler.py` |
-| **Canonical Benchmark** | UNTOUCHED | Unchanged `200.52 min` → `195.82 min` total delay metrics |
-| **API Endpoints & Server** | UNTOUCHED | Unchanged FastAPI REST endpoints in `api_server.py` |
+1. **Installed & Integrated Tailwind CSS v4 Compiler**:
+   - Installed `tailwindcss` and `@tailwindcss/vite` in `dashboard/package.json`.
+   - Updated `dashboard/vite.config.ts` to import `tailwindcss` from `@tailwindcss/vite` and register `plugins: [react(), tailwindcss()]`.
+   - Updated `dashboard/src/index.css` with `@import "tailwindcss";` and font imports.
+2. **Restored Full 6-Column KPI Grid (`KpiCards.tsx`)**:
+   - Spans full desktop viewport width evenly: `ACTIVE TRAINS`, `THROUGHPUT`, `AVERAGE DELAY`, `TRACK UTILIZATION`, `CONFLICTS DETECTED`, `CONFLICTS RESOLVED`.
+3. **Restored Interactive Vector Map (`LiveRailwayNetwork.tsx`)**:
+   - SVG canvas (`viewBox="0 0 1000 320"`), glassmorphic status key overlay (`Moving`, `Waiting`, `Delayed`, `Conflict/Risk`), dashed `SLOW LINE` and glowing cyan `FAST LINE` with station target rings (`CSMT`, `BY`, `DR`, `CLA`, `GC`, `TNA`), train pills (`T101`, `T104`, `T218`, `T201`), and hover drawer.
+4. **Restored Command Center Header (`TopNav.tsx`)**:
+   - Logo, title, uppercase green subtitle (`REAL-TIME SECTION THROUGHPUT OPTIMIZATION`), navigation tabs, `SIH Demo Flow` launcher, and `ONLINE` status pill.
+
+---
+
+## 4. Build & Test Verification
+
+### Frontend Build Output (`npm run build` in `dashboard/`)
+```text
+> dashboard@0.0.0 build
+> tsc -b && vite build
+
+✓ 2,391 modules transformed.
+dist/index.html                   0.45 kB │ gzip:   0.29 kB
+dist/assets/index-DWU47_dH.css   44.14 kB │ gzip:   7.56 kB
+dist/assets/index-BDlRqTQY.js   687.71 kB │ gzip: 197.76 kB
+✓ built in 9.22s
+```
+- **CSS Bundle Size**: Expanded from **0.88 kB** (uncompiled) to **44.14 kB** (fully processed Tailwind utility engine).
+- **TypeScript & Build Errors**: **0 Errors**.
+
+### Backend Test Suite (`python -m pytest`)
+- **Total Tests**: **120 / 120 PASSED (100%)**
+- **Backend Components**: 100% untouched and operational.
 
 ---
 

@@ -1,0 +1,39 @@
+{
+  "audit_name": "Nexora Data Consistency & Scientific Credibility Audit",
+  "audit_timestamp": "2026-08-23T15:02:52Z",
+  "verdicts": {
+    "data_consistency": "PASS",
+    "scientific_credibility": "PASS",
+    "dashboard_backend_consistency": "PASS"
+  },
+  "canonical_benchmark": {
+    "title": "Nexora 10-Train CSMT-Thane Central Line Benchmark",
+    "baseline_total_delay_min": 200.52,
+    "optimized_total_delay_min": 195.82,
+    "baseline_additional_hold_min": 19.55,
+    "optimized_additional_hold_min": 11.65,
+    "baseline_delay_variance_min2": 66.36,
+    "optimized_delay_variance_min2": 61.48,
+    "delay_reduction_pct": -2.34,
+    "hold_reduction_pct": -40.41,
+    "zero_hold_trains_baseline": 3,
+    "zero_hold_trains_optimized": 5,
+    "headway_violations": 0,
+    "solver_backend": "Google OR-Tools CP-SAT",
+    "solver_status": "FEASIBLE"
+  },
+  "current_replay_metrics": {
+    "active_trains": 6,
+    "throughput_trains_per_hr": 19,
+    "average_delay_min": 3.1,
+    "track_utilization_pct": 86.0,
+    "conflicts_detected": 2,
+    "conflicts_resolved": 2
+  },
+  "unsupported_claims_remaining": 0,
+  "hardcoded_critical_metrics_remaining": 0,
+  "verification": {
+    "pytest_suite": "125 / 125 PASSED (100%)",
+    "frontend_build": "PASS (0 errors, 0 warnings)"
+  }
+}
