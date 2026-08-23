@@ -1,0 +1,31 @@
+{
+  "audit_name": "Nexora Final Demo Freeze & Judge Readiness Audit",
+  "audit_timestamp": "2026-08-23T15:30:17Z",
+  "final_verdict": "READY FOR DEMO",
+  "verification": {
+    "pytest_suite": "125/125 PASSED",
+    "frontend_build": "PASS (0 errors, 0 warnings)",
+    "git_working_tree": "CLEAN",
+    "css_layout_regressions": 0,
+    "unsupported_claims_count": 0
+  },
+  "canonical_benchmark": {
+    "baseline_total_delay_min": 200.52,
+    "optimized_total_delay_min": 195.82,
+    "total_delay_improvement_pct": -2.34,
+    "baseline_additional_hold_min": 19.55,
+    "optimized_additional_hold_min": 11.65,
+    "additional_hold_improvement_pct": -40.41,
+    "maximum_delay_min": 34.32,
+    "zero_hold_trains_baseline": 3,
+    "zero_hold_trains_optimized": 5,
+    "headway_violations": 0
+  },
+  "metric_contexts": {
+    "21_trains_hr": "CURRENT REPLAY STATE",
+    "15_to_19_trains_hr": "DEMONSTRATION SCENARIO",
+    "200_52_to_195_82_min": "VALIDATED 10-TRAIN BENCHMARK",
+    "19_55_to_11_65_min": "VALIDATED 10-TRAIN BENCHMARK"
+  },
+  "judge_demo_sequence_steps": 9
+}
