@@ -1,0 +1,37 @@
+{
+  "audit_name": "Nexora Throughput Provenance Audit",
+  "audit_timestamp": "2026-08-23T15:16:49Z",
+  "metric_21_trains_hr": {
+    "value": 21,
+    "unit": "trains/hr",
+    "source_file": "src/railradar/api_server.py",
+    "source_line": 562,
+    "formula": "24 if state.scenario == 'Peak Hour' else 21",
+    "scenario_classification": "CURRENT_REPLAY",
+    "directly_produced_by_ortools": false
+  },
+  "metric_19_trains_hr": {
+    "value": 19,
+    "unit": "trains/hr",
+    "source_file": "src/railradar/api_server.py",
+    "source_line": 302,
+    "formula": "(19 - 15) / 15 * 100 = 26.67%",
+    "scenario_classification": "DEMONSTRATION_SCENARIO",
+    "part_of_canonical_10_train_benchmark": false
+  },
+  "canonical_10_train_benchmark": {
+    "baseline_total_delay_min": 200.52,
+    "optimized_total_delay_min": 195.82,
+    "baseline_hold_min": 19.55,
+    "optimized_hold_min": 11.65,
+    "corridor_makespan_min": 156.15,
+    "source_file": "data/reports/infrastructure_aware_benchmark.json"
+  },
+  "answers": {
+    "measuring_same_thing": false,
+    "is_15_to_19_canonical": false,
+    "is_21_produced_by_ortools": false,
+    "live_api_claim_without_live_call": false
+  },
+  "final_verdict": "PASS WITH CAVEATS"
+}
