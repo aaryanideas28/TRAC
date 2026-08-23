@@ -262,7 +262,7 @@ class StationTrafficOptimizer:
         A = np.array(A_rows)
         constraints = LinearConstraint(A, rhs_lb, rhs_ub)
 
-        res = milp(c=c, integrality=integrality, bounds=bounds, constraints=constraints)
+        res = milp(c=c, integrality=integrality, bounds=bounds, constraints=constraints, options={"time_limit": 1.0})
 
         if not res.success:
             logger.warning(f"MILP solver returned non-success code {res.status}: {res.message}")

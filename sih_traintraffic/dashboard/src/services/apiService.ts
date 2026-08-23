@@ -7,19 +7,27 @@ import type {
   BeforeAfterMetrics,
   Validated10TrainBenchmark,
   SimulationConfig,
+  SimulationState,
+  SystemEventLogItem,
 } from '../types/railway';
 
 const API_BASE_URL = 'http://127.0.0.1:8000/api';
 
 // Fallback Mock Dataset
 const MOCK_NODES = [
-  { station_code: 'CSMT', station_name: 'Chhatrapati Shivaji Maharaj Terminus', pos_x: 60, pos_y: 180, line_corridor: 'Central Line', is_terminal: true, is_halt: true },
-  { station_code: 'BY', station_name: 'Byculla', pos_x: 220, pos_y: 180, line_corridor: 'Central Line', is_terminal: false, is_halt: true },
-  { station_code: 'DR', station_name: 'Dadar Junction', pos_x: 400, pos_y: 180, line_corridor: 'Central Line', is_terminal: false, is_halt: true },
-  { station_code: 'CLA', station_name: 'Kurla Junction', pos_x: 580, pos_y: 180, line_corridor: 'Central Line', is_terminal: false, is_halt: true },
-  { station_code: 'GC', station_name: 'Ghatkopar', pos_x: 740, pos_y: 180, line_corridor: 'Central Line', is_terminal: false, is_halt: true },
-  { station_code: 'TNA', station_name: 'Thane', pos_x: 900, pos_y: 180, line_corridor: 'Central Line', is_terminal: true, is_halt: true },
+  { station_code: 'CSMT', station_name: 'Chhatrapati Shivaji Maharaj Terminus', pos_x: 60, pos_y: 220, line_corridor: 'Central Line', is_terminal: true, is_halt: true },
+  { station_code: 'BY', station_name: 'Byculla', pos_x: 220, pos_y: 220, line_corridor: 'Central Line', is_terminal: false, is_halt: true },
+  { station_code: 'DR', station_name: 'Dadar Junction', pos_x: 400, pos_y: 220, line_corridor: 'Central Line', is_terminal: false, is_halt: true },
+  { station_code: 'CLA', station_name: 'Kurla Junction', pos_x: 580, pos_y: 220, line_corridor: 'Central Line', is_terminal: false, is_halt: true },
+  { station_code: 'GC', station_name: 'Ghatkopar', pos_x: 740, pos_y: 220, line_corridor: 'Central Line', is_terminal: false, is_halt: true },
+  { station_code: 'TNA', station_name: 'Thane', pos_x: 900, pos_y: 220, line_corridor: 'Central Line', is_terminal: true, is_halt: true },
 ];
+
+let mockSimTime = '10:42:00';
+let mockTickCount = 120;
+let mockIsRunning = true;
+let mockSpeedMultiplier = 1;
+let mockTrackBlocked = false;
 
 let mockTrains: Train[] = [
   {
@@ -37,7 +45,7 @@ let mockTrains: Train[] = [
     expected_eta: '10:42',
     delay_min: 0.0,
     priority: 'High',
-    assigned_track: 'DOWN_FAST',
+    assigned_track: 'Track 2 (Down Fast)',
     status: 'Moving',
     progress_percent: 18,
     current_edge_id: 'CSMT_BY',
@@ -58,7 +66,7 @@ let mockTrains: Train[] = [
     expected_eta: '10:49',
     delay_min: 1.0,
     priority: 'High',
-    assigned_track: 'DOWN_FAST',
+    assigned_track: 'Track 2 (Down Fast)',
     status: 'Moving',
     progress_percent: 36,
     current_edge_id: 'BY_DR',
@@ -74,14 +82,14 @@ let mockTrains: Train[] = [
     destination_name: 'Thane',
     current_location: 'DR',
     current_location_name: 'Dadar Junction',
-    speed_kmh: 0,
+    speed_kmh: 45,
     scheduled_eta: '10:52',
     expected_eta: '10:56',
-    delay_min: 4.5,
+    delay_min: 2.5,
     priority: 'Medium',
-    assigned_track: 'DOWN_SLOW',
-    status: 'Waiting',
-    progress_percent: 50,
+    assigned_track: 'Track 1 (Down Slow)',
+    status: 'Moving',
+    progress_percent: 48,
     current_edge_id: 'DR_CLA',
     route: ['CSMT', 'BY', 'DR', 'CLA', 'GC', 'TNA'],
   },
@@ -95,14 +103,14 @@ let mockTrains: Train[] = [
     destination_name: 'Thane Freight Yard',
     current_location: 'CLA',
     current_location_name: 'Kurla Junction',
-    speed_kmh: 24,
+    speed_kmh: 28,
     scheduled_eta: '11:15',
     expected_eta: '11:28',
-    delay_min: 13.0,
+    delay_min: 8.0,
     priority: 'Low',
-    assigned_track: 'DEFAULT (Loop)',
-    status: 'Delayed',
-    progress_percent: 64,
+    assigned_track: 'Track 4 (Loop Line)',
+    status: 'Moving',
+    progress_percent: 62,
     current_edge_id: 'CLA_GC',
     route: ['CSMT', 'BY', 'DR', 'CLA', 'GC', 'TNA'],
   },
@@ -119,34 +127,13 @@ let mockTrains: Train[] = [
     speed_kmh: 62,
     scheduled_eta: '11:05',
     expected_eta: '11:07',
-    delay_min: 2.0,
+    delay_min: 1.5,
     priority: 'Medium',
-    assigned_track: 'DOWN_FAST',
+    assigned_track: 'Track 2 (Down Fast)',
     status: 'Moving',
-    progress_percent: 78,
+    progress_percent: 75,
     current_edge_id: 'GC_TNA',
     route: ['CSMT', 'BY', 'DR', 'CLA', 'GC', 'TNA'],
-  },
-  {
-    id: 'T412',
-    name: 'T412 Special Passenger',
-    type: 'Passenger',
-    origin: 'DR',
-    origin_name: 'Dadar',
-    destination: 'KJT',
-    destination_name: 'Karjat',
-    current_location: 'DR',
-    current_location_name: 'Dadar Platform 3',
-    speed_kmh: 0,
-    scheduled_eta: '11:10',
-    expected_eta: '11:14',
-    delay_min: 4.0,
-    priority: 'Medium',
-    assigned_track: 'DEFAULT (Dual)',
-    status: 'Conflict',
-    progress_percent: 50,
-    current_edge_id: 'DR_CLA',
-    route: ['DR', 'CLA', 'GC', 'TNA'],
   },
 ];
 
@@ -155,80 +142,29 @@ let mockRecommendations: AiRecommendation[] = [
     id: 'REC-01',
     affected_train_id: 'T104',
     affected_train_name: 'T104 Superfast',
-    action: 'Proceed on DOWN_FAST Resource',
+    action: 'Proceed on Down Fast Track',
     action_type: 'PROCEED',
-    assigned_track: 'DOWN_FAST',
+    assigned_track: 'Track 2 (Down Fast)',
     waiting_time_sec: 0,
     expected_delay_reduction_min: 1.2,
-    reason: 'Fast line clear. Priority dispatch avoids downstream headway congestion at Kurla Junction.',
-    confidence_score: 0.96,
-    resource_involved: 'BY__DR__DOWN_FAST',
-    trains_involved: ['T104 Superfast'],
-    conflict_predicted_min: 0,
-  },
-  {
-    id: 'REC-02',
-    affected_train_id: 'T218',
-    affected_train_name: 'T218 Local',
-    action: 'Hold T218 for 90 seconds',
-    action_type: 'HOLD',
-    assigned_track: 'DOWN_SLOW',
-    waiting_time_sec: 90,
-    expected_delay_reduction_min: 4.6,
-    reason: 'Delaying T218 prevents modeled resource/headway conflict and allows T201 to proceed.',
-    confidence_score: 0.94,
-    resource_involved: 'DR__CLA__DOWN_SLOW',
-    trains_involved: ['T218 Local', 'T412 Special'],
-    conflict_predicted_min: 3.0,
-  },
-  {
-    id: 'REC-03',
-    affected_train_id: 'T305',
-    affected_train_name: 'T305 Freight',
-    action: 'Re-allocate to Loop Resource',
-    action_type: 'TRACK_CHANGE',
-    assigned_track: 'DEFAULT (Loop Resource)',
-    waiting_time_sec: 120,
-    expected_delay_reduction_min: 8.1,
-    reason: 'Resource re-allocation: Moves lower-priority freight to loop resource, enabling T201 Fast Local to maintain line speed.',
-    confidence_score: 0.91,
-    resource_involved: 'CLA__GC__DEFAULT',
-    trains_involved: ['T305 Freight', 'T201 Fast Local'],
-    conflict_predicted_min: 2.5,
+    reason: 'Fast line clear. Priority dispatch avoids downstream headway congestion.',
+    solver_status: 'FEASIBLE',
+    ml_congestion_prob: 0.12,
   },
 ];
 
-let mockConflicts: ConflictItem[] = [
-  {
-    id: 'CONF-07',
-    trains_involved: ['T201 Fast Local', 'T305 Freight'],
-    section: 'Dadar Junction (Block 4B)',
-    predicted_in_min: 2.5,
-    severity: 'HIGH',
-    status: 'DETECTED',
-    ai_resolution: 'Hold T305 Freight on Loop Resource for 60 seconds to grant clear occupancy to T201.',
-  },
-  {
-    id: 'CONF-08',
-    trains_involved: ['T218 Local', 'T412 Special'],
-    section: 'Kurla Crossover (Signal S-12)',
-    predicted_in_min: 5.0,
-    severity: 'MEDIUM',
-    status: 'RESOLVED',
-    ai_resolution: 'Re-sequence T218 via DOWN_SLOW Resource; conflict resolved automatically.',
-  },
-];
+let mockConflicts: ConflictItem[] = [];
 
 let mockMetrics: KpiMetrics = {
-  active_trains: 6,
+  active_trains: 5,
   throughput_trains_per_hr: 19,
-  throughput_trend_pct: 21.0,
-  average_delay_min: 3.1,
-  delay_trend_pct: -62.0,
-  track_utilization_pct: 86.0,
-  utilization_trend_pct: 17.0,
-  conflicts_detected: 2,
-  conflicts_resolved: 2,
+  throughput_trend_pct: 12.0,
+  average_delay_min: 2.6,
+  delay_trend_pct: -45.0,
+  track_utilization_pct: 82,
+  utilization_trend_pct: 8.0,
+  conflicts_detected: 0,
+  conflicts_resolved: 0,
 };
 
 let mockBeforeAfter: BeforeAfterMetrics = {
@@ -241,14 +177,14 @@ let mockBeforeAfter: BeforeAfterMetrics = {
     track_utilization_unit: '%',
     waiting_time: 14.2,
     waiting_time_unit: 'min',
-    conflicts: 4,
+    conflicts: 3,
   },
   with_ai: {
     throughput: 19,
     throughput_unit: 'trains/hr',
-    average_delay: 3.1,
+    average_delay: 2.6,
     average_delay_unit: 'min',
-    track_utilization: 86,
+    track_utilization: 82,
     track_utilization_unit: '%',
     waiting_time: 4.5,
     waiting_time_unit: 'min',
@@ -256,14 +192,61 @@ let mockBeforeAfter: BeforeAfterMetrics = {
   },
   improvements: {
     throughput_increase_pct: 26.6,
-    delay_reduction_pct: 63.1,
-    utilization_increase_pct: 24.6,
+    delay_reduction_pct: 69.0,
+    utilization_increase_pct: 18.8,
     waiting_time_reduction_pct: 68.3,
     conflict_elimination_pct: 100.0,
   },
 };
 
-// Canonical Validated 10-Train Benchmark Data (From infrastructure_aware_benchmark.json)
+let mockEventLogs: SystemEventLogItem[] = [
+  {
+    id: 'EVT-0001',
+    timestamp: '10:42:00',
+    message: 'Local fallback engine active. Disconnected from backend server.',
+    category: 'SIMULATION',
+    severity: 'WARNING',
+  },
+];
+
+// Client-side fallback ticker for smooth offline simulation
+function clientFallbackTick() {
+  if (!mockIsRunning) return;
+  mockTickCount += 1;
+  const now = new Date();
+  mockSimTime = now.toLocaleTimeString('en-US', { hour12: false });
+
+  mockTrains = mockTrains.map((t) => {
+    if (t.status === 'Moving') {
+      let nextProg = t.progress_percent + 0.8 * mockSpeedMultiplier;
+      let currLoc = t.current_location;
+      let currEdge = t.current_edge_id;
+      if (nextProg >= 100) {
+        nextProg = 0;
+        const idx = t.route.indexOf(currLoc);
+        if (idx >= 0 && idx < t.route.length - 1) {
+          currLoc = t.route[idx + 1];
+          if (idx < t.route.length - 2) {
+            currEdge = `${currLoc}_${t.route[idx + 2]}`;
+          }
+        } else {
+          currLoc = 'CSMT';
+          currEdge = 'CSMT_BY';
+        }
+      }
+      return {
+        ...t,
+        progress_percent: Number(nextProg.toFixed(1)),
+        current_location: currLoc,
+        current_location_name: currLoc,
+        current_edge_id: currEdge,
+      };
+    }
+    return t;
+  });
+}
+
+// Canonical Validated 10-Train Benchmark Data
 export const VALIDATED_BENCHMARK: Validated10TrainBenchmark = {
   legacy_baseline: {
     total_completion_delay_min: 200.52,
@@ -289,6 +272,81 @@ export const VALIDATED_BENCHMARK: Validated10TrainBenchmark = {
 };
 
 export const apiService = {
+  async fetchSimulationState(): Promise<SimulationState> {
+    try {
+      const res = await fetch(`${API_BASE_URL}/simulation/state`);
+      if (res.ok) {
+        return await res.json();
+      }
+    } catch (e) {
+      // Backend offline fallback
+    }
+
+    clientFallbackTick();
+
+    return {
+      data_mode: 'LIVE SIMULATION',
+      backend_status: 'DISCONNECTED',
+      sim_time: mockSimTime,
+      tick_count: mockTickCount,
+      is_running: mockIsRunning,
+      speed_multiplier: mockSpeedMultiplier,
+      track_blocked: mockTrackBlocked,
+      blocked_section: 'BY_DR',
+      blocked_section_name: 'Dadar Junction (Fast Line)',
+      signal_failure: false,
+      trains: mockTrains,
+      metrics: mockMetrics,
+      before_after: mockBeforeAfter,
+      recommendations: mockRecommendations,
+      conflicts: mockConflicts,
+      event_logs: mockEventLogs,
+      ml_prediction: {
+        status: mockTrackBlocked ? 'PREDICTED' : 'NORMAL',
+        congestion_risk: mockTrackBlocked ? 'HIGH' : 'LOW',
+        congestion_prob: mockTrackBlocked ? 0.89 : 0.12,
+        predicted_delay_min: mockTrackBlocked ? 6.4 : 0.5,
+        affected_trains_count: mockTrackBlocked ? 3 : 0,
+        model_name: 'Random Forest Classifier (Offline Fallback)',
+      },
+      optimization_state: {
+        status: 'IDLE',
+        objective: 'Minimize delay while enforcing 120s safety headway and section availability',
+        solve_time_ms: 142.0,
+        conflicts_before: 0,
+        conflicts_after: 0,
+        last_run_timestamp: mockSimTime,
+      },
+      last_updated: mockSimTime,
+    };
+  },
+
+  async sendSimulationControl(action: string, payload?: any): Promise<SimulationState> {
+    try {
+      const res = await fetch(`${API_BASE_URL}/simulation/control`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action, ...payload }),
+      });
+      if (res.ok) {
+        return await res.json();
+      }
+    } catch (e) {
+      // Fallback
+    }
+
+    if (action === 'start') mockIsRunning = true;
+    if (action === 'pause') mockIsRunning = false;
+    if (action === 'speed') mockSpeedMultiplier = payload?.speed_multiplier || 1;
+    if (action === 'block_track') mockTrackBlocked = true;
+    if (action === 'reset') {
+      mockTrackBlocked = false;
+      mockIsRunning = true;
+    }
+
+    return this.fetchSimulationState();
+  },
+
   async fetchNetwork(): Promise<NetworkData> {
     try {
       const res = await fetch(`${API_BASE_URL}/network`);
@@ -393,15 +451,6 @@ export const apiService = {
     } catch (e) {
       // Fallback update
     }
-    if (config.scenario === 'Peak Hour') {
-      mockMetrics.active_trains = 12;
-      mockMetrics.throughput_trains_per_hr = 22;
-      mockMetrics.conflicts_detected = 5;
-    } else if (config.scenario === 'Heavy Congestion') {
-      mockMetrics.active_trains = 15;
-      mockMetrics.throughput_trains_per_hr = 14;
-      mockMetrics.conflicts_detected = 7;
-    }
     return { status: 'SUCCESS', message: `Scenario updated to ${config.scenario}` };
   },
 
@@ -414,7 +463,8 @@ export const apiService = {
     } catch (e) {
       // Fallback optimization trigger
     }
-    // Update local state for offline mock demo
+    
+    mockTrackBlocked = false;
     mockTrains = mockTrains.map((t) => ({
       ...t,
       status: 'Moving',
@@ -430,7 +480,7 @@ export const apiService = {
       delay_trend_pct: -81.0,
       track_utilization_pct: 92.0,
       utilization_trend_pct: 25.0,
-      conflicts_detected: 2,
+      conflicts_detected: 0,
       conflicts_resolved: 2,
     };
 
@@ -446,66 +496,12 @@ export const apiService = {
       conflicts: 0,
     };
 
-    mockConflicts = mockConflicts.map((c) => ({
-      ...c,
-      status: 'RESOLVED',
-      ai_resolution: 'Google OR-Tools CP-SAT Solver Status: OPTIMAL. Modeled resource conflict resolved with zero safety buffer violation.',
-    }));
-
-    mockRecommendations = [
-      {
-        id: 'REC-OPT-01',
-        affected_train_id: 'T101',
-        affected_train_name: 'T101 Express',
-        action: 'Proceed on DOWN_FAST Resource - Clear Corridor',
-        action_type: 'PROCEED',
-        assigned_track: 'DOWN_FAST',
-        waiting_time_sec: 0,
-        expected_delay_reduction_min: 3.8,
-        reason: 'Google OR-Tools CP-SAT solver assigned uninterrupted occupancy corridor across all 5 block segments.',
-        confidence_score: 0.99,
-        resource_involved: 'CSMT__BY__DOWN_FAST',
-        trains_involved: ['T101 Express'],
-        conflict_predicted_min: 0,
-      },
-      {
-        id: 'REC-OPT-02',
-        affected_train_id: 'T218',
-        affected_train_name: 'T218 Local',
-        action: 'Synchronized Headway Release on DOWN_SLOW',
-        action_type: 'PROCEED',
-        assigned_track: 'DOWN_SLOW',
-        waiting_time_sec: 0,
-        expected_delay_reduction_min: 4.6,
-        reason: 'Hold constraint satisfied. T218 released with optimal 120s safety headway behind Express service.',
-        confidence_score: 0.97,
-        resource_involved: 'DR__CLA__DOWN_SLOW',
-        trains_involved: ['T218 Local'],
-        conflict_predicted_min: 0,
-      },
-      {
-        id: 'REC-OPT-03',
-        affected_train_id: 'T305',
-        affected_train_name: 'T305 Freight',
-        action: 'Re-enter Main Line from Loop Resource',
-        action_type: 'TRACK_CHANGE',
-        assigned_track: 'DOWN_SLOW',
-        waiting_time_sec: 0,
-        expected_delay_reduction_min: 6.2,
-        reason: 'Resource re-allocation complete. Freight service safely re-inserted into main traffic stream without bottleneck.',
-        confidence_score: 0.95,
-        resource_involved: 'CLA__GC__DOWN_SLOW',
-        trains_involved: ['T305 Freight'],
-        conflict_predicted_min: 0,
-      },
-    ];
-
     return {
       status: 'OPTIMAL',
-      solver_backend: 'Google OR-Tools CP-SAT',
-      total_delay_penalty: 12.4,
-      total_hold_delay_minutes: 1.5,
-      message: 'Google OR-Tools CP-SAT optimization executed successfully!',
+      solver_backend: 'OR-Tools CP-SAT (Local Fallback)',
+      solve_time_ms: 142.5,
+      message: 'OR-Tools CP-SAT optimization executed successfully!',
+      simulation_state: await this.fetchSimulationState(),
     };
   },
 };

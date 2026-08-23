@@ -1,10 +1,12 @@
 import React from 'react';
-import { RefreshCw, Play, Zap } from 'lucide-react';
+import { RefreshCw, Play, Zap, Activity } from 'lucide-react';
 
 interface TopNavProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
   systemStatus: string;
+  simTime: string;
+  tickCount: number;
   lastUpdated: string;
   onRefresh: () => void;
   onStartDemo: () => void;
@@ -14,6 +16,8 @@ export const TopNav: React.FC<TopNavProps> = ({
   activeTab,
   setActiveTab,
   systemStatus,
+  simTime,
+  tickCount,
   lastUpdated,
   onRefresh,
   onStartDemo,
@@ -24,11 +28,13 @@ export const TopNav: React.FC<TopNavProps> = ({
     { id: 'schedule', label: 'Train Schedule' },
     { id: 'recommendations', label: 'AI Recommendations' },
     { id: 'analytics', label: 'Analytics' },
-    { id: 'simulation', label: 'Simulation' },
+    { id: 'simulation', label: 'Incident Simulator' },
   ];
 
+  const isConnected = systemStatus === 'CONNECTED' || systemStatus === 'ONLINE';
+
   return (
-    <header className="top-nav-bar flex items-center justify-between px-6 py-3 bg-slate-950/95 border-b border-slate-800 shadow-md">
+    <header className="top-nav-bar flex flex-wrap items-center justify-between px-6 py-3 bg-slate-950/95 border-b border-slate-800 shadow-xl gap-4">
       <div className="flex items-center gap-6">
         <div className="flex items-center gap-3">
           <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-inner">
@@ -39,7 +45,7 @@ export const TopNav: React.FC<TopNavProps> = ({
               AI Railway Traffic Control
             </h1>
             <p className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider mt-1">
-              OFFLINE RAILRADAR REPLAY & CP-SAT OPTIMIZATION
+              LIVE SIMULATION • ML + CP-SAT OPTIMIZATION
             </p>
           </div>
         </div>
@@ -61,7 +67,24 @@ export const TopNav: React.FC<TopNavProps> = ({
         </nav>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 flex-wrap">
+        {/* Data Mode Indicator Pill */}
+        <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 border border-slate-700/80 text-[11px] font-mono text-cyan-400">
+          <Activity className="w-3.5 h-3.5" />
+          <span className="text-slate-400">DATA MODE:</span>
+          <span className="font-bold text-slate-100">LIVE SIMULATION</span>
+        </div>
+
+        {/* Sim Clock & Tick */}
+        <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-[11px] font-mono text-slate-300">
+          <span className="text-slate-400">Sim Clock:</span>
+          <span className="font-bold text-emerald-400">{simTime || '10:42:00'}</span>
+          <span className="text-slate-600">|</span>
+          <span className="text-slate-400">Tick:</span>
+          <span className="font-bold text-slate-200">#{tickCount || 120}</span>
+        </div>
+
+        {/* SIH Demo Flow Walkthrough Button */}
         <button
           className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 hover:bg-amber-500/20 text-xs font-bold transition shadow-sm"
           onClick={onStartDemo}
@@ -71,14 +94,21 @@ export const TopNav: React.FC<TopNavProps> = ({
           <span>SIH Demo Flow</span>
         </button>
 
-        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span>{systemStatus}</span>
+        {/* Backend Status Indicator */}
+        <div
+          className={`flex items-center gap-1.5 px-3 py-1 rounded-full border text-xs font-bold ${
+            isConnected
+              ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400'
+              : 'bg-rose-500/10 border-rose-500/30 text-rose-400'
+          }`}
+        >
+          <span className={`w-2 h-2 rounded-full ${isConnected ? 'bg-emerald-400 animate-pulse' : 'bg-rose-500'}`}></span>
+          <span>{isConnected ? '🟢 BACKEND CONNECTED' : '🔴 BACKEND DISCONNECTED'}</span>
         </div>
 
-        <div className="text-xs text-slate-300 font-mono flex items-center gap-1">
+        <div className="hidden xl:flex text-xs text-slate-300 font-mono items-center gap-1">
           <span className="text-slate-400">Updated:</span>
-          <span className="font-bold text-slate-100">{lastUpdated}</span>
+          <span className="font-bold text-slate-100">{lastUpdated || simTime}</span>
         </div>
 
         <button

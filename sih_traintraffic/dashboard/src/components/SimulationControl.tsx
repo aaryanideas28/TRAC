@@ -1,193 +1,196 @@
 import React, { useState } from 'react';
-import type { SimulationConfig } from '../types/railway';
-import { Cpu, ShieldCheck, RefreshCw, Sparkles, Flame } from 'lucide-react';
+import type { SimulationState } from '../types/railway';
+import { apiService } from '../services/apiService';
+import { Play, Pause, AlertTriangle, Zap, Train, Clock, RefreshCw, Cpu, FastForward } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface SimulationControlProps {
-  onRunOptimization: (config: SimulationConfig) => Promise<void>;
+  simState?: SimulationState | null;
+  onStateUpdate?: (newState: SimulationState) => void;
+  onRunOptimization?: () => Promise<void>;
 }
 
-export const SimulationControl: React.FC<SimulationControlProps> = ({ onRunOptimization }) => {
-  const [scenario, setScenario] = useState('Peak Hour');
-  const [density, setDensity] = useState('High');
-  const [trackStatus, setTrackStatus] = useState('Available');
-  const [blockedSection] = useState('Dadar Junction');
-  const [priorityTrain, setPriorityTrain] = useState('T101');
-  const [isCalculating, setIsCalculating] = useState(false);
-  const [isCompleted, setIsCompleted] = useState(false);
+export const SimulationControl: React.FC<SimulationControlProps> = ({
+  simState,
+  onStateUpdate,
+  onRunOptimization,
+}) => {
+  const [isSolving, setIsSolving] = useState(false);
+  const [speed, setSpeed] = useState(simState?.speed_multiplier || 1);
+  const isRunning = simState?.is_running ?? true;
 
-  const scenariosList = [
-    { id: 'Normal', title: 'Normal Operational Flow', desc: 'Standard timetabled traffic sequence across all tracks.' },
-    { id: 'Peak Hour', title: 'Peak Hour Rush', desc: 'High-density suburban service frequency with 120s headways.' },
-    { id: 'Heavy Congestion', title: 'Heavy Congestion Spike', desc: 'Downstream bottleneck with multiple delayed freight & local trains.' },
-    { id: 'Train Delay', title: 'Primary Train Delay Cascade', desc: 'Express service delayed by 15 mins causing cascading conflicts.' },
-    { id: 'Track Blockage', title: 'Track Blockage / Maintenance', desc: 'One main line blocked; traffic rerouted via dual/loop tracks.' },
-    { id: 'Priority Train', title: 'VIP Express Priority Clearance', desc: 'Emergency priority corridor override for Superfast train.' },
-  ];
-
-  const handleRun = async () => {
-    setIsCalculating(true);
-    setIsCompleted(false);
-
+  const handleAction = async (action: string, payload?: any) => {
     try {
-      await onRunOptimization({
-        scenario,
-        density,
-        track_status: trackStatus,
-        blocked_section: blockedSection,
-        priority_train_id: priorityTrain,
-      });
+      const updated = await apiService.sendSimulationControl(action, payload);
+      if (onStateUpdate) onStateUpdate(updated);
+    } catch (e) {
+      console.error('Error executing control action:', e);
+    }
+  };
 
-      // Celebration Confetti
+  const handleOptimize = async () => {
+    setIsSolving(true);
+    try {
+      if (onRunOptimization) {
+        await onRunOptimization();
+      } else {
+        await apiService.runOptimization();
+        const updated = await apiService.fetchSimulationState();
+        if (onStateUpdate) onStateUpdate(updated);
+      }
+
       confetti({
-        particleCount: 80,
-        spread: 70,
+        particleCount: 90,
+        spread: 80,
         origin: { y: 0.6 },
       });
-
-      setIsCompleted(true);
     } catch (e) {
       console.error(e);
     } finally {
-      setIsCalculating(false);
+      setIsSolving(false);
     }
   };
 
   return (
-    <div className="card-container space-y-6">
+    <div className="w-full p-5 rounded-2xl bg-slate-900/95 border border-slate-800 shadow-2xl space-y-4">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-slate-800 pb-4">
-        <div className="flex items-center gap-2.5">
-          <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-            <Cpu className="w-5 h-5" />
+      <div className="flex flex-wrap items-center justify-between border-b border-slate-800 pb-3 gap-3">
+        <div className="flex items-center gap-3">
+          <div className="p-2 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
+            <Zap className="w-5 h-5 fill-current" />
           </div>
           <div>
-            <h2 className="text-lg font-bold text-slate-100">Traffic Simulation & Scenario Control</h2>
-            <p className="text-xs text-slate-400">Configure Railway Traffic Conditions & Trigger OR-Tools CP-SAT Solver</p>
+            <h2 className="text-base sm:text-lg font-extrabold text-slate-100 tracking-tight">
+              LIVE INCIDENT SIMULATOR (SIH JUDGE DEMO CONTROLS)
+            </h2>
+            <p className="text-xs text-slate-400">
+              Inject real-time track disruptions, signal failures, or train delays and trigger OR-Tools CP-SAT re-optimization
+            </p>
           </div>
         </div>
 
-        <span className="text-xs px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-slate-300 font-mono">
-          Engine: Google OR-Tools CP-SAT
-        </span>
-      </div>
-
-      {/* Scenario Grid Selectors */}
-      <div>
-        <label className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-3">
-          1. Select Traffic Scenario
-        </label>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-          {scenariosList.map((s) => (
-            <button
-              key={s.id}
-              onClick={() => setScenario(s.id)}
-              className={`p-3.5 rounded-xl border text-left transition-all ${
-                scenario === s.id
-                  ? 'bg-emerald-500/10 border-emerald-500/60 text-slate-100 ring-1 ring-emerald-500/30'
-                  : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-200'
-              }`}
-            >
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-sm font-bold">{s.title}</span>
-                {scenario === s.id && <Sparkles className="w-4 h-4 text-emerald-400" />}
-              </div>
-              <p className="text-xs text-slate-400 leading-relaxed">{s.desc}</p>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Parameter Fine-Tuning Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 rounded-xl bg-slate-950/80 border border-slate-800 text-xs">
-        {/* Density Selector */}
-        <div>
-          <label className="text-slate-400 font-bold block mb-1.5">Traffic Density</label>
-
-          <div className="flex rounded-lg bg-slate-900 p-1 border border-slate-800">
-            {['Low', 'Medium', 'High'].map((d) => (
+        <div className="flex items-center gap-2">
+          {/* Speed Selector */}
+          <div className="flex items-center gap-1 bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs font-mono">
+            <FastForward className="w-3.5 h-3.5 text-slate-400 ml-1" />
+            {[1, 2, 5, 10].map((s) => (
               <button
-                key={d}
-                onClick={() => setDensity(d)}
-                className={`flex-1 py-1.5 rounded-md font-semibold text-center transition ${
-                  density === d ? 'bg-emerald-500 text-slate-950 shadow' : 'text-slate-400 hover:text-slate-200'
+                key={s}
+                onClick={() => {
+                  setSpeed(s);
+                  handleAction('speed', { speed_multiplier: s });
+                }}
+                className={`px-2 py-0.5 rounded font-bold transition ${
+                  speed === s ? 'bg-cyan-500 text-slate-950 shadow' : 'text-slate-400 hover:text-slate-200'
                 }`}
               >
-                {d}
+                {s}x
               </button>
             ))}
           </div>
-        </div>
 
-        {/* Track Status */}
-        <div>
-          <label className="text-slate-400 font-bold block mb-1.5">Track Infrastructure Status</label>
-          <div className="flex rounded-lg bg-slate-900 p-1 border border-slate-800">
-            {['Available', 'Blocked'].map((st) => (
-              <button
-                key={st}
-                onClick={() => setTrackStatus(st)}
-                className={`flex-1 py-1.5 rounded-md font-semibold text-center transition ${
-                  trackStatus === st
-                    ? st === 'Blocked'
-                      ? 'bg-rose-500 text-white'
-                      : 'bg-emerald-500 text-slate-950'
-                    : 'text-slate-400 hover:text-slate-200'
-                }`}
-              >
-                {st}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Priority Train */}
-        <div>
-          <label className="text-slate-400 font-bold block mb-1.5">Select Priority Train</label>
-          <select
-            value={priorityTrain}
-            onChange={(e) => setPriorityTrain(e.target.value)}
-            className="w-full py-2 px-3 rounded-lg bg-slate-900 border border-slate-800 text-slate-200 font-medium focus:outline-none"
+          {/* Start / Pause Button */}
+          <button
+            onClick={() => handleAction(isRunning ? 'pause' : 'start')}
+            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold transition shadow ${
+              isRunning
+                ? 'bg-amber-500/20 border border-amber-500/40 text-amber-400 hover:bg-amber-500/30'
+                : 'bg-emerald-500 border border-emerald-400 text-slate-950 hover:bg-emerald-400'
+            }`}
           >
-            <option value="T101">T101 Express (CSMT - Thane)</option>
-            <option value="T104">T104 Superfast (CSMT - Kalyan)</option>
-            <option value="T201">T201 Fast Local (CSMT - Kasara)</option>
-            <option value="T218">T218 Local (CSMT - Thane)</option>
-          </select>
+            {isRunning ? <Pause className="w-3.5 h-3.5 fill-current" /> : <Play className="w-3.5 h-3.5 fill-current" />}
+            <span>{isRunning ? 'PAUSE SIM' : 'START SIM'}</span>
+          </button>
         </div>
       </div>
 
-      {/* Prominent Action Button */}
-      <div className="pt-2">
+      {/* Interactive Action Buttons */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+        {/* 1. BLOCK TRACK */}
         <button
-          onClick={handleRun}
-          disabled={isCalculating}
-          className={`w-full py-4 rounded-xl font-extrabold text-base tracking-wide flex items-center justify-center gap-3 transition shadow-xl ${
-            isCalculating
-              ? 'bg-slate-800 text-slate-400 cursor-not-allowed border border-slate-700'
-              : 'bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 hover:scale-[1.01] active:scale-[0.99]'
+          onClick={() => handleAction('block_track', { blocked_section: 'BY_DR' })}
+          className={`flex flex-col items-center justify-center p-3.5 rounded-xl border text-center transition-all ${
+            simState?.track_blocked
+              ? 'bg-rose-500/20 border-rose-500 text-rose-300 ring-2 ring-rose-500/40 animate-pulse'
+              : 'bg-slate-950/80 border-slate-800 text-slate-300 hover:border-rose-500/50 hover:bg-rose-500/10'
           }`}
         >
-          {isCalculating ? (
-            <>
-              <RefreshCw className="w-5 h-5 animate-spin text-emerald-400" />
-              <span>AI is calculating optimal traffic sequence...</span>
-            </>
-          ) : (
-            <>
-              <Flame className="w-5 h-5 fill-current text-slate-950" />
-              <span>RUN AI OPTIMIZATION</span>
-            </>
-          )}
+          <AlertTriangle className="w-5 h-5 text-rose-400 mb-1.5" />
+          <span className="text-xs font-bold">⚡ BLOCK TRACK</span>
+          <span className="text-[10px] text-slate-400 mt-0.5">Dadar Fast Line</span>
         </button>
 
-        {isCompleted && (
-          <div className="mt-3 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold text-center flex items-center justify-center gap-2">
-            <ShieldCheck className="w-4 h-4" />
-            <span>Optimization Complete! Railway graph, timetable, and recommendations updated with OR-Tools solution.</span>
-          </div>
-        )}
+        {/* 2. SIGNAL FAILURE */}
+        <button
+          onClick={() => handleAction('signal_failure')}
+          className="flex flex-col items-center justify-center p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 text-slate-300 hover:border-amber-500/50 hover:bg-amber-500/10 transition-all"
+        >
+          <Zap className="w-5 h-5 text-amber-400 mb-1.5" />
+          <span className="text-xs font-bold">⚠️ SIGNAL FAILURE</span>
+          <span className="text-[10px] text-slate-400 mt-0.5">Kurla Crossover</span>
+        </button>
+
+        {/* 3. ADD PRIORITY TRAIN */}
+        <button
+          onClick={() => handleAction('add_train')}
+          className="flex flex-col items-center justify-center p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 text-slate-300 hover:border-cyan-500/50 hover:bg-cyan-500/10 transition-all"
+        >
+          <Train className="w-5 h-5 text-cyan-400 mb-1.5" />
+          <span className="text-xs font-bold">🚆 ADD PRIORITY TRAIN</span>
+          <span className="text-[10px] text-slate-400 mt-0.5">Vande Bharat Exp</span>
+        </button>
+
+        {/* 4. INDUCE DELAY */}
+        <button
+          onClick={() => handleAction('induce_delay', { train_id: 'T104', delay_minutes: 10.0 })}
+          className="flex flex-col items-center justify-center p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 text-slate-300 hover:border-indigo-500/50 hover:bg-indigo-500/10 transition-all"
+        >
+          <Clock className="w-5 h-5 text-indigo-400 mb-1.5" />
+          <span className="text-xs font-bold">⏱ INDUCE DELAY</span>
+          <span className="text-[10px] text-slate-400 mt-0.5">+10 Min on T104</span>
+        </button>
+
+        {/* 5. RUN CP-SAT OPTIMIZATION */}
+        <button
+          onClick={handleOptimize}
+          disabled={isSolving}
+          className="flex flex-col items-center justify-center p-3.5 rounded-xl bg-gradient-to-br from-emerald-600 to-teal-700 text-slate-950 border border-emerald-400 shadow-lg hover:brightness-110 transition-all disabled:opacity-50"
+        >
+          <Cpu className={`w-5 h-5 text-slate-950 mb-1.5 ${isSolving ? 'animate-spin' : ''}`} />
+          <span className="text-xs font-extrabold tracking-tight">
+            {isSolving ? 'SOLVING CP-SAT...' : '⚡ RUN CP-SAT OPTIMIZE'}
+          </span>
+          <span className="text-[10px] text-slate-900 font-semibold mt-0.5">OR-Tools Solver</span>
+        </button>
+
+        {/* 6. RESET SIMULATION */}
+        <button
+          onClick={() => handleAction('reset')}
+          className="flex flex-col items-center justify-center p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 text-slate-300 hover:border-slate-600 hover:bg-slate-800/50 transition-all"
+        >
+          <RefreshCw className="w-5 h-5 text-slate-400 mb-1.5" />
+          <span className="text-xs font-bold">↻ RESET SIM</span>
+          <span className="text-[10px] text-slate-400 mt-0.5">Clean Baseline</span>
+        </button>
       </div>
+
+      {/* Disruption Alert Notice when Track Blocked */}
+      {simState?.track_blocked && (
+        <div className="flex items-center justify-between p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/40 text-xs text-rose-300">
+          <div className="flex items-center gap-2">
+            <AlertTriangle className="w-4 h-4 text-rose-400 animate-bounce" />
+            <span>
+              <strong>ACTIVE TRACK BLOCKAGE:</strong> Dadar Junction Fast Line (BY_DR). Trains T104 & T201 halted!
+            </span>
+          </div>
+          <button
+            onClick={handleOptimize}
+            className="px-3 py-1 rounded-lg bg-rose-500 text-slate-950 font-bold hover:bg-rose-400 transition"
+          >
+            Trigger CP-SAT Solver Now ➔
+          </button>
+        </div>
+      )}
     </div>
   );
 };

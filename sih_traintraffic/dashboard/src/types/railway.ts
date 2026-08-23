@@ -48,7 +48,8 @@ export interface AiRecommendation {
   waiting_time_sec: number;
   expected_delay_reduction_min: number;
   reason: string;
-  confidence_score: number;
+  solver_status?: string;
+  ml_congestion_prob?: number;
   resource_involved?: string;
   trains_involved?: string[];
   conflict_predicted_min?: number;
@@ -141,4 +142,52 @@ export interface SimulationConfig {
   track_status: string;
   blocked_section?: string;
   priority_train_id?: string;
+}
+
+export interface SystemEventLogItem {
+  id: string;
+  timestamp: string;
+  message: string;
+  category: 'SIMULATION' | 'INCIDENT' | 'ML' | 'OPTIMIZATION';
+  severity: 'INFO' | 'WARNING' | 'ERROR' | 'SUCCESS';
+}
+
+export interface MlPredictionState {
+  status: string;
+  congestion_risk: 'LOW' | 'MEDIUM' | 'HIGH';
+  congestion_prob: number;
+  predicted_delay_min: number;
+  affected_trains_count: number;
+  model_name: string;
+}
+
+export interface OrToolsOptimizationState {
+  status: 'IDLE' | 'SOLVING' | 'OPTIMAL' | 'FEASIBLE';
+  objective: string;
+  solve_time_ms: number;
+  conflicts_before: number;
+  conflicts_after: number;
+  last_run_timestamp: string;
+}
+
+export interface SimulationState {
+  data_mode: string;
+  backend_status: 'CONNECTED' | 'DISCONNECTED';
+  sim_time: string;
+  tick_count: number;
+  is_running: boolean;
+  speed_multiplier: number;
+  track_blocked: boolean;
+  blocked_section: string;
+  blocked_section_name: string;
+  signal_failure: boolean;
+  trains: Train[];
+  metrics: KpiMetrics;
+  before_after: BeforeAfterMetrics;
+  recommendations: AiRecommendation[];
+  conflicts: ConflictItem[];
+  event_logs: SystemEventLogItem[];
+  ml_prediction: MlPredictionState;
+  optimization_state: OrToolsOptimizationState;
+  last_updated: string;
 }
