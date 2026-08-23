@@ -318,7 +318,10 @@ def test_18_optimization_preparation_pipeline():
     assert (opt_df["risk_score"] <= 1.0).all()
 
 
-# 19. Hard safety check: OR-Tools must NOT be installed or imported
+# 19. Hard safety check: ML Random Forest must NOT import OR-Tools (strict architectural decoupling)
 def test_19_hard_safety_check_no_ortools():
-    import sys
-    assert "ortools" not in sys.modules
+    import inspect
+    import railradar.ml_random_forest as rf_mod
+    src = inspect.getsource(rf_mod)
+    assert "ortools" not in src
+    assert "cp_model" not in src

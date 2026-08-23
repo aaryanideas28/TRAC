@@ -1,0 +1,69 @@
+{
+  "report_name": "Nexora Infrastructure Data Audit & Benchmark Reconciliation Report",
+  "generated_at": "2026-08-23T01:05:00Z",
+  "csv_audit": {
+    "file_name": "csmt_thane_railway_infrastructure.csv",
+    "rows_count": 19,
+    "columns_count": 5,
+    "columns": [
+      {
+        "name": "Station",
+        "type": "string",
+        "missing_count": 0,
+        "unique_count": 19,
+        "classification": "REAL DATA",
+        "meaning": "Station name along CSMT-Thane corridor"
+      },
+      {
+        "name": "Distance_km",
+        "type": "float",
+        "missing_count": 0,
+        "unique_count": 19,
+        "classification": "REAL DATA",
+        "meaning": "Cumulative distance in km from Mumbai CSMT (0.0 to 32.7 km)"
+      },
+      {
+        "name": "Tracks",
+        "type": "integer",
+        "missing_count": 0,
+        "unique_count": 2,
+        "classification": "REAL DATA",
+        "meaning": "Total parallel track count (4 tracks CSMT-Sion, 6 tracks Kurla-Thane)"
+      },
+      {
+        "name": "Infrastructure_Type",
+        "type": "string",
+        "missing_count": 0,
+        "unique_count": 8,
+        "classification": "REAL DATA / CATEGORICAL",
+        "meaning": "Civil/structural station classification (Terminus, Junction, At-Grade, Elevated)"
+      },
+      {
+        "name": "Geographic_Feature",
+        "type": "string",
+        "missing_count": 0,
+        "unique_count": 19,
+        "classification": "REAL DATA / DESCRIPTIVE",
+        "meaning": "Geographical and civil engineering constraints (bridges, ROBs, floodplain)"
+      }
+    ]
+  },
+  "infrastructure_classification": {
+    "stations": "AVAILABLE (19 stations)",
+    "tracks": "PARTIALLY AVAILABLE (total corridor track count 4/6 without directional or line designation)",
+    "track_sections": "PARTIALLY AVAILABLE (inter-station distances derived from cumulative distance)",
+    "platforms": "NOT AVAILABLE",
+    "signals_and_interlocking": "NOT AVAILABLE",
+    "crossovers_and_turnouts": "NOT AVAILABLE",
+    "routing_alternatives": "NOT AVAILABLE",
+    "fast_slow_designations": "NOT EXPLICIT (can be inferred from Mumbai Railway operational norms)"
+  },
+  "benchmark_reconciliation": {
+    "earlier_benchmark_delay_minutes": 273.78,
+    "current_benchmark_delay_minutes": 200.52,
+    "root_cause": "Earlier benchmark in diagnostic_experiments.py used simplified non-calibrated distance travel-times without empirical observation medians, advancing ideal completion by 73.26 min. The current 200.52 min is the canonical, verified metric based on real historical observation medians in src/railradar/network_scheduler.py.",
+    "recommended_canonical_benchmark": "200.52 min total completion delay, 34.32 min max delay, 19.55 min total hold (Status: OPTIMAL by horizon)"
+  },
+  "verdict": "PARTIAL VALUE — useful but insufficient for major expansion",
+  "recommended_next_step": "Expand Railway Network Graph to model Dual-Track Directional Edges (Down Slow + Down Fast) over the CSMT-Thane corridor."
+}

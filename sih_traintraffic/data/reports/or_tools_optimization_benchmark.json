@@ -1,0 +1,118 @@
+{
+  "benchmark_name": "Nexora OR-Tools CP-SAT Network Scheduling Benchmark",
+  "generated_at": "2026-08-23T00:25:00Z",
+  "model_scope": {
+    "network_stations": 61,
+    "network_edges": 62,
+    "trains_scheduled": 10,
+    "total_segments_scheduled": 328,
+    "shared_edges": 42,
+    "prototype_assumptions": [
+      "Track block capacity = 1 (single-block section per consecutive station pair)",
+      "Safety headway = 60 seconds buffer between consecutive block occupancies",
+      "Travel times use historical observation medians where available; fallback to 45 km/h + 20s station dwell",
+      "Latest Random Forest prediction row per train selected deterministically from rf_optimization_inputs.csv",
+      "Model operates on logical edge occupancies and does NOT simulate physical signals, interlocking, or platforms"
+    ]
+  },
+  "comparative_benchmarks": {
+    "proof_cases": {
+      "case_a_no_conflict": {
+        "description": "Two trains with disjoint temporal windows on same track",
+        "unconstrained_total_delay_min": 0.0,
+        "fifo_total_delay_min": 0.0,
+        "nexora_total_delay_min": 0.0,
+        "nexora_additional_hold_min": 0.0,
+        "modeled_headway_violations": 0,
+        "conclusion": "Zero unnecessary hold applied when track ahead is clear"
+      },
+      "case_b_priority_ordering": {
+        "description": "Fast Express (Priority 2.0) and Slow Local (Priority 1.0) ready simultaneously",
+        "unconstrained_total_delay_min": 0.0,
+        "fifo_total_delay_min": 3.12,
+        "nexora_total_delay_min": 3.12,
+        "nexora_additional_hold_min": 3.12,
+        "modeled_headway_violations_unconstrained": 10,
+        "modeled_headway_violations_nexora": 0,
+        "conclusion": "Fast Express dispatched first with 0s hold; Slow Local held by necessary headway buffer"
+      },
+      "case_c_delayed_train_clear_track": {
+        "description": "Delayed train (+25m) with clear track ahead",
+        "unconstrained_total_delay_min": 25.0,
+        "fifo_total_delay_min": 25.0,
+        "nexora_total_delay_min": 25.0,
+        "nexora_additional_hold_min": 0.0,
+        "modeled_headway_violations": 0,
+        "conclusion": "Delayed train dispatched immediately at earliest feasible time with 0s additional hold"
+      },
+      "case_d_cascading_delay_suppression": {
+        "description": "Primary delay disruption with trailing follower trains",
+        "unconstrained_total_delay_min": 15.0,
+        "fifo_total_delay_min": 15.3,
+        "nexora_total_delay_min": 15.3,
+        "nexora_additional_hold_min": 0.3,
+        "modeled_headway_violations_unconstrained": 6,
+        "modeled_headway_violations_nexora": 0,
+        "conclusion": "Hold applied only to minimum extent necessary to prevent cascading headway violations"
+      }
+    },
+    "full_central_line_fleet_10_trains": {
+      "unconstrained_baseline": {
+        "total_completion_delay_min": 166.9,
+        "mean_delay_min": 16.69,
+        "median_delay_min": 17.6,
+        "p90_delay_min": 28.6,
+        "max_delay_min": 31.1,
+        "delay_variance_min2": 72.4,
+        "total_additional_hold_min": 0.0,
+        "corridor_makespan_min": 168.9,
+        "modeled_headway_violations": 1172,
+        "trains_with_additional_hold": 0,
+        "status": "INFEASIBLE_IN_PRACTICE (Contains 1,172 Headway Collisions)"
+      },
+      "greedy_fifo_heuristic": {
+        "total_completion_delay_min": 273.78,
+        "mean_delay_min": 27.38,
+        "median_delay_min": 26.3,
+        "p90_delay_min": 41.5,
+        "max_delay_min": 46.5,
+        "delay_variance_min2": 138.2,
+        "total_additional_hold_min": 19.55,
+        "corridor_makespan_min": 179.8,
+        "modeled_headway_violations": 0,
+        "trains_with_additional_hold": 7,
+        "status": "FEASIBLE"
+      },
+      "nexora_cp_sat_optimized": {
+        "total_completion_delay_min": 273.78,
+        "mean_delay_min": 27.38,
+        "median_delay_min": 28.33,
+        "p90_delay_min": 40.45,
+        "max_delay_min": 40.58,
+        "delay_variance_min2": 115.4,
+        "total_additional_hold_min": 19.55,
+        "corridor_makespan_min": 179.8,
+        "modeled_headway_violations": 0,
+        "trains_with_additional_hold": 7,
+        "trains_with_zero_hold": 3,
+        "solver_status": "FEASIBLE",
+        "wall_time_seconds": 5.0331
+      }
+    }
+  },
+  "mathematical_optimality_analysis": {
+    "minimum_achievable_total_hold_min": 19.55,
+    "minimum_achievable_total_hold_solver_status": "OPTIMAL",
+    "minimum_achievable_max_delay_min": 40.58,
+    "minimum_achievable_max_delay_solver_status": "OPTIMAL",
+    "minimum_achievable_total_delay_min": 272.68,
+    "minimum_achievable_total_delay_solver_status": "FEASIBLE",
+    "findings": [
+      "19.55 minutes is proven to be the mathematical minimum feasible total optimizer hold under the current prototype assumptions.",
+      "Nexora reduces maximum individual train delay from 46.5 min down to 40.58 min (a 12.7% reduction in worst-case delay).",
+      "Nexora reduces delay variance from 138.2 min^2 down to 115.4 min^2 (a 16.5% improvement in schedule fairness/predictability).",
+      "Total completion delay is identical between FIFO and Nexora (273.78 min) because all 10 trains share a single bottleneck trunk track in the same direction."
+    ]
+  },
+  "final_verdict": "NEXORA OBJECTIVE VERIFIED — IMPROVES DELAY DISTRIBUTION BUT NOT TOTAL DELAY"
+}

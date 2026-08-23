@@ -1,0 +1,20 @@
+Station,Distance_km,Tracks,Infrastructure_Type,Geographic_Feature
+CSMT,0.0,4,Terminus,Sea level terminus / Historic architecture constraints
+Masjid,1.4,4,At-Grade,High-density urban sprawl / Low vertical clearance ROBs
+Sandhurst Road,2.7,4,Double-Decker Elevated Intersect,Harbour line crosses overhead on steel girders
+Byculla,4.0,4,At-Grade,Urban bottleneck / British-era structural stone walls
+Chinchpokli,5.2,4,At-Grade,Arthur Road ROB constriction
+Currey Road,6.3,4,At-Grade,Dense commercial structural limits
+Parel,7.7,4,At-Grade,Elphinstone-Parel ROB bridge constraints
+Dadar,8.8,4,Major Interchang Station,Western Line intersection / Tilak Bridge constraint
+Matunga,10.2,4,At-Grade,Close proximity to Central Railway Workshop
+Sion,11.9,4,At-Grade / Cutting,Approaching low-lying Mithi River floodplain
+Kurla,14.7,6,Junction Station,Mithi River Bridge / Major natural seasonal depression
+Vidyavihar,16.4,6,At-Grade,Transition zone to Suburbs
+Ghatkopar,18.2,6,Metro Interchange,High utility crossover bridge integration
+Vikhroli,21.1,6,At-Grade,Industrial land borders / Foothill drainage runoffs
+Kanjurmarg,22.8,6,At-Grade,Suburban expansion zone
+Bhandup,24.5,6,At-Grade,Water pipeline bridge crossing limits
+Nahur,26.6,6,At-Grade,Mulund-Goregaon Link Road planned flyovers
+Mulund,28.5,6,At-Grade,Approaching Parsik Hill foothills baseline
+Thane,32.7,6,Major Junction Terminus,Thane Creek crossing node / Parsik rock tunnel gateway

@@ -1,0 +1,4351 @@
+{
+  "metadata": {
+    "source": "RailRadar static route snapshots + csmt_thane_railway_infrastructure.csv",
+    "corridor": "Central Line (CSMT - TNA / KYN / KHPI / KSRA)",
+    "builder": "Nexora Railway Network Graph Builder",
+    "direction": "DOWN",
+    "track_resource_extension": "Dual-Track Directional Resources (DOWN_SLOW / DOWN_FAST / DEFAULT)"
+  },
+  "summary": {
+    "node_count": 61,
+    "edge_count": 62,
+    "track_resource_count": 86,
+    "train_route_count": 10,
+    "edges_with_distance": 62,
+    "edges_with_historical_travel_time": 22,
+    "total_track_length_km": 182.09,
+    "directionality": "DOWN (outbound from CSMT)",
+    "corridor": "Central Line"
+  },
+  "nodes": {
+    "ABH": {
+      "station_code": "ABH",
+      "station_name": "AMBARNATH",
+      "latitude": 19.210061,
+      "longitude": 73.184688,
+      "line_corridor": "Central Line",
+      "is_terminal": true,
+      "is_halt": true
+    },
+    "ABY": {
+      "station_code": "ABY",
+      "station_name": "AMBIVLI",
+      "latitude": 19.268291,
+      "longitude": 73.172246,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "ASO": {
+      "station_code": "ASO",
+      "station_name": "ASANGAON",
+      "latitude": 19.439747,
+      "longitude": 73.308012,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "ATG": {
+      "station_code": "ATG",
+      "station_name": "ATGAON",
+      "latitude": 19.503542,
+      "longitude": 73.328257,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "BND": {
+      "station_code": "BND",
+      "station_name": "BHANDUP",
+      "latitude": 19.142757,
+      "longitude": 72.937654,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "BUD": {
+      "station_code": "BUD",
+      "station_name": "BADLAPUR",
+      "latitude": 19.166624,
+      "longitude": 73.238906,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "BVS": {
+      "station_code": "BVS",
+      "station_name": "BHIVPURI ROAD",
+      "latitude": 18.970549,
+      "longitude": 73.331437,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "BY": {
+      "station_code": "BY",
+      "station_name": "BYCULLA",
+      "latitude": 18.976622,
+      "longitude": 72.832794,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "CHG": {
+      "station_code": "CHG",
+      "station_name": "BBY CHINCHPKILI",
+      "latitude": 18.987198,
+      "longitude": 72.832672,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "CHLI": {
+      "station_code": "CHLI",
+      "station_name": "CHIKHLOLI",
+      "latitude": 19.18103,
+      "longitude": 73.22102,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "CLA": {
+      "station_code": "CLA",
+      "station_name": "KURLA LOCAL",
+      "latitude": 19.06528,
+      "longitude": 72.87938,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "CLAS": {
+      "station_code": "CLAS",
+      "station_name": "KURLA EMU CARSHED",
+      "latitude": 19.07464,
+      "longitude": 72.89122,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "CRD": {
+      "station_code": "CRD",
+      "station_name": "BMBY CURREY RD",
+      "latitude": 18.993749,
+      "longitude": 72.832856,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "CRNM": {
+      "station_code": "CRNM",
+      "station_name": "MULUND DEPOT",
+      "latitude": 19.16379,
+      "longitude": 72.95099,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "CSMT": {
+      "station_code": "CSMT",
+      "station_name": "CHHATRAPATI SHIVAJI MAHARAJ TERMINUS",
+      "latitude": 18.940493,
+      "longitude": 72.835786,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "DDCL": {
+      "station_code": "DDCL",
+      "station_name": "DOMVIVALI CONTROL CABIN",
+      "latitude": 19.21243,
+      "longitude": 73.079353,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "DI": {
+      "station_code": "DI",
+      "station_name": "DOMBIVLI",
+      "latitude": 19.218049,
+      "longitude": 73.086135,
+      "line_corridor": "Central Line",
+      "is_terminal": true,
+      "is_halt": true
+    },
+    "DIVA": {
+      "station_code": "DIVA",
+      "station_name": "DIVA",
+      "latitude": 19.188756,
+      "longitude": 73.041417,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "DLV": {
+      "station_code": "DLV",
+      "station_name": "DOLAVALI",
+      "latitude": 18.833163,
+      "longitude": 73.320344,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "DR": {
+      "station_code": "DR",
+      "station_name": "DADAR",
+      "latitude": 19.017376,
+      "longitude": 72.843026,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "DWJN": {
+      "station_code": "DWJN",
+      "station_name": "DIVA JUNCTION CABIN",
+      "latitude": 19.19585,
+      "longitude": 73.05737,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "GC": {
+      "station_code": "GC",
+      "station_name": "GHATKOPAR",
+      "latitude": 19.085693,
+      "longitude": 72.908367,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "KDV": {
+      "station_code": "KDV",
+      "station_name": "KHADAVLI",
+      "latitude": 19.356724,
+      "longitude": 73.219037,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "KE": {
+      "station_code": "KE",
+      "station_name": "KHARDI",
+      "latitude": 19.580216,
+      "longitude": 73.393825,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "KHPI": {
+      "station_code": "KHPI",
+      "station_name": "KHOPOLI",
+      "latitude": 18.788473,
+      "longitude": 73.346071,
+      "line_corridor": "Central Line",
+      "is_terminal": true,
+      "is_halt": true
+    },
+    "KJRD": {
+      "station_code": "KJRD",
+      "station_name": "KANJUR MARG",
+      "latitude": 19.128653,
+      "longitude": 72.928039,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "KJT": {
+      "station_code": "KJT",
+      "station_name": "KARJAT",
+      "latitude": 18.9099653,
+      "longitude": 73.3209629,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "KLVA": {
+      "station_code": "KLVA",
+      "station_name": "KALVA",
+      "latitude": 19.195224,
+      "longitude": 72.996333,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "KLVC": {
+      "station_code": "KLVC",
+      "station_name": "KALVA EMU CARSHED",
+      "latitude": 19.197129,
+      "longitude": 72.998955,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "KLY": {
+      "station_code": "KLY",
+      "station_name": "KELAVLI",
+      "latitude": 18.844545,
+      "longitude": 73.318912,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "KOPR": {
+      "station_code": "KOPR",
+      "station_name": "KOPAR",
+      "latitude": 19.212423,
+      "longitude": 73.078865,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "KSRA": {
+      "station_code": "KSRA",
+      "station_name": "KASARA",
+      "latitude": 19.648232,
+      "longitude": 73.473589,
+      "line_corridor": "Central Line",
+      "is_terminal": true,
+      "is_halt": true
+    },
+    "KYN": {
+      "station_code": "KYN",
+      "station_name": "KALYAN JN",
+      "latitude": 19.235822,
+      "longitude": 73.13081,
+      "line_corridor": "Central Line",
+      "is_terminal": true,
+      "is_halt": true
+    },
+    "KYNX": {
+      "station_code": "KYNX",
+      "station_name": "KALYAN JUNCTION YARD (TXR)",
+      "latitude": 19.23293,
+      "longitude": 73.12379,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "LWJ": {
+      "station_code": "LWJ",
+      "station_name": "LOWJEE",
+      "latitude": 18.809571,
+      "longitude": 73.335185,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "MBQ": {
+      "station_code": "MBQ",
+      "station_name": "MUMBRA",
+      "latitude": 19.189943,
+      "longitude": 73.023075,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "MLND": {
+      "station_code": "MLND",
+      "station_name": "MULUND",
+      "latitude": 19.172137,
+      "longitude": 72.956697,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "MSD": {
+      "station_code": "MSD",
+      "station_name": "MUMBAI MASJID",
+      "latitude": 18.952295,
+      "longitude": 72.838177,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "MTN": {
+      "station_code": "MTN",
+      "station_name": "MUMBAI MATUNGA",
+      "latitude": 19.027436,
+      "longitude": 72.850147,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "MZNC": {
+      "station_code": "MZNC",
+      "station_name": "MAZGAON CABIN",
+      "latitude": 18.97022,
+      "longitude": 72.83343,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "NHU": {
+      "station_code": "NHU",
+      "station_name": "NAHUR",
+      "latitude": 19.15464,
+      "longitude": 72.946652,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "NRL": {
+      "station_code": "NRL",
+      "station_name": "NERAL",
+      "latitude": 19.027431,
+      "longitude": 73.318437,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "OMB": {
+      "station_code": "OMB",
+      "station_name": "OOMBERMALI",
+      "latitude": 19.628367,
+      "longitude": 73.422953,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "PDI": {
+      "station_code": "PDI",
+      "station_name": "PALASDHARI",
+      "latitude": 18.884354,
+      "longitude": 73.320813,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "PR": {
+      "station_code": "PR",
+      "station_name": "MUMBAI PAREL",
+      "latitude": 19.009482,
+      "longitude": 72.837661,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "PRLW": {
+      "station_code": "PRLW",
+      "station_name": "PAREL LOCO WORKSHOP",
+      "latitude": 19.00447,
+      "longitude": 72.83486,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "SHAD": {
+      "station_code": "SHAD",
+      "station_name": "SHAHAD",
+      "latitude": 19.243584,
+      "longitude": 73.158075,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "SHLU": {
+      "station_code": "SHLU",
+      "station_name": "SHELU",
+      "latitude": 19.063516,
+      "longitude": 73.317926,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "SION": {
+      "station_code": "SION",
+      "station_name": "SION",
+      "latitude": 19.04653,
+      "longitude": 72.86332,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "SNRD": {
+      "station_code": "SNRD",
+      "station_name": "BY SANDHURST RD",
+      "latitude": 18.960924,
+      "longitude": 72.839372,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "THK": {
+      "station_code": "THK",
+      "station_name": "THAKURLI",
+      "latitude": 19.226281,
+      "longitude": 73.098017,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "THS": {
+      "station_code": "THS",
+      "station_name": "THANSIT",
+      "latitude": 19.550337,
+      "longitude": 73.35224,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "TLA": {
+      "station_code": "TLA",
+      "station_name": "TITVALA",
+      "latitude": 19.296383,
+      "longitude": 73.203066,
+      "line_corridor": "Central Line",
+      "is_terminal": true,
+      "is_halt": true
+    },
+    "TNA": {
+      "station_code": "TNA",
+      "station_name": "THANE",
+      "latitude": 19.186483,
+      "longitude": 72.975766,
+      "line_corridor": "Central Line",
+      "is_terminal": true,
+      "is_halt": true
+    },
+    "ULNR": {
+      "station_code": "ULNR",
+      "station_name": "ULHASNAGAR",
+      "latitude": 19.21788,
+      "longitude": 73.163078,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "VGI": {
+      "station_code": "VGI",
+      "station_name": "VANGANI",
+      "latitude": 19.094332,
+      "longitude": 73.300895,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "VK": {
+      "station_code": "VK",
+      "station_name": "VIKHROLI",
+      "latitude": 19.11148,
+      "longitude": 72.928021,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "VLDI": {
+      "station_code": "VLDI",
+      "station_name": "VITHALWADI",
+      "latitude": 19.22842,
+      "longitude": 73.149108,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "VSD": {
+      "station_code": "VSD",
+      "station_name": "VASIND",
+      "latitude": 19.406509,
+      "longitude": 73.267468,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "VVH": {
+      "station_code": "VVH",
+      "station_name": "VIDYAVIHAR",
+      "latitude": 19.079542,
+      "longitude": 72.897117,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    },
+    "XX-TNAB": {
+      "station_code": "XX-TNAB",
+      "station_name": "THANE B CABIN",
+      "latitude": 19.19133,
+      "longitude": 72.999997,
+      "line_corridor": "Central Line",
+      "is_terminal": false,
+      "is_halt": true
+    }
+  },
+  "edges": {
+    "ABH__CHLI": {
+      "edge_id": "ABH__CHLI",
+      "from_station": "ABH",
+      "to_station": "CHLI",
+      "distance_km": 4.9977,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011"
+      ],
+      "service_types": [
+        "FAST"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "ABY__TLA": {
+      "edge_id": "ABY__TLA",
+      "from_station": "ABY",
+      "to_station": "TLA",
+      "distance_km": 4.4968,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95421",
+        "96643"
+      ],
+      "service_types": [
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "ASO__ATG": {
+      "edge_id": "ASO__ATG",
+      "from_station": "ASO",
+      "to_station": "ATG",
+      "distance_km": 7.4044,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95421"
+      ],
+      "service_types": [
+        "FAST"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "ATG__THS": {
+      "edge_id": "ATG__THS",
+      "from_station": "ATG",
+      "to_station": "THS",
+      "distance_km": 5.7786,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95421"
+      ],
+      "service_types": [
+        "FAST"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "BND__NHU": {
+      "edge_id": "BND__NHU",
+      "from_station": "BND",
+      "to_station": "NHU",
+      "distance_km": 1.6246,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "service_types": [
+        "EMU",
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": 60.0,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "BUD__VGI": {
+      "edge_id": "BUD__VGI",
+      "from_station": "BUD",
+      "to_station": "VGI",
+      "distance_km": 10.3454,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011"
+      ],
+      "service_types": [
+        "FAST"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "BVS__KJT": {
+      "edge_id": "BVS__KJT",
+      "from_station": "BVS",
+      "to_station": "KJT",
+      "distance_km": 6.8261,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011"
+      ],
+      "service_types": [
+        "FAST"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "BY__CHG": {
+      "edge_id": "BY__CHG",
+      "from_station": "BY",
+      "to_station": "CHG",
+      "distance_km": 1.1761,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "service_types": [
+        "EMU",
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": 59.8,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "CHG__CRD": {
+      "edge_id": "CHG__CRD",
+      "from_station": "CHG",
+      "to_station": "CRD",
+      "distance_km": 0.7287,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "service_types": [
+        "EMU",
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": 60.1,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "CHLI__BUD": {
+      "edge_id": "CHLI__BUD",
+      "from_station": "CHLI",
+      "to_station": "BUD",
+      "distance_km": 2.4688,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011"
+      ],
+      "service_types": [
+        "FAST"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "CLAS__VVH": {
+      "edge_id": "CLAS__VVH",
+      "from_station": "CLAS",
+      "to_station": "VVH",
+      "distance_km": 0.8253,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "service_types": [
+        "EMU",
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "CLA__CLAS": {
+      "edge_id": "CLA__CLAS",
+      "from_station": "CLA",
+      "to_station": "CLAS",
+      "distance_km": 1.6222,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "service_types": [
+        "EMU",
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": 60.0,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "CRD__PRLW": {
+      "edge_id": "CRD__PRLW",
+      "from_station": "CRD",
+      "to_station": "PRLW",
+      "distance_km": 1.2106,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "service_types": [
+        "EMU",
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": 60.0,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "CRNM__MLND": {
+      "edge_id": "CRNM__MLND",
+      "from_station": "CRNM",
+      "to_station": "MLND",
+      "distance_km": 1.1049,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "service_types": [
+        "EMU",
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "CSMT__MSD": {
+      "edge_id": "CSMT__MSD",
+      "from_station": "CSMT",
+      "to_station": "MSD",
+      "distance_km": 1.3362,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "service_types": [
+        "EMU",
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "DDCL__DI": {
+      "edge_id": "DDCL__DI",
+      "from_station": "DDCL",
+      "to_station": "DI",
+      "distance_km": 0.9474,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261"
+      ],
+      "service_types": [
+        "EMU",
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "DIVA__DWJN": {
+      "edge_id": "DIVA__DWJN",
+      "from_station": "DIVA",
+      "to_station": "DWJN",
+      "distance_km": 1.8517,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261"
+      ],
+      "service_types": [
+        "EMU",
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": 60.0,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "DI__THK": {
+      "edge_id": "DI__THK",
+      "from_station": "DI",
+      "to_station": "THK",
+      "distance_km": 1.5473,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167"
+      ],
+      "service_types": [
+        "EMU",
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": 128.1,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "DLV__LWJ": {
+      "edge_id": "DLV__LWJ",
+      "from_station": "DLV",
+      "to_station": "LWJ",
+      "distance_km": 3.0531,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011"
+      ],
+      "service_types": [
+        "FAST"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "DR__MTN": {
+      "edge_id": "DR__MTN",
+      "from_station": "DR",
+      "to_station": "MTN",
+      "distance_km": 1.346,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "service_types": [
+        "EMU",
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": 60.0,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "DWJN__DDCL": {
+      "edge_id": "DWJN__DDCL",
+      "from_station": "DWJN",
+      "to_station": "DDCL",
+      "distance_km": 2.9542,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421"
+      ],
+      "service_types": [
+        "FAST"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "DWJN__KOPR": {
+      "edge_id": "DWJN__KOPR",
+      "from_station": "DWJN",
+      "to_station": "KOPR",
+      "distance_km": 2.9139,
+      "direction": "DOWN",
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261"
+      ],
+      "service_types": [
+        "EMU",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "GC__VK": {
+      "edge_id": "GC__VK",
+      "from_station": "GC",
+      "to_station": "VK",
+      "distance_km": 3.5336,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "service_types": [
+        "EMU",
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": 60.1,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "KDV__VSD": {
+      "edge_id": "KDV__VSD",
+      "from_station": "KDV",
+      "to_station": "VSD",
+      "distance_km": 7.5135,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95421"
+      ],
+      "service_types": [
+        "FAST"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "KE__OMB": {
+      "edge_id": "KE__OMB",
+      "from_station": "KE",
+      "to_station": "OMB",
+      "distance_km": 6.1625,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95421"
+      ],
+      "service_types": [
+        "FAST"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "KJRD__BND": {
+      "edge_id": "KJRD__BND",
+      "from_station": "KJRD",
+      "to_station": "BND",
+      "distance_km": 1.8654,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "service_types": [
+        "EMU",
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": 60.1,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "KJT__PDI": {
+      "edge_id": "KJT__PDI",
+      "from_station": "KJT",
+      "to_station": "PDI",
+      "distance_km": 2.8479,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011"
+      ],
+      "service_types": [
+        "FAST"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "KLVA__KLVC": {
+      "edge_id": "KLVA__KLVC",
+      "from_station": "KLVA",
+      "to_station": "KLVC",
+      "distance_km": 0.3474,
+      "direction": "DOWN",
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261"
+      ],
+      "service_types": [
+        "EMU",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": 60.0,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "KLVC__MBQ": {
+      "edge_id": "KLVC__MBQ",
+      "from_station": "KLVC",
+      "to_station": "MBQ",
+      "distance_km": 2.656,
+      "direction": "DOWN",
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261"
+      ],
+      "service_types": [
+        "EMU",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "KLY__DLV": {
+      "edge_id": "KLY__DLV",
+      "from_station": "KLY",
+      "to_station": "DLV",
+      "distance_km": 1.2746,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011"
+      ],
+      "service_types": [
+        "FAST"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "KOPR__DDCL": {
+      "edge_id": "KOPR__DDCL",
+      "from_station": "KOPR",
+      "to_station": "DDCL",
+      "distance_km": 0.0512,
+      "direction": "DOWN",
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261"
+      ],
+      "service_types": [
+        "EMU",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": 60.0,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "KYNX__KYN": {
+      "edge_id": "KYNX__KYN",
+      "from_station": "KYNX",
+      "to_station": "KYN",
+      "distance_km": 0.8041,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167"
+      ],
+      "service_types": [
+        "EMU",
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "KYN__SHAD": {
+      "edge_id": "KYN__SHAD",
+      "from_station": "KYN",
+      "to_station": "SHAD",
+      "distance_km": 2.9897,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95421",
+        "96643"
+      ],
+      "service_types": [
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "KYN__VLDI": {
+      "edge_id": "KYN__VLDI",
+      "from_station": "KYN",
+      "to_station": "VLDI",
+      "distance_km": 2.09,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "96333"
+      ],
+      "service_types": [
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "LWJ__KHPI": {
+      "edge_id": "LWJ__KHPI",
+      "from_station": "LWJ",
+      "to_station": "KHPI",
+      "distance_km": 2.6109,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011"
+      ],
+      "service_types": [
+        "FAST"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "MBQ__DIVA": {
+      "edge_id": "MBQ__DIVA",
+      "from_station": "MBQ",
+      "to_station": "DIVA",
+      "distance_km": 1.9307,
+      "direction": "DOWN",
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261"
+      ],
+      "service_types": [
+        "EMU",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": 60.0,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "MLND__TNA": {
+      "edge_id": "MLND__TNA",
+      "from_station": "MLND",
+      "to_station": "TNA",
+      "distance_km": 2.5604,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "service_types": [
+        "EMU",
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": 60.2,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "MSD__SNRD": {
+      "edge_id": "MSD__SNRD",
+      "from_station": "MSD",
+      "to_station": "SNRD",
+      "distance_km": 0.9677,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "service_types": [
+        "EMU",
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "MTN__SION": {
+      "edge_id": "MTN__SION",
+      "from_station": "MTN",
+      "to_station": "SION",
+      "distance_km": 2.5348,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "service_types": [
+        "EMU",
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": 60.0,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "MZNC__BY": {
+      "edge_id": "MZNC__BY",
+      "from_station": "MZNC",
+      "to_station": "BY",
+      "distance_km": 0.715,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "service_types": [
+        "EMU",
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "NHU__CRNM": {
+      "edge_id": "NHU__CRNM",
+      "from_station": "NHU",
+      "to_station": "CRNM",
+      "distance_km": 1.1148,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "service_types": [
+        "EMU",
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": 60.0,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "NRL__BVS": {
+      "edge_id": "NRL__BVS",
+      "from_station": "NRL",
+      "to_station": "BVS",
+      "distance_km": 6.471,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011"
+      ],
+      "service_types": [
+        "FAST"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "OMB__KSRA": {
+      "edge_id": "OMB__KSRA",
+      "from_station": "OMB",
+      "to_station": "KSRA",
+      "distance_km": 5.7446,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95421"
+      ],
+      "service_types": [
+        "FAST"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": 210.4,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "PDI__KLY": {
+      "edge_id": "PDI__KLY",
+      "from_station": "PDI",
+      "to_station": "KLY",
+      "distance_km": 4.4311,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011"
+      ],
+      "service_types": [
+        "FAST"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "PRLW__PR": {
+      "edge_id": "PRLW__PR",
+      "from_station": "PRLW",
+      "to_station": "PR",
+      "distance_km": 0.6303,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "service_types": [
+        "EMU",
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "PR__DR": {
+      "edge_id": "PR__DR",
+      "from_station": "PR",
+      "to_station": "DR",
+      "distance_km": 1.0434,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "service_types": [
+        "EMU",
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": 60.0,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "SHAD__ABY": {
+      "edge_id": "SHAD__ABY",
+      "from_station": "SHAD",
+      "to_station": "ABY",
+      "distance_km": 3.1242,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95421",
+        "96643"
+      ],
+      "service_types": [
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "SHLU__NRL": {
+      "edge_id": "SHLU__NRL",
+      "from_station": "SHLU",
+      "to_station": "NRL",
+      "distance_km": 4.0128,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011"
+      ],
+      "service_types": [
+        "FAST"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "SION__CLA": {
+      "edge_id": "SION__CLA",
+      "from_station": "SION",
+      "to_station": "CLA",
+      "distance_km": 2.6825,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "service_types": [
+        "EMU",
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": 60.0,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "SNRD__MZNC": {
+      "edge_id": "SNRD__MZNC",
+      "from_station": "SNRD",
+      "to_station": "MZNC",
+      "distance_km": 1.2079,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "service_types": [
+        "EMU",
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "THK__KYNX": {
+      "edge_id": "THK__KYNX",
+      "from_station": "THK",
+      "to_station": "KYNX",
+      "distance_km": 2.8051,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167"
+      ],
+      "service_types": [
+        "EMU",
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "THS__KE": {
+      "edge_id": "THS__KE",
+      "from_station": "THS",
+      "to_station": "KE",
+      "distance_km": 5.4793,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95421"
+      ],
+      "service_types": [
+        "FAST"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "TLA__KDV": {
+      "edge_id": "TLA__KDV",
+      "from_station": "TLA",
+      "to_station": "KDV",
+      "distance_km": 6.9157,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95421"
+      ],
+      "service_types": [
+        "FAST"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "TNA__KLVA": {
+      "edge_id": "TNA__KLVA",
+      "from_station": "TNA",
+      "to_station": "KLVA",
+      "distance_km": 2.3685,
+      "direction": "DOWN",
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261"
+      ],
+      "service_types": [
+        "EMU",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": 60.0,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "TNA__XX-TNAB": {
+      "edge_id": "TNA__XX-TNAB",
+      "from_station": "TNA",
+      "to_station": "XX-TNAB",
+      "distance_km": 2.6011,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421"
+      ],
+      "service_types": [
+        "FAST"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "ULNR__ABH": {
+      "edge_id": "ULNR__ABH",
+      "from_station": "ULNR",
+      "to_station": "ABH",
+      "distance_km": 2.4299,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "96333"
+      ],
+      "service_types": [
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "VGI__SHLU": {
+      "edge_id": "VGI__SHLU",
+      "from_station": "VGI",
+      "to_station": "SHLU",
+      "distance_km": 3.8658,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011"
+      ],
+      "service_types": [
+        "FAST"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "VK__KJRD": {
+      "edge_id": "VK__KJRD",
+      "from_station": "VK",
+      "to_station": "KJRD",
+      "distance_km": 1.9096,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "service_types": [
+        "EMU",
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": 60.1,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "VLDI__ULNR": {
+      "edge_id": "VLDI__ULNR",
+      "from_station": "VLDI",
+      "to_station": "ULNR",
+      "distance_km": 1.8775,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "96333"
+      ],
+      "service_types": [
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "VSD__ASO": {
+      "edge_id": "VSD__ASO",
+      "from_station": "VSD",
+      "to_station": "ASO",
+      "distance_km": 5.6335,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95421"
+      ],
+      "service_types": [
+        "FAST"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "VVH__GC": {
+      "edge_id": "VVH__GC",
+      "from_station": "VVH",
+      "to_station": "GC",
+      "distance_km": 1.3658,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "service_types": [
+        "EMU",
+        "FAST",
+        "SLOW"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": 60.1,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    },
+    "XX-TNAB__DIVA": {
+      "edge_id": "XX-TNAB__DIVA",
+      "from_station": "XX-TNAB",
+      "to_station": "DIVA",
+      "distance_km": 4.3592,
+      "direction": "DOWN",
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421"
+      ],
+      "service_types": [
+        "FAST"
+      ],
+      "scheduled_travel_time_seconds": null,
+      "historical_travel_time_seconds": null,
+      "route_speed_kmh": null,
+      "capacity": 1,
+      "capacity_is_prototype_assumption": true
+    }
+  },
+  "track_resources": {
+    "ABH__CHLI__DEFAULT": {
+      "resource_id": "ABH__CHLI__DEFAULT",
+      "from_station": "ABH",
+      "to_station": "CHLI",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95011"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "ABY__TLA__DEFAULT": {
+      "resource_id": "ABY__TLA__DEFAULT",
+      "from_station": "ABY",
+      "to_station": "TLA",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95421",
+        "96643"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "ASO__ATG__DEFAULT": {
+      "resource_id": "ASO__ATG__DEFAULT",
+      "from_station": "ASO",
+      "to_station": "ATG",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95421"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "ATG__THS__DEFAULT": {
+      "resource_id": "ATG__THS__DEFAULT",
+      "from_station": "ATG",
+      "to_station": "THS",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95421"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "BND__NHU__DOWN_FAST": {
+      "resource_id": "BND__NHU__DOWN_FAST",
+      "from_station": "BND",
+      "to_station": "NHU",
+      "direction": "DOWN",
+      "track_type": "DOWN_FAST",
+      "capacity": 1,
+      "physical_corridor_tracks": 6,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "BND__NHU__DOWN_SLOW": {
+      "resource_id": "BND__NHU__DOWN_SLOW",
+      "from_station": "BND",
+      "to_station": "NHU",
+      "direction": "DOWN",
+      "track_type": "DOWN_SLOW",
+      "capacity": 1,
+      "physical_corridor_tracks": 6,
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "BUD__VGI__DEFAULT": {
+      "resource_id": "BUD__VGI__DEFAULT",
+      "from_station": "BUD",
+      "to_station": "VGI",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95011"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "BVS__KJT__DEFAULT": {
+      "resource_id": "BVS__KJT__DEFAULT",
+      "from_station": "BVS",
+      "to_station": "KJT",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95011"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "BY__CHG__DOWN_FAST": {
+      "resource_id": "BY__CHG__DOWN_FAST",
+      "from_station": "BY",
+      "to_station": "CHG",
+      "direction": "DOWN",
+      "track_type": "DOWN_FAST",
+      "capacity": 1,
+      "physical_corridor_tracks": 4,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "BY__CHG__DOWN_SLOW": {
+      "resource_id": "BY__CHG__DOWN_SLOW",
+      "from_station": "BY",
+      "to_station": "CHG",
+      "direction": "DOWN",
+      "track_type": "DOWN_SLOW",
+      "capacity": 1,
+      "physical_corridor_tracks": 4,
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "CHG__CRD__DOWN_FAST": {
+      "resource_id": "CHG__CRD__DOWN_FAST",
+      "from_station": "CHG",
+      "to_station": "CRD",
+      "direction": "DOWN",
+      "track_type": "DOWN_FAST",
+      "capacity": 1,
+      "physical_corridor_tracks": 4,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "CHG__CRD__DOWN_SLOW": {
+      "resource_id": "CHG__CRD__DOWN_SLOW",
+      "from_station": "CHG",
+      "to_station": "CRD",
+      "direction": "DOWN",
+      "track_type": "DOWN_SLOW",
+      "capacity": 1,
+      "physical_corridor_tracks": 4,
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "CHLI__BUD__DEFAULT": {
+      "resource_id": "CHLI__BUD__DEFAULT",
+      "from_station": "CHLI",
+      "to_station": "BUD",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95011"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "CLAS__VVH__DOWN_FAST": {
+      "resource_id": "CLAS__VVH__DOWN_FAST",
+      "from_station": "CLAS",
+      "to_station": "VVH",
+      "direction": "DOWN",
+      "track_type": "DOWN_FAST",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "CLAS__VVH__DOWN_SLOW": {
+      "resource_id": "CLAS__VVH__DOWN_SLOW",
+      "from_station": "CLAS",
+      "to_station": "VVH",
+      "direction": "DOWN",
+      "track_type": "DOWN_SLOW",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "CLA__CLAS__DOWN_FAST": {
+      "resource_id": "CLA__CLAS__DOWN_FAST",
+      "from_station": "CLA",
+      "to_station": "CLAS",
+      "direction": "DOWN",
+      "track_type": "DOWN_FAST",
+      "capacity": 1,
+      "physical_corridor_tracks": 6,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "CLA__CLAS__DOWN_SLOW": {
+      "resource_id": "CLA__CLAS__DOWN_SLOW",
+      "from_station": "CLA",
+      "to_station": "CLAS",
+      "direction": "DOWN",
+      "track_type": "DOWN_SLOW",
+      "capacity": 1,
+      "physical_corridor_tracks": 6,
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "CRD__PRLW__DOWN_FAST": {
+      "resource_id": "CRD__PRLW__DOWN_FAST",
+      "from_station": "CRD",
+      "to_station": "PRLW",
+      "direction": "DOWN",
+      "track_type": "DOWN_FAST",
+      "capacity": 1,
+      "physical_corridor_tracks": 4,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "CRD__PRLW__DOWN_SLOW": {
+      "resource_id": "CRD__PRLW__DOWN_SLOW",
+      "from_station": "CRD",
+      "to_station": "PRLW",
+      "direction": "DOWN",
+      "track_type": "DOWN_SLOW",
+      "capacity": 1,
+      "physical_corridor_tracks": 4,
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "CRNM__MLND__DOWN_FAST": {
+      "resource_id": "CRNM__MLND__DOWN_FAST",
+      "from_station": "CRNM",
+      "to_station": "MLND",
+      "direction": "DOWN",
+      "track_type": "DOWN_FAST",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "CRNM__MLND__DOWN_SLOW": {
+      "resource_id": "CRNM__MLND__DOWN_SLOW",
+      "from_station": "CRNM",
+      "to_station": "MLND",
+      "direction": "DOWN",
+      "track_type": "DOWN_SLOW",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "CSMT__MSD__DOWN_FAST": {
+      "resource_id": "CSMT__MSD__DOWN_FAST",
+      "from_station": "CSMT",
+      "to_station": "MSD",
+      "direction": "DOWN",
+      "track_type": "DOWN_FAST",
+      "capacity": 1,
+      "physical_corridor_tracks": 4,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "CSMT__MSD__DOWN_SLOW": {
+      "resource_id": "CSMT__MSD__DOWN_SLOW",
+      "from_station": "CSMT",
+      "to_station": "MSD",
+      "direction": "DOWN",
+      "track_type": "DOWN_SLOW",
+      "capacity": 1,
+      "physical_corridor_tracks": 4,
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "DDCL__DI__DEFAULT": {
+      "resource_id": "DDCL__DI__DEFAULT",
+      "from_station": "DDCL",
+      "to_station": "DI",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "DIVA__DWJN__DEFAULT": {
+      "resource_id": "DIVA__DWJN__DEFAULT",
+      "from_station": "DIVA",
+      "to_station": "DWJN",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "DI__THK__DEFAULT": {
+      "resource_id": "DI__THK__DEFAULT",
+      "from_station": "DI",
+      "to_station": "THK",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "DLV__LWJ__DEFAULT": {
+      "resource_id": "DLV__LWJ__DEFAULT",
+      "from_station": "DLV",
+      "to_station": "LWJ",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95011"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "DR__MTN__DOWN_FAST": {
+      "resource_id": "DR__MTN__DOWN_FAST",
+      "from_station": "DR",
+      "to_station": "MTN",
+      "direction": "DOWN",
+      "track_type": "DOWN_FAST",
+      "capacity": 1,
+      "physical_corridor_tracks": 4,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "DR__MTN__DOWN_SLOW": {
+      "resource_id": "DR__MTN__DOWN_SLOW",
+      "from_station": "DR",
+      "to_station": "MTN",
+      "direction": "DOWN",
+      "track_type": "DOWN_SLOW",
+      "capacity": 1,
+      "physical_corridor_tracks": 4,
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "DWJN__DDCL__DEFAULT": {
+      "resource_id": "DWJN__DDCL__DEFAULT",
+      "from_station": "DWJN",
+      "to_station": "DDCL",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "DWJN__KOPR__DEFAULT": {
+      "resource_id": "DWJN__KOPR__DEFAULT",
+      "from_station": "DWJN",
+      "to_station": "KOPR",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "GC__VK__DOWN_FAST": {
+      "resource_id": "GC__VK__DOWN_FAST",
+      "from_station": "GC",
+      "to_station": "VK",
+      "direction": "DOWN",
+      "track_type": "DOWN_FAST",
+      "capacity": 1,
+      "physical_corridor_tracks": 6,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "GC__VK__DOWN_SLOW": {
+      "resource_id": "GC__VK__DOWN_SLOW",
+      "from_station": "GC",
+      "to_station": "VK",
+      "direction": "DOWN",
+      "track_type": "DOWN_SLOW",
+      "capacity": 1,
+      "physical_corridor_tracks": 6,
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "KDV__VSD__DEFAULT": {
+      "resource_id": "KDV__VSD__DEFAULT",
+      "from_station": "KDV",
+      "to_station": "VSD",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95421"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "KE__OMB__DEFAULT": {
+      "resource_id": "KE__OMB__DEFAULT",
+      "from_station": "KE",
+      "to_station": "OMB",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95421"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "KJRD__BND__DOWN_FAST": {
+      "resource_id": "KJRD__BND__DOWN_FAST",
+      "from_station": "KJRD",
+      "to_station": "BND",
+      "direction": "DOWN",
+      "track_type": "DOWN_FAST",
+      "capacity": 1,
+      "physical_corridor_tracks": 6,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "KJRD__BND__DOWN_SLOW": {
+      "resource_id": "KJRD__BND__DOWN_SLOW",
+      "from_station": "KJRD",
+      "to_station": "BND",
+      "direction": "DOWN",
+      "track_type": "DOWN_SLOW",
+      "capacity": 1,
+      "physical_corridor_tracks": 6,
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "KJT__PDI__DEFAULT": {
+      "resource_id": "KJT__PDI__DEFAULT",
+      "from_station": "KJT",
+      "to_station": "PDI",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95011"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "KLVA__KLVC__DEFAULT": {
+      "resource_id": "KLVA__KLVC__DEFAULT",
+      "from_station": "KLVA",
+      "to_station": "KLVC",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "KLVC__MBQ__DEFAULT": {
+      "resource_id": "KLVC__MBQ__DEFAULT",
+      "from_station": "KLVC",
+      "to_station": "MBQ",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "KLY__DLV__DEFAULT": {
+      "resource_id": "KLY__DLV__DEFAULT",
+      "from_station": "KLY",
+      "to_station": "DLV",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95011"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "KOPR__DDCL__DEFAULT": {
+      "resource_id": "KOPR__DDCL__DEFAULT",
+      "from_station": "KOPR",
+      "to_station": "DDCL",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "KYNX__KYN__DEFAULT": {
+      "resource_id": "KYNX__KYN__DEFAULT",
+      "from_station": "KYNX",
+      "to_station": "KYN",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "KYN__SHAD__DEFAULT": {
+      "resource_id": "KYN__SHAD__DEFAULT",
+      "from_station": "KYN",
+      "to_station": "SHAD",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95421",
+        "96643"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "KYN__VLDI__DEFAULT": {
+      "resource_id": "KYN__VLDI__DEFAULT",
+      "from_station": "KYN",
+      "to_station": "VLDI",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "96333"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "LWJ__KHPI__DEFAULT": {
+      "resource_id": "LWJ__KHPI__DEFAULT",
+      "from_station": "LWJ",
+      "to_station": "KHPI",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95011"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "MBQ__DIVA__DEFAULT": {
+      "resource_id": "MBQ__DIVA__DEFAULT",
+      "from_station": "MBQ",
+      "to_station": "DIVA",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "MLND__TNA__DOWN_FAST": {
+      "resource_id": "MLND__TNA__DOWN_FAST",
+      "from_station": "MLND",
+      "to_station": "TNA",
+      "direction": "DOWN",
+      "track_type": "DOWN_FAST",
+      "capacity": 1,
+      "physical_corridor_tracks": 6,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "MLND__TNA__DOWN_SLOW": {
+      "resource_id": "MLND__TNA__DOWN_SLOW",
+      "from_station": "MLND",
+      "to_station": "TNA",
+      "direction": "DOWN",
+      "track_type": "DOWN_SLOW",
+      "capacity": 1,
+      "physical_corridor_tracks": 6,
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "MSD__SNRD__DOWN_FAST": {
+      "resource_id": "MSD__SNRD__DOWN_FAST",
+      "from_station": "MSD",
+      "to_station": "SNRD",
+      "direction": "DOWN",
+      "track_type": "DOWN_FAST",
+      "capacity": 1,
+      "physical_corridor_tracks": 4,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "MSD__SNRD__DOWN_SLOW": {
+      "resource_id": "MSD__SNRD__DOWN_SLOW",
+      "from_station": "MSD",
+      "to_station": "SNRD",
+      "direction": "DOWN",
+      "track_type": "DOWN_SLOW",
+      "capacity": 1,
+      "physical_corridor_tracks": 4,
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "MTN__SION__DOWN_FAST": {
+      "resource_id": "MTN__SION__DOWN_FAST",
+      "from_station": "MTN",
+      "to_station": "SION",
+      "direction": "DOWN",
+      "track_type": "DOWN_FAST",
+      "capacity": 1,
+      "physical_corridor_tracks": 4,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "MTN__SION__DOWN_SLOW": {
+      "resource_id": "MTN__SION__DOWN_SLOW",
+      "from_station": "MTN",
+      "to_station": "SION",
+      "direction": "DOWN",
+      "track_type": "DOWN_SLOW",
+      "capacity": 1,
+      "physical_corridor_tracks": 4,
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "MZNC__BY__DOWN_FAST": {
+      "resource_id": "MZNC__BY__DOWN_FAST",
+      "from_station": "MZNC",
+      "to_station": "BY",
+      "direction": "DOWN",
+      "track_type": "DOWN_FAST",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "MZNC__BY__DOWN_SLOW": {
+      "resource_id": "MZNC__BY__DOWN_SLOW",
+      "from_station": "MZNC",
+      "to_station": "BY",
+      "direction": "DOWN",
+      "track_type": "DOWN_SLOW",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "NHU__CRNM__DOWN_FAST": {
+      "resource_id": "NHU__CRNM__DOWN_FAST",
+      "from_station": "NHU",
+      "to_station": "CRNM",
+      "direction": "DOWN",
+      "track_type": "DOWN_FAST",
+      "capacity": 1,
+      "physical_corridor_tracks": 6,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "NHU__CRNM__DOWN_SLOW": {
+      "resource_id": "NHU__CRNM__DOWN_SLOW",
+      "from_station": "NHU",
+      "to_station": "CRNM",
+      "direction": "DOWN",
+      "track_type": "DOWN_SLOW",
+      "capacity": 1,
+      "physical_corridor_tracks": 6,
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "NRL__BVS__DEFAULT": {
+      "resource_id": "NRL__BVS__DEFAULT",
+      "from_station": "NRL",
+      "to_station": "BVS",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95011"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "OMB__KSRA__DEFAULT": {
+      "resource_id": "OMB__KSRA__DEFAULT",
+      "from_station": "OMB",
+      "to_station": "KSRA",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95421"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "PDI__KLY__DEFAULT": {
+      "resource_id": "PDI__KLY__DEFAULT",
+      "from_station": "PDI",
+      "to_station": "KLY",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95011"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "PRLW__PR__DOWN_FAST": {
+      "resource_id": "PRLW__PR__DOWN_FAST",
+      "from_station": "PRLW",
+      "to_station": "PR",
+      "direction": "DOWN",
+      "track_type": "DOWN_FAST",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "PRLW__PR__DOWN_SLOW": {
+      "resource_id": "PRLW__PR__DOWN_SLOW",
+      "from_station": "PRLW",
+      "to_station": "PR",
+      "direction": "DOWN",
+      "track_type": "DOWN_SLOW",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "PR__DR__DOWN_FAST": {
+      "resource_id": "PR__DR__DOWN_FAST",
+      "from_station": "PR",
+      "to_station": "DR",
+      "direction": "DOWN",
+      "track_type": "DOWN_FAST",
+      "capacity": 1,
+      "physical_corridor_tracks": 4,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "PR__DR__DOWN_SLOW": {
+      "resource_id": "PR__DR__DOWN_SLOW",
+      "from_station": "PR",
+      "to_station": "DR",
+      "direction": "DOWN",
+      "track_type": "DOWN_SLOW",
+      "capacity": 1,
+      "physical_corridor_tracks": 4,
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "SHAD__ABY__DEFAULT": {
+      "resource_id": "SHAD__ABY__DEFAULT",
+      "from_station": "SHAD",
+      "to_station": "ABY",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95421",
+        "96643"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "SHLU__NRL__DEFAULT": {
+      "resource_id": "SHLU__NRL__DEFAULT",
+      "from_station": "SHLU",
+      "to_station": "NRL",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95011"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "SION__CLA__DOWN_FAST": {
+      "resource_id": "SION__CLA__DOWN_FAST",
+      "from_station": "SION",
+      "to_station": "CLA",
+      "direction": "DOWN",
+      "track_type": "DOWN_FAST",
+      "capacity": 1,
+      "physical_corridor_tracks": 4,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "SION__CLA__DOWN_SLOW": {
+      "resource_id": "SION__CLA__DOWN_SLOW",
+      "from_station": "SION",
+      "to_station": "CLA",
+      "direction": "DOWN",
+      "track_type": "DOWN_SLOW",
+      "capacity": 1,
+      "physical_corridor_tracks": 4,
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "SNRD__MZNC__DOWN_FAST": {
+      "resource_id": "SNRD__MZNC__DOWN_FAST",
+      "from_station": "SNRD",
+      "to_station": "MZNC",
+      "direction": "DOWN",
+      "track_type": "DOWN_FAST",
+      "capacity": 1,
+      "physical_corridor_tracks": 4,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "SNRD__MZNC__DOWN_SLOW": {
+      "resource_id": "SNRD__MZNC__DOWN_SLOW",
+      "from_station": "SNRD",
+      "to_station": "MZNC",
+      "direction": "DOWN",
+      "track_type": "DOWN_SLOW",
+      "capacity": 1,
+      "physical_corridor_tracks": 4,
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "THK__KYNX__DEFAULT": {
+      "resource_id": "THK__KYNX__DEFAULT",
+      "from_station": "THK",
+      "to_station": "KYNX",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421",
+        "96333",
+        "96643",
+        "97167"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "THS__KE__DEFAULT": {
+      "resource_id": "THS__KE__DEFAULT",
+      "from_station": "THS",
+      "to_station": "KE",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95421"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "TLA__KDV__DEFAULT": {
+      "resource_id": "TLA__KDV__DEFAULT",
+      "from_station": "TLA",
+      "to_station": "KDV",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95421"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "TNA__KLVA__DOWN_FAST": {
+      "resource_id": "TNA__KLVA__DOWN_FAST",
+      "from_station": "TNA",
+      "to_station": "KLVA",
+      "direction": "DOWN",
+      "track_type": "DOWN_FAST",
+      "capacity": 1,
+      "physical_corridor_tracks": 6,
+      "serving_trains": [],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "TNA__KLVA__DOWN_SLOW": {
+      "resource_id": "TNA__KLVA__DOWN_SLOW",
+      "from_station": "TNA",
+      "to_station": "KLVA",
+      "direction": "DOWN",
+      "track_type": "DOWN_SLOW",
+      "capacity": 1,
+      "physical_corridor_tracks": 6,
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "TNA__XX-TNAB__DOWN_FAST": {
+      "resource_id": "TNA__XX-TNAB__DOWN_FAST",
+      "from_station": "TNA",
+      "to_station": "XX-TNAB",
+      "direction": "DOWN",
+      "track_type": "DOWN_FAST",
+      "capacity": 1,
+      "physical_corridor_tracks": 6,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "TNA__XX-TNAB__DOWN_SLOW": {
+      "resource_id": "TNA__XX-TNAB__DOWN_SLOW",
+      "from_station": "TNA",
+      "to_station": "XX-TNAB",
+      "direction": "DOWN",
+      "track_type": "DOWN_SLOW",
+      "capacity": 1,
+      "physical_corridor_tracks": 6,
+      "serving_trains": [],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "ULNR__ABH__DEFAULT": {
+      "resource_id": "ULNR__ABH__DEFAULT",
+      "from_station": "ULNR",
+      "to_station": "ABH",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "96333"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "VGI__SHLU__DEFAULT": {
+      "resource_id": "VGI__SHLU__DEFAULT",
+      "from_station": "VGI",
+      "to_station": "SHLU",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95011"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "VK__KJRD__DOWN_FAST": {
+      "resource_id": "VK__KJRD__DOWN_FAST",
+      "from_station": "VK",
+      "to_station": "KJRD",
+      "direction": "DOWN",
+      "track_type": "DOWN_FAST",
+      "capacity": 1,
+      "physical_corridor_tracks": 6,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "VK__KJRD__DOWN_SLOW": {
+      "resource_id": "VK__KJRD__DOWN_SLOW",
+      "from_station": "VK",
+      "to_station": "KJRD",
+      "direction": "DOWN",
+      "track_type": "DOWN_SLOW",
+      "capacity": 1,
+      "physical_corridor_tracks": 6,
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "VLDI__ULNR__DEFAULT": {
+      "resource_id": "VLDI__ULNR__DEFAULT",
+      "from_station": "VLDI",
+      "to_station": "ULNR",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "96333"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "VSD__ASO__DEFAULT": {
+      "resource_id": "VSD__ASO__DEFAULT",
+      "from_station": "VSD",
+      "to_station": "ASO",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95421"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "VVH__GC__DOWN_FAST": {
+      "resource_id": "VVH__GC__DOWN_FAST",
+      "from_station": "VVH",
+      "to_station": "GC",
+      "direction": "DOWN",
+      "track_type": "DOWN_FAST",
+      "capacity": 1,
+      "physical_corridor_tracks": 6,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "VVH__GC__DOWN_SLOW": {
+      "resource_id": "VVH__GC__DOWN_SLOW",
+      "from_station": "VVH",
+      "to_station": "GC",
+      "direction": "DOWN",
+      "track_type": "DOWN_SLOW",
+      "capacity": 1,
+      "physical_corridor_tracks": 6,
+      "serving_trains": [
+        "96333",
+        "96643",
+        "97167",
+        "97259",
+        "97261",
+        "97419",
+        "97421"
+      ],
+      "source": "csmt_thane_railway_infrastructure.csv",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    },
+    "XX-TNAB__DIVA__DEFAULT": {
+      "resource_id": "XX-TNAB__DIVA__DEFAULT",
+      "from_station": "XX-TNAB",
+      "to_station": "DIVA",
+      "direction": "DOWN",
+      "track_type": "DEFAULT",
+      "capacity": 1,
+      "physical_corridor_tracks": 2,
+      "serving_trains": [
+        "95011",
+        "95333",
+        "95421"
+      ],
+      "source": "railway_graph_default",
+      "is_prototype_assumption": true,
+      "track_assignment_status": "PROTOTYPE_ASSUMPTION"
+    }
+  },
+  "train_routes": {
+    "95011": {
+      "train_number": "95011",
+      "train_name": "KP11/Mumbai CSMT - Khopoli Fast Local",
+      "service_type": "FAST",
+      "origin_code": "CSMT",
+      "destination_code": "KHPI",
+      "stations": [
+        "CSMT",
+        "MSD",
+        "SNRD",
+        "MZNC",
+        "BY",
+        "CHG",
+        "CRD",
+        "PRLW",
+        "PR",
+        "DR",
+        "MTN",
+        "SION",
+        "CLA",
+        "CLAS",
+        "VVH",
+        "GC",
+        "VK",
+        "KJRD",
+        "BND",
+        "NHU",
+        "CRNM",
+        "MLND",
+        "TNA",
+        "XX-TNAB",
+        "DIVA",
+        "DWJN",
+        "DDCL",
+        "DI",
+        "THK",
+        "KYNX",
+        "KYN",
+        "VLDI",
+        "ULNR",
+        "ABH",
+        "CHLI",
+        "BUD",
+        "VGI",
+        "SHLU",
+        "NRL",
+        "BVS",
+        "KJT",
+        "PDI",
+        "KLY",
+        "DLV",
+        "LWJ",
+        "KHPI"
+      ],
+      "edges": [
+        "CSMT__MSD",
+        "MSD__SNRD",
+        "SNRD__MZNC",
+        "MZNC__BY",
+        "BY__CHG",
+        "CHG__CRD",
+        "CRD__PRLW",
+        "PRLW__PR",
+        "PR__DR",
+        "DR__MTN",
+        "MTN__SION",
+        "SION__CLA",
+        "CLA__CLAS",
+        "CLAS__VVH",
+        "VVH__GC",
+        "GC__VK",
+        "VK__KJRD",
+        "KJRD__BND",
+        "BND__NHU",
+        "NHU__CRNM",
+        "CRNM__MLND",
+        "MLND__TNA",
+        "TNA__XX-TNAB",
+        "XX-TNAB__DIVA",
+        "DIVA__DWJN",
+        "DWJN__DDCL",
+        "DDCL__DI",
+        "DI__THK",
+        "THK__KYNX",
+        "KYNX__KYN",
+        "KYN__VLDI",
+        "VLDI__ULNR",
+        "ULNR__ABH",
+        "ABH__CHLI",
+        "CHLI__BUD",
+        "BUD__VGI",
+        "VGI__SHLU",
+        "SHLU__NRL",
+        "NRL__BVS",
+        "BVS__KJT",
+        "KJT__PDI",
+        "PDI__KLY",
+        "KLY__DLV",
+        "DLV__LWJ",
+        "LWJ__KHPI"
+      ],
+      "stop_count": 46,
+      "total_distance_km": 110.58
+    },
+    "95333": {
+      "train_number": "95333",
+      "train_name": "A55 / Mumbai CSMT - Ambernath Fast Local",
+      "service_type": "FAST",
+      "origin_code": "CSMT",
+      "destination_code": "ABH",
+      "stations": [
+        "CSMT",
+        "MSD",
+        "SNRD",
+        "MZNC",
+        "BY",
+        "CHG",
+        "CRD",
+        "PRLW",
+        "PR",
+        "DR",
+        "MTN",
+        "SION",
+        "CLA",
+        "CLAS",
+        "VVH",
+        "GC",
+        "VK",
+        "KJRD",
+        "BND",
+        "NHU",
+        "CRNM",
+        "MLND",
+        "TNA",
+        "XX-TNAB",
+        "DIVA",
+        "DWJN",
+        "DDCL",
+        "DI",
+        "THK",
+        "KYNX",
+        "KYN",
+        "VLDI",
+        "ULNR",
+        "ABH"
+      ],
+      "edges": [
+        "CSMT__MSD",
+        "MSD__SNRD",
+        "SNRD__MZNC",
+        "MZNC__BY",
+        "BY__CHG",
+        "CHG__CRD",
+        "CRD__PRLW",
+        "PRLW__PR",
+        "PR__DR",
+        "DR__MTN",
+        "MTN__SION",
+        "SION__CLA",
+        "CLA__CLAS",
+        "CLAS__VVH",
+        "VVH__GC",
+        "GC__VK",
+        "VK__KJRD",
+        "KJRD__BND",
+        "BND__NHU",
+        "NHU__CRNM",
+        "CRNM__MLND",
+        "MLND__TNA",
+        "TNA__XX-TNAB",
+        "XX-TNAB__DIVA",
+        "DIVA__DWJN",
+        "DWJN__DDCL",
+        "DDCL__DI",
+        "DI__THK",
+        "THK__KYNX",
+        "KYNX__KYN",
+        "KYN__VLDI",
+        "VLDI__ULNR",
+        "ULNR__ABH"
+      ],
+      "stop_count": 34,
+      "total_distance_km": 57.37
+    },
+    "95421": {
+      "train_number": "95421",
+      "train_name": "N27 / Mumbai CSMT - Kasara Fast Local",
+      "service_type": "FAST",
+      "origin_code": "CSMT",
+      "destination_code": "KSRA",
+      "stations": [
+        "CSMT",
+        "MSD",
+        "SNRD",
+        "MZNC",
+        "BY",
+        "CHG",
+        "CRD",
+        "PRLW",
+        "PR",
+        "DR",
+        "MTN",
+        "SION",
+        "CLA",
+        "CLAS",
+        "VVH",
+        "GC",
+        "VK",
+        "KJRD",
+        "BND",
+        "NHU",
+        "CRNM",
+        "MLND",
+        "TNA",
+        "XX-TNAB",
+        "DIVA",
+        "DWJN",
+        "DDCL",
+        "DI",
+        "THK",
+        "KYNX",
+        "KYN",
+        "SHAD",
+        "ABY",
+        "TLA",
+        "KDV",
+        "VSD",
+        "ASO",
+        "ATG",
+        "THS",
+        "KE",
+        "OMB",
+        "KSRA"
+      ],
+      "edges": [
+        "CSMT__MSD",
+        "MSD__SNRD",
+        "SNRD__MZNC",
+        "MZNC__BY",
+        "BY__CHG",
+        "CHG__CRD",
+        "CRD__PRLW",
+        "PRLW__PR",
+        "PR__DR",
+        "DR__MTN",
+        "MTN__SION",
+        "SION__CLA",
+        "CLA__CLAS",
+        "CLAS__VVH",
+        "VVH__GC",
+        "GC__VK",
+        "VK__KJRD",
+        "KJRD__BND",
+        "BND__NHU",
+        "NHU__CRNM",
+        "CRNM__MLND",
+        "MLND__TNA",
+        "TNA__XX-TNAB",
+        "XX-TNAB__DIVA",
+        "DIVA__DWJN",
+        "DWJN__DDCL",
+        "DDCL__DI",
+        "DI__THK",
+        "THK__KYNX",
+        "KYNX__KYN",
+        "KYN__SHAD",
+        "SHAD__ABY",
+        "ABY__TLA",
+        "TLA__KDV",
+        "KDV__VSD",
+        "VSD__ASO",
+        "ASO__ATG",
+        "ATG__THS",
+        "THS__KE",
+        "KE__OMB",
+        "OMB__KSRA"
+      ],
+      "stop_count": 42,
+      "total_distance_km": 112.22
+    },
+    "96333": {
+      "train_number": "96333",
+      "train_name": "A57 / Mumbai CSMT - Ambernath Slow Local",
+      "service_type": "SLOW",
+      "origin_code": "CSMT",
+      "destination_code": "ABH",
+      "stations": [
+        "CSMT",
+        "MSD",
+        "SNRD",
+        "MZNC",
+        "BY",
+        "CHG",
+        "CRD",
+        "PRLW",
+        "PR",
+        "DR",
+        "MTN",
+        "SION",
+        "CLA",
+        "CLAS",
+        "VVH",
+        "GC",
+        "VK",
+        "KJRD",
+        "BND",
+        "NHU",
+        "CRNM",
+        "MLND",
+        "TNA",
+        "KLVA",
+        "KLVC",
+        "MBQ",
+        "DIVA",
+        "DWJN",
+        "KOPR",
+        "DDCL",
+        "DI",
+        "THK",
+        "KYNX",
+        "KYN",
+        "VLDI",
+        "ULNR",
+        "ABH"
+      ],
+      "edges": [
+        "CSMT__MSD",
+        "MSD__SNRD",
+        "SNRD__MZNC",
+        "MZNC__BY",
+        "BY__CHG",
+        "CHG__CRD",
+        "CRD__PRLW",
+        "PRLW__PR",
+        "PR__DR",
+        "DR__MTN",
+        "MTN__SION",
+        "SION__CLA",
+        "CLA__CLAS",
+        "CLAS__VVH",
+        "VVH__GC",
+        "GC__VK",
+        "VK__KJRD",
+        "KJRD__BND",
+        "BND__NHU",
+        "NHU__CRNM",
+        "CRNM__MLND",
+        "MLND__TNA",
+        "TNA__KLVA",
+        "KLVA__KLVC",
+        "KLVC__MBQ",
+        "MBQ__DIVA",
+        "DIVA__DWJN",
+        "DWJN__KOPR",
+        "KOPR__DDCL",
+        "DDCL__DI",
+        "DI__THK",
+        "THK__KYNX",
+        "KYNX__KYN",
+        "KYN__VLDI",
+        "VLDI__ULNR",
+        "ULNR__ABH"
+      ],
+      "stop_count": 37,
+      "total_distance_km": 57.73
+    },
+    "96643": {
+      "train_number": "96643",
+      "train_name": "TL55 / Mumbai CSMT - Titvala Slow Local",
+      "service_type": "SLOW",
+      "origin_code": "CSMT",
+      "destination_code": "TLA",
+      "stations": [
+        "CSMT",
+        "MSD",
+        "SNRD",
+        "MZNC",
+        "BY",
+        "CHG",
+        "CRD",
+        "PRLW",
+        "PR",
+        "DR",
+        "MTN",
+        "SION",
+        "CLA",
+        "CLAS",
+        "VVH",
+        "GC",
+        "VK",
+        "KJRD",
+        "BND",
+        "NHU",
+        "CRNM",
+        "MLND",
+        "TNA",
+        "KLVA",
+        "KLVC",
+        "MBQ",
+        "DIVA",
+        "DWJN",
+        "KOPR",
+        "DDCL",
+        "DI",
+        "THK",
+        "KYNX",
+        "KYN",
+        "SHAD",
+        "ABY",
+        "TLA"
+      ],
+      "edges": [
+        "CSMT__MSD",
+        "MSD__SNRD",
+        "SNRD__MZNC",
+        "MZNC__BY",
+        "BY__CHG",
+        "CHG__CRD",
+        "CRD__PRLW",
+        "PRLW__PR",
+        "PR__DR",
+        "DR__MTN",
+        "MTN__SION",
+        "SION__CLA",
+        "CLA__CLAS",
+        "CLAS__VVH",
+        "VVH__GC",
+        "GC__VK",
+        "VK__KJRD",
+        "KJRD__BND",
+        "BND__NHU",
+        "NHU__CRNM",
+        "CRNM__MLND",
+        "MLND__TNA",
+        "TNA__KLVA",
+        "KLVA__KLVC",
+        "KLVC__MBQ",
+        "MBQ__DIVA",
+        "DIVA__DWJN",
+        "DWJN__KOPR",
+        "KOPR__DDCL",
+        "DDCL__DI",
+        "DI__THK",
+        "THK__KYNX",
+        "KYNX__KYN",
+        "KYN__SHAD",
+        "SHAD__ABY",
+        "ABY__TLA"
+      ],
+      "stop_count": 37,
+      "total_distance_km": 61.94
+    },
+    "97167": {
+      "train_number": "97167",
+      "train_name": "Kalyan Jn. Mumbai EMU",
+      "service_type": "EMU",
+      "origin_code": "CSMT",
+      "destination_code": "KYN",
+      "stations": [
+        "CSMT",
+        "MSD",
+        "SNRD",
+        "MZNC",
+        "BY",
+        "CHG",
+        "CRD",
+        "PRLW",
+        "PR",
+        "DR",
+        "MTN",
+        "SION",
+        "CLA",
+        "CLAS",
+        "VVH",
+        "GC",
+        "VK",
+        "KJRD",
+        "BND",
+        "NHU",
+        "CRNM",
+        "MLND",
+        "TNA",
+        "KLVA",
+        "KLVC",
+        "MBQ",
+        "DIVA",
+        "DWJN",
+        "KOPR",
+        "DDCL",
+        "DI",
+        "THK",
+        "KYNX",
+        "KYN"
+      ],
+      "edges": [
+        "CSMT__MSD",
+        "MSD__SNRD",
+        "SNRD__MZNC",
+        "MZNC__BY",
+        "BY__CHG",
+        "CHG__CRD",
+        "CRD__PRLW",
+        "PRLW__PR",
+        "PR__DR",
+        "DR__MTN",
+        "MTN__SION",
+        "SION__CLA",
+        "CLA__CLAS",
+        "CLAS__VVH",
+        "VVH__GC",
+        "GC__VK",
+        "VK__KJRD",
+        "KJRD__BND",
+        "BND__NHU",
+        "NHU__CRNM",
+        "CRNM__MLND",
+        "MLND__TNA",
+        "TNA__KLVA",
+        "KLVA__KLVC",
+        "KLVC__MBQ",
+        "MBQ__DIVA",
+        "DIVA__DWJN",
+        "DWJN__KOPR",
+        "KOPR__DDCL",
+        "DDCL__DI",
+        "DI__THK",
+        "THK__KYNX",
+        "KYNX__KYN"
+      ],
+      "stop_count": 34,
+      "total_distance_km": 51.33
+    },
+    "97259": {
+      "train_number": "97259",
+      "train_name": "DL49 / Mumbai CSMT - Dombivli Slow Local",
+      "service_type": "SLOW",
+      "origin_code": "CSMT",
+      "destination_code": "DI",
+      "stations": [
+        "CSMT",
+        "MSD",
+        "SNRD",
+        "MZNC",
+        "BY",
+        "CHG",
+        "CRD",
+        "PRLW",
+        "PR",
+        "DR",
+        "MTN",
+        "SION",
+        "CLA",
+        "CLAS",
+        "VVH",
+        "GC",
+        "VK",
+        "KJRD",
+        "BND",
+        "NHU",
+        "CRNM",
+        "MLND",
+        "TNA",
+        "KLVA",
+        "KLVC",
+        "MBQ",
+        "DIVA",
+        "DWJN",
+        "KOPR",
+        "DDCL",
+        "DI"
+      ],
+      "edges": [
+        "CSMT__MSD",
+        "MSD__SNRD",
+        "SNRD__MZNC",
+        "MZNC__BY",
+        "BY__CHG",
+        "CHG__CRD",
+        "CRD__PRLW",
+        "PRLW__PR",
+        "PR__DR",
+        "DR__MTN",
+        "MTN__SION",
+        "SION__CLA",
+        "CLA__CLAS",
+        "CLAS__VVH",
+        "VVH__GC",
+        "GC__VK",
+        "VK__KJRD",
+        "KJRD__BND",
+        "BND__NHU",
+        "NHU__CRNM",
+        "CRNM__MLND",
+        "MLND__TNA",
+        "TNA__KLVA",
+        "KLVA__KLVC",
+        "KLVC__MBQ",
+        "MBQ__DIVA",
+        "DIVA__DWJN",
+        "DWJN__KOPR",
+        "KOPR__DDCL",
+        "DDCL__DI"
+      ],
+      "stop_count": 31,
+      "total_distance_km": 46.17
+    },
+    "97261": {
+      "train_number": "97261",
+      "train_name": "DL51 / Mumbai CSMT - Dombivli Slow Local",
+      "service_type": "SLOW",
+      "origin_code": "CSMT",
+      "destination_code": "DI",
+      "stations": [
+        "CSMT",
+        "MSD",
+        "SNRD",
+        "MZNC",
+        "BY",
+        "CHG",
+        "CRD",
+        "PRLW",
+        "PR",
+        "DR",
+        "MTN",
+        "SION",
+        "CLA",
+        "CLAS",
+        "VVH",
+        "GC",
+        "VK",
+        "KJRD",
+        "BND",
+        "NHU",
+        "CRNM",
+        "MLND",
+        "TNA",
+        "KLVA",
+        "KLVC",
+        "MBQ",
+        "DIVA",
+        "DWJN",
+        "KOPR",
+        "DDCL",
+        "DI"
+      ],
+      "edges": [
+        "CSMT__MSD",
+        "MSD__SNRD",
+        "SNRD__MZNC",
+        "MZNC__BY",
+        "BY__CHG",
+        "CHG__CRD",
+        "CRD__PRLW",
+        "PRLW__PR",
+        "PR__DR",
+        "DR__MTN",
+        "MTN__SION",
+        "SION__CLA",
+        "CLA__CLAS",
+        "CLAS__VVH",
+        "VVH__GC",
+        "GC__VK",
+        "VK__KJRD",
+        "KJRD__BND",
+        "BND__NHU",
+        "NHU__CRNM",
+        "CRNM__MLND",
+        "MLND__TNA",
+        "TNA__KLVA",
+        "KLVA__KLVC",
+        "KLVC__MBQ",
+        "MBQ__DIVA",
+        "DIVA__DWJN",
+        "DWJN__KOPR",
+        "KOPR__DDCL",
+        "DDCL__DI"
+      ],
+      "stop_count": 31,
+      "total_distance_km": 46.17
+    },
+    "97419": {
+      "train_number": "97419",
+      "train_name": "T123 / Mumbai CSMT - Thane Slow Local",
+      "service_type": "SLOW",
+      "origin_code": "CSMT",
+      "destination_code": "TNA",
+      "stations": [
+        "CSMT",
+        "MSD",
+        "SNRD",
+        "MZNC",
+        "BY",
+        "CHG",
+        "CRD",
+        "PRLW",
+        "PR",
+        "DR",
+        "MTN",
+        "SION",
+        "CLA",
+        "CLAS",
+        "VVH",
+        "GC",
+        "VK",
+        "KJRD",
+        "BND",
+        "NHU",
+        "CRNM",
+        "MLND",
+        "TNA"
+      ],
+      "edges": [
+        "CSMT__MSD",
+        "MSD__SNRD",
+        "SNRD__MZNC",
+        "MZNC__BY",
+        "BY__CHG",
+        "CHG__CRD",
+        "CRD__PRLW",
+        "PRLW__PR",
+        "PR__DR",
+        "DR__MTN",
+        "MTN__SION",
+        "SION__CLA",
+        "CLA__CLAS",
+        "CLAS__VVH",
+        "VVH__GC",
+        "GC__VK",
+        "VK__KJRD",
+        "KJRD__BND",
+        "BND__NHU",
+        "NHU__CRNM",
+        "CRNM__MLND",
+        "MLND__TNA"
+      ],
+      "stop_count": 23,
+      "total_distance_km": 33.11
+    },
+    "97421": {
+      "train_number": "97421",
+      "train_name": "T127 / Mumbai CSMT - Thane Slow Local",
+      "service_type": "SLOW",
+      "origin_code": "CSMT",
+      "destination_code": "TNA",
+      "stations": [
+        "CSMT",
+        "MSD",
+        "SNRD",
+        "MZNC",
+        "BY",
+        "CHG",
+        "CRD",
+        "PRLW",
+        "PR",
+        "DR",
+        "MTN",
+        "SION",
+        "CLA",
+        "CLAS",
+        "VVH",
+        "GC",
+        "VK",
+        "KJRD",
+        "BND",
+        "NHU",
+        "CRNM",
+        "MLND",
+        "TNA"
+      ],
+      "edges": [
+        "CSMT__MSD",
+        "MSD__SNRD",
+        "SNRD__MZNC",
+        "MZNC__BY",
+        "BY__CHG",
+        "CHG__CRD",
+        "CRD__PRLW",
+        "PRLW__PR",
+        "PR__DR",
+        "DR__MTN",
+        "MTN__SION",
+        "SION__CLA",
+        "CLA__CLAS",
+        "CLAS__VVH",
+        "VVH__GC",
+        "GC__VK",
+        "VK__KJRD",
+        "KJRD__BND",
+        "BND__NHU",
+        "NHU__CRNM",
+        "CRNM__MLND",
+        "MLND__TNA"
+      ],
+      "stop_count": 23,
+      "total_distance_km": 33.11
+    }
+  }
+}

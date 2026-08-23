@@ -1,0 +1,101 @@
+{
+  "benchmark_title": "Nexora Stage 2 Infrastructure-Aware Scheduling Benchmark",
+  "timestamp": "2026-08-23T01:15:00Z",
+  "inputs_summary": {
+    "total_trains": 10,
+    "fast_trains_count": 3,
+    "slow_trains_count": 7,
+    "total_edges": 62,
+    "total_track_resources": 86,
+    "headway_seconds": 60
+  },
+  "results": {
+    "fifo_single_resource": {
+      "name": "Greedy FIFO (Single Resource)",
+      "total_completion_delay_min": 200.52,
+      "mean_delay_min": 20.05,
+      "median_delay_min": 20.08,
+      "p90_delay_min": 28.23,
+      "maximum_delay_min": 34.32,
+      "delay_variance_min2": 66.36,
+      "total_additional_hold_min": 19.55,
+      "corridor_makespan_min": 156.15,
+      "headway_violations": 0,
+      "trains_with_hold": 7,
+      "trains_without_hold": 3
+    },
+    "fifo_infrastructure_aware": {
+      "name": "Greedy FIFO (Infrastructure-Aware)",
+      "total_completion_delay_min": 195.82,
+      "mean_delay_min": 19.58,
+      "median_delay_min": 19.74,
+      "p90_delay_min": 27.91,
+      "maximum_delay_min": 34.32,
+      "delay_variance_min2": 61.48,
+      "total_additional_hold_min": 11.65,
+      "corridor_makespan_min": 156.15,
+      "headway_violations": 0,
+      "trains_with_hold": 5,
+      "trains_without_hold": 5
+    },
+    "nexora_legacy_single_resource": {
+      "name": "Nexora CP-SAT (Legacy Single-Resource)",
+      "status": "FEASIBLE",
+      "wall_time_sec": 5.056325500000001,
+      "total_completion_delay_min": 200.52,
+      "mean_delay_min": 20.05,
+      "median_delay_min": 20.08,
+      "p90_delay_min": 28.23,
+      "maximum_delay_min": 34.32,
+      "delay_variance_min2": 66.36,
+      "total_additional_hold_min": 19.55,
+      "maximum_additional_hold_min": 6.48,
+      "corridor_makespan_min": 156.15,
+      "conflicts_prevented": 1172,
+      "propagated_delay_cost": 25837.59,
+      "trains_with_hold": 7,
+      "trains_without_hold": 3,
+      "fast_resource_utilization": 0,
+      "slow_resource_utilization": 0,
+      "default_resource_utilization": 328
+    },
+    "nexora_infrastructure_aware": {
+      "name": "Nexora CP-SAT (Infrastructure-Aware Multi-Track)",
+      "status": "FEASIBLE",
+      "wall_time_sec": 5.502082700000001,
+      "total_completion_delay_min": 195.82,
+      "mean_delay_min": 19.58,
+      "median_delay_min": 19.74,
+      "p90_delay_min": 27.91,
+      "maximum_delay_min": 34.32,
+      "delay_variance_min2": 61.48,
+      "total_additional_hold_min": 11.65,
+      "maximum_additional_hold_min": 4.37,
+      "corridor_makespan_min": 156.15,
+      "conflicts_prevented": 710,
+      "propagated_delay_cost": 25183.06,
+      "trains_with_hold": 5,
+      "trains_without_hold": 5,
+      "fast_resource_utilization": 69,
+      "slow_resource_utilization": 159,
+      "default_resource_utilization": 100
+    }
+  },
+  "deltas": {
+    "infra_vs_legacy": {
+      "delta_total_delay_min": -4.7,
+      "delta_total_hold_min": -7.9,
+      "delta_max_hold_min": -2.11,
+      "delta_variance_min2": -4.88,
+      "delta_propagated_cost": -654.53,
+      "delta_conflicts_prevented": -462
+    },
+    "infra_vs_fifo_legacy": {
+      "delta_total_delay_min": -4.7,
+      "delta_total_hold_min": -7.9,
+      "delta_variance_min2": -4.88
+    }
+  },
+  "scientific_verdict": "A. MATERIAL IMPROVEMENT",
+  "scientific_statement": "The infrastructure CSV establishes multi-track capacity but does not provide individual physical track identities, crossover topology, signal blocks, or interlocking routes. DOWN_FAST and DOWN_SLOW are therefore prototype logical resources, not verified physical track IDs."
+}

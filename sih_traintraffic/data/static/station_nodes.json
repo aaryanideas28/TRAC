@@ -1,0 +1,551 @@
+[
+  {
+    "station_code": "CSMT",
+    "station_name": "CHHATRAPATI SHIVAJI MAHARAJ TERMINUS",
+    "latitude": 18.940493,
+    "longitude": 72.835786,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "MSD",
+    "station_name": "MUMBAI MASJID",
+    "latitude": 18.952295,
+    "longitude": 72.838177,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "SNRD",
+    "station_name": "BY SANDHURST RD",
+    "latitude": 18.960924,
+    "longitude": 72.839372,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "MZNC",
+    "station_name": "MAZGAON CABIN",
+    "latitude": 18.97022,
+    "longitude": 72.83343,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "BY",
+    "station_name": "BYCULLA",
+    "latitude": 18.976622,
+    "longitude": 72.832794,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "CHG",
+    "station_name": "BBY CHINCHPKILI",
+    "latitude": 18.987198,
+    "longitude": 72.832672,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "CRD",
+    "station_name": "BMBY CURREY RD",
+    "latitude": 18.993749,
+    "longitude": 72.832856,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "PRLW",
+    "station_name": "PAREL LOCO WORKSHOP",
+    "latitude": 19.00447,
+    "longitude": 72.83486,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "PR",
+    "station_name": "MUMBAI PAREL",
+    "latitude": 19.009482,
+    "longitude": 72.837661,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "DR",
+    "station_name": "DADAR",
+    "latitude": 19.017376,
+    "longitude": 72.843026,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "MTN",
+    "station_name": "MUMBAI MATUNGA",
+    "latitude": 19.027436,
+    "longitude": 72.850147,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "SION",
+    "station_name": "SION",
+    "latitude": 19.04653,
+    "longitude": 72.86332,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "CLA",
+    "station_name": "KURLA LOCAL",
+    "latitude": 19.06528,
+    "longitude": 72.87938,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "CLAS",
+    "station_name": "KURLA EMU CARSHED",
+    "latitude": 19.07464,
+    "longitude": 72.89122,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "VVH",
+    "station_name": "VIDYAVIHAR",
+    "latitude": 19.079542,
+    "longitude": 72.897117,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "GC",
+    "station_name": "GHATKOPAR",
+    "latitude": 19.085693,
+    "longitude": 72.908367,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "VK",
+    "station_name": "VIKHROLI",
+    "latitude": 19.11148,
+    "longitude": 72.928021,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "KJRD",
+    "station_name": "KANJUR MARG",
+    "latitude": 19.128653,
+    "longitude": 72.928039,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "BND",
+    "station_name": "BHANDUP",
+    "latitude": 19.142757,
+    "longitude": 72.937654,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "NHU",
+    "station_name": "NAHUR",
+    "latitude": 19.15464,
+    "longitude": 72.946652,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "CRNM",
+    "station_name": "MULUND DEPOT",
+    "latitude": 19.16379,
+    "longitude": 72.95099,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "MLND",
+    "station_name": "MULUND",
+    "latitude": 19.172137,
+    "longitude": 72.956697,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "TNA",
+    "station_name": "THANE",
+    "latitude": 19.186483,
+    "longitude": 72.975766,
+    "line_corridor": "Central Line",
+    "is_terminal": true,
+    "is_halt": true
+  },
+  {
+    "station_code": "XX-TNAB",
+    "station_name": "THANE B CABIN",
+    "latitude": 19.19133,
+    "longitude": 72.999997,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "DIVA",
+    "station_name": "DIVA",
+    "latitude": 19.188756,
+    "longitude": 73.041417,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "DWJN",
+    "station_name": "DIVA JUNCTION CABIN",
+    "latitude": 19.19585,
+    "longitude": 73.05737,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "DDCL",
+    "station_name": "DOMVIVALI CONTROL CABIN",
+    "latitude": 19.21243,
+    "longitude": 73.079353,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "DI",
+    "station_name": "DOMBIVLI",
+    "latitude": 19.218049,
+    "longitude": 73.086135,
+    "line_corridor": "Central Line",
+    "is_terminal": true,
+    "is_halt": true
+  },
+  {
+    "station_code": "THK",
+    "station_name": "THAKURLI",
+    "latitude": 19.226281,
+    "longitude": 73.098017,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "KYNX",
+    "station_name": "KALYAN JUNCTION YARD (TXR)",
+    "latitude": 19.23293,
+    "longitude": 73.12379,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "KYN",
+    "station_name": "KALYAN JN",
+    "latitude": 19.235822,
+    "longitude": 73.13081,
+    "line_corridor": "Central Line",
+    "is_terminal": true,
+    "is_halt": true
+  },
+  {
+    "station_code": "VLDI",
+    "station_name": "VITHALWADI",
+    "latitude": 19.22842,
+    "longitude": 73.149108,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "ULNR",
+    "station_name": "ULHASNAGAR",
+    "latitude": 19.21788,
+    "longitude": 73.163078,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "ABH",
+    "station_name": "AMBARNATH",
+    "latitude": 19.210061,
+    "longitude": 73.184688,
+    "line_corridor": "Central Line",
+    "is_terminal": true,
+    "is_halt": true
+  },
+  {
+    "station_code": "CHLI",
+    "station_name": "CHIKHLOLI",
+    "latitude": 19.18103,
+    "longitude": 73.22102,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "BUD",
+    "station_name": "BADLAPUR",
+    "latitude": 19.166624,
+    "longitude": 73.238906,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "VGI",
+    "station_name": "VANGANI",
+    "latitude": 19.094332,
+    "longitude": 73.300895,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "SHLU",
+    "station_name": "SHELU",
+    "latitude": 19.063516,
+    "longitude": 73.317926,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "NRL",
+    "station_name": "NERAL",
+    "latitude": 19.027431,
+    "longitude": 73.318437,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "BVS",
+    "station_name": "BHIVPURI ROAD",
+    "latitude": 18.970549,
+    "longitude": 73.331437,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "KJT",
+    "station_name": "KARJAT",
+    "latitude": 18.9099653,
+    "longitude": 73.3209629,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "PDI",
+    "station_name": "PALASDHARI",
+    "latitude": 18.884354,
+    "longitude": 73.320813,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "KLY",
+    "station_name": "KELAVLI",
+    "latitude": 18.844545,
+    "longitude": 73.318912,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "DLV",
+    "station_name": "DOLAVALI",
+    "latitude": 18.833163,
+    "longitude": 73.320344,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "LWJ",
+    "station_name": "LOWJEE",
+    "latitude": 18.809571,
+    "longitude": 73.335185,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "KHPI",
+    "station_name": "KHOPOLI",
+    "latitude": 18.788473,
+    "longitude": 73.346071,
+    "line_corridor": "Central Line",
+    "is_terminal": true,
+    "is_halt": true
+  },
+  {
+    "station_code": "SHAD",
+    "station_name": "SHAHAD",
+    "latitude": 19.243584,
+    "longitude": 73.158075,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "ABY",
+    "station_name": "AMBIVLI",
+    "latitude": 19.268291,
+    "longitude": 73.172246,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "TLA",
+    "station_name": "TITVALA",
+    "latitude": 19.296383,
+    "longitude": 73.203066,
+    "line_corridor": "Central Line",
+    "is_terminal": true,
+    "is_halt": true
+  },
+  {
+    "station_code": "KDV",
+    "station_name": "KHADAVLI",
+    "latitude": 19.356724,
+    "longitude": 73.219037,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "VSD",
+    "station_name": "VASIND",
+    "latitude": 19.406509,
+    "longitude": 73.267468,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "ASO",
+    "station_name": "ASANGAON",
+    "latitude": 19.439747,
+    "longitude": 73.308012,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "ATG",
+    "station_name": "ATGAON",
+    "latitude": 19.503542,
+    "longitude": 73.328257,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "THS",
+    "station_name": "THANSIT",
+    "latitude": 19.550337,
+    "longitude": 73.35224,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "KE",
+    "station_name": "KHARDI",
+    "latitude": 19.580216,
+    "longitude": 73.393825,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "OMB",
+    "station_name": "OOMBERMALI",
+    "latitude": 19.628367,
+    "longitude": 73.422953,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "KSRA",
+    "station_name": "KASARA",
+    "latitude": 19.648232,
+    "longitude": 73.473589,
+    "line_corridor": "Central Line",
+    "is_terminal": true,
+    "is_halt": true
+  },
+  {
+    "station_code": "KLVA",
+    "station_name": "KALVA",
+    "latitude": 19.195224,
+    "longitude": 72.996333,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "KLVC",
+    "station_name": "KALVA EMU CARSHED",
+    "latitude": 19.197129,
+    "longitude": 72.998955,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "MBQ",
+    "station_name": "MUMBRA",
+    "latitude": 19.189943,
+    "longitude": 73.023075,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  },
+  {
+    "station_code": "KOPR",
+    "station_name": "KOPAR",
+    "latitude": 19.212423,
+    "longitude": 73.078865,
+    "line_corridor": "Central Line",
+    "is_terminal": false,
+    "is_halt": true
+  }
+]
