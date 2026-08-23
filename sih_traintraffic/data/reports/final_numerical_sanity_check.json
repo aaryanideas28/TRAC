@@ -1,0 +1,44 @@
+{
+  "audit_name": "Nexora Final Numerical Sanity Check",
+  "audit_timestamp": "2026-08-23T15:10:05Z",
+  "canonical_benchmark": {
+    "baseline_total_delay_min": 200.52,
+    "optimized_total_delay_min": 195.82,
+    "delta_total_delay_min": -4.7,
+    "pct_total_delay_improvement": -2.34,
+    "baseline_hold_min": 19.55,
+    "optimized_hold_min": 11.65,
+    "delta_hold_min": -7.9,
+    "pct_hold_reduction": -40.41,
+    "baseline_max_delay_min": 34.32,
+    "optimized_max_delay_min": 34.32,
+    "baseline_delay_variance_min2": 66.36,
+    "optimized_delay_variance_min2": 61.48,
+    "baseline_makespan_min": 156.15,
+    "optimized_makespan_min": 156.15,
+    "zero_hold_trains_baseline": 3,
+    "zero_hold_trains_optimized": 5,
+    "headway_violations": 0
+  },
+  "maximum_delay_analysis": {
+    "value_min": 34.32,
+    "classification": "EXOGENOUS_ENTRY_DELAY",
+    "explanation": "Train 97421 enters the corridor with +34.32 min initial delay. Pre-entry delay cannot be altered by downstream corridor optimization."
+  },
+  "current_replay_metrics": {
+    "active_trains": 6,
+    "throughput_trains_per_hr": 19,
+    "average_delay_min": 3.1,
+    "track_utilization_pct": 86.0,
+    "conflicts_detected": 2,
+    "conflicts_resolved": 2
+  },
+  "solver_status": "FEASIBLE",
+  "solver_backend": "Google OR-Tools CP-SAT",
+  "verdicts": {
+    "numerical_consistency": "PASS",
+    "ui_data_binding": "PASS",
+    "tests": "125/125 PASSED",
+    "build": "PASS"
+  }
+}
