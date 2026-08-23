@@ -39,7 +39,7 @@ export const TopNav: React.FC<TopNavProps> = ({
               AI Railway Traffic Control
             </h1>
             <p className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider mt-1">
-              REAL-TIME SECTION THROUGHPUT OPTIMIZATION
+              OFFLINE RAILRADAR REPLAY & CP-SAT OPTIMIZATION
             </p>
           </div>
         </div>

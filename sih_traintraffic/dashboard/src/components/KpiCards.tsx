@@ -1,6 +1,6 @@
 import React from 'react';
 import type { KpiMetrics } from '../types/railway';
-import { Train, TrendingUp, TrendingDown, Clock, Cpu, ShieldCheck, AlertOctagon } from 'lucide-react';
+import { Train, TrendingUp, Clock, Cpu, ShieldCheck, AlertOctagon } from 'lucide-react';
 
 interface KpiCardsProps {
   metrics: KpiMetrics;
@@ -14,7 +14,7 @@ export const KpiCards: React.FC<KpiCardsProps> = ({ metrics }) => {
       unit: '',
       subBadge: (
         <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-400">
-          <TrendingUp className="w-3 h-3" /> Optimal Density
+          Current Replay
         </span>
       ),
       icon: Train,
@@ -26,7 +26,7 @@ export const KpiCards: React.FC<KpiCardsProps> = ({ metrics }) => {
       unit: 'trains/hr',
       subBadge: (
         <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-400">
-          <TrendingUp className="w-3 h-3" /> ↑ 21%
+          Current Replay State
         </span>
       ),
       icon: Cpu,
@@ -38,7 +38,7 @@ export const KpiCards: React.FC<KpiCardsProps> = ({ metrics }) => {
       unit: 'min',
       subBadge: (
         <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-cyan-400">
-          <TrendingDown className="w-3 h-3" /> ↘ 62%
+          Current Replay
         </span>
       ),
       icon: Clock,
@@ -50,7 +50,7 @@ export const KpiCards: React.FC<KpiCardsProps> = ({ metrics }) => {
       unit: '%',
       subBadge: (
         <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-400">
-          <TrendingUp className="w-3 h-3" /> ↑ 17%
+          Current Replay
         </span>
       ),
       icon: TrendingUp,
@@ -62,7 +62,7 @@ export const KpiCards: React.FC<KpiCardsProps> = ({ metrics }) => {
       unit: '',
       subBadge: (
         <span className="text-[11px] font-semibold text-slate-300">
-          Real-Time Radar
+          Modeled Resource Conflicts
         </span>
       ),
       icon: AlertOctagon,
@@ -74,7 +74,7 @@ export const KpiCards: React.FC<KpiCardsProps> = ({ metrics }) => {
       unit: '',
       subBadge: (
         <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-400">
-          <ShieldCheck className="w-3 h-3" /> 100% OR-Tools Solved
+          <ShieldCheck className="w-3 h-3" /> CP-SAT Solved
         </span>
       ),
       icon: ShieldCheck,

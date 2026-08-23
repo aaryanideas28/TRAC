@@ -285,8 +285,37 @@ def initialize_state():
         "conflicts_resolved": 2,
     }
 
-    # Before vs WITH AI Metrics
+    # Before vs WITH AI Metrics (Canonical Benchmark + Demonstration Scenario)
     state.before_after = {
+        "canonical_benchmark": {
+            "title": "Validated 10-Train CSMT-Thane Corridor Benchmark",
+            "legacy_baseline": {
+                "total_completion_delay_min": 200.52,
+                "additional_hold_min": 19.55,
+                "delay_variance_min2": 66.36,
+                "modeled_conflicts": 1172,
+                "zero_hold_trains": 3,
+                "maximum_delay_min": 34.32,
+                "corridor_makespan_min": 156.15,
+            },
+            "infrastructure_aware": {
+                "total_completion_delay_min": 195.82,
+                "additional_hold_min": 11.65,
+                "delay_variance_min2": 61.48,
+                "modeled_conflicts": 710,
+                "zero_hold_trains": 5,
+                "maximum_delay_min": 34.32,
+                "corridor_makespan_min": 156.15,
+            },
+            "improvements": {
+                "total_completion_delay_pct": -2.34,
+                "optimizer_added_hold_pct": -40.41,
+                "delay_variance_pct": -7.35,
+                "modeled_conflicts_pct": -39.42,
+                "zero_hold_trains_change": "3 → 5",
+                "headway_violations": 0,
+            },
+        },
         "without_ai": {
             "throughput": 15,
             "throughput_unit": "trains/hr",
