@@ -569,7 +569,7 @@ class NetworkScheduleOptimizer:
         # 5. Solve Model
         solver = cp_model.CpSolver()
         solver.parameters.max_time_in_seconds = self.time_limit_sec
-        solver.parameters.num_workers = 4
+        solver.parameters.num_workers = 1
         status = solver.Solve(model)
         status_name = solver.StatusName(status)
 

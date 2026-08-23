@@ -1,0 +1,94 @@
+import React from 'react';
+import { RefreshCw, Play, Zap } from 'lucide-react';
+
+interface TopNavProps {
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
+  systemStatus: string;
+  lastUpdated: string;
+  onRefresh: () => void;
+  onStartDemo: () => void;
+}
+
+export const TopNav: React.FC<TopNavProps> = ({
+  activeTab,
+  setActiveTab,
+  systemStatus,
+  lastUpdated,
+  onRefresh,
+  onStartDemo,
+}) => {
+  const tabs = [
+    { id: 'dashboard', label: 'Dashboard' },
+    { id: 'network', label: 'Live Network' },
+    { id: 'schedule', label: 'Train Schedule' },
+    { id: 'recommendations', label: 'AI Recommendations' },
+    { id: 'analytics', label: 'Analytics' },
+    { id: 'simulation', label: 'Simulation' },
+  ];
+
+  return (
+    <header className="top-nav-bar flex items-center justify-between px-6 py-3 bg-slate-950/95 border-b border-slate-800 shadow-md">
+      <div className="flex items-center gap-6">
+        <div className="flex items-center gap-3">
+          <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-inner">
+            <Zap className="w-5 h-5 fill-current" />
+          </div>
+          <div>
+            <h1 className="text-base font-extrabold text-slate-100 tracking-tight leading-none">
+              AI Railway Traffic Control
+            </h1>
+            <p className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider mt-1">
+              REAL-TIME SECTION THROUGHPUT OPTIMIZATION
+            </p>
+          </div>
+        </div>
+
+        <nav className="flex items-center gap-1 bg-slate-900/80 p-1 rounded-xl border border-slate-800">
+          {tabs.map((t) => (
+            <button
+              key={t.id}
+              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                activeTab === t.id
+                  ? 'bg-emerald-500 text-slate-950 shadow-md'
+                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+              }`}
+              onClick={() => setActiveTab(t.id)}
+            >
+              {t.label}
+            </button>
+          ))}
+        </nav>
+      </div>
+
+      <div className="flex items-center gap-3">
+        <button
+          className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 hover:bg-amber-500/20 text-xs font-bold transition shadow-sm"
+          onClick={onStartDemo}
+          title="Start Competition Demo Walkthrough"
+        >
+          <Play className="w-3.5 h-3.5 fill-current" />
+          <span>SIH Demo Flow</span>
+        </button>
+
+        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>{systemStatus}</span>
+        </div>
+
+        <div className="text-xs text-slate-300 font-mono flex items-center gap-1">
+          <span className="text-slate-400">Updated:</span>
+          <span className="font-bold text-slate-100">{lastUpdated}</span>
+        </div>
+
+        <button
+          className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700 transition"
+          onClick={onRefresh}
+          title="Refresh System Data"
+        >
+          <RefreshCw className="w-4 h-4" />
+        </button>
+      </div>
+    </header>
+  );
+};

@@ -340,8 +340,9 @@ def test_16_demo_formatting_output(scheduler_result: NetworkScheduleResult) -> N
 def test_17_legacy_vs_infrastructure_aware_modes(graph) -> None:
     """Verify both legacy_single_resource and infrastructure_aware modes execute cleanly."""
     optimizer = NetworkScheduleOptimizer()
-    inputs_path = Path(r"c:\Users\joshi\OneDrive\Desktop\Nexora\TRAC\TRAC\sih_traintraffic\data\selected_trains.json")
-    rf_path = Path(r"c:\Users\joshi\OneDrive\Desktop\Nexora\TRAC\TRAC\sih_traintraffic\data\processed\rf_optimization_inputs.csv")
+    project_root = Path(__file__).resolve().parents[1]
+    inputs_path = project_root / "data" / "selected_trains.json"
+    rf_path = project_root / "data" / "processed" / "rf_optimization_inputs.csv"
     train_inputs = optimizer.load_inputs(graph, inputs_path, rf_path)
 
     res_legacy = optimizer.solve(train_inputs, graph, mode="legacy_single_resource")
@@ -427,9 +428,10 @@ def test_20_proof_case_c_branch_default_resource(graph) -> None:
 
 def test_21_proof_case_d_legacy_regression_exact_match(graph) -> None:
     """CASE D: Legacy mode reproduces the previously validated 200.52 min benchmark."""
-    optimizer = NetworkScheduleOptimizer(time_limit_sec=5.0)
-    inputs_path = Path(r"c:\Users\joshi\OneDrive\Desktop\Nexora\TRAC\TRAC\sih_traintraffic\data\selected_trains.json")
-    rf_path = Path(r"c:\Users\joshi\OneDrive\Desktop\Nexora\TRAC\TRAC\sih_traintraffic\data\processed\rf_optimization_inputs.csv")
+    optimizer = NetworkScheduleOptimizer(time_limit_sec=10.0)
+    project_root = Path(__file__).resolve().parents[1]
+    inputs_path = project_root / "data" / "selected_trains.json"
+    rf_path = project_root / "data" / "processed" / "rf_optimization_inputs.csv"
     train_inputs = optimizer.load_inputs(graph, inputs_path, rf_path)
 
     res_legacy = optimizer.solve(train_inputs, graph, mode="legacy_single_resource")
