@@ -76,6 +76,23 @@ export function App() {
     await pollSimulationState();
   };
 
+  const handleAcceptRecommendation = async (recId: string) => {
+    try {
+      const res = await apiService.acceptRecommendation(recId);
+      if (res?.simulation_state) {
+        setSimState(res.simulation_state);
+        if (res.simulation_state.trains) setTrains(res.simulation_state.trains);
+        if (res.simulation_state.metrics) setMetrics(res.simulation_state.metrics);
+        if (res.simulation_state.before_after) setBeforeAfter(res.simulation_state.before_after);
+        if (res.simulation_state.recommendations) setRecommendations(res.simulation_state.recommendations);
+        if (res.simulation_state.conflicts) setConflicts(res.simulation_state.conflicts);
+      }
+      await pollSimulationState();
+    } catch (e) {
+      console.error('Error accepting recommendation:', e);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-cyan-500 selection:text-slate-950">
       {/* Top Header */}
@@ -144,7 +161,11 @@ export function App() {
 
             {/* Expanded Full-Width AI Recommendations & Conflict Resolution */}
             <div className="w-full">
-              <AiRecommendationPanel recommendations={recommendations} conflicts={conflicts} />
+              <AiRecommendationPanel
+                recommendations={recommendations}
+                conflicts={conflicts}
+                onAcceptRecommendation={handleAcceptRecommendation}
+              />
             </div>
           </div>
         )}
@@ -162,7 +183,11 @@ export function App() {
               <MlVisualizationPanel mlPrediction={simState?.ml_prediction} />
             </div>
             <div className="w-full">
-              <AiRecommendationPanel recommendations={recommendations} conflicts={conflicts} />
+              <AiRecommendationPanel
+                recommendations={recommendations}
+                conflicts={conflicts}
+                onAcceptRecommendation={handleAcceptRecommendation}
+              />
             </div>
           </div>
         )}
@@ -176,7 +201,11 @@ export function App() {
         {activeTab === 'recommendations' && (
           <div className="space-y-6">
             <div className="w-full">
-              <AiRecommendationPanel recommendations={recommendations} conflicts={conflicts} />
+              <AiRecommendationPanel
+                recommendations={recommendations}
+                conflicts={conflicts}
+                onAcceptRecommendation={handleAcceptRecommendation}
+              />
             </div>
           </div>
         )}

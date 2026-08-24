@@ -1042,6 +1042,70 @@ def get_recommendations():
         }
 
 
+class AcceptRecommendationRequest(BaseModel):
+    recommendation_id: Optional[str] = "REC-01"
+
+
+@app.post("/api/recommendations/accept")
+@app.post("/api/recommendations/{rec_id}/accept")
+def accept_recommendation(rec_id: Optional[str] = None, req: Optional[AcceptRecommendationRequest] = None):
+    """Accept an AI recommendation, execute it dynamically on the trains/network, and update simulation state."""
+    target_id = rec_id or (req.recommendation_id if req else None) or "REC-01"
+    
+    with state_lock:
+        found_rec = None
+        for rec in state.recommendations:
+            if rec["id"] == target_id or target_id == "ALL":
+                found_rec = rec
+                rec["status"] = "ACCEPTED"
+                
+                # Dynamically update the affected train and network allocation
+                tid = rec["affected_train_id"]
+                for t in state.trains:
+                    if t["id"] == tid:
+                        if rec["action_type"] == "OVERTAKE_LOOP":
+                            t["assigned_track"] = rec["assigned_track"]
+                            t["current_edge_id"] = "DR_LOOP" if "Dadar" in rec["assigned_track"] else "CLA_LOOP"
+                            t["status"] = "Waiting"
+                            t["speed_kmh"] = 0
+                            t["delay_min"] = max(0.0, round(t["delay_min"] - rec.get("expected_delay_reduction_min", 2.0), 1))
+                        elif rec["action_type"] in ["TRACK_CHANGE", "REROUTE"]:
+                            t["assigned_track"] = rec["assigned_track"]
+                            t["status"] = "Moving"
+                            t["speed_kmh"] = 48
+                            t["delay_min"] = max(0.0, round(t["delay_min"] - rec.get("expected_delay_reduction_min", 2.0), 1))
+                        elif rec["action_type"] in ["PROCEED", "SPEED_ADVISORY"]:
+                            t["status"] = "Moving"
+                            t["speed_kmh"] = 80
+                            t["delay_min"] = max(0.0, round(t["delay_min"] - rec.get("expected_delay_reduction_min", 1.5), 1))
+                        elif rec["action_type"] == "HOLD":
+                            t["status"] = "Waiting"
+                            t["speed_kmh"] = 0
+
+                # Resolve any associated conflict
+                for c in state.conflicts:
+                    if c["status"] == "DETECTED" and any(tid in t_inv for t_inv in c.get("trains_involved", [])):
+                        c["status"] = "RESOLVED"
+                
+                if target_id != "ALL":
+                    break
+
+        if not found_rec and state.recommendations:
+            found_rec = state.recommendations[0]
+            found_rec["status"] = "ACCEPTED"
+
+        calculate_derived_metrics()
+        action_msg = f"Accepted & Dispatched AI Recommendation {found_rec['id']}: {found_rec['action']}" if found_rec else "All AI Recommendations accepted and dispatched."
+        log_event(f"✅ {action_msg}", "DISPATCH", "SUCCESS")
+
+        return {
+            "status": "SUCCESS",
+            "message": action_msg,
+            "recommendation": found_rec,
+            "simulation_state": get_simulation_state(),
+        }
+
+
 @app.get("/api/metrics")
 def get_metrics():
     with state_lock:

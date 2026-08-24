@@ -879,6 +879,79 @@ export const apiService = {
     return mockRecommendations;
   },
 
+  async acceptRecommendation(recId: string): Promise<any> {
+    try {
+      const res = await fetch(`${API_BASE_URL}/recommendations/accept`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ recommendation_id: recId }),
+      });
+      if (res.ok) return await res.json();
+    } catch (e) {
+      // Fallback
+    }
+
+    // Local client-side fallback execution
+    mockRecommendations = mockRecommendations.map((r) => {
+      if (r.id === recId || recId === 'ALL') {
+        return { ...r, status: 'ACCEPTED' };
+      }
+      return r;
+    });
+
+    const targetRec = mockRecommendations.find((r) => r.id === recId) || mockRecommendations[0];
+    if (targetRec) {
+      const tid = targetRec.affected_train_id;
+      mockTrains = mockTrains.map((t) => {
+        if (t.id === tid) {
+          if (targetRec.action_type === 'OVERTAKE_LOOP') {
+            return {
+              ...t,
+              assigned_track: targetRec.assigned_track,
+              current_edge_id: 'DR_LOOP',
+              status: 'Waiting',
+              speed_kmh: 0,
+              delay_min: Math.max(0, Number((t.delay_min - targetRec.expected_delay_reduction_min).toFixed(1))),
+            };
+          } else if (targetRec.action_type === 'TRACK_CHANGE') {
+            return {
+              ...t,
+              assigned_track: targetRec.assigned_track,
+              status: 'Moving',
+              speed_kmh: 48,
+              delay_min: Math.max(0, Number((t.delay_min - targetRec.expected_delay_reduction_min).toFixed(1))),
+            };
+          } else if (targetRec.action_type === 'PROCEED' || targetRec.action_type === 'SPEED_ADVISORY') {
+            return {
+              ...t,
+              status: 'Moving',
+              speed_kmh: 80,
+              delay_min: Math.max(0, Number((t.delay_min - targetRec.expected_delay_reduction_min).toFixed(1))),
+            };
+          } else if (targetRec.action_type === 'HOLD') {
+            return { ...t, status: 'Waiting', speed_kmh: 0 };
+          }
+        }
+        return t;
+      });
+
+      mockEventLogs.unshift({
+        id: `EVT-${mockTickCount}-${targetRec.id}`,
+        timestamp: mockSimTime,
+        message: `Accepted & Dispatched AI Recommendation ${targetRec.id}: ${targetRec.action}`,
+        category: 'DISPATCH',
+        severity: 'SUCCESS',
+      });
+      if (mockEventLogs.length > 40) mockEventLogs.pop();
+    }
+
+    return {
+      status: 'SUCCESS',
+      message: `Recommendation ${recId} accepted and dispatched.`,
+      simulation_state: await this.fetchSimulationState(),
+    };
+  },
+
   async fetchMetrics(): Promise<{ kpis: KpiMetrics; before_vs_after: BeforeAfterMetrics }> {
     try {
       const res = await fetch(`${API_BASE_URL}/metrics`);
