@@ -1,13 +1,13 @@
 import React from 'react';
-import { RefreshCw, Play, Zap, Activity } from 'lucide-react';
+import { RefreshCw, Play, Zap, Clock } from 'lucide-react';
 
 interface TopNavProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
   systemStatus: string;
-  simTime: string;
-  tickCount: number;
-  lastUpdated: string;
+  simTime?: string;
+  tickCount?: number;
+  lastUpdated?: string;
   onRefresh: () => void;
   onStartDemo: () => void;
 }
@@ -18,7 +18,6 @@ export const TopNav: React.FC<TopNavProps> = ({
   systemStatus,
   simTime,
   tickCount,
-  lastUpdated,
   onRefresh,
   onStartDemo,
 }) => {
@@ -68,6 +67,14 @@ export const TopNav: React.FC<TopNavProps> = ({
       </div>
 
       <div className="flex items-center gap-3 flex-wrap">
+        {simTime && (
+          <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-xs font-mono">
+            <Clock className="w-3.5 h-3.5 text-cyan-400" />
+            <span className="font-bold text-cyan-300">{simTime}</span>
+            {tickCount !== undefined && <span className="text-slate-500">| T#{tickCount}</span>}
+          </div>
+        )}
+
         <button
           className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 hover:bg-amber-500/20 text-xs font-bold transition shadow-sm"
           onClick={onStartDemo}

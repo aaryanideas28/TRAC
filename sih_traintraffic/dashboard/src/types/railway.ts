@@ -54,6 +54,7 @@ export interface AiRecommendation {
   waiting_time_sec: number;
   expected_delay_reduction_min: number;
   reason: string;
+  status?: string;
   solver_status?: string;
   ml_congestion_prob?: number;
   resource_involved?: string;
@@ -154,7 +155,7 @@ export interface SystemEventLogItem {
   id: string;
   timestamp: string;
   message: string;
-  category: 'SIMULATION' | 'INCIDENT' | 'ML' | 'OPTIMIZATION';
+  category: 'SIMULATION' | 'INCIDENT' | 'ML' | 'OPTIMIZATION' | 'DISPATCH';
   severity: 'INFO' | 'WARNING' | 'ERROR' | 'SUCCESS';
 }
 

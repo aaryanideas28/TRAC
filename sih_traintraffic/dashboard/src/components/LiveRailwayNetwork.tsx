@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { StationNode, Train } from '../types/railway';
-import { Layers, AlertTriangle, Info, Compass, ShieldCheck, CheckCircle2, ChevronRight, Zap } from 'lucide-react';
+import { Layers, AlertTriangle, Info } from 'lucide-react';
 
 interface LiveRailwayNetworkProps {
   nodes: StationNode[];

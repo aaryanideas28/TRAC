@@ -1,0 +1,10 @@
+{
+  "buildCommand": "cd sih_traintraffic/dashboard && npm install && npm run build",
+  "outputDirectory": "sih_traintraffic/dashboard/dist",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
