@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import type { SimulationState } from '../types/railway';
 import { apiService } from '../services/apiService';
 import { Play, Pause, AlertTriangle, Zap, Train, Clock, RefreshCw, Cpu, FastForward } from 'lucide-react';
-import confetti from 'canvas-confetti';
 
 interface SimulationControlProps {
   simState?: SimulationState | null;
@@ -38,12 +37,6 @@ export const SimulationControl: React.FC<SimulationControlProps> = ({
         const updated = await apiService.fetchSimulationState();
         if (onStateUpdate) onStateUpdate(updated);
       }
-
-      confetti({
-        particleCount: 90,
-        spread: 80,
-        origin: { y: 0.6 },
-      });
     } catch (e) {
       console.error(e);
     } finally {

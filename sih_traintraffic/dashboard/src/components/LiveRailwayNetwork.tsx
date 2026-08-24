@@ -76,44 +76,106 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
   const FAST_STOPS = ['CSMT', 'BY', 'DR', 'CLA', 'GC', 'MLND', 'TNA'];
   const FULL_CORRIDOR_ROUTE = CORRIDOR_STATIONS.map((s) => s.code);
 
-  // Compute interpolated train X coordinate along graph edge
-  const getTrainX = (train: Train): number => {
-    const isFast = train.assigned_track.includes('Fast') || train.type === 'Fast Local' || train.type === 'Express';
-    const activeRoute = (train.route && train.route.length > 0)
-      ? train.route
-      : (isFast ? FAST_STOPS : FULL_CORRIDOR_ROUTE);
+  // Compute interpolated and collision-free train positions with safety headway
+  const getPositionedTrains = (): Array<Train & { x: number; y: number }> => {
+    // 1. Calculate raw target X coordinate for each train
+    const rawList = trains.map((train) => {
+      const isFast = train.assigned_track.includes('Fast') || train.type === 'Fast Local' || train.type === 'Express';
+      const isLoop = train.assigned_track.includes('Loop');
 
-    const currLoc = train.current_location || 'CSMT';
-    const currIdx = activeRoute.indexOf(currLoc);
+      let y = isLoop ? 305 : isFast ? 215 : 125;
+      let rawX = 55;
 
-    let rawX = 55;
-    if (currIdx >= 0 && currIdx < activeRoute.length - 1) {
-      const startX = nodePosMap[activeRoute[currIdx]] ?? 55;
-      const endX = nodePosMap[activeRoute[currIdx + 1]] ?? (startX + 55);
-      const prog = Math.min(100, Math.max(0, train.progress_percent || 0));
-      rawX = startX + (endX - startX) * (prog / 100.0);
-    } else {
-      const locX = nodePosMap[currLoc];
-      if (locX !== undefined) rawX = locX;
-      else rawX = 55 + ((train.progress_percent || 0) / 100.0) * 990;
-    }
+      if (isLoop) {
+        // Dedicated Loop Siding Berths
+        if (train.current_edge_id?.includes('DR') || train.current_location === 'DR') rawX = 440;
+        else if (train.current_edge_id?.includes('CLA') || train.current_location === 'CLA') rawX = 605;
+        else if (train.current_edge_id?.includes('PR') || train.current_location === 'PR') rawX = 385;
+        else if (train.current_edge_id?.includes('GC') || train.current_location === 'GC') rawX = 715;
+        else if (train.current_edge_id?.includes('TNA') || train.current_location === 'TNA') rawX = 1045;
+        else rawX = nodePosMap[train.current_location] ?? 440;
+      } else {
+        const activeRoute = (train.route && train.route.length > 0)
+          ? train.route
+          : (isFast ? FAST_STOPS : FULL_CORRIDOR_ROUTE);
 
-    // CLAMP TRAIN POSITION BEFORE BLOCKED TRACK (BY_DR Section on Fast Line)
-    if (isTrackBlocked && train.assigned_track.includes('Fast')) {
-      const byIdx = activeRoute.indexOf('BY') >= 0 ? activeRoute.indexOf('BY') : 1;
-      const drIdx = activeRoute.indexOf('DR') >= 0 ? activeRoute.indexOf('DR') : 2;
-      const safeStopX = nodePosMap['BY'] ?? 220;
+        const currLoc = train.current_location || 'CSMT';
+        const currIdx = activeRoute.indexOf(currLoc);
 
-      const isBeforeOrAtBlock = (currIdx >= 0 && currIdx <= byIdx) || train.current_edge_id === 'BY_DR' || train.current_edge_id === 'BY__DR' || train.status === 'Conflict';
-      const isNotPastBlock = currIdx < drIdx || (currIdx === drIdx && (train.progress_percent || 0) === 0);
+        if (currIdx >= 0 && currIdx < activeRoute.length - 1) {
+          const startX = nodePosMap[activeRoute[currIdx]] ?? 55;
+          const endX = nodePosMap[activeRoute[currIdx + 1]] ?? (startX + 55);
+          const prog = Math.min(100, Math.max(0, train.progress_percent || 0));
+          rawX = startX + (endX - startX) * (prog / 100.0);
+        } else {
+          const locX = nodePosMap[currLoc];
+          if (locX !== undefined) rawX = locX;
+          else rawX = 55 + ((train.progress_percent || 0) / 100.0) * 990;
+        }
 
-      if (isBeforeOrAtBlock && isNotPastBlock && rawX >= safeStopX) {
-        return safeStopX; // Stop at Byculla BY (X = 220) before Dadar blocked region
+        // Clamp Fast trains before blocked region (BY-DR blockage)
+        if (isTrackBlocked && isFast) {
+          const byIdx = activeRoute.indexOf('BY') >= 0 ? activeRoute.indexOf('BY') : 1;
+          const drIdx = activeRoute.indexOf('DR') >= 0 ? activeRoute.indexOf('DR') : 2;
+          const safeStopX = nodePosMap['BY'] ?? 220;
+
+          const isBeforeOrAtBlock = (currIdx >= 0 && currIdx <= byIdx) || train.current_edge_id === 'BY_DR' || train.current_edge_id === 'BY__DR' || train.status === 'Conflict';
+          const isNotPastBlock = currIdx < drIdx || (currIdx === drIdx && (train.progress_percent || 0) === 0);
+
+          if (isBeforeOrAtBlock && isNotPastBlock && rawX >= safeStopX) {
+            rawX = safeStopX;
+          }
+        }
       }
-    }
 
-    return rawX;
+      return {
+        ...train,
+        rawX: Math.max(45, Math.min(1065, rawX)),
+        y,
+        isFast,
+        isLoop,
+      };
+    });
+
+    // 2. Anti-Collision Headway Enforcement (Separately on Track 1 Slow and Track 2 Fast)
+    const MIN_HEADWAY_GAP = 54; // Minimum distance between train pill centers (badge is 48px wide)
+
+    const slowGroup = rawList.filter((t) => !t.isFast && !t.isLoop).sort((a, b) => a.rawX - b.rawX);
+    const fastGroup = rawList.filter((t) => t.isFast && !t.isLoop).sort((a, b) => a.rawX - b.rawX);
+    const loopGroup = rawList.filter((t) => t.isLoop);
+
+    const spaceGroup = (group: typeof rawList) => {
+      if (group.length <= 1) return group.map((t) => ({ ...t, x: t.rawX }));
+      const result = [...group];
+      
+      // Forward spacing pass
+      for (let i = 1; i < result.length; i++) {
+        if (result[i].rawX - result[i - 1].rawX < MIN_HEADWAY_GAP) {
+          result[i].rawX = result[i - 1].rawX + MIN_HEADWAY_GAP;
+        }
+      }
+
+      // Backward adjustment if right edge exceeds corridor boundary
+      if (result[result.length - 1].rawX > 1055) {
+        result[result.length - 1].rawX = 1055;
+        for (let i = result.length - 2; i >= 0; i--) {
+          if (result[i + 1].rawX - result[i].rawX < MIN_HEADWAY_GAP) {
+            result[i].rawX = result[i + 1].rawX - MIN_HEADWAY_GAP;
+          }
+        }
+      }
+
+      return result.map((t) => ({ ...t, x: Math.max(45, Math.min(1060, t.rawX)) }));
+    };
+
+    const spacedSlow = spaceGroup(slowGroup);
+    const spacedFast = spaceGroup(fastGroup);
+    const spacedLoop = loopGroup.map((t) => ({ ...t, x: t.rawX }));
+
+    return [...spacedSlow, ...spacedFast, ...spacedLoop];
   };
+
+  const positionedTrains = getPositionedTrains();
 
   // Filter stations based on toggle
   const displayedStations = CORRIDOR_STATIONS.filter((s) => {
@@ -583,13 +645,11 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
           })}
 
           {/* ========================================================================= */}
-          {/* 5. MOVING TRAIN MARKERS ON ALL TRACKS */}
+          {/* 5. MOVING TRAIN MARKERS ON ALL TRACKS (Collision-Free Safety Spaced) */}
           {/* ========================================================================= */}
-          {trains.map((train) => {
-            const trainX = getTrainX(train);
-            const isFast = train.assigned_track.includes('Fast') || train.type === 'Fast Local' || train.type === 'Express';
-            const isLoop = train.assigned_track.includes('Loop');
-            const trainY = isLoop ? 305 : isFast ? 215 : 125;
+          {positionedTrains.map((train) => {
+            const trainX = train.x;
+            const trainY = train.y;
             const statusColor = getStatusColor(train.status);
             const isSelected = selectedTrainId === train.id;
 

@@ -9,12 +9,9 @@ import { AiRecommendationPanel } from './components/AiRecommendationPanel';
 import { TrainScheduleTable } from './components/TrainScheduleTable';
 import { AnalyticsView } from './components/AnalyticsView';
 import { SimulationControl } from './components/SimulationControl';
-import { MlVisualizationPanel } from './components/MlVisualizationPanel';
-import { OrToolsVisualizationPanel } from './components/OrToolsVisualizationPanel';
 import { LiveSystemEventLog } from './components/LiveSystemEventLog';
 import { TrainDetailModal } from './components/TrainDetailModal';
 import { DemoFlowGuide } from './components/DemoFlowGuide';
-import { DataProvenanceBadge } from './components/DataProvenanceBadge';
 
 export function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -133,12 +130,6 @@ export function App() {
               isTrackBlocked={simState?.track_blocked}
             />
 
-            {/* Intelligence Output panels: ML Prediction & OR-Tools Solver */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
-              <MlVisualizationPanel mlPrediction={simState?.ml_prediction} />
-              <OrToolsVisualizationPanel optimizationState={simState?.optimization_state} />
-            </div>
-
             {/* Live System Event Log */}
             <LiveSystemEventLog events={simState?.event_logs} />
 
@@ -148,11 +139,6 @@ export function App() {
             {/* Expanded Full-Width AI Recommendations & Conflict Resolution */}
             <div className="w-full">
               <AiRecommendationPanel recommendations={recommendations} conflicts={conflicts} />
-            </div>
-
-            {/* Real Data Provenance Architecture Card */}
-            <div className="w-full pt-1">
-              <DataProvenanceBadge />
             </div>
           </div>
         )}
@@ -166,10 +152,6 @@ export function App() {
               selectedTrainId={selectedTrain?.id}
               isTrackBlocked={simState?.track_blocked}
             />
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
-              <MlVisualizationPanel mlPrediction={simState?.ml_prediction} />
-              <OrToolsVisualizationPanel optimizationState={simState?.optimization_state} />
-            </div>
             <div className="w-full">
               <AiRecommendationPanel recommendations={recommendations} conflicts={conflicts} />
             </div>
@@ -187,7 +169,6 @@ export function App() {
             <div className="w-full">
               <AiRecommendationPanel recommendations={recommendations} conflicts={conflicts} />
             </div>
-            <OrToolsVisualizationPanel optimizationState={simState?.optimization_state} />
           </div>
         )}
 
@@ -200,10 +181,6 @@ export function App() {
 
         {activeTab === 'simulation' && (
           <div className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
-              <MlVisualizationPanel mlPrediction={simState?.ml_prediction} />
-              <OrToolsVisualizationPanel optimizationState={simState?.optimization_state} />
-            </div>
             <LiveSystemEventLog events={simState?.event_logs} />
             {beforeAfter && <BeforeAfterComparison metrics={beforeAfter} />}
           </div>

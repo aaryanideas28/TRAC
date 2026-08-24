@@ -68,23 +68,6 @@ export const TopNav: React.FC<TopNavProps> = ({
       </div>
 
       <div className="flex items-center gap-3 flex-wrap">
-        {/* Data Mode Indicator Pill */}
-        <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 border border-slate-700/80 text-[11px] font-mono text-cyan-400">
-          <Activity className="w-3.5 h-3.5" />
-          <span className="text-slate-400">DATA MODE:</span>
-          <span className="font-bold text-slate-100">LIVE SIMULATION</span>
-        </div>
-
-        {/* Sim Clock & Tick */}
-        <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-[11px] font-mono text-slate-300">
-          <span className="text-slate-400">Sim Clock:</span>
-          <span className="font-bold text-emerald-400">{simTime || '10:42:00'}</span>
-          <span className="text-slate-600">|</span>
-          <span className="text-slate-400">Tick:</span>
-          <span className="font-bold text-slate-200">#{tickCount || 120}</span>
-        </div>
-
-        {/* Demo Flow Walkthrough Button */}
         <button
           className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 hover:bg-amber-500/20 text-xs font-bold transition shadow-sm"
           onClick={onStartDemo}
@@ -103,12 +86,7 @@ export const TopNav: React.FC<TopNavProps> = ({
           }`}
         >
           <span className={`w-2 h-2 rounded-full ${isConnected ? 'bg-emerald-400 animate-pulse' : 'bg-rose-500'}`}></span>
-          <span>{isConnected ? '🟢 BACKEND CONNECTED' : '🔴 BACKEND DISCONNECTED'}</span>
-        </div>
-
-        <div className="hidden xl:flex text-xs text-slate-300 font-mono items-center gap-1">
-          <span className="text-slate-400">Updated:</span>
-          <span className="font-bold text-slate-100">{lastUpdated || simTime}</span>
+          <span>{isConnected ? '🟢 SYSTEM CONNECTED' : '🔴 SYSTEM DISCONNECTED'}</span>
         </div>
 
         <button
