@@ -41,11 +41,11 @@ export const TopNav: React.FC<TopNavProps> = ({
             <Zap className="w-5 h-5 fill-current" />
           </div>
           <div>
-            <h1 className="text-base font-extrabold text-slate-100 tracking-tight leading-none">
-              AI Railway Traffic Control
+            <h1 className="text-lg font-extrabold text-slate-100 tracking-tight leading-none">
+              TRAC
             </h1>
-            <p className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider mt-1">
-              LIVE SIMULATION • ML + CP-SAT OPTIMIZATION
+            <p className="text-[11px] font-bold text-emerald-400 uppercase tracking-wider mt-1">
+              Train Rescheduling and Allocation Core
             </p>
           </div>
         </div>
@@ -84,14 +84,14 @@ export const TopNav: React.FC<TopNavProps> = ({
           <span className="font-bold text-slate-200">#{tickCount || 120}</span>
         </div>
 
-        {/* SIH Demo Flow Walkthrough Button */}
+        {/* Demo Flow Walkthrough Button */}
         <button
           className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 hover:bg-amber-500/20 text-xs font-bold transition shadow-sm"
           onClick={onStartDemo}
           title="Start Competition Demo Walkthrough"
         >
           <Play className="w-3.5 h-3.5 fill-current" />
-          <span>SIH Demo Flow</span>
+          <span>Demo Flow</span>
         </button>
 
         {/* Backend Status Indicator */}

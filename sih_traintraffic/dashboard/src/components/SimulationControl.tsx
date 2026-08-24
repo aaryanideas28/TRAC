@@ -61,7 +61,7 @@ export const SimulationControl: React.FC<SimulationControlProps> = ({
           </div>
           <div>
             <h2 className="text-base sm:text-lg font-extrabold text-slate-100 tracking-tight">
-              LIVE INCIDENT SIMULATOR (SIH JUDGE DEMO CONTROLS)
+              LIVE INCIDENT SIMULATOR
             </h2>
             <p className="text-xs text-slate-400">
               Inject real-time track disruptions, signal failures, or train delays and trigger OR-Tools CP-SAT re-optimization
@@ -132,12 +132,13 @@ export const SimulationControl: React.FC<SimulationControlProps> = ({
 
         {/* 3. ADD PRIORITY TRAIN */}
         <button
-          onClick={() => handleAction('add_train')}
-          className="flex flex-col items-center justify-center p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 text-slate-300 hover:border-cyan-500/50 hover:bg-cyan-500/10 transition-all"
+          disabled
+          title="No fetched Vande Bharat observation available in historical datasets"
+          className="flex flex-col items-center justify-center p-3.5 rounded-xl bg-slate-950/40 border border-slate-800/60 text-slate-500 cursor-not-allowed opacity-60 transition-all"
         >
-          <Train className="w-5 h-5 text-cyan-400 mb-1.5" />
+          <Train className="w-5 h-5 text-slate-600 mb-1.5" />
           <span className="text-xs font-bold">🚆 ADD PRIORITY TRAIN</span>
-          <span className="text-[10px] text-slate-400 mt-0.5">Vande Bharat Exp</span>
+          <span className="text-[10px] text-slate-500 mt-0.5">No fetched service available</span>
         </button>
 
         {/* 4. INDUCE DELAY */}

@@ -18,6 +18,7 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
   isTrackBlocked = false,
 }) => {
   const [hoveredTrain, setHoveredTrain] = useState<Train | null>(null);
+  const [showLoopInfo, setShowLoopInfo] = useState(false);
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -35,31 +36,68 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
   };
 
   // Node position lookup map
-  const nodePosMap: Record<string, number> = {
-    CSMT: 60,
-    BY: 220,
-    DR: 400,
-    CLA: 580,
-    GC: 740,
-    TNA: 900,
+  const defaultNodePosMap: Record<string, number> = {
+    CSMT: 40,
+    MSD: 90,
+    SNRD: 140,
+    BY: 190,
+    CHG: 240,
+    CRD: 290,
+    PR: 340,
+    DR: 390,
+    MTN: 440,
+    SION: 490,
+    CLA: 540,
+    VVH: 590,
+    GC: 640,
+    VK: 690,
+    KJRD: 740,
+    BND: 790,
+    NHU: 840,
+    MLND: 890,
+    TNA: 940,
   };
+
+  const nodePosMap: Record<string, number> = { ...defaultNodePosMap };
+  nodes.forEach((n) => {
+    if (n.pos_x) nodePosMap[n.station_code] = n.pos_x;
+  });
 
   // Compute interpolated train X coordinate along graph edge
   const getTrainX = (train: Train): number => {
-    const route = train.route && train.route.length > 0 ? train.route : ['CSMT', 'BY', 'DR', 'CLA', 'GC', 'TNA'];
+    const route = train.route && train.route.length > 0
+      ? train.route
+      : ['CSMT', 'MSD', 'SNRD', 'BY', 'CHG', 'CRD', 'PR', 'DR', 'MTN', 'SION', 'CLA', 'VVH', 'GC', 'VK', 'KJRD', 'BND', 'NHU', 'MLND', 'TNA'];
     const currLoc = train.current_location || 'CSMT';
     const currIdx = route.indexOf(currLoc);
 
+    let rawX = 40;
     if (currIdx >= 0 && currIdx < route.length - 1) {
-      const startX = nodePosMap[route[currIdx]] ?? 60;
-      const endX = nodePosMap[route[currIdx + 1]] ?? (startX + 160);
+      const startX = nodePosMap[route[currIdx]] ?? 40;
+      const endX = nodePosMap[route[currIdx + 1]] ?? (startX + 50);
       const prog = Math.min(100, Math.max(0, train.progress_percent || 0));
-      return startX + (endX - startX) * (prog / 100.0);
+      rawX = startX + (endX - startX) * (prog / 100.0);
+    } else {
+      const locX = nodePosMap[currLoc];
+      if (locX !== undefined) rawX = locX;
+      else rawX = 40 + ((train.progress_percent || 0) / 100.0) * 900;
     }
 
-    const locX = nodePosMap[currLoc];
-    if (locX !== undefined) return locX;
-    return 60 + ((train.progress_percent || 0) / 100.0) * 840;
+    // CLAMP TRAIN POSITION BEFORE BLOCKED TRACK (BY_DR Section on Fast Line)
+    if (isTrackBlocked && train.assigned_track.includes('Fast')) {
+      const byIdx = route.indexOf('BY') >= 0 ? route.indexOf('BY') : 3;
+      const drIdx = route.indexOf('DR') >= 0 ? route.indexOf('DR') : 7;
+      const safeStopX = nodePosMap['BY'] ?? 190;
+
+      const isBeforeOrAtBlock = (currIdx >= 0 && currIdx <= byIdx) || train.current_edge_id === 'BY_DR' || train.status === 'Conflict';
+      const isNotPastBlock = currIdx < drIdx || (currIdx === drIdx && (train.progress_percent || 0) === 0);
+
+      if (isBeforeOrAtBlock && isNotPastBlock && rawX >= safeStopX) {
+        return safeStopX; // Stop at Byculla BY (X = 190) before Dadar blocked region
+      }
+    }
+
+    return rawX;
   };
 
   return (
@@ -168,10 +206,22 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
           </text>
           <line x1="60" y1="220" x2="900" y2="220" stroke="#06b6d4" strokeWidth="4" filter="url(#glowCyan)" />
 
-          {/* 3. LOOP TRACK LINE (Track 4) */}
-          <text x="50" y="265" fill="#f59e0b" fontSize="10" fontWeight="bold" fontFamily="monospace">
-            LOOP TRACK
-          </text>
+          {/* 3. LOOP TRACK LINE (Track 4) with Info Icon (i) */}
+          <g
+            className="cursor-pointer group"
+            onMouseEnter={() => setShowLoopInfo(true)}
+            onMouseLeave={() => setShowLoopInfo(false)}
+            onClick={() => setShowLoopInfo(!showLoopInfo)}
+          >
+            <text x="50" y="265" fill="#f59e0b" fontSize="10" fontWeight="bold" fontFamily="monospace">
+              LOOP TRACK
+            </text>
+            <circle cx="124" cy="262" r="6" fill="#f59e0b" opacity="0.2" className="group-hover:opacity-40 transition" />
+            <circle cx="124" cy="262" r="6" fill="none" stroke="#f59e0b" strokeWidth="1" />
+            <text x="124" y="265" textAnchor="middle" fill="#f59e0b" fontSize="8" fontWeight="bold" fontFamily="sans-serif">
+              i
+            </text>
+          </g>
 
           {/* Crossover curves */}
           <path
@@ -277,6 +327,19 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
               Track: <span className="text-cyan-300">{hoveredTrain.assigned_track}</span> | Delay:{' '}
               <span className="text-amber-400">{hoveredTrain.delay_min} min</span> | Progress: {hoveredTrain.progress_percent}%
             </div>
+          </div>
+        )}
+
+        {/* Loop Track Explanation Tooltip / Popover */}
+        {showLoopInfo && (
+          <div className="absolute bottom-4 left-4 max-w-xs p-3 rounded-xl bg-slate-900/95 border border-amber-500/40 shadow-2xl text-xs space-y-1.5 backdrop-blur z-30 font-sans">
+            <div className="flex items-center gap-1.5 font-bold text-amber-400 border-b border-slate-800 pb-1">
+              <span className="w-4 h-4 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center text-[10px] border border-amber-500/40 font-bold">i</span>
+              <span>Loop Track Info</span>
+            </div>
+            <p className="text-slate-300 text-[11px] leading-relaxed">
+              A loop track is an additional track that runs parallel to the main line for a certain section, allowing one train to wait while another train passes. It helps improve capacity and reduce delays.
+            </p>
           </div>
         )}
       </div>

@@ -11,7 +11,7 @@ export interface StationNode {
 }
 
 export type TrainStatus = 'Moving' | 'Waiting' | 'Delayed' | 'Conflict';
-export type TrainType = 'Express' | 'Local' | 'Freight' | 'Passenger';
+export type TrainType = 'Express' | 'Local' | 'Freight' | 'Passenger' | 'Fast Local' | 'Slow Local';
 export type TrainPriority = 'High' | 'Medium' | 'Low';
 
 export interface Train {

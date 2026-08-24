@@ -116,7 +116,7 @@ export function App() {
         {/* Top Summary KPI Cards */}
         {metrics && <KpiCards metrics={metrics} lastUpdated={lastUpdated} />}
 
-        {/* Incident Simulator Toolbar (SIH Judge Perturbation Controls) */}
+        {/* Live Incident Simulator Toolbar */}
         <SimulationControl
           simState={simState}
           onStateUpdate={(st) => setSimState(st)}
