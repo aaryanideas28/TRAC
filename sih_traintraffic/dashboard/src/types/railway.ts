@@ -8,6 +8,12 @@ export interface StationNode {
   line_corridor: string;
   is_terminal: boolean;
   is_halt: boolean;
+  is_fast_stop?: boolean;
+  is_slow_stop?: boolean;
+  has_loop_line?: boolean;
+  platform_count?: number;
+  infrastructure_type?: string;
+  geographic_feature?: string;
 }
 
 export type TrainStatus = 'Moving' | 'Waiting' | 'Delayed' | 'Conflict';
@@ -36,7 +42,7 @@ export interface Train {
   route: string[];
 }
 
-export type ActionType = 'PROCEED' | 'HOLD' | 'TRACK_CHANGE';
+export type ActionType = 'PROCEED' | 'HOLD' | 'TRACK_CHANGE' | 'OVERTAKE_LOOP' | 'SPEED_ADVISORY' | 'PLATFORM_REASSIGN';
 
 export interface AiRecommendation {
   id: string;

@@ -107,6 +107,8 @@ export const TrainScheduleTable: React.FC<TrainScheduleTableProps> = ({ trains, 
               className="bg-transparent text-slate-300 font-medium focus:outline-none"
             >
               <option value="All">All Types</option>
+              <option value="Fast Local">Fast Local</option>
+              <option value="Slow Local">Slow Local</option>
               <option value="Express">Express</option>
               <option value="Local">Local</option>
               <option value="Freight">Freight</option>
