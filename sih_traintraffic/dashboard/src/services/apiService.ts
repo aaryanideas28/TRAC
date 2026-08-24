@@ -193,23 +193,23 @@ let mockTrains: Train[] = [
     route: ALL_STATIONS,
   },
   {
-    id: '97419',
-    name: 'T123 / Mumbai CSMT - Thane Slow Local',
-    type: 'Slow Local',
+    id: 'T305',
+    name: 'BOXN Container Freight (Goods Express)',
+    type: 'Freight',
     origin: 'CSMT',
-    origin_name: 'CHHATRAPATI SHIVAJI MAHARAJ TERMINUS',
-    destination: 'TNA',
-    destination_name: 'THANE',
+    origin_name: 'CSMT Goods Yard',
+    destination: 'KYN',
+    destination_name: 'KALYAN GOODS YARD',
     current_location: 'VVH',
-    current_location_name: 'Vidyavihar',
-    speed_kmh: 46,
+    current_location_name: 'Vidyavihar Goods Section',
+    speed_kmh: 38,
     scheduled_eta: '21:02',
     expected_eta: '21:03',
     delay_min: 1.0,
-    priority: 'Medium',
+    priority: 'Low',
     assigned_track: 'Track 1 (Down Slow)',
     status: 'Moving',
-    progress_percent: 0,
+    progress_percent: 15,
     current_edge_id: 'VVH__GC',
     route: ALL_STATIONS,
   },
@@ -536,11 +536,11 @@ let mockConflicts: ConflictItem[] = [];
 
 let mockMetrics: KpiMetrics = {
   active_trains: 18,
-  throughput_trains_per_hr: 28,
-  throughput_trend_pct: 16.0,
+  throughput_trains_per_hr: 24,
+  throughput_trend_pct: 12.0,
   average_delay_min: 1.8,
-  delay_trend_pct: -52.0,
-  track_utilization_pct: 79,
+  delay_trend_pct: -45.0,
+  track_utilization_pct: 76,
   utilization_trend_pct: 8.0,
   conflicts_detected: 0,
   conflicts_resolved: 4,
@@ -548,32 +548,32 @@ let mockMetrics: KpiMetrics = {
 
 let mockBeforeAfter: BeforeAfterMetrics = {
   without_ai: {
-    throughput: 16,
+    throughput: 14,
     throughput_unit: 'trains/hr',
     average_delay: 8.9,
     average_delay_unit: 'min',
-    track_utilization: 64,
+    track_utilization: 58,
     track_utilization_unit: '%',
     waiting_time: 15.6,
     waiting_time_unit: 'min',
     conflicts: 4,
   },
   with_ai: {
-    throughput: 28,
+    throughput: 30,
     throughput_unit: 'trains/hr',
-    average_delay: 1.8,
+    average_delay: 1.2,
     average_delay_unit: 'min',
-    track_utilization: 81,
+    track_utilization: 85,
     track_utilization_unit: '%',
-    waiting_time: 2.8,
+    waiting_time: 2.2,
     waiting_time_unit: 'min',
     conflicts: 0,
   },
   improvements: {
-    throughput_increase_pct: 75.0,
-    delay_reduction_pct: 79.8,
-    utilization_increase_pct: 26.5,
-    waiting_time_reduction_pct: 82.0,
+    throughput_increase_pct: 114.3,
+    delay_reduction_pct: 86.5,
+    utilization_increase_pct: 46.5,
+    waiting_time_reduction_pct: 85.9,
     conflict_elimination_pct: 100.0,
   },
 };
@@ -606,10 +606,25 @@ function clientFallbackTick() {
   mockSimTime = formatSimTime(mockSimSeconds);
 
   mockTrains = mockTrains.map((t) => {
+    const isFast = t.assigned_track.includes('Fast') || t.type === 'Fast Local' || t.type === 'Express';
+    const isFreight = t.type === 'Freight';
+
+    // If fast track is blocked, keep blocked fast trains stationary before blockage
+    if (mockTrackBlocked && isFast) {
+      if (t.current_location === 'BY' || t.current_edge_id?.includes('BY') || t.current_edge_id?.includes('DR') || t.status === 'Conflict') {
+        return {
+          ...t,
+          status: 'Conflict',
+          speed_kmh: 0,
+          progress_percent: 0,
+          current_location: 'BY',
+        };
+      }
+    }
+
     if (t.status === 'Moving') {
-      const isFast = t.assigned_track.includes('Fast') || t.type === 'Fast Local' || t.type === 'Express';
       const activeRoute = t.route && t.route.length > 0 ? t.route : (isFast ? FAST_STATIONS : ALL_STATIONS);
-      const speedFactor = isFast ? 1.4 : 0.9;
+      const speedFactor = isFast ? 1.4 : (isFreight ? 0.75 : 0.9);
       let nextProg = t.progress_percent + speedFactor * mockSpeedMultiplier;
       let currLoc = t.current_location;
       let currEdge = t.current_edge_id;
@@ -747,6 +762,17 @@ export const apiService = {
         }
         return t;
       });
+      mockMetrics = {
+        ...mockMetrics,
+        throughput_trains_per_hr: 14,
+        throughput_trend_pct: -28.0,
+        average_delay_min: 6.5,
+        delay_trend_pct: 65.0,
+        track_utilization_pct: 58.0,
+        utilization_trend_pct: -18.0,
+        conflicts_detected: 3,
+        conflicts_resolved: 0,
+      };
     }
     if (action === 'reset') {
       mockTrackBlocked = false;
@@ -756,6 +782,17 @@ export const apiService = {
       mockSimTime = '10:42:00';
       mockTickCount = 1200;
       mockTrains = mockTrains.map((t) => ({ ...t, status: 'Moving', speed_kmh: t.assigned_track.includes('Fast') ? 75 : 44 }));
+      mockMetrics = {
+        active_trains: 18,
+        throughput_trains_per_hr: 24,
+        throughput_trend_pct: 12.0,
+        average_delay_min: 1.8,
+        delay_trend_pct: -45.0,
+        track_utilization_pct: 76,
+        utilization_trend_pct: 8.0,
+        conflicts_detected: 0,
+        conflicts_resolved: 4,
+      };
       mockEventLogs = [
         {
           id: 'EVT-0001',
@@ -902,26 +939,34 @@ export const apiService = {
 
     mockMetrics = {
       ...mockMetrics,
-      throughput_trains_per_hr: 32,
-      throughput_trend_pct: 28.0,
+      throughput_trains_per_hr: 30,
+      throughput_trend_pct: 25.0,
       average_delay_min: 1.2,
-      delay_trend_pct: -85.0,
-      track_utilization_pct: 94.0,
-      utilization_trend_pct: 22.0,
+      delay_trend_pct: -82.0,
+      track_utilization_pct: 85.0,
+      utilization_trend_pct: 14.0,
       conflicts_detected: 0,
       conflicts_resolved: 4,
     };
 
     mockBeforeAfter.with_ai = {
-      throughput: 32,
+      throughput: 30,
       throughput_unit: 'trains/hr',
       average_delay: 1.2,
       average_delay_unit: 'min',
-      track_utilization: 94,
+      track_utilization: 85,
       track_utilization_unit: '%',
-      waiting_time: 1.8,
+      waiting_time: 2.2,
       waiting_time_unit: 'min',
       conflicts: 0,
+    };
+
+    mockBeforeAfter.improvements = {
+      throughput_increase_pct: 114.3,
+      delay_reduction_pct: 86.5,
+      utilization_increase_pct: 46.5,
+      waiting_time_reduction_pct: 85.9,
+      conflict_elimination_pct: 100.0,
     };
 
     return {

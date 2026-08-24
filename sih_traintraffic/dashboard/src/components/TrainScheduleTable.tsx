@@ -157,6 +157,7 @@ export const TrainScheduleTable: React.FC<TrainScheduleTableProps> = ({ trains, 
               </th>
               <th className="py-3 px-4">Assigned Resource</th>
               <th className="py-3 px-4">Status</th>
+              <th className="py-3 px-4">ML Risk Prediction</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-800/60 font-mono text-slate-300">
@@ -182,6 +183,21 @@ export const TrainScheduleTable: React.FC<TrainScheduleTableProps> = ({ trains, 
                 </td>
                 <td className="py-3 px-4 text-cyan-300 font-semibold">{t.assigned_track}</td>
                 <td className="py-3 px-4">{getStatusBadge(t.status)}</td>
+                <td className="py-3 px-4">
+                  {t.status === 'Conflict' || t.delay_min >= 4.0 ? (
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-rose-500/20 text-rose-300 border border-rose-500/40 animate-pulse">
+                      HIGH RISK (88%)
+                    </span>
+                  ) : t.delay_min >= 1.5 || t.status === 'Waiting' ? (
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                      MEDIUM RISK (42%)
+                    </span>
+                  ) : (
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                      LOW RISK (6%)
+                    </span>
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>

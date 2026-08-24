@@ -87,13 +87,14 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
       let rawX = 55;
 
       if (isLoop) {
-        // Dedicated Loop Siding Berths
+        // Dedicated Loop Siding Berths (sitting directly on Loop Track Line at Y = 305)
         if (train.current_edge_id?.includes('DR') || train.current_location === 'DR') rawX = 440;
         else if (train.current_edge_id?.includes('CLA') || train.current_location === 'CLA') rawX = 605;
         else if (train.current_edge_id?.includes('PR') || train.current_location === 'PR') rawX = 385;
         else if (train.current_edge_id?.includes('GC') || train.current_location === 'GC') rawX = 715;
         else if (train.current_edge_id?.includes('TNA') || train.current_location === 'TNA') rawX = 1045;
-        else rawX = nodePosMap[train.current_location] ?? 440;
+        else if (train.current_edge_id?.includes('CSMT') || train.current_location === 'CSMT') rawX = 85;
+        else rawX = nodePosMap[train.current_location] ?? 605;
       } else {
         const activeRoute = (train.route && train.route.length > 0)
           ? train.route
@@ -113,17 +114,17 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
           else rawX = 55 + ((train.progress_percent || 0) / 100.0) * 990;
         }
 
-        // Clamp Fast trains before blocked region (BY-DR blockage)
+        // Clamp Fast trains before blocked region (BY-DR blockage) - Keep train COMPLETELY STILL
         if (isTrackBlocked && isFast) {
           const byIdx = activeRoute.indexOf('BY') >= 0 ? activeRoute.indexOf('BY') : 1;
           const drIdx = activeRoute.indexOf('DR') >= 0 ? activeRoute.indexOf('DR') : 2;
           const safeStopX = nodePosMap['BY'] ?? 220;
 
-          const isBeforeOrAtBlock = (currIdx >= 0 && currIdx <= byIdx) || train.current_edge_id === 'BY_DR' || train.current_edge_id === 'BY__DR' || train.status === 'Conflict';
+          const isBlockedSection = train.current_edge_id?.includes('BY') || train.current_edge_id?.includes('DR') || train.status === 'Conflict' || currLoc === 'BY' || (currIdx >= 0 && currIdx <= byIdx && rawX >= safeStopX);
           const isNotPastBlock = currIdx < drIdx || (currIdx === drIdx && (train.progress_percent || 0) === 0);
 
-          if (isBeforeOrAtBlock && isNotPastBlock && rawX >= safeStopX) {
-            rawX = safeStopX;
+          if (isBlockedSection && isNotPastBlock) {
+            rawX = safeStopX; // Lock completely still at Byculla (X = 220) before Dadar blockage
           }
         }
       }
@@ -229,7 +230,7 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
                 filterMode === 'FAST' ? 'bg-cyan-950 text-cyan-300 font-bold border border-cyan-800/60 shadow' : 'text-slate-400 hover:text-cyan-400'
               }`}
             >
-              Fast Halts (8)
+              Fast Halts (7)
             </button>
             <button
               onClick={() => setFilterMode('SLOW')}
@@ -487,10 +488,11 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
           </g>
 
           {/* ========================================================================= */}
-          {/* 3. TRACK 3 & LOOP LINES (Y = 305) - Turnouts at Dadar, Kurla, Ghatkopar, Thane, Parel */}
+          {/* ========================================================================= */}
+          {/* 3. TRACK 3 & LOOP LINES (Y = 305) - Full Corridor Sidings & Interlocking Loops */}
           {/* ========================================================================= */}
           <g>
-            {/* Loop Header */}
+            {/* Loop Header Badge */}
             <g
               className="cursor-pointer group"
               onMouseEnter={() => setShowLoopInfo(true)}
@@ -506,24 +508,41 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
               </text>
             </g>
 
-            {/* Continuous Loop Track Bed Line with Dash Pattern */}
+            {/* Continuous Track 3 Loop Bed Base & Rails (Spans entire corridor from CSMT to Thane) */}
+            <rect x="40" y="301" width="1025" height="8" fill="#0f172a" rx="4" />
             <line
-              x1="350"
+              x1="45"
               y1="305"
               x2="1060"
               y2="305"
-              stroke="#b45309"
-              strokeWidth="3.5"
-              strokeDasharray="8 4"
-              opacity="0.85"
+              stroke="#d97706"
+              strokeWidth="4"
+              strokeLinecap="round"
             />
+            {/* Loop Track Sleeper Ties across whole corridor */}
+            {Array.from({ length: 70 }).map((_, i) => (
+              <line
+                key={`tie-loop-${i}`}
+                x1={50 + i * 14.5}
+                y1={300}
+                x2={50 + i * 14.5}
+                y2={310}
+                stroke="#1e293b"
+                strokeWidth="1.5"
+              />
+            ))}
 
-            {/* A. Parel Siding (PR: X=360-410) */}
+            {/* A. CSMT Goods Yard Siding (X = 55-100) */}
+            <path d="M 55 215 Q 70 305 85 305" fill="none" stroke="#f59e0b" strokeWidth="2.5" />
+            <rect x="68" y="298" width="42" height="14" rx="4" fill="#0f172a" stroke="#f59e0b" strokeWidth="1.5" />
+            <text x="89" y="308" textAnchor="middle" fill="#fde047" fontSize="7" fontWeight="extrabold">CSMT YARD</text>
+
+            {/* B. Parel Siding (PR: X=360-410) */}
             <path d="M 360 215 Q 375 305 385 305 L 410 305" fill="none" stroke="#f59e0b" strokeWidth="2.5" />
-            <rect x="375" y="299" width="30" height="12" rx="4" fill="#78350f" stroke="#f59e0b" strokeWidth="1" />
-            <text x="390" y="308" textAnchor="middle" fill="#fef3c7" fontSize="7" fontWeight="bold">PR Siding</text>
+            <rect x="370" y="298" width="40" height="14" rx="4" fill="#0f172a" stroke="#f59e0b" strokeWidth="1.5" />
+            <text x="390" y="308" textAnchor="middle" fill="#fde047" fontSize="7" fontWeight="extrabold">PR SIDING</text>
 
-            {/* B. Dadar Interlocking Loop (DR: X=410-480) */}
+            {/* C. Dadar Interlocking Loop (DR: X=410-480) */}
             <path
               d="M 410 215 Q 425 305 440 305 L 465 305 Q 480 305 495 215"
               fill="none"
@@ -531,12 +550,11 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
               strokeWidth="3"
               filter="url(#glowAmber)"
             />
-            {/* Dadar Crossover to Slow Track */}
             <path d="M 440 305 Q 450 125 465 125" fill="none" stroke="#f59e0b" strokeWidth="2" strokeDasharray="4 2" />
             <rect x="425" y="298" width="38" height="14" rx="4" fill="#0f172a" stroke="#f59e0b" strokeWidth="1.5" />
             <text x="444" y="308" textAnchor="middle" fill="#fde047" fontSize="7.5" fontWeight="extrabold">DR LOOP</text>
 
-            {/* C. Kurla Car Shed / Goods Loop (CLA: X=575-645) */}
+            {/* D. Kurla Car Shed / Goods Loop (CLA: X=575-645) */}
             <path
               d="M 575 215 Q 590 305 605 305 L 630 305 Q 645 305 660 215"
               fill="none"
@@ -548,7 +566,7 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
             <rect x="590" y="298" width="40" height="14" rx="4" fill="#0f172a" stroke="#f59e0b" strokeWidth="1.5" />
             <text x="610" y="308" textAnchor="middle" fill="#fde047" fontSize="7.5" fontWeight="extrabold">CLA LOOP</text>
 
-            {/* D. Ghatkopar Metro Interchange Loop (GC: X=685-755) */}
+            {/* E. Ghatkopar Metro Interchange Loop (GC: X=685-755) */}
             <path
               d="M 685 215 Q 700 305 715 305 L 740 305 Q 755 305 770 215"
               fill="none"
@@ -559,7 +577,7 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
             <rect x="700" y="298" width="38" height="14" rx="4" fill="#0f172a" stroke="#f59e0b" strokeWidth="1.5" />
             <text x="719" y="308" textAnchor="middle" fill="#fde047" fontSize="7.5" fontWeight="extrabold">GC LOOP</text>
 
-            {/* E. Thane Major Terminus Loops (TNA: X=1010-1070) */}
+            {/* F. Thane Major Terminus Loops (TNA: X=1010-1070) */}
             <path
               d="M 1010 215 Q 1025 305 1045 305 L 1065 305"
               fill="none"

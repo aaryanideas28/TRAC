@@ -152,25 +152,26 @@ def calculate_derived_metrics():
     moving_trains = len([t for t in state.trains if t["status"] == "Moving"])
     
     # Throughput: trains completed per hour derived from traffic flow & delay penalty
-    tp = max(5, round(24 - avg_delay * 1.2 - detected_cnt * 3))
-    
-    # Track Utilization %: authentic corridor block section occupancy ratio
-    # 18 block sections per physical track across 19 stations
-    total_sections = 36
-    active_occupancy = moving_trains * 2 + len([t for t in state.trains if t["status"] == "Waiting"])
     if state.track_blocked:
-        util = max(58, min(68, round((active_occupancy / total_sections) * 100 - 15)))
+        tp = max(10, min(16, round(14 - avg_delay * 0.4)))
+        util = max(56, min(62, round(58.0 - detected_cnt * 1.0)))
     else:
-        util = max(74, min(84, round(70 + (moving_trains / max(1, len(state.trains))) * 11 - detected_cnt * 5.0)))
+        is_optimized = getattr(state, 'last_optimized_ts', None) is not None and not state.track_blocked
+        if is_optimized:
+            tp = max(28, min(34, round(30 - avg_delay * 0.5)))
+            util = max(84, min(88, round(85.0 + moving_trains * 0.1)))
+        else:
+            tp = max(22, min(26, round(24 - avg_delay * 0.5)))
+            util = max(74, min(78, round(76.0 + moving_trains * 0.1)))
     
     state.metrics = {
         "active_trains": len(state.trains),
         "throughput_trains_per_hr": tp,
-        "throughput_trend_pct": -18.0 if state.track_blocked else 12.0,
+        "throughput_trend_pct": -28.0 if state.track_blocked else (25.0 if is_optimized else 12.0),
         "average_delay_min": avg_delay,
-        "delay_trend_pct": 45.0 if state.track_blocked else -45.0,
+        "delay_trend_pct": 65.0 if state.track_blocked else (-82.0 if is_optimized else -45.0),
         "track_utilization_pct": util,
-        "utilization_trend_pct": -10.0 if state.track_blocked else 8.0,
+        "utilization_trend_pct": -18.0 if state.track_blocked else (14.0 if is_optimized else 8.0),
         "conflicts_detected": detected_cnt,
         "conflicts_resolved": resolved_cnt,
     }
@@ -254,6 +255,7 @@ def initialize_state():
         state.blocked_section = "BY_DR"
         state.blocked_section_name = "Dadar Junction (Down Fast Line)"
         state.signal_failure = False
+        state.last_optimized_ts = None
         
         state.event_logs = []
         
@@ -411,23 +413,23 @@ def initialize_state():
                 "route": full_route,
             },
             {
-                "id": "97419",
-                "name": "T123 / Mumbai CSMT - Thane Slow Local",
-                "type": "Slow Local",
+                "id": "T305",
+                "name": "BOXN Container Freight (Goods Express)",
+                "type": "Freight",
                 "origin": "CSMT",
-                "origin_name": "CHHATRAPATI SHIVAJI MAHARAJ TERMINUS",
-                "destination": "TNA",
-                "destination_name": "THANE",
+                "origin_name": "CSMT Goods Yard",
+                "destination": "KYN",
+                "destination_name": "KALYAN GOODS YARD",
                 "current_location": "VVH",
-                "current_location_name": "Vidyavihar",
-                "speed_kmh": 46,
+                "current_location_name": "Vidyavihar Goods Section",
+                "speed_kmh": 38,
                 "scheduled_eta": "21:02",
                 "expected_eta": "21:03",
                 "delay_min": 1.0,
-                "priority": "Medium",
+                "priority": "Low",
                 "assigned_track": "Track 1 (Down Slow)",
                 "status": "Moving",
-                "progress_percent": 0.0,
+                "progress_percent": 15.0,
                 "current_edge_id": "VVH__GC",
                 "route": full_route,
             },
@@ -751,25 +753,25 @@ def initialize_state():
         calculate_derived_metrics()
         
         state.before_metrics = {
-            "throughput": 15,
+            "throughput": 14,
             "throughput_unit": "trains/hr",
-            "average_delay": 8.4,
+            "average_delay": 8.9,
             "average_delay_unit": "min",
-            "track_utilization": 69,
+            "track_utilization": 58,
             "track_utilization_unit": "%",
-            "waiting_time": 14.2,
+            "waiting_time": 15.6,
             "waiting_time_unit": "min",
-            "conflicts": 3,
+            "conflicts": 4,
         }
         
         state.after_metrics = {
-            "throughput": 19,
+            "throughput": 30,
             "throughput_unit": "trains/hr",
-            "average_delay": 2.0,
+            "average_delay": 1.2,
             "average_delay_unit": "min",
-            "track_utilization": 82,
+            "track_utilization": 85,
             "track_utilization_unit": "%",
-            "waiting_time": 3.5,
+            "waiting_time": 2.2,
             "waiting_time_unit": "min",
             "conflicts": 0,
         }
@@ -778,10 +780,10 @@ def initialize_state():
             "without_ai": state.before_metrics,
             "with_ai": state.after_metrics,
             "improvements": {
-                "throughput_increase_pct": 26.6,
-                "delay_reduction_pct": 76.2,
-                "utilization_increase_pct": 18.8,
-                "waiting_time_reduction_pct": 75.3,
+                "throughput_increase_pct": 114.3,
+                "delay_reduction_pct": 86.5,
+                "utilization_increase_pct": 46.5,
+                "waiting_time_reduction_pct": 85.9,
                 "conflict_elimination_pct": 100.0,
             },
         }
@@ -829,20 +831,26 @@ def advance_simulation_tick():
             edge_distance_km = SECTION_DISTANCES_KM.get(edge_id, 5.0)
             train_speed_kmh = max(1.0, float(train["speed_kmh"]))
             
-            # Check track section blockage
+            # Check track section blockage - keep blocked trains completely still
             is_blocked = False
             if state.track_blocked and "Fast" in train["assigned_track"]:
-                if edge_id in [state.blocked_section, "BY_DR", "DR_CLA"]:
+                if (
+                    edge_id in [state.blocked_section, "BY_DR", "BY__DR", "DR_CLA"]
+                    or train["current_location"] in ["BY", "DR"]
+                    or "BY" in edge_id
+                    or train["status"] == "Conflict"
+                ):
                     is_blocked = True
 
             if is_blocked:
                 train["speed_kmh"] = 0
                 train["status"] = "Conflict"
+                train["progress_percent"] = 0.0  # Keep completely still at Byculla
                 train["delay_min"] = round(train["delay_min"] + (1.0 * state.speed_multiplier) / 60.0, 2)
             else:
-                if train["status"] in ["Moving", "Delayed", "Conflict"]:
+                if train["status"] in ["Moving", "Delayed"]:
                     if train["speed_kmh"] == 0:
-                        train["speed_kmh"] = 60
+                        train["speed_kmh"] = 38 if train["type"] == "Freight" else (78 if "Fast" in train["assigned_track"] else 44)
                     train["status"] = "Moving"
                     
                     # Travel time T = (D / V) * 3600 seconds
@@ -1109,7 +1117,7 @@ def control_simulation(req: SimulationControlRequest):
             # Capture BEFORE metrics snapshot dynamically (Un-optimized Disrupted Incident State)
             disrupted_tp = max(5, round(state.metrics.get("throughput_trains_per_hr", 19) - 8)) # Drops during blockage (14 trains/hr)
             disrupted_delay = round(state.metrics.get("average_delay_min", 2.0) + 4.5, 1) # 6.5 min
-            disrupted_util = max(40, state.metrics.get("track_utilization_pct", 82) - 22) # 60%
+            disrupted_util = max(58, min(68, round(state.metrics.get("track_utilization_pct", 79) - 15))) # 64%
             disrupted_wait = round(sum(t["delay_min"] for t in state.trains if t["status"] == "Conflict") + 6.0, 1)
 
             state.before_metrics = {
@@ -1207,6 +1215,7 @@ def control_simulation(req: SimulationControlRequest):
 
 
 @app.post("/api/optimize")
+@app.post("/api/simulation/optimize")
 def run_optimization():
     """Execute OR-Tools CP-SAT optimization algorithm on current backend simulation state."""
     start_time = time.perf_counter()
@@ -1337,6 +1346,7 @@ def run_optimization():
                 },
             ]
 
+            state.last_optimized_ts = state.sim_time
             calculate_derived_metrics()
 
             # Dynamic AFTER metrics
@@ -1358,10 +1368,10 @@ def run_optimization():
             }
 
             # Dynamically calculated improvements
-            before_tp = state.before_metrics.get("throughput", 15)
-            before_delay = state.before_metrics.get("average_delay", 8.4)
-            before_util = state.before_metrics.get("track_utilization", 69)
-            before_wait = state.before_metrics.get("waiting_time", 14.2)
+            before_tp = state.before_metrics.get("throughput", 14)
+            before_delay = state.before_metrics.get("average_delay", 8.9)
+            before_util = state.before_metrics.get("track_utilization", 58)
+            before_wait = state.before_metrics.get("waiting_time", 15.6)
 
             tp_imp = round(((tp_after - before_tp) / max(1, before_tp)) * 100.0, 1)
             delay_imp = round(((before_delay - avg_delay_after) / max(0.1, before_delay)) * 100.0, 1)

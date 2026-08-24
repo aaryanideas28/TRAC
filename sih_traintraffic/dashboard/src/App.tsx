@@ -9,6 +9,7 @@ import { AiRecommendationPanel } from './components/AiRecommendationPanel';
 import { TrainScheduleTable } from './components/TrainScheduleTable';
 import { AnalyticsView } from './components/AnalyticsView';
 import { SimulationControl } from './components/SimulationControl';
+import { MlVisualizationPanel } from './components/MlVisualizationPanel';
 import { LiveSystemEventLog } from './components/LiveSystemEventLog';
 import { TrainDetailModal } from './components/TrainDetailModal';
 import { DemoFlowGuide } from './components/DemoFlowGuide';
@@ -130,6 +131,11 @@ export function App() {
               isTrackBlocked={simState?.track_blocked}
             />
 
+            {/* Scikit-Learn ML Risk & Congestion Prediction Panel */}
+            <div className="w-full">
+              <MlVisualizationPanel mlPrediction={simState?.ml_prediction} />
+            </div>
+
             {/* Live System Event Log */}
             <LiveSystemEventLog events={simState?.event_logs} />
 
@@ -152,6 +158,9 @@ export function App() {
               selectedTrainId={selectedTrain?.id}
               isTrackBlocked={simState?.track_blocked}
             />
+            <div className="w-full">
+              <MlVisualizationPanel mlPrediction={simState?.ml_prediction} />
+            </div>
             <div className="w-full">
               <AiRecommendationPanel recommendations={recommendations} conflicts={conflicts} />
             </div>
@@ -181,14 +190,19 @@ export function App() {
 
         {activeTab === 'simulation' && (
           <div className="space-y-6">
+            <div className="w-full">
+              <MlVisualizationPanel mlPrediction={simState?.ml_prediction} />
+            </div>
             <LiveSystemEventLog events={simState?.event_logs} />
             {beforeAfter && <BeforeAfterComparison metrics={beforeAfter} />}
           </div>
         )}
       </main>
 
-      {/* Interactive Train Details Modal Drawer */}
-      {selectedTrain && <TrainDetailModal train={selectedTrain} onClose={() => setSelectedTrain(null)} />}
+      {/* Train Details Modal */}
+      {selectedTrain && (
+        <TrainDetailModal train={selectedTrain} onClose={() => setSelectedTrain(null)} />
+      )}
     </div>
   );
 }
