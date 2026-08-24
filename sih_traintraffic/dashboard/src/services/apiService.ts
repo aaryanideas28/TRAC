@@ -578,6 +578,16 @@ let mockBeforeAfter: BeforeAfterMetrics = {
   },
 };
 
+let mockSimSeconds = 38520; // 10:42:00
+
+function formatSimTime(seconds: number): string {
+  const total = Math.max(0, Math.floor(seconds)) % 86400;
+  const h = Math.floor(total / 3600);
+  const m = Math.floor((total % 3600) / 60);
+  const s = total % 60;
+  return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+}
+
 let mockEventLogs: SystemEventLogItem[] = [
   {
     id: 'EVT-0001',
@@ -592,8 +602,8 @@ let mockEventLogs: SystemEventLogItem[] = [
 function clientFallbackTick() {
   if (!mockIsRunning) return;
   mockTickCount += 1;
-  const now = new Date();
-  mockSimTime = now.toLocaleTimeString('en-US', { hour12: false });
+  mockSimSeconds += 1 * mockSpeedMultiplier;
+  mockSimTime = formatSimTime(mockSimSeconds);
 
   mockTrains = mockTrains.map((t) => {
     if (t.status === 'Moving') {
@@ -612,6 +622,14 @@ function clientFallbackTick() {
           if (idx < activeRoute.length - 2) {
             currEdge = `${currLoc}__${activeRoute[idx + 2]}`;
           }
+          mockEventLogs.unshift({
+            id: `EVT-${mockTickCount}-${t.id}`,
+            timestamp: mockSimTime,
+            message: `${t.id} (${t.name.split('/')[0].trim()}) Arrived at ${currLoc}`,
+            category: 'SIMULATION',
+            severity: 'INFO',
+          });
+          if (mockEventLogs.length > 40) mockEventLogs.pop();
         } else {
           currLoc = 'CSMT';
           currEdge = isFast ? 'CSMT__BY' : 'CSMT__MSD';
@@ -730,7 +748,25 @@ export const apiService = {
         return t;
       });
     }
-    if (action === 'reset' || action === 'unblock_track') {
+    if (action === 'reset') {
+      mockTrackBlocked = false;
+      mockIsRunning = true;
+      mockSpeedMultiplier = 1;
+      mockSimSeconds = 38520;
+      mockSimTime = '10:42:00';
+      mockTickCount = 1200;
+      mockTrains = mockTrains.map((t) => ({ ...t, status: 'Moving', speed_kmh: t.assigned_track.includes('Fast') ? 75 : 44 }));
+      mockEventLogs = [
+        {
+          id: 'EVT-0001',
+          timestamp: '10:42:00',
+          message: 'Simulation reset to baseline. 19 stations, 18 real trains active.',
+          category: 'SIMULATION',
+          severity: 'INFO',
+        },
+      ];
+    }
+    if (action === 'unblock_track') {
       mockTrackBlocked = false;
       mockIsRunning = true;
       mockTrains = mockTrains.map((t) => ({ ...t, status: 'Moving', speed_kmh: t.assigned_track.includes('Fast') ? 75 : 44 }));

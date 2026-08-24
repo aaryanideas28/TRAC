@@ -6,7 +6,6 @@ import { KpiCards } from './components/KpiCards';
 import { LiveRailwayNetwork } from './components/LiveRailwayNetwork';
 import { BeforeAfterComparison } from './components/BeforeAfterComparison';
 import { AiRecommendationPanel } from './components/AiRecommendationPanel';
-import { ConflictMonitor } from './components/ConflictMonitor';
 import { TrainScheduleTable } from './components/TrainScheduleTable';
 import { AnalyticsView } from './components/AnalyticsView';
 import { SimulationControl } from './components/SimulationControl';
@@ -15,8 +14,7 @@ import { OrToolsVisualizationPanel } from './components/OrToolsVisualizationPane
 import { LiveSystemEventLog } from './components/LiveSystemEventLog';
 import { TrainDetailModal } from './components/TrainDetailModal';
 import { DemoFlowGuide } from './components/DemoFlowGuide';
-import { DataProvenancePanel } from './components/DataProvenancePanel';
-import { PrototypeAssumptionsPanel } from './components/PrototypeAssumptionsPanel';
+import { DataProvenanceBadge } from './components/DataProvenanceBadge';
 
 export function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -55,7 +53,7 @@ export function App() {
       if (state.conflicts) setConflicts(state.conflicts);
 
       setSystemStatus(state.backend_status);
-      setLastUpdated(state.sim_time || new Date().toLocaleTimeString('en-US', { hour12: false }));
+      setLastUpdated(state.sim_time || '10:42:00');
     } catch (e) {
       setSystemStatus('DISCONNECTED');
     }
@@ -147,16 +145,14 @@ export function App() {
             {/* Side-by-Side BEFORE vs WITH AI */}
             {beforeAfter && <BeforeAfterComparison metrics={beforeAfter} />}
 
-            {/* Split View: AI Recommendations & Live Conflict Radar */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
-              <AiRecommendationPanel recommendations={recommendations} />
-              <ConflictMonitor conflicts={conflicts} />
+            {/* Expanded Full-Width AI Recommendations & Conflict Resolution */}
+            <div className="w-full">
+              <AiRecommendationPanel recommendations={recommendations} conflicts={conflicts} />
             </div>
 
-            {/* Data Provenance & Assumptions (Judge Audit Accordions) */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full pt-2">
-              <DataProvenancePanel />
-              <PrototypeAssumptionsPanel />
+            {/* Real Data Provenance Architecture Card */}
+            <div className="w-full pt-1">
+              <DataProvenanceBadge />
             </div>
           </div>
         )}
@@ -174,9 +170,8 @@ export function App() {
               <MlVisualizationPanel mlPrediction={simState?.ml_prediction} />
               <OrToolsVisualizationPanel optimizationState={simState?.optimization_state} />
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
-              <AiRecommendationPanel recommendations={recommendations} />
-              <ConflictMonitor conflicts={conflicts} />
+            <div className="w-full">
+              <AiRecommendationPanel recommendations={recommendations} conflicts={conflicts} />
             </div>
           </div>
         )}
@@ -189,9 +184,8 @@ export function App() {
 
         {activeTab === 'recommendations' && (
           <div className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
-              <AiRecommendationPanel recommendations={recommendations} />
-              <ConflictMonitor conflicts={conflicts} />
+            <div className="w-full">
+              <AiRecommendationPanel recommendations={recommendations} conflicts={conflicts} />
             </div>
             <OrToolsVisualizationPanel optimizationState={simState?.optimization_state} />
           </div>

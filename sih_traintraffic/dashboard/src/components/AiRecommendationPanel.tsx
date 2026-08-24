@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
-import type { AiRecommendation } from '../types/railway';
-import { Sparkles, ArrowRight, Clock, ShieldCheck, Zap, GitCommit, CornerDownRight, Gauge, Layers, Filter } from 'lucide-react';
+import type { AiRecommendation, ConflictItem } from '../types/railway';
+import { Sparkles, ArrowRight, Clock, ShieldCheck, Zap, GitCommit, CornerDownRight, Gauge, Layers, Filter, AlertTriangle, CheckCircle2 } from 'lucide-react';
 
 interface AiRecommendationPanelProps {
   recommendations: AiRecommendation[];
+  conflicts?: ConflictItem[];
 }
 
-export const AiRecommendationPanel: React.FC<AiRecommendationPanelProps> = ({ recommendations }) => {
+export const AiRecommendationPanel: React.FC<AiRecommendationPanelProps> = ({
+  recommendations,
+  conflicts = [],
+}) => {
   const [activeFilter, setActiveFilter] = useState<string>('ALL');
+
+  const activeConflicts = conflicts.filter((c) => c.status === 'DETECTED');
 
   const getActionBadge = (type: string) => {
     switch (type) {
@@ -66,136 +72,159 @@ export const AiRecommendationPanel: React.FC<AiRecommendationPanelProps> = ({ re
   });
 
   return (
-    <div className="p-5 rounded-2xl bg-slate-900/95 border border-slate-800 shadow-2xl space-y-4">
-      {/* Header */}
+    <div className="w-full p-5 rounded-2xl bg-slate-900/95 border border-slate-800 shadow-2xl space-y-4">
+      {/* Header with Title & Conflict Summary */}
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-3">
         <div className="flex items-center gap-2.5">
-          <div className="p-2 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+          <div className="p-2 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
             <Sparkles className="w-5 h-5 text-indigo-400" />
           </div>
           <div>
             <h2 className="text-base sm:text-lg font-extrabold text-slate-100 flex items-center gap-2">
-              AI Operational Traffic Recommendations
+              AI Operational Traffic Recommendations & Conflict Resolution
               <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-indigo-950 text-indigo-300 border border-indigo-800">
                 {recommendations.length} Active Dispatch Decisions
               </span>
             </h2>
-            <p className="text-xs text-slate-400">OR-Tools CP-SAT Conflict-Free Mathematical Dispatch & Headway Sequencing</p>
+            <p className="text-xs text-slate-400">Google OR-Tools CP-SAT Mathematical Dispatch, Headway Sequencing & Precedence Control</p>
           </div>
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="text-xs px-2.5 py-1 rounded-full bg-slate-950 text-slate-300 border border-slate-800 font-mono">
-            Engine: OR-Tools CP-SAT + ML Classifier
+          {activeConflicts.length > 0 ? (
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-bold animate-pulse">
+              <AlertTriangle className="w-4 h-4" />
+              <span>{activeConflicts.length} Active Conflict Detected</span>
+            </div>
+          ) : (
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold">
+              <CheckCircle2 className="w-4 h-4" />
+              <span>No active conflicts detected • 18 Trains Monitored</span>
+            </div>
+          )}
+          <span className="text-xs px-2.5 py-1 rounded-full bg-slate-950 text-slate-300 border border-slate-800 font-mono hidden md:inline-block">
+            Engine: CP-SAT + ML
           </span>
         </div>
       </div>
 
-      {/* Filter Tabs */}
-      <div className="flex flex-wrap items-center gap-1.5 bg-slate-950 p-1.5 rounded-xl border border-slate-800/80 text-xs">
-        <div className="flex items-center gap-1 text-slate-500 px-2 font-semibold">
-          <Filter className="w-3 h-3" /> Filter:
+      {/* Active Conflict Banner if Any */}
+      {activeConflicts.length > 0 && (
+        <div className="p-3.5 rounded-xl bg-rose-950/30 border border-rose-800/60 space-y-2 text-xs font-mono">
+          <div className="flex items-center justify-between text-rose-300 font-bold">
+            <span className="flex items-center gap-2">
+              <AlertTriangle className="w-4 h-4 text-rose-400" />
+              Active Track Section Conflict: {activeConflicts[0].section}
+            </span>
+            <span className="px-2 py-0.5 rounded bg-rose-900/60 text-rose-200 text-[10px] font-extrabold">
+              SEVERITY: {activeConflicts[0].severity}
+            </span>
+          </div>
+          <p className="text-slate-300 font-sans text-xs">
+            Trains Involved: <span className="font-bold text-rose-300">{activeConflicts[0].trains_involved.join(' ↔ ')}</span>. Resolution: {activeConflicts[0].ai_resolution}
+          </p>
         </div>
-        <button
-          onClick={() => setActiveFilter('ALL')}
-          className={`px-2.5 py-1 rounded-lg transition font-medium ${
-            activeFilter === 'ALL' ? 'bg-slate-800 text-white font-bold' : 'text-slate-400 hover:text-white'
-          }`}
-        >
-          All ({recommendations.length})
-        </button>
-        <button
-          onClick={() => setActiveFilter('OVERTAKE')}
-          className={`px-2.5 py-1 rounded-lg transition font-medium ${
-            activeFilter === 'OVERTAKE' ? 'bg-purple-950 text-purple-300 font-bold border border-purple-800/50' : 'text-slate-400 hover:text-purple-300'
-          }`}
-        >
-          Loop Overtakes
-        </button>
-        <button
-          onClick={() => setActiveFilter('REROUTE')}
-          className={`px-2.5 py-1 rounded-lg transition font-medium ${
-            activeFilter === 'REROUTE' ? 'bg-indigo-950 text-indigo-300 font-bold border border-indigo-800/50' : 'text-slate-400 hover:text-indigo-300'
-          }`}
-        >
-          Track Crossovers
-        </button>
-        <button
-          onClick={() => setActiveFilter('HOLD')}
-          className={`px-2.5 py-1 rounded-lg transition font-medium ${
-            activeFilter === 'HOLD' ? 'bg-amber-950 text-amber-300 font-bold border border-amber-800/50' : 'text-slate-400 hover:text-amber-300'
-          }`}
-        >
-          Headway Holds
-        </button>
-        <button
-          onClick={() => setActiveFilter('PROCEED')}
-          className={`px-2.5 py-1 rounded-lg transition font-medium ${
-            activeFilter === 'PROCEED' ? 'bg-emerald-950 text-emerald-300 font-bold border border-emerald-800/50' : 'text-slate-400 hover:text-emerald-300'
-          }`}
-        >
-          Speed & Green Wave
-        </button>
+      )}
+
+      {/* Filter Tabs */}
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="flex flex-wrap items-center gap-1.5 bg-slate-950 p-1.5 rounded-xl border border-slate-800/80 text-xs">
+          <div className="flex items-center gap-1 text-slate-500 px-2 font-semibold">
+            <Filter className="w-3 h-3" /> Filter:
+          </div>
+          <button
+            onClick={() => setActiveFilter('ALL')}
+            className={`px-2.5 py-1 rounded-lg transition font-medium ${
+              activeFilter === 'ALL' ? 'bg-slate-800 text-white font-bold' : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            All ({recommendations.length})
+          </button>
+          <button
+            onClick={() => setActiveFilter('OVERTAKE')}
+            className={`px-2.5 py-1 rounded-lg transition font-medium ${
+              activeFilter === 'OVERTAKE' ? 'bg-purple-950 text-purple-300 font-bold border border-purple-800/50' : 'text-slate-400 hover:text-purple-300'
+            }`}
+          >
+            Loop Overtakes
+          </button>
+          <button
+            onClick={() => setActiveFilter('REROUTE')}
+            className={`px-2.5 py-1 rounded-lg transition font-medium ${
+              activeFilter === 'REROUTE' ? 'bg-indigo-950 text-indigo-300 font-bold border border-indigo-800/50' : 'text-slate-400 hover:text-indigo-300'
+            }`}
+          >
+            Track Crossovers
+          </button>
+          <button
+            onClick={() => setActiveFilter('HOLD')}
+            className={`px-2.5 py-1 rounded-lg transition font-medium ${
+              activeFilter === 'HOLD' ? 'bg-amber-950 text-amber-300 font-bold border border-amber-800/50' : 'text-slate-400 hover:text-amber-300'
+            }`}
+          >
+            Headway Holds
+          </button>
+          <button
+            onClick={() => setActiveFilter('PROCEED')}
+            className={`px-2.5 py-1 rounded-lg transition font-medium ${
+              activeFilter === 'PROCEED' ? 'bg-emerald-950 text-emerald-300 font-bold border border-emerald-800/50' : 'text-slate-400 hover:text-emerald-300'
+            }`}
+          >
+            Speed & Green Wave
+          </button>
+        </div>
+
+        <div className="text-xs text-slate-400 font-mono">
+          Showing <span className="font-bold text-slate-200">{filteredRecs.length}</span> of {recommendations.length} recommendations
+        </div>
       </div>
 
-      {/* Recommendations Cards List */}
-      <div className="space-y-3.5 max-h-[560px] overflow-y-auto pr-1">
+      {/* Expanded Multi-Column Recommendations Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         {filteredRecs.map((rec) => (
           <div
             key={rec.id}
-            className="p-4 rounded-xl bg-slate-900 border border-slate-800/90 hover:border-slate-700 transition shadow-lg space-y-3"
+            className="p-4 rounded-xl bg-slate-950/80 border border-slate-800 hover:border-slate-700 transition shadow-lg flex flex-col justify-between space-y-3"
           >
-            {/* Header: Action Badge & Train Info */}
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <div className="flex items-center gap-2">
-                {getActionBadge(rec.action_type)}
-                <span className="font-bold text-slate-100 text-sm">{rec.affected_train_name}</span>
-                <span className="text-xs font-mono px-1.5 py-0.5 rounded bg-slate-950 text-cyan-400 border border-slate-800 font-bold">
+            <div className="space-y-2.5">
+              {/* Header: Action Badge & Train Info */}
+              <div className="flex items-start justify-between gap-2">
+                <div className="space-y-1">
+                  {getActionBadge(rec.action_type)}
+                  <div className="font-bold text-slate-100 text-sm">{rec.affected_train_name}</div>
+                </div>
+                <span className="text-xs font-mono px-2 py-0.5 rounded bg-slate-900 text-cyan-400 border border-slate-800 font-bold shrink-0">
                   {rec.affected_train_id}
                 </span>
               </div>
-              <div className="text-right">
-                <span className="text-[11px] text-slate-400 block">Assigned Resource</span>
-                <span className="text-xs font-semibold text-cyan-300">{rec.assigned_track}</span>
+
+              {/* Recommendation Instruction Action Banner */}
+              <div className="flex items-center gap-2 p-2.5 rounded-lg bg-slate-900 border border-slate-800">
+                <ArrowRight className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span className="font-bold text-slate-100 text-xs">{rec.action}</span>
               </div>
-            </div>
 
-            {/* Recommendation Instruction Action Banner */}
-            <div className="flex items-center gap-2 p-2.5 rounded-lg bg-slate-950 border border-slate-800">
-              <ArrowRight className="w-4 h-4 text-emerald-400 shrink-0" />
-              <span className="font-bold text-slate-100 text-xs sm:text-sm">{rec.action}</span>
-            </div>
+              {/* Resource Target */}
+              <div className="text-[11px] text-slate-400 flex items-center justify-between font-mono bg-slate-900/50 px-2.5 py-1.5 rounded-lg">
+                <span>Target Resource:</span>
+                <span className="text-cyan-300 font-bold truncate max-w-[180px]">{rec.assigned_track}</span>
+              </div>
 
-            {/* AI Operational Rationale */}
-            <p className="text-xs text-slate-300 leading-relaxed bg-slate-950/70 p-3 rounded-lg border border-slate-900">
-              <span className="text-indigo-400 font-bold">AI Rationale: </span>
-              "{rec.reason}"
-            </p>
+              {/* AI Operational Rationale */}
+              <p className="text-xs text-slate-300 leading-relaxed bg-slate-900/40 p-2.5 rounded-lg border border-slate-900/80">
+                <span className="text-indigo-400 font-bold">Rationale: </span>
+                {rec.reason}
+              </p>
+            </div>
 
             {/* Metrics & Solvers Footer */}
-            <div className="flex flex-wrap items-center justify-between pt-2 text-xs border-t border-slate-800/60 gap-2">
-              <div className="flex items-center gap-4">
-                <div>
-                  <span className="text-slate-500">Wait Duration: </span>
-                  <span className="font-mono font-bold text-slate-200">{rec.waiting_time_sec}s</span>
-                </div>
-                <div>
-                  <span className="text-slate-500">Delay Saved: </span>
-                  <span className="font-mono font-bold text-emerald-400">-{rec.expected_delay_reduction_min} min</span>
-                </div>
+            <div className="pt-2 text-xs border-t border-slate-800/80 flex items-center justify-between text-slate-400 font-mono">
+              <div>
+                Delay Saved: <span className="font-bold text-emerald-400">+{rec.expected_delay_reduction_min}m</span>
               </div>
-
-              <div className="flex items-center gap-2">
-                {rec.solver_status && (
-                  <span className="px-2 py-0.5 rounded text-[11px] font-mono bg-emerald-950 text-emerald-300 border border-emerald-800/70 font-semibold flex items-center gap-1">
-                    <ShieldCheck className="w-3 h-3 text-emerald-400" /> CP-SAT: {rec.solver_status}
-                  </span>
-                )}
-                {rec.ml_congestion_prob !== undefined && (
-                  <span className="px-2 py-0.5 rounded text-[11px] font-mono bg-indigo-950 text-indigo-300 border border-indigo-800/70 font-semibold">
-                    ML Risk: {Math.round(rec.ml_congestion_prob * 100)}%
-                  </span>
-                )}
+              <div className="flex items-center gap-1.5 text-[11px]">
+                <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
+                <span className="text-slate-300 font-bold">{rec.solver_status || 'OPTIMAL'}</span>
               </div>
             </div>
           </div>

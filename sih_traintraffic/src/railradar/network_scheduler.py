@@ -504,15 +504,82 @@ class NetworkScheduleOptimizer:
                     prev_e_var = exit_vars[(t.train_number, prev_edge_id)]
                     model.Add(s_var >= prev_e_var)
 
-        # 3. LEVEL 1: Intelligent Conflict-Aware Constraints on Shared Track Resources
+        # 3. LEVEL 1: Intelligent Conflict-Aware Constraints & Physical FIFO Ordering on Shared Track Resources
+        OVERTAKING_LOOP_STATIONS = frozenset({"CSMT", "PR", "DR", "CLA", "GC", "TNA"})
+        
         shared_resource_count = 0
         potential_conflicts_count = 0
-        for res_key, intervals in padded_intervals_by_resource.items():
-            if len(intervals) > 1:
+        train_edges_by_resource: dict[str, list[tuple[str, str]]] = {}
+        for (t_num, e_id), r_key in train_edge_resource_map.items():
+            if r_key not in train_edges_by_resource:
+                train_edges_by_resource[r_key] = []
+            train_edges_by_resource[r_key].append((t_num, e_id))
+
+        prec_vars: dict[tuple[str, str, str], cp_model.IntVar] = {}
+
+        for res_key, train_edge_pairs in train_edges_by_resource.items():
+            if len(train_edge_pairs) > 1:
                 shared_resource_count += 1
-                k = len(intervals)
+                k = len(train_edge_pairs)
                 potential_conflicts_count += (k * (k - 1)) // 2
-                model.AddNoOverlap(intervals)
+                
+                # Global no-overlap interval constraint
+                if res_key in padded_intervals_by_resource:
+                    model.AddNoOverlap(padded_intervals_by_resource[res_key])
+
+                # Pair-wise directional precedence and safety headway enforcement
+                for idx1 in range(len(train_edge_pairs)):
+                    for idx2 in range(idx1 + 1, len(train_edge_pairs)):
+                        t1_num, e1_id = train_edge_pairs[idx1]
+                        t2_num, e2_id = train_edge_pairs[idx2]
+                        
+                        pair_key = (t1_num, t2_num, res_key)
+                        b_prec = model.NewBoolVar(f"prec_{t1_num}_{t2_num}_{res_key}")
+                        prec_vars[pair_key] = b_prec
+                        # Also register inverse key
+                        prec_vars[(t2_num, t1_num, res_key)] = b_prec.Not()
+
+                        # If t1 precedes t2 on this resource: t2 can only enter after t1 exits + headway
+                        model.Add(
+                            exit_vars[(t1_num, e1_id)] + self.default_headway_sec <= entry_vars[(t2_num, e2_id)]
+                        ).OnlyEnforceIf(b_prec)
+
+                        # If t2 precedes t1 on this resource: t1 can only enter after t2 exits + headway
+                        model.Add(
+                            exit_vars[(t2_num, e2_id)] + self.default_headway_sec <= entry_vars[(t1_num, e1_id)]
+                        ).OnlyEnforceIf(b_prec.Not())
+
+        # Enforce physical single-track FIFO ordering across consecutive non-loop block sections
+        # (Trains on the same physical line cannot overtake each other unless an overtaking loop siding is available)
+        for t1 in train_inputs:
+            for t2 in train_inputs:
+                if t1.train_number >= t2.train_number:
+                    continue
+                # Inspect shared consecutive edge sequences
+                for i1, e1_id in enumerate(t1.route_edges[:-1]):
+                    next_e1_id = t1.route_edges[i1 + 1]
+                    edge1 = graph.get_edge_by_id(e1_id)
+                    next_edge1 = graph.get_edge_by_id(next_e1_id)
+                    if not edge1 or not next_edge1:
+                        continue
+                    
+                    inter_station = edge1.to_station
+                    if inter_station in OVERTAKING_LOOP_STATIONS:
+                        # Overtaking is physically permissible at this station via loop siding
+                        continue
+
+                    # Check if t2 traverses the exact same consecutive edges/resources
+                    r1 = train_edge_resource_map.get((t1.train_number, e1_id))
+                    r2 = train_edge_resource_map.get((t1.train_number, next_e1_id))
+                    r1_t2 = train_edge_resource_map.get((t2.train_number, e1_id))
+                    r2_t2 = train_edge_resource_map.get((t2.train_number, next_e1_id))
+
+                    if r1 and r2 and r1 == r1_t2 and r2 == r2_t2:
+                        k1 = (t1.train_number, t2.train_number, r1)
+                        k2 = (t1.train_number, t2.train_number, r2)
+                        if k1 in prec_vars and k2 in prec_vars:
+                            # Order cannot swap across single-track line between stations
+                            model.Add(prec_vars[k1] == prec_vars[k2])
 
         # 4. LEVEL 2 & LEVEL 4: Hierarchical & Delay-Propagation-Aware Objective
         delays_list = []

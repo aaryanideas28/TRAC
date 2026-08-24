@@ -25,7 +25,7 @@ export const CORRIDOR_STATIONS = [
   { code: 'CLA', name: 'Kurla Junction', km: 14.7, isFast: true, isSlow: true, hasLoop: true, posX: 605, pf: 'PF 1-6', type: 'Major Junction', infra: '6-Track Junction / Mithi River Bridge / EMU Car Shed Loops' },
   { code: 'VVH', name: 'Vidyavihar', km: 16.4, isFast: false, isSlow: true, hasLoop: false, posX: 660, pf: 'PF 1-2', type: 'Slow Only', infra: 'Transition zone to Suburbs / 6-Track baseline' },
   { code: 'GC', name: 'Ghatkopar', km: 18.2, isFast: true, isSlow: true, hasLoop: true, posX: 715, pf: 'PF 1-4', type: 'Metro Interchange Hub', infra: 'High utility crossover bridge integration & Loop sidings' },
-  { code: 'VK', name: 'Vikhroli', km: 21.1, isFast: true, isSlow: true, hasLoop: false, posX: 770, pf: 'PF 1-4', type: 'Fast & Slow Stop', infra: 'Industrial land borders / Foothill drainage runoffs' },
+  { code: 'VK', name: 'Vikhroli', km: 21.1, isFast: false, isSlow: true, hasLoop: false, posX: 770, pf: 'PF 1-2', type: 'Slow Only', infra: 'Industrial land borders / Foothill drainage runoffs' },
   { code: 'KJRD', name: 'Kanjur Marg', km: 22.8, isFast: false, isSlow: true, hasLoop: false, posX: 825, pf: 'PF 1-2', type: 'Slow Only', infra: 'Suburban expansion zone / 6-Track corridor' },
   { code: 'BND', name: 'Bhandup', km: 24.5, isFast: false, isSlow: true, hasLoop: false, posX: 880, pf: 'PF 1-2', type: 'Slow Only', infra: 'Water pipeline bridge crossing limits' },
   { code: 'NHU', name: 'Nahur', km: 26.6, isFast: false, isSlow: true, hasLoop: false, posX: 935, pf: 'PF 1-2', type: 'Slow Only', infra: 'Mulund-Goregaon Link Road planned flyovers' },
@@ -43,6 +43,7 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
   const [hoveredTrain, setHoveredTrain] = useState<Train | null>(null);
   const [hoveredStation, setHoveredStation] = useState<typeof CORRIDOR_STATIONS[0] | null>(null);
   const [showLoopInfo, setShowLoopInfo] = useState(false);
+  const [showStationLegend, setShowStationLegend] = useState(true);
   const [filterMode, setFilterMode] = useState<'ALL' | 'FAST' | 'SLOW' | 'LOOP'>('ALL');
 
   const getStatusColor = (status: string) => {
@@ -71,8 +72,8 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
     }
   });
 
-  // Fast-only stations route sequence for Fast trains
-  const FAST_STOPS = ['CSMT', 'BY', 'DR', 'CLA', 'GC', 'VK', 'MLND', 'TNA'];
+  // Exactly 7 Fast stations for Fast line stopping pattern
+  const FAST_STOPS = ['CSMT', 'BY', 'DR', 'CLA', 'GC', 'MLND', 'TNA'];
   const FULL_CORRIDOR_ROUTE = CORRIDOR_STATIONS.map((s) => s.code);
 
   // Compute interpolated train X coordinate along graph edge
@@ -186,6 +187,16 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
             </button>
           </div>
 
+          <button
+            onClick={() => setShowStationLegend(!showStationLegend)}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-semibold transition ${
+              showStationLegend ? 'bg-slate-800 text-cyan-300 border-cyan-700/60' : 'bg-slate-950 text-slate-400 border-slate-800'
+            }`}
+          >
+            <Info className="w-3.5 h-3.5" />
+            <span>Station Legend (19)</span>
+          </button>
+
           {isTrackBlocked && (
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-rose-500/20 border border-rose-500/50 text-rose-300 text-xs font-bold animate-pulse shadow-lg">
               <AlertTriangle className="w-4 h-4 text-rose-400" />
@@ -200,32 +211,60 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
         </div>
       </div>
 
-      {/* SVG Map Container */}
-      <div className="relative w-full overflow-x-auto bg-slate-950 rounded-xl border border-slate-800 p-4 shadow-inner">
-        {/* Status Key & Track Legend Overlay */}
-        <div className="absolute top-4 left-4 z-10 text-[11px] space-y-1.5 text-slate-400 font-medium pointer-events-none bg-slate-900/90 p-3.5 rounded-xl border border-slate-800 backdrop-blur shadow-xl">
-          <div className="text-slate-200 font-bold border-b border-slate-800 pb-1.5 flex items-center justify-between gap-3">
-            <span>Track Architecture Legend</span>
-            <Compass className="w-3.5 h-3.5 text-cyan-400" />
+      {/* Top Track Architecture Legend Bar (Clean, Non-Overlapping) */}
+      <div className="flex flex-wrap items-center justify-between gap-3 p-3 rounded-xl bg-slate-950/90 border border-slate-800 text-xs">
+        <div className="flex items-center gap-4 flex-wrap">
+          <div className="flex items-center gap-2">
+            <span className="w-4 h-2 rounded bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+            <span className="text-emerald-300 font-bold">Track 1 (Down Slow)</span>
+            <span className="text-[10px] text-slate-500">• All 19 Stations Halt</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="w-4 h-1.5 rounded bg-emerald-500 inline-block"></span>
-            <span className="text-emerald-300 font-semibold">Track 1 (Slow Line)</span>
-            <span className="text-[10px] text-slate-500">• All 19 Stops</span>
+            <span className="w-4 h-2 rounded bg-cyan-400 shadow-[0_0_8px_rgba(6,182,212,0.8)]"></span>
+            <span className="text-cyan-300 font-bold">Track 2 (Down Fast)</span>
+            <span className="text-[10px] text-slate-500">• 7 Major Halts (CSMT, BY, DR, CLA, GC, MLND, TNA)</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="w-4 h-1.5 rounded bg-cyan-400 inline-block shadow-[0_0_8px_rgba(6,182,212,0.8)]"></span>
-            <span className="text-cyan-300 font-semibold">Track 2 (Fast Line)</span>
-            <span className="text-[10px] text-slate-500">• 8 Major Express Halts</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="w-4 h-1.5 rounded bg-amber-400 border border-dashed border-amber-300 inline-block"></span>
-            <span className="text-amber-300 font-semibold">Loop Lines & Sidings</span>
-            <span className="text-[10px] text-slate-500">• DR, CLA, GC, TNA, PR</span>
+            <span className="w-4 h-2 rounded bg-amber-400 border border-dashed border-amber-300 shadow-[0_0_8px_rgba(245,158,11,0.5)]"></span>
+            <span className="text-amber-300 font-bold">Loop Lines & Sidings</span>
+            <span className="text-[10px] text-slate-500">• Dadar, Kurla, Ghatkopar, Thane, Parel</span>
           </div>
         </div>
+        <div className="text-[11px] font-mono text-slate-400">
+          Corridor Length: <span className="font-bold text-slate-200">32.7 km</span> • Single Direction: <span className="font-bold text-emerald-400">DOWN (Northbound)</span>
+        </div>
+      </div>
 
-        <svg viewBox="0 0 1120 370" className="w-full h-auto min-w-[1020px]">
+      {/* Collapsible 19-Station Code Legend */}
+      {showStationLegend && (
+        <div className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800/80 text-[11px] font-mono text-slate-300 space-y-1.5 animate-fadeIn">
+          <div className="text-xs font-bold text-cyan-300 flex items-center justify-between border-b border-slate-800/80 pb-1">
+            <span>Mumbai Suburban Central Line — 19 Station Code Directory:</span>
+            <span className="text-[10px] text-slate-400 font-normal">Blue Badge = Fast Halt • Green Badge = Slow Only</span>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2 pt-1 text-[10.5px]">
+            {CORRIDOR_STATIONS.map((s) => (
+              <div
+                key={s.code}
+                className={`p-1.5 rounded-lg border flex items-center gap-1.5 ${
+                  s.isFast
+                    ? 'bg-cyan-950/40 border-cyan-800/50 text-cyan-200'
+                    : 'bg-slate-900/60 border-slate-800 text-slate-300'
+                }`}
+              >
+                <span className={`px-1.5 py-0.5 rounded font-extrabold text-[10px] ${s.isFast ? 'bg-cyan-500 text-slate-950' : 'bg-slate-800 text-slate-300'}`}>
+                  {s.code}
+                </span>
+                <span className="truncate" title={s.name}>{s.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* SVG Map Container */}
+      <div className="relative w-full overflow-x-auto bg-slate-950 rounded-xl border border-slate-800 p-4 shadow-inner">
+        <svg viewBox="0 0 1120 400" className="w-full h-auto min-w-[1040px]">
           <defs>
             <pattern id="gridPattern" width="40" height="40" patternUnits="userSpaceOnUse">
               <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" strokeWidth="0.6" opacity="0.4" />
@@ -253,7 +292,7 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
           </defs>
 
           {/* Background Grid */}
-          <rect width="1120" height="370" fill="url(#gridPattern)" />
+          <rect width="1120" height="400" fill="url(#gridPattern)" />
 
           {/* Station Vertical Marker Beams & Labels */}
           {CORRIDOR_STATIONS.map((stn) => {
@@ -270,7 +309,7 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
                   x1={stn.posX}
                   y1={45}
                   x2={stn.posX}
-                  y2={330}
+                  y2={355}
                   stroke={stn.isFast ? '#334155' : '#1e293b'}
                   strokeWidth={stn.isFast ? '1.5' : '1'}
                   strokeDasharray={stn.isFast ? '4 3' : '2 4'}
@@ -284,7 +323,7 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
                   width="44"
                   height="22"
                   rx="6"
-                  fill={stn.isFast ? '#0f172a' : '#020617'}
+                  fill={stn.isFast ? '#083344' : '#020617'}
                   stroke={stn.isFast ? '#06b6d4' : '#475569'}
                   strokeWidth={stn.isFast ? '1.5' : '1'}
                   opacity={isHighlighted ? 1 : 0.3}
@@ -304,7 +343,7 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
                 {/* Station KM Distance */}
                 <text
                   x={stn.posX}
-                  y={345}
+                  y={370}
                   textAnchor="middle"
                   fill="#64748b"
                   fontSize="9"
@@ -317,47 +356,47 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
           })}
 
           {/* ========================================================================= */}
-          {/* 1. TRACK 1: SLOW LINE (Y = 130) - All 19 Stations Stop */}
+          {/* 1. TRACK 1: SLOW LINE (Y = 125) - All 19 Stations Stop */}
           {/* ========================================================================= */}
           <g>
             {/* Track Bed Base */}
-            <rect x="40" y="126" width="1025" height="8" fill="#0f172a" rx="4" />
-            <line x1="45" y1="130" x2="1060" y2="130" stroke="url(#slowTrackGradient)" strokeWidth="4.5" strokeLinecap="round" />
+            <rect x="40" y="121" width="1025" height="8" fill="#0f172a" rx="4" />
+            <line x1="45" y1="125" x2="1060" y2="125" stroke="url(#slowTrackGradient)" strokeWidth="4.5" strokeLinecap="round" />
 
             {/* Track Sleeper Ties */}
             {Array.from({ length: 70 }).map((_, i) => (
               <line
                 key={`tie-slow-${i}`}
                 x1={50 + i * 14.5}
-                y1={125}
+                y1={120}
                 x2={50 + i * 14.5}
-                y2={135}
+                y2={130}
                 stroke="#1e293b"
                 strokeWidth="1.5"
               />
             ))}
 
             {/* Track Label Badge */}
-            <rect x="5" y="118" width="46" height="24" rx="6" fill="#064e3b" stroke="#10b981" strokeWidth="1.5" />
-            <text x="28" y="130" textAnchor="middle" fill="#ecfdf5" fontSize="8" fontWeight="900" fontFamily="monospace">
+            <rect x="5" y="113" width="46" height="24" rx="6" fill="#064e3b" stroke="#10b981" strokeWidth="1.5" />
+            <text x="28" y="125" textAnchor="middle" fill="#ecfdf5" fontSize="8" fontWeight="900" fontFamily="monospace">
               TRACK 1
             </text>
-            <text x="28" y="138" textAnchor="middle" fill="#a7f3d0" fontSize="7" fontWeight="bold" fontFamily="monospace">
+            <text x="28" y="133" textAnchor="middle" fill="#a7f3d0" fontSize="7" fontWeight="bold" fontFamily="monospace">
               (SLOW)
             </text>
           </g>
 
           {/* ========================================================================= */}
-          {/* 2. TRACK 2: FAST LINE (Y = 205) - Stops ONLY at 8 Fast Stations */}
+          {/* 2. TRACK 2: FAST LINE (Y = 215) - Stops ONLY at 7 Fast Stations */}
           {/* ========================================================================= */}
           <g>
             {/* Track Bed Base */}
-            <rect x="40" y="201" width="1025" height="8" fill="#0f172a" rx="4" />
+            <rect x="40" y="211" width="1025" height="8" fill="#0f172a" rx="4" />
             <line
               x1="45"
-              y1="205"
+              y1="215"
               x2="1060"
-              y2="205"
+              y2="215"
               stroke="url(#fastTrackGradient)"
               strokeWidth="5"
               strokeLinecap="round"
@@ -365,20 +404,20 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
             />
 
             {/* Track Label Badge */}
-            <rect x="5" y="193" width="46" height="24" rx="6" fill="#083344" stroke="#06b6d4" strokeWidth="1.5" />
-            <text x="28" y="205" textAnchor="middle" fill="#ecfeff" fontSize="8" fontWeight="900" fontFamily="monospace">
+            <rect x="5" y="203" width="46" height="24" rx="6" fill="#083344" stroke="#06b6d4" strokeWidth="1.5" />
+            <text x="28" y="215" textAnchor="middle" fill="#ecfeff" fontSize="8" fontWeight="900" fontFamily="monospace">
               TRACK 2
             </text>
-            <text x="28" y="213" textAnchor="middle" fill="#67e8f9" fontSize="7" fontWeight="bold" fontFamily="monospace">
+            <text x="28" y="223" textAnchor="middle" fill="#67e8f9" fontSize="7" fontWeight="bold" fontFamily="monospace">
               (FAST)
             </text>
 
             {/* Fast Line Skip Indicators over Slow-Only stations */}
             {CORRIDOR_STATIONS.filter((s) => !s.isFast).map((stn) => (
               <g key={`skip-${stn.code}`}>
-                <rect x={stn.posX - 10} y="200" width="20" height="10" fill="#020617" rx="3" stroke="#334155" strokeWidth="1" />
-                <path d={`M ${stn.posX - 5} 205 L ${stn.posX} 202 L ${stn.posX + 5} 205`} fill="none" stroke="#64748b" strokeWidth="1.5" />
-                <text x={stn.posX} y="222" textAnchor="middle" fill="#64748b" fontSize="7.5" fontWeight="bold" fontFamily="monospace">
+                <rect x={stn.posX - 10} y="210" width="20" height="10" fill="#020617" rx="3" stroke="#334155" strokeWidth="1" />
+                <path d={`M ${stn.posX - 5} 215 L ${stn.posX} 212 L ${stn.posX + 5} 215`} fill="none" stroke="#64748b" strokeWidth="1.5" />
+                <text x={stn.posX} y="232" textAnchor="middle" fill="#64748b" fontSize="7.5" fontWeight="bold" fontFamily="monospace">
                   SKIP
                 </text>
               </g>
@@ -386,21 +425,21 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
           </g>
 
           {/* ========================================================================= */}
-          {/* 3. TRACK 3 & LOOP LINES (Y = 280) - Turnouts at Dadar, Kurla, Ghatkopar, Thane, Parel */}
+          {/* 3. TRACK 3 & LOOP LINES (Y = 305) - Turnouts at Dadar, Kurla, Ghatkopar, Thane, Parel */}
           {/* ========================================================================= */}
           <g>
-            {/* Loop Header with info trigger */}
+            {/* Loop Header */}
             <g
               className="cursor-pointer group"
               onMouseEnter={() => setShowLoopInfo(true)}
               onMouseLeave={() => setShowLoopInfo(false)}
               onClick={() => setShowLoopInfo(!showLoopInfo)}
             >
-              <rect x="5" y="268" width="46" height="24" rx="6" fill="#451a03" stroke="#f59e0b" strokeWidth="1.5" />
-              <text x="28" y="280" textAnchor="middle" fill="#fffbeb" fontSize="8" fontWeight="900" fontFamily="monospace">
+              <rect x="5" y="293" width="46" height="24" rx="6" fill="#451a03" stroke="#f59e0b" strokeWidth="1.5" />
+              <text x="28" y="305" textAnchor="middle" fill="#fffbeb" fontSize="8" fontWeight="900" fontFamily="monospace">
                 LOOP
               </text>
-              <text x="28" y="288" textAnchor="middle" fill="#fde68a" fontSize="7" fontWeight="bold" fontFamily="monospace">
+              <text x="28" y="313" textAnchor="middle" fill="#fde68a" fontSize="7" fontWeight="bold" fontFamily="monospace">
                 SIDINGS
               </text>
             </g>
@@ -408,9 +447,9 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
             {/* Continuous Loop Track Bed Line with Dash Pattern */}
             <line
               x1="350"
-              y1="280"
+              y1="305"
               x2="1060"
-              y2="280"
+              y2="305"
               stroke="#b45309"
               strokeWidth="3.5"
               strokeDasharray="8 4"
@@ -418,60 +457,60 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
             />
 
             {/* A. Parel Siding (PR: X=360-410) */}
-            <path d="M 360 205 Q 375 280 395 280 L 410 280" fill="none" stroke="#f59e0b" strokeWidth="2.5" />
-            <rect x="375" y="274" width="30" height="12" rx="4" fill="#78350f" stroke="#f59e0b" strokeWidth="1" />
-            <text x="390" y="283" textAnchor="middle" fill="#fef3c7" fontSize="7" fontWeight="bold">PR Siding</text>
+            <path d="M 360 215 Q 375 305 385 305 L 410 305" fill="none" stroke="#f59e0b" strokeWidth="2.5" />
+            <rect x="375" y="299" width="30" height="12" rx="4" fill="#78350f" stroke="#f59e0b" strokeWidth="1" />
+            <text x="390" y="308" textAnchor="middle" fill="#fef3c7" fontSize="7" fontWeight="bold">PR Siding</text>
 
             {/* B. Dadar Interlocking Loop (DR: X=410-480) */}
             <path
-              d="M 410 205 Q 425 280 440 280 L 465 280 Q 480 280 495 205"
+              d="M 410 215 Q 425 305 440 305 L 465 305 Q 480 305 495 215"
               fill="none"
               stroke="#f59e0b"
               strokeWidth="3"
               filter="url(#glowAmber)"
             />
             {/* Dadar Crossover to Slow Track */}
-            <path d="M 440 280 Q 450 130 465 130" fill="none" stroke="#f59e0b" strokeWidth="2" strokeDasharray="4 2" />
-            <rect x="425" y="273" width="38" height="14" rx="4" fill="#0f172a" stroke="#f59e0b" strokeWidth="1.5" />
-            <text x="444" y="283" textAnchor="middle" fill="#fde047" fontSize="7.5" fontWeight="extrabold">DR LOOP</text>
+            <path d="M 440 305 Q 450 125 465 125" fill="none" stroke="#f59e0b" strokeWidth="2" strokeDasharray="4 2" />
+            <rect x="425" y="298" width="38" height="14" rx="4" fill="#0f172a" stroke="#f59e0b" strokeWidth="1.5" />
+            <text x="444" y="308" textAnchor="middle" fill="#fde047" fontSize="7.5" fontWeight="extrabold">DR LOOP</text>
 
             {/* C. Kurla Car Shed / Goods Loop (CLA: X=575-645) */}
             <path
-              d="M 575 205 Q 590 280 605 280 L 630 280 Q 645 280 660 205"
+              d="M 575 215 Q 590 305 605 305 L 630 305 Q 645 305 660 215"
               fill="none"
               stroke="#f59e0b"
               strokeWidth="3"
               filter="url(#glowAmber)"
             />
-            <path d="M 605 280 Q 615 130 630 130" fill="none" stroke="#f59e0b" strokeWidth="2" strokeDasharray="4 2" />
-            <rect x="590" y="273" width="40" height="14" rx="4" fill="#0f172a" stroke="#f59e0b" strokeWidth="1.5" />
-            <text x="610" y="283" textAnchor="middle" fill="#fde047" fontSize="7.5" fontWeight="extrabold">CLA LOOP</text>
+            <path d="M 605 305 Q 615 125 630 125" fill="none" stroke="#f59e0b" strokeWidth="2" strokeDasharray="4 2" />
+            <rect x="590" y="298" width="40" height="14" rx="4" fill="#0f172a" stroke="#f59e0b" strokeWidth="1.5" />
+            <text x="610" y="308" textAnchor="middle" fill="#fde047" fontSize="7.5" fontWeight="extrabold">CLA LOOP</text>
 
             {/* D. Ghatkopar Metro Interchange Loop (GC: X=685-755) */}
             <path
-              d="M 685 205 Q 700 280 715 280 L 740 280 Q 755 280 770 205"
+              d="M 685 215 Q 700 305 715 305 L 740 305 Q 755 305 770 215"
               fill="none"
               stroke="#f59e0b"
               strokeWidth="3"
               filter="url(#glowAmber)"
             />
-            <rect x="700" y="273" width="38" height="14" rx="4" fill="#0f172a" stroke="#f59e0b" strokeWidth="1.5" />
-            <text x="719" y="283" textAnchor="middle" fill="#fde047" fontSize="7.5" fontWeight="extrabold">GC LOOP</text>
+            <rect x="700" y="298" width="38" height="14" rx="4" fill="#0f172a" stroke="#f59e0b" strokeWidth="1.5" />
+            <text x="719" y="308" textAnchor="middle" fill="#fde047" fontSize="7.5" fontWeight="extrabold">GC LOOP</text>
 
             {/* E. Thane Major Terminus Loops (TNA: X=1010-1070) */}
             <path
-              d="M 1010 205 Q 1025 280 1045 280 L 1065 280"
+              d="M 1010 215 Q 1025 305 1045 305 L 1065 305"
               fill="none"
               stroke="#f59e0b"
               strokeWidth="3"
               filter="url(#glowAmber)"
             />
-            <rect x="1030" y="273" width="36" height="14" rx="4" fill="#0f172a" stroke="#f59e0b" strokeWidth="1.5" />
-            <text x="1048" y="283" textAnchor="middle" fill="#fde047" fontSize="7.5" fontWeight="extrabold">TNA YARD</text>
+            <rect x="1030" y="298" width="36" height="14" rx="4" fill="#0f172a" stroke="#f59e0b" strokeWidth="1.5" />
+            <text x="1048" y="308" textAnchor="middle" fill="#fde047" fontSize="7.5" fontWeight="extrabold">TNA YARD</text>
           </g>
 
           {/* Crossover Link at Byculla (BY: X=220) between Fast and Slow lines */}
-          <path d="M 220 205 Q 235 130 250 130" fill="none" stroke="#38bdf8" strokeWidth="2.5" strokeDasharray="4 2" />
+          <path d="M 220 215 Q 235 125 250 125" fill="none" stroke="#38bdf8" strokeWidth="2.5" strokeDasharray="4 2" />
           <text x="248" y="172" fill="#38bdf8" fontSize="7.5" fontWeight="bold" fontFamily="monospace">
             Switch S-14
           </text>
@@ -481,10 +520,10 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
           {/* ========================================================================= */}
           {isTrackBlocked && (
             <g>
-              <rect x="235" y="190" width="200" height="30" fill="url(#hatchBlocked)" rx="6" opacity="0.9" />
-              <rect x="235" y="190" width="200" height="30" fill="none" stroke="#ef4444" strokeWidth="2.5" rx="6" />
-              <rect x="250" y="197" width="170" height="16" rx="4" fill="#450a0a" stroke="#ef4444" strokeWidth="1" />
-              <text x="335" y="209" textAnchor="middle" fill="#fee2e2" fontSize="9" fontWeight="900" fontFamily="monospace">
+              <rect x="235" y="200" width="200" height="30" fill="url(#hatchBlocked)" rx="6" opacity="0.9" />
+              <rect x="235" y="200" width="200" height="30" fill="none" stroke="#ef4444" strokeWidth="2.5" rx="6" />
+              <rect x="250" y="207" width="170" height="16" rx="4" fill="#450a0a" stroke="#ef4444" strokeWidth="1" />
+              <text x="335" y="219" textAnchor="middle" fill="#fee2e2" fontSize="9" fontWeight="900" fontFamily="monospace">
                 ⛔ BY-DR FAST TRACK BLOCKED
               </text>
             </g>
@@ -505,36 +544,36 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
                 {/* Slow Line Platform Halt Node (At All 19 Stations) */}
                 <circle
                   cx={stn.posX}
-                  cy="130"
+                  cy="125"
                   r="7"
                   fill="#020617"
                   stroke={isHighlighted ? '#10b981' : '#334155'}
                   strokeWidth="2.5"
                 />
-                <circle cx={stn.posX} cy="130" r="3" fill={isHighlighted ? '#10b981' : '#64748b'} />
+                <circle cx={stn.posX} cy="125" r="3" fill={isHighlighted ? '#10b981' : '#64748b'} />
 
                 {/* Fast Line Platform Node (ONLY at Fast Stations) */}
                 {stn.isFast ? (
                   <g>
                     {/* Fast Interchange Diamond Node */}
                     <polygon
-                      points={`${stn.posX},195 ${stn.posX + 10},205 ${stn.posX},215 ${stn.posX - 10},205`}
+                      points={`${stn.posX},205 ${stn.posX + 10},215 ${stn.posX},225 ${stn.posX - 10},215`}
                       fill="#020617"
                       stroke={isHighlighted ? '#06b6d4' : '#334155'}
                       strokeWidth="2.5"
                     />
-                    <circle cx={stn.posX} cy="205" r="3.5" fill="#38bdf8" />
+                    <circle cx={stn.posX} cy="215" r="3.5" fill="#38bdf8" />
                     {/* Fast Station Badge */}
-                    <rect x={stn.posX - 14} y="228" width="28" height="13" rx="3" fill="#083344" stroke="#06b6d4" strokeWidth="1" />
-                    <text x={stn.posX} y="238" textAnchor="middle" fill="#67e8f9" fontSize="7.5" fontWeight="extrabold" fontFamily="monospace">
+                    <rect x={stn.posX - 14} y="238" width="28" height="13" rx="3" fill="#083344" stroke="#06b6d4" strokeWidth="1" />
+                    <text x={stn.posX} y="248" textAnchor="middle" fill="#67e8f9" fontSize="7.5" fontWeight="extrabold" fontFamily="monospace">
                       FAST
                     </text>
                   </g>
                 ) : (
                   // Slow Only Station Badge
                   <g>
-                    <rect x={stn.posX - 13} y="142" width="26" height="12" rx="3" fill="#064e3b" stroke="#10b981" strokeWidth="1" />
-                    <text x={stn.posX} y="151" textAnchor="middle" fill="#a7f3d0" fontSize="7" fontWeight="bold" fontFamily="monospace">
+                    <rect x={stn.posX - 13} y="137" width="26" height="12" rx="3" fill="#064e3b" stroke="#10b981" strokeWidth="1" />
+                    <text x={stn.posX} y="146" textAnchor="middle" fill="#a7f3d0" fontSize="7" fontWeight="bold" fontFamily="monospace">
                       SLOW
                     </text>
                   </g>
@@ -550,7 +589,7 @@ export const LiveRailwayNetwork: React.FC<LiveRailwayNetworkProps> = ({
             const trainX = getTrainX(train);
             const isFast = train.assigned_track.includes('Fast') || train.type === 'Fast Local' || train.type === 'Express';
             const isLoop = train.assigned_track.includes('Loop');
-            const trainY = isLoop ? 280 : isFast ? 205 : 130;
+            const trainY = isLoop ? 305 : isFast ? 215 : 125;
             const statusColor = getStatusColor(train.status);
             const isSelected = selectedTrainId === train.id;
 
